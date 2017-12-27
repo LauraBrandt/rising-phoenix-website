@@ -4,7 +4,7 @@ import color from 'color';
 const navElemStyles = {
   fontSize: '0.95em',
   fontFamily: sv.fontDefault,
-  color: sv.light,  
+  color: sv.light,
   transition: 'all 0.4s ease',
   ':hover': {
     color: 'white',
@@ -38,7 +38,10 @@ const ulStyles = {
 
 const dropdownToggleStyles = {
   background: 'none',
-  border: 'none',
+  borderTop: 'none',
+  borderBottom: 'none',
+  borderLeft: 'none',
+  borderRight: 'none',
   margin: 0,
   cursor: 'pointer',
   ...navElemStyles,  
@@ -102,7 +105,7 @@ const navbarStyles = {
       zIndex: 20,
     },
     dropdownLi: {
-      width: '100%',    
+      width: '100%',   
       transition: 'all 0.4s ease', 
       ':hover': {
         backgroundColor: color(sv.dark).lighten(1.2),

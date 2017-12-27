@@ -142,7 +142,7 @@ const calendarStyles = {
       margin: '0 0 0 -1px',
       transition: 'all 0.4s ease',
       ':hover': {
-        backgroundColor: '#eee',
+        backgroundColor: '#e2e2e2',
       }
     }
   }

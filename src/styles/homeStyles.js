@@ -181,7 +181,7 @@ const homeStyles = {
       '@media (max-width: 960px)': {
         width: '100%',
       },
-      '@media (max-width: 450px)': {
+      '@media (max-width: 650px)': {
         margin: '0 auto 1em auto',
       },
       '@media (min-width: 2000px)': {
@@ -197,7 +197,7 @@ const homeStyles = {
       '@media (max-width: 750px)': {
         height: phoenixHeight*0.8,
       },
-      '@media (max-width: 450px)': {
+      '@media (max-width: 650px)': {
         bottom: '30px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -219,7 +219,7 @@ const homeStyles = {
         height: phoenixHeight*0.8,
         clip: `rect(${clipAmount*0.8}px,400px,400px,0px)`,
       },
-      '@media (max-width: 450px)': {
+      '@media (max-width: 650px)': {
         bottom: '30px',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -252,7 +252,7 @@ const homeStyles = {
       '@media (max-width: 750px)': {
         fontSize: '1.2em',
       },
-      '@media (max-width: 450px)': {
+      '@media (max-width: 650px)': {
         float: 'none',
         width: '70%',
         margin: `2em auto ${(phoenixHeight*0.65) + 50}px auto`
