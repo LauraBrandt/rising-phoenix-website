@@ -75,7 +75,7 @@ class CorporateSponsors extends Component {
         <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground} 
-          bgAlt="surora borealis"
+          bgAlt="Aurora borealis"
           rightDiv={<HeaderContent/>}
         />
         <Main />

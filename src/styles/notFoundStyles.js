@@ -5,7 +5,7 @@ const notFoundStyles = {
     ...sv.mainStyle,
     textAlign: 'center',
     marginTop: '10vh',
-    '@media': {
+    '@media (max-width: 450px)': {
       fontSize: '0.8em'
     }
   },
@@ -35,6 +35,15 @@ const notFoundStyles = {
       // color: 'white'
       color: sv.orange,
       backgroundColor: 'white',
+    },
+    ':active': {
+      color: sv.orange,
+      backgroundColor: 'white',
+    },
+    ':focus': {
+      color: sv.orange,
+      backgroundColor: 'white',
+      outline: 'none'
     }
   }
 }
