@@ -112,6 +112,13 @@ const homeStyles = {
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
       },
+      ':active': {
+        backgroundColor: color(sv.red).lighten(0.2),
+      },
+      ':focus': {
+        backgroundColor: color(sv.red).lighten(0.2),
+        outline: 'none'
+      },
       '@media (max-width: 1000px)': {
         fontSize: '1.6em',
       },
@@ -317,6 +324,17 @@ const homeStyles = {
         color: sv.orange,
         backgroundColor: 'white',
         fontWeight: 600,
+      },
+      ':active': {
+        color: sv.orange,
+        backgroundColor: 'white',
+        fontWeight: 600,
+      },
+      ':focus': {
+        color: sv.orange,
+        backgroundColor: 'white',
+        fontWeight: 600,
+        outline: 'none'
       }
     },
     subscribeText: {
@@ -340,6 +358,16 @@ const homeStyles = {
       ':hover': {
         color: 'black',
         backgroundColor: '#ddd',
+        outline: '1px solid rgba(0,0,0,0.1)'
+      },
+      ':active': {
+        color: 'black',
+        backgroundColor: '#ddd',
+        outline: '1px solid rgba(0,0,0,0.1)'
+      },
+      ':focus': {
+        color: 'black',
+        backgroundColor: '#d7d7d7',
         outline: '1px solid rgba(0,0,0,0.1)'
       },
       '@media (max-width: 768px)': {

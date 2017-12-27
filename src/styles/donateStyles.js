@@ -37,6 +37,16 @@ const donateStyles = {
         padding: '1em 1em 2em 1em',
       },
     },
+    gfmLink: {
+      borderRadius: '8px',
+      ':active': {
+        backgroundColor: '#5d8421',
+      },
+      ':focus': {
+        backgroundColor: '#5d8421',
+        outline: 'none'
+      }
+    },
     gfmLogo: {
       borderRadius: '8px',
       maxWidth: "250px",
@@ -77,6 +87,13 @@ const donateStyles = {
         transition: 'all 0.2s ease',
         ':hover': {
           backgroundColor: "#f5f5f5"
+        },
+        ':active': {
+          backgroundColor: "#f5f5f5"
+        },
+        ':focus': {
+          backgroundColor: "#f5f5f5",
+          outline: 'none'
         },
         '@media (max-width: 550px)': {
           flexDirection: 'column',

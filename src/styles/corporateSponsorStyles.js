@@ -28,7 +28,16 @@ const corporateSponsorStyles = {
       backgroundColor: '#fdfdfd',
       boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
       // boxShadow: 'inset 0 0px 2px rgba(255,255,255,0.3), 0 2px 12px rgba(0,0,0,0.2)',
-    }
+    },
+    ':active': {
+      backgroundColor: '#fdfdfd',
+      boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+    },
+    ':focus': {
+      backgroundColor: '#fdfdfd',
+      boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+      outline: 'none'
+    },
   },
   innerCompanyBlock: {
     display: 'flex',

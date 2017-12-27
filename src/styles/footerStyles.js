@@ -1,4 +1,5 @@
 import sv from './styleVariables';
+import color from 'color';
 
 const footerStyles = {
   footer: {
@@ -17,6 +18,14 @@ const footerStyles = {
   copyright: {
     color: sv.light,
   },
+  gfmLink: {
+    borderRadius: '5px',    
+    padding: '0 0.15em',
+    ':focus': {
+      backgroundColor: color(sv.dark).lighten(2.5),
+      outline: 'none',
+    },
+  },
   gfmLogo: {
     borderRadius: '5px',
     height: "0.87em",
@@ -24,10 +33,18 @@ const footerStyles = {
     marginTop: '0.15em',
   },
   facebookLogo: {
-    color: sv.facebookBlue,
+    color: sv.facebookBlue,    
+    ':focus': {
+      color: color(sv.facebookBlue).lighten(0.2),
+      outline: 'none'
+    },
   },
   twitterLogo: {
     color: sv.twitterBlue,
+    ':focus': {
+      color: color(sv.twitterBlue).lighten(0.2),
+      outline: 'none'
+    },
   },
 }
 

@@ -42,8 +42,15 @@ const styleVariables = {
 		textDecoration: 'none',
 		transition: 'all 0.3s ease',
 		':hover': {
-		  color: orange,
+			color: orange,
+    	},
+    	':active': {
+			color: orange,
 		},
+		':focus': {
+			color: orange,
+			outline: 'none',
+		}
 	}
 }
   

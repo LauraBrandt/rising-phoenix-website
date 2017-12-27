@@ -143,6 +143,13 @@ const calendarStyles = {
       transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: '#e2e2e2',
+      },
+      ':active': {
+        backgroundColor: '#e2e2e2',
+      },
+      ':focus': {
+        backgroundColor: '#ddd',
+        outline: 'none',
       }
     }
   }

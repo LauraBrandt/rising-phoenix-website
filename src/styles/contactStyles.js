@@ -109,6 +109,15 @@ const contactStyles = {
       backgroundColor: sv.paleOrange,
       color: '#fff'
     },
+    ':active': {
+      backgroundColor: sv.paleOrange,
+      color: '#fff'
+    },
+    ':focus': {
+      backgroundColor: sv.paleOrange,
+      color: '#fff',
+      outline: 'none'
+    },
     '@media (max-width: 450px)': {
       justifySelf: 'center'
     },

@@ -11,7 +11,11 @@ const navElemStyles = {
   },
   ':active': {
     color: 'white',
-  },  
+  },
+  ':focus': {
+    color: 'white',
+    outline: 'none'
+  }, 
 };
 
 const navElemWideStyles = {
@@ -112,6 +116,10 @@ const navbarStyles = {
       },
       ':active': {
         backgroundColor: color(sv.dark).lighten(1.2),
+      },
+      ':focus': {
+        backgroundColor: color(sv.dark).lighten(1.2),
+        outline: 'none'
       }
     },
     dropdownLink: {
@@ -127,6 +135,15 @@ const navbarStyles = {
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
         border: `1px solid ${color(sv.red).lighten(0.2)}`,
+      },
+      ':active': {
+        backgroundColor: color(sv.red).lighten(0.2),
+        border: `1px solid ${color(sv.red).lighten(0.2)}`,
+      },
+      ':focus': {
+        backgroundColor: color(sv.red).lighten(0.2),
+        border: `1px solid ${color(sv.red).lighten(0.2)}`,
+        outline: 'none'
       }
     },
     current: {
@@ -155,6 +172,10 @@ const navbarStyles = {
       ':active': {
         color: color(sv.facebookBlue).lighten(0.2),
       },
+      ':focus': {
+        color: color(sv.facebookBlue).lighten(0.2),
+        outline: 'none'
+      },
       '@media (max-width: 1025px)': {
         marginRight: '.6em',
       }
@@ -168,6 +189,10 @@ const navbarStyles = {
       },
       ':active': {
         color: color(sv.twitterBlue).lighten(0.2),
+      },
+      ':focus': {
+        color: color(sv.twitterBlue).lighten(0.2),
+        outline: 'none'
       },
       '@media (max-width: 1025px)': {
         marginRight: '.6em',
@@ -203,12 +228,23 @@ const navbarStyles = {
       fontSize: '1.3em'
     },
     barsButton: {
-      color: color(sv.light).lighten(0.3),
+      color: color(sv.light).lighten(0.1),
       backgroundColor: sv.dark,
       border: 'none',
       fontSize: '1.5em',
       padding: '0.3em 0.5em',
       float: 'right',
+      cursor: 'pointer',
+      ':hover': {
+        color: 'white'
+      },
+      ':active': {
+        color: 'white'
+      },
+      ':focus': {
+        color: 'white',
+        outline: '1px solid #777'
+      }
     },
     ul: {
       ...ulStyles,
@@ -253,6 +289,13 @@ const navbarStyles = {
       transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
+      },
+      ':active': {
+        backgroundColor: color(sv.red).lighten(0.2),
+      },
+      ':focus': {
+        backgroundColor: color(sv.red).lighten(0.2),
+        outline: 'none'
       }
     },
     current: {

@@ -18,7 +18,7 @@ class Main extends Component {
         <div style={style.main.donateContainer}>
           <div style={style.main.gfmContainer}>
             Through our GoFundMe page:<br/><br/>
-            <a href={DATA.links.goFundMe}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
+            <a href={DATA.links.goFundMe} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           <div style={style.main.checkContainer}>
             By mailing a check made payable to <span style={{fontWeight: 600}}>{donateData.check.to}</span> to
@@ -34,7 +34,7 @@ class Main extends Component {
         <div>{donateData.rewardText}</div>
         <div style={style.main.rewardsTable}>
           {donateData.rewardLevels.map( level => 
-            <div key={level.name} style={style.main.rewardsTable.row}>
+            <div key={level.name} style={style.main.rewardsTable.row} tabIndex="0">
               {level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>}
               {!level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
               <div style={style.main.rewardsTable.nameCol}>{level.name}</div>
