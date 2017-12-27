@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/corporateSponsorStyles';
 import headerBackground from '../img/astronomy5.png';
 import DATA from '../data.js';
+
+let Link = require('react-router-dom').Link;
+Link = Radium(Link);
 
 // function importAll(r) {
 //   let images = {};

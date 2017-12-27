@@ -128,8 +128,12 @@ class DropDown extends React.Component {
           {this.props.label}
           <i className="fa fa-caret-down" aria-hidden="true" style={style.carat}></i>
         </button>
-        { this.state.showing && 
-          <ul key={this.props.label} style={style[this.props.styleType].dropdownMenu}>
+        <ul key={this.props.label} 
+            style={[style[this.props.styleType].dropdownMenu, 
+                    this.state.showing ? 
+                      {maxHeight: '20em', opacity: 1, visibility: 'visible', transition: 'all 0.5s ease, max-height 0.7s, opacity 0.4s, visibility 0s linear 0s',} : 
+                      {maxHeight: 0, opacity: 0, visibility: 'hidden', transition: 'all 0.5s ease, max-height 0.6s ease 0s, opacity 0.5s ease 0.1s, visibility 0s linear 1s'}
+                  ]}>
             { this.props.sublinks.map((sublink, i) => 
                 <li key={sublink.label} style={style[this.props.styleType].dropdownLi}>
                   <Link to={sublink.link} style={[style[this.props.styleType].Link, style[this.props.styleType].dropdownLink]}>
@@ -138,7 +142,6 @@ class DropDown extends React.Component {
                 </li>
             ) }
           </ul>
-        }
       </div>
     );
   };

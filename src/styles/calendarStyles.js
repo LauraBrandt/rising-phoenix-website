@@ -12,6 +12,7 @@ const calendarStyles = {
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     margin: '0 0 2em 0',
+    transition: 'all 0.3s ease',
     '@media (min-width: 2000px)': {
       width: '80%',
       margin: '0 auto 2em auto',
@@ -26,6 +27,7 @@ const calendarStyles = {
     width: '5.8em',
     margin: '0.3em 2em 0 0',
     textAlign: 'center',
+    transition: 'all 0.3s ease',
     '@media (max-width: 450px)': {
       display: 'none'
     },
@@ -52,6 +54,7 @@ const calendarStyles = {
     backgroundColor: 'white',
     flexBasis: '80%',
     padding: '1.5em 2em',
+    transition: 'all 0.3s ease',
     '@media (max-width: 450px)': {
       flexBasis: '100%',
       fontSize: '0.95em'
@@ -90,6 +93,7 @@ const calendarStyles = {
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       padding: '0 2em 0 1em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 450px)': {
         padding: '0.5em 2em',
       },
@@ -97,6 +101,7 @@ const calendarStyles = {
     h1: {
       fontSize: '3.5em',
       margin: 0,
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '3em',
       },
@@ -111,6 +116,7 @@ const calendarStyles = {
     cta: {
       fontSize: '1.3em',
       padding: '0 0 0.5em 0',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '1.2em',
       },
@@ -134,6 +140,7 @@ const calendarStyles = {
       padding: '0.3em 1em',
       cursor: 'pointer',
       margin: '0 0 0 -1px',
+      transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: '#eee',
       }

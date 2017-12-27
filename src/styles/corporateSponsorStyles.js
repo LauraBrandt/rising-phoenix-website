@@ -13,6 +13,7 @@ const corporateSponsorStyles = {
     textAlign: 'center',
     fontSize: '2em',
     lineHeight: '120%',
+    transition: 'all 0.3s ease',
   },
   outerCompanyBlock: {
     backgroundColor: 'white',
@@ -22,6 +23,7 @@ const corporateSponsorStyles = {
     // boxShadow: 'inset 0 2px 2px rgba(255,255,255,0.3), inset 0 -2px 2px rgba(0,0,0,0.3)',
     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
     borderRadius: '5px',
+    transition: 'all 0.3s ease',
     ':hover': {
       backgroundColor: '#fdfdfd',
       boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
@@ -55,6 +57,7 @@ const corporateSponsorStyles = {
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       padding: '0 5% 0 0',
+      transition: 'all 0.3s ease',
       '@media (max-width: 745px)': {
         textAlign: 'center',
         padding: '5%',
@@ -64,6 +67,7 @@ const corporateSponsorStyles = {
     h1: {
       fontSize: '2.7em',
       margin: 0,
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '2.4em',
       },
@@ -76,6 +80,7 @@ const corporateSponsorStyles = {
     },
     cta: {
       fontSize: '1.1em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '0.95em',
       },
@@ -84,8 +89,8 @@ const corporateSponsorStyles = {
       }
     },
     link: {
-      // ...sv.linkStyle
-      color: sv.paleOrange,
+      ...sv.linkStyle
+      // color: sv.paleOrange,
     }
   }
 }

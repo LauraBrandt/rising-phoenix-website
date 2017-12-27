@@ -42,6 +42,7 @@ const headerStyles = {
     width: '75%',
     zIndex: 2,
     boxSizing: 'border-box',
+    transition: 'all 0.3s ease',
     '@media (max-width: 745px)': {
       width: '100%',
     },

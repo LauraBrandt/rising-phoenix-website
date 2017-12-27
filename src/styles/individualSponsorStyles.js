@@ -24,6 +24,7 @@ const individualSponsorStyles = {
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       padding: '0 5% 0 0',
+      transition: 'all 0.3s ease',
       '@media (max-width: 745px)': {
         textAlign: 'center',
         padding: '5%',
@@ -32,6 +33,7 @@ const individualSponsorStyles = {
     h1: {
       fontSize: '2.7em',
       margin: 0,
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '2.4em',
       },
@@ -44,6 +46,7 @@ const individualSponsorStyles = {
     },
     cta: {
       fontSize: '1.1em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '0.95em',
       },
@@ -52,8 +55,8 @@ const individualSponsorStyles = {
       }
     },
     link: {
-      // ...sv.linkStyle
-      color: sv.paleOrange,
+      ...sv.linkStyle
+      // color: sv.paleOrange,
     }
   }
 }

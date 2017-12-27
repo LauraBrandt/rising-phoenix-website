@@ -5,6 +5,7 @@ const navElemStyles = {
   fontSize: '0.95em',
   fontFamily: sv.fontDefault,
   color: sv.light,  
+  transition: 'all 0.4s ease',
   ':hover': {
     color: 'white',
   },
@@ -73,6 +74,7 @@ const navbarStyles = {
       justifyContent: 'space-around',
       alignItems: 'flex-end',
       width: '75%',
+      transition: 'all 0.4s ease',
       '@media (max-width: 1025px)': {
         width: '90%',
       }
@@ -101,6 +103,7 @@ const navbarStyles = {
     },
     dropdownLi: {
       width: '100%',    
+      transition: 'all 0.4s ease', 
       ':hover': {
         backgroundColor: color(sv.dark).lighten(1.2),
       },
@@ -117,6 +120,7 @@ const navbarStyles = {
       backgroundColor: sv.red,
       border: `1px solid ${sv.red}`,
       borderRadius: 5,
+      transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
         border: `1px solid ${color(sv.red).lighten(0.2)}`,
@@ -141,6 +145,7 @@ const navbarStyles = {
     facebookButton: {
       color: sv.facebookBlue,
       marginRight: '.8em',
+      transition: 'all 0.4s ease',
       ':hover': {
         color: color(sv.facebookBlue).lighten(0.2),
       },
@@ -154,6 +159,7 @@ const navbarStyles = {
     twitterButton: {
       color: sv.twitterBlue,
       marginRight: '.8em',
+      transition: 'all 0.4s ease',
       ':hover': {
         color: color(sv.twitterBlue).lighten(0.2),
       },
@@ -241,6 +247,7 @@ const navbarStyles = {
     donateLink: {
       color: 'white',
       backgroundColor: sv.red,
+      transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
       }

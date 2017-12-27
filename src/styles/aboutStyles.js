@@ -14,6 +14,7 @@ const aboutStyles = {
       justifyContent: 'space-evenly',
       paddingLeft: '1.5em',
       fontSize: '1.8em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '1.5em',
       },

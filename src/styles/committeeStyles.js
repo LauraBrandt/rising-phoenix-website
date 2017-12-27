@@ -15,6 +15,7 @@ const committeeStyles = {
   },
   name: {
     fontSize: '1.3em',
+    transition: 'all 0.3s ease',
     '@media (max-width: 550px)': {
       display: 'block',
       marginTop: '0.8em'
@@ -33,6 +34,7 @@ const committeeStyles = {
       justifyContent: 'space-evenly',
       paddingLeft: '2.5em',
       fontSize: '1.8em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '1.5em',
         paddingLeft: '0.7em',

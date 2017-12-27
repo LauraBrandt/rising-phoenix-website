@@ -20,6 +20,7 @@ const donateStyles = {
       color: '#4d4d4d',
       backgroundColor: '#f5f5f5', //grey
       padding: '1em', //grey
+      transition: 'all 0.3s ease',
       '@media (max-width: 550px)': {
         flexDirection: 'column',
       },
@@ -29,6 +30,7 @@ const donateStyles = {
       // padding: '2.5em 3em 2.5em 0', //white
       padding: '2em 3em 2em 2em', //grey
       borderRight: '2px solid #ccc',
+      transition: 'all 0.3s ease',
       '@media (max-width: 550px)': {
         borderRight: 'none',
         borderBottom: '2px solid #ccc',
@@ -39,6 +41,7 @@ const donateStyles = {
       borderRadius: '8px',
       maxWidth: "250px",
       height: "auto",
+      transition: 'all 0.3s ease',
       '@media (max-width: 950px)': {
         maxWidth: "100%",
       },
@@ -47,6 +50,7 @@ const donateStyles = {
       flexBasis: '60%',
       // padding: '2.5em 0 2.5em 4em', //white
       padding: '2em 0 2em 3em', //grey
+      transition: 'all 0.3s ease',
       '@media (max-width: 550px)': {
         padding: '2em 1em 1em 1em',
       },
@@ -54,6 +58,7 @@ const donateStyles = {
     checkAddress: {
       fontSize: '0.95em',
       padding: '0.5em 0 0 2em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 550px)': {
         padding: '0.5em 0 0 1em',
       },
@@ -69,6 +74,7 @@ const donateStyles = {
         borderBottom: '1px solid #ddd',
         borderTop: '1px solid #ddd',
         borderCollapse: 'collapse',
+        transition: 'all 0.2s ease',
         ':hover': {
           backgroundColor: "#f5f5f5"
         },
@@ -81,6 +87,7 @@ const donateStyles = {
         width: '20%',
         padding: '0.3em 0.7em',
         boxSizing: 'border-box',
+        transition: 'all 0.3s ease',
         '@media (max-width: 1024px)': {
           width: '25%',
         },
@@ -99,6 +106,7 @@ const donateStyles = {
         width: '20%',
         padding: '0.3em 0.7em',
         boxSizing: 'border-box',
+        transition: 'all 0.3s ease',
         '@media (min-width 801) and (max-width: 1024px)': {
           width: '30%'
         },
@@ -117,6 +125,7 @@ const donateStyles = {
         width: '55%',
         padding: '0.3em 0.7em',
         boxSizing: 'border-box',
+        transition: 'all 0.3s ease',
         '@media (min-width 801) and (max-width: 1024px)': {
           width: '45%',
         },
@@ -146,6 +155,7 @@ const donateStyles = {
       alignItems: 'center',
       paddingLeft: '2em',
       fontSize: '2.2em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '1.8em',
       },

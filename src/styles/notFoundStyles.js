@@ -28,7 +28,8 @@ const notFoundStyles = {
     fontWeight: 600,
     display: 'inline-block',
     padding: '0.5em 1em',
-    margin: '1em',
+    margin: '1em',    
+    transition: 'all 0.4s',
     ':hover': {
       // backgroundColor: sv.orange,
       // color: 'white'

@@ -5,6 +5,7 @@ const contactStyles = {
   main: {
     ...sv.mainStyle,
     backgroundColor: sv.bgLight,
+    transition: 'all 0.3s ease',
     '@media (max-width: 1024px)': {
       padding: '2% 10%',
     },
@@ -28,6 +29,7 @@ const contactStyles = {
        'messageLabel  messageLabel'
        'message       message'
        'submit        .'`,
+    transition: 'all 0.3s ease',
     '@media (max-width: 1024px)': {
       width: '80%',
     },
@@ -59,6 +61,7 @@ const contactStyles = {
     padding: '0.5em 0.3em',
     fontSize: '0.95em',
     fontFamily: 'Helvetica, Arial, sans-serif',
+    transition: 'all 0.3s ease',
     '@media (max-width: 450px)': {
       margin: '0 0 1em 0'
     },
@@ -101,6 +104,7 @@ const contactStyles = {
     fontFamily: sv.fontDefault,
     color: '#fafafa',
     cursor: "pointer",
+    transition: 'all 0.4s ease',
     ':hover': {
       backgroundColor: sv.paleOrange,
       color: '#fff'
@@ -124,6 +128,7 @@ const contactStyles = {
       justifyContent: 'space-evenly',
       fontSize: '1.8em',
       padding: '0 3em 0 0',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1024px)': {
         fontSize: '1.5em',
       },
@@ -138,6 +143,7 @@ const contactStyles = {
     },
     h1: {
       margin: '0 0 0 27%',
+      transition: 'all 0.3s ease',
       '@media (min-width: 2000px)': {
         margin: '0 0 0 22%',
       },

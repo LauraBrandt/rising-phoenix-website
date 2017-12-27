@@ -5,6 +5,7 @@ const articleStyles = {
     ...sv.mainStyle,
     minHeight: '90vh',
     margin: '2em 0 0 0',
+    transition: 'all 0.3s ease',
     '@media (max-width: 850px)': {
         margin: '3em 0 0 0',
     },
@@ -38,6 +39,7 @@ const articleStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: sv.bgLight,
+    transition: 'all 0.3s ease',
     '@media (max-width: 850px)': {
         padding: '5em 0',
     },
@@ -56,6 +58,7 @@ const articleStyles = {
       margin: '1em',
       padding: '2em',
       backgroundColor: 'white',
+      transition: 'all 0.3s ease',
       '@media (max-width: 450px)': {
         margin: '1em 0.5em',
         padding: '1em',

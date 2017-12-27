@@ -19,6 +19,7 @@ const styleVariables = {
 		padding: '3% 15% 5% 15%',
 		minHeight: '70vh',
 		lineHeight: '150%',
+		transition: 'all 0.3s ease',
 		'@media (max-width: 850px)': {
 			padding: '2% 10%',
 		},
@@ -27,6 +28,7 @@ const styleVariables = {
 		}
 	},
 	h1Style: {
+		transition: 'all 0.3s ease',
 		'@media (max-width: 550px)': {
 			fontSize: '1.5em',
 		}
@@ -37,7 +39,8 @@ const styleVariables = {
 	},
 	linkStyle: {
 		color: paleOrange,
-		textDecoration: 'none',    
+		textDecoration: 'none',
+		transition: 'all 0.3s ease',
 		':hover': {
 		  color: orange,
 		},

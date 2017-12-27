@@ -18,6 +18,7 @@ const homeStyles = {
     textShadow: '0 3px 3px rgba(0,0,0,0.9)', 
     paddingTop: '15vh',
     zIndex: 2,
+    transition: 'all 0.3s ease',
     '@media (max-width: 450px)': {
       paddingTop: '10vh',
       height: '61vh',
@@ -32,6 +33,7 @@ const homeStyles = {
       fontSize: '5em',
       color: '#eee',
       padding: '0 10%',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1000px)': {
         fontSize: '4.5em',
       },
@@ -49,6 +51,7 @@ const homeStyles = {
       margin: '2.5em auto 0 auto',
       lineHeight: '150%',
       color: '#fff',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1100px)': {
         width: '50%',
         margin: '2em auto 0 auto',
@@ -105,6 +108,7 @@ const homeStyles = {
       textDecoration: 'none',
       height: '100%',
       display: 'inline-block',
+      transition: 'all 0.4s ease',
       ':hover': {
         backgroundColor: color(sv.red).lighten(0.2),
       },
@@ -123,6 +127,7 @@ const homeStyles = {
       marginTop: '-7em',
       padding: '4em 2em 3em 2em',
       backgroundColor: sv.bgLight,
+      transition: 'all 0.3s ease',
       '@media (max-width: 1160px)': {
         flexDirection: 'column-reverse',
         padding: '3em 2em',
@@ -142,6 +147,7 @@ const homeStyles = {
       lineHeight: '150%',
       whiteSpace: 'pre-wrap',
       padding: '0 1em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1270px)': {
         flexBasis: '30%',
       },
@@ -164,6 +170,7 @@ const homeStyles = {
       border: '1px solid rgba(0,0,0,0.15)',
       borderRadius: '10px',
       backgroundColor: 'white',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1270px)': {
         flexBasis: '70%',
       },
@@ -186,6 +193,7 @@ const homeStyles = {
       height: phoenixHeight,
       position: 'absolute',
       right: 0,
+      transition: 'all 0.3s ease',
       '@media (max-width: 750px)': {
         height: phoenixHeight*0.8,
       },
@@ -206,6 +214,7 @@ const homeStyles = {
       position: 'absolute',
       right: 0,
       clip: `rect(${clipAmount}px,400px,400px,0px)`,
+      transition: 'all 0.3s ease',
       '@media (max-width: 750px)': {
         height: phoenixHeight*0.8,
         clip: `rect(${clipAmount*0.8}px,400px,400px,0px)`,
@@ -233,6 +242,7 @@ const homeStyles = {
       border: '1px solid rgba(0,0,0,0.05)',
       // boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.2)',
       boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1270px)': {
         margin: '2em',
       },
@@ -274,6 +284,7 @@ const homeStyles = {
     fontSize: '1.5em',
     textAlign: 'center',
     color: 'white',
+    transition: 'all 0.3s ease',
     '@media (max-width: 1024px)': {
       fontSize: '1.3em',
       padding: '2em 0',
@@ -287,6 +298,7 @@ const homeStyles = {
       flexDirection: 'column',
     },
     contact: {
+      transition: 'all 0.3s ease',
       '@media (max-width: 750px)': {
         marginBottom: '3em',
       },
@@ -300,10 +312,11 @@ const homeStyles = {
       padding: '0.5em 1em',
       margin: '1em 0 0 0',
       borderRadius: 7,
+      transition: 'background-color 0.4s ease',
       ':hover': {
         color: sv.orange,
-        fontWeight: 600,
         backgroundColor: 'white',
+        fontWeight: 600,
       }
     },
     subscribeText: {
@@ -312,6 +325,7 @@ const homeStyles = {
     },
     emailInput: {
       padding: '0.5em',
+      transition: 'all 0.3s ease',
       '@media (max-width: 768px)': {
         padding: '0.35em',
       },
@@ -322,6 +336,7 @@ const homeStyles = {
       padding: '0 1em',
       cursor: 'pointer',
       backgroundColor: '#eee',
+      transition: 'background-color 0.4s ease',
       ':hover': {
         color: 'black',
         backgroundColor: '#ddd',
@@ -339,6 +354,7 @@ const homeStyles = {
     padding: '2em',
     justifyContent: 'space-evenly',
     backgroundColor: sv.bgLight,
+    transition: 'all 0.3s ease',
     '@media (max-width: 450px)': {
       padding: '1em',
     },
@@ -351,6 +367,7 @@ const homeStyles = {
       margin: '1em',
       padding: '2em',
       backgroundColor: 'white',
+      transition: 'all 0.3s ease',
       '@media (max-width: 1230px)': {
         flexBasis: '440px',
       },
