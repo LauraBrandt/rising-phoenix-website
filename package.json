@@ -19,5 +19,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://laurabrandt.github.io/rising-phoenix-website/"
+  "homepage": "https://laurabrandt.github.io/rising-phoenix-website"
 }
