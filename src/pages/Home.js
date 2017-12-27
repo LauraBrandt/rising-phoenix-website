@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import style from '../styles/homeStyles';
+import phoenixUnfilled from '../img/phoenix_stencil_unfilled.png';
+import phoenixFilled from '../img/phoenix_stencil_filled.png';
 import DATA from '../data.js';
+
+function importAll(r) {
+  let images = {};
+  r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+const newsImages = importAll(require.context('../img/news', false, /\.(png|jpe?g|svg)$/));
 
 let Link = require('react-router-dom').Link;
 Link = Radium(Link);
@@ -27,8 +36,8 @@ let Main = (props) => {
           <div>{props.data.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
         </div>
         <div style={style.main.progress}>
-          <img src="img/phoenix_stencil_unfilled.png" alt="outline of a phoenix" style={style.main.phoenix}/>
-          <img src="img/phoenix_stencil_filled.png" alt="outline of a phoenix filled with red" style={style.main.phoenixFilled}/>
+          <img src={phoenixUnfilled} alt="outline of a phoenix" style={style.main.phoenix}/>
+          <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={style.main.phoenixFilled}/>
           <div style={style.main.progressBox}>
             <div style={style.main.progressBox.label}>Amount Raised:</div>
             <div style={style.main.progressBox.amount}>{`$${props.data.donatedAmount}`}</div>
@@ -91,7 +100,7 @@ let News = (props) => {
     <section style={style.news}>
       {props.newsItems.map( news => 
         <div key={news.title} style={style.news.newsItem}>
-          {news.image && <img src={`img/news/${news.image}`} alt={news.alt} style={style.news.newsImage}/>}
+          {news.image && <img src={newsImages[news.image]} alt={news.alt} style={style.news.newsImage}/>}
           <Link to={`/news/${news.slug}`} style={style.news.header} >{news.title}</Link>
           <div style={style.news.date}>{news.date.toDateString()}</div>
           <div style={style.news.preview}>{getFirstWords(news.article)}...</div>

@@ -3,6 +3,7 @@ import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/individualSponsorStyles';
+import headerBackground from '../img/astronomy3.png';
 import DATA from '../data.js';
 
 let Link = require('react-router-dom').Link;
@@ -50,7 +51,7 @@ class IndividualSponsors extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy3.png" 
+          bgImage={headerBackground}
           bgAlt="colorful nebula"
           rightDiv={<HeaderContent/>}
         />

@@ -3,6 +3,7 @@ import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/contactStyles';
+import headerBackground from '../img/astronomy4.png';
 
 class Main extends Component {
   constructor(props) {
@@ -104,7 +105,7 @@ class Contact extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy4.png" 
+          bgImage={headerBackground}
           bgAlt="nasa measuring instrument in space"
           rightDiv={<HeaderContent/>}
         />

@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import Radium from 'radium';
 import style from '../styles/committeeStyles';
+import headerBackground from '../img/astronomy2.png';
 import DATA from '../data.js';
 
 class Main extends Component {
@@ -43,7 +44,7 @@ class CommitteeMembers extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy2.png" 
+          bgImage={headerBackground}  
           bgAlt="swirling pink surface"
           rightDiv={<HeaderContent/>}
         />

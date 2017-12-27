@@ -3,6 +3,7 @@ import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/aboutStyles';
+import headerBackground from '../img/astronomy1.png';
 import DATA from '../data.js';
 
 class Main extends Component {
@@ -34,7 +35,7 @@ class About extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy1.png" 
+          bgImage={headerBackground}
           bgAlt="blue, purple, and black lines of light"
           rightDiv={<HeaderContent/>}
         />

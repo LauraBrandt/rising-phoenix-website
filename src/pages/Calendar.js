@@ -3,6 +3,7 @@ import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/calendarStyles';
+import headerBackground from '../img/astronomy6.png';
 import DATA from '../data.js';
 
 class Main extends Component {
@@ -86,7 +87,7 @@ class Calendar extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy13.png" 
+          bgImage={headerBackground}
           bgAlt="telescope pointing out a glass wall towards a sunset sky"
           rightDiv={<HeaderContent/>}
         />

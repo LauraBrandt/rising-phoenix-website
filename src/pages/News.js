@@ -5,6 +5,13 @@ import Navbar from '../components/Navbar';
 import style from '../styles/newsStyles';
 import DATA from '../data.js';
 
+function importAll(r) {
+  let images = {};
+  r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+const newsImages = importAll(require.context('../img/news', false, /\.(png|jpe?g|svg)$/));
+
 let NewsList = (props) => {
   const newsItems = DATA.home.news;
 
@@ -17,7 +24,7 @@ let NewsList = (props) => {
     <main style={style.newsList}>
       {newsItems.map(news => 
         <div key={news.title} style={style.newsList.item}>
-          {news.image && <img src={`/img/news/${news.image}`} alt={news.alt} style={style.newsList.image}/>}
+          {news.image && <img src={newsImages[news.image]} alt={news.alt} style={style.newsList.image}/>}
           <Link to={`/news/${news.slug}`} style={style.newsList.header} >{news.title}</Link>
           <div style={style.newsList.date}>{news.date.toDateString()}</div>
           <div style={style.newsList.preview}>{getFirstWords(news.article)}...</div>
@@ -34,7 +41,7 @@ let Article = (props) => {
   if (newsItem) {
     return (
       <main style={style.article}>
-        {newsItem.image && <img src={`/img/news/${newsItem.image}`} alt={newsItem.alt} style={style.article.image}/>}
+        {newsItem.image && <img src={newsImages[newsItem.image]} alt={newsItem.alt} style={style.article.image}/>}
         <h1 style={style.article.header}>{newsItem.title}</h1>
         <div style={style.article.date}>{newsItem.date.toDateString()}</div>
         <hr style={style.article.hr} />

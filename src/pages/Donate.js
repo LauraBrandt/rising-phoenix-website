@@ -3,6 +3,8 @@ import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/donateStyles';
+import headerBackground from '../img/astronomy7.png';
+import gfmLogo from '../img/GoFundMe-Logo.jpg';
 import DATA from '../data.js';
 
 class Main extends Component {
@@ -16,7 +18,7 @@ class Main extends Component {
         <div style={style.main.donateContainer}>
           <div style={style.main.gfmContainer}>
             Through our GoFundMe page:<br/><br/>
-            <a href={DATA.links.goFundMe}><img src="/img/GoFundMe-Logo.jpg" alt="gofundme logo" style={style.main.gfmLogo}/></a>
+            <a href={DATA.links.goFundMe}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           <div style={style.main.checkContainer}>
             By mailing a check made payable to <span style={{fontWeight: 600}}>{donateData.check.to}</span> to
@@ -63,7 +65,7 @@ class Donate extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy16.png" 
+          bgImage={headerBackground}
           bgAlt="deep blue-puple starry sky with light from below"
           rightDiv={<HeaderContent/>}
         />

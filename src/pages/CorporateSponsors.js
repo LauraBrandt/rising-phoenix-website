@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import style from '../styles/corporateSponsorStyles';
+import headerBackground from '../img/astronomy5.png';
 import DATA from '../data.js';
+
+// function importAll(r) {
+//   let images = {};
+//   r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
+//   return images;
+// }
+// const sponsorLogos = importAll(require.context('../img/sponsorLogos', false, /\.(png|jpe?g|svg)$/));
 
 const sponsors = DATA.sponsors.corporate;
 
@@ -21,14 +29,14 @@ class Main extends Component {
                   {company.link ?
                   <a href={company.link} style={[style.innerCompanyBlock, style.link]} key={company.link}>
                     {company.logo ? 
-                      <img src={`img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
+                      <img src={`%PUBLIC_URL%/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
                       :
                       company.name
                     }
                   </a>
                   : 
                   <div href={company.link} style={style.innerCompanyBlock}>
-                    {company.logo && <img src={`img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
+                    {company.logo && <img src={`%PUBLIC_URL%/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
                     {!company.logo && company.name}
                   </div>}
                 </div>
@@ -64,7 +72,7 @@ class CorporateSponsors extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Header 
-          bgImage="img/astronomy9.png" 
+          bgImage={headerBackground} 
           bgAlt="surora borealis"
           rightDiv={<HeaderContent/>}
         />
