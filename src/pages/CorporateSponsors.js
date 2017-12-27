@@ -29,14 +29,14 @@ class Main extends Component {
                   {company.link ?
                   <a href={company.link} style={[style.innerCompanyBlock, style.link]} key={company.link}>
                     {company.logo ? 
-                      <img src={`%PUBLIC_URL%/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
+                      <img src={`${process.env.PUBLIC_URL}/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
                       :
                       company.name
                     }
                   </a>
                   : 
                   <div href={company.link} style={style.innerCompanyBlock}>
-                    {company.logo && <img src={`%PUBLIC_URL%/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
+                    {company.logo && <img src={`${process.env.PUBLIC_URL}/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
                     {!company.logo && company.name}
                   </div>}
                 </div>
