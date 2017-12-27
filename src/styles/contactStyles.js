@@ -144,8 +144,7 @@ const contactStyles = {
       '@media (max-width: 745px)': {
         margin: '0'
       },
-    },
-    
+    },    
   }
 }
 

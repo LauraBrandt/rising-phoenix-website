@@ -52,8 +52,7 @@ let Article = (props) => {
   }
   else {
     return <Redirect to='/notfound'/>;
-  }
-  
+  }  
 }
 Article = Radium(Article);
 

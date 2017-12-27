@@ -1,8 +1,3 @@
-// import color from 'color';
-
-// const darkGreen = color('#283927').lighten(0.5)
-// const lightBrown = '#9C5F4D';
-// const red = '#BE352D';
 const orange = '#DE5E37';
 const paleOrange = '#F58C5F';
 
