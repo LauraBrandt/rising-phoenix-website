@@ -123,7 +123,8 @@ News = Radium(News);
 
 class Home extends Component {
   render() {
-    const homeData = DATA.home;
+    const homeData = DATA.home;    
+    document.title = "Rising Phoenix";
     return (
       <div>
         <Navbar path={this.props.match.path} />

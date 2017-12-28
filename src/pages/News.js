@@ -15,7 +15,9 @@ function importAll(r) {
 }
 const newsImages = importAll(require.context('../img/news', false, /\.(png|jpe?g|svg)$/));
 
-let NewsList = (props) => {
+let NewsList = (props) => {  
+  document.title = "Rising Phoenix | News";
+  
   const newsItems = DATA.home.news;
 
   const getFirstWords = (article) => {
@@ -40,8 +42,10 @@ let NewsList = (props) => {
 NewsList = Radium(NewsList);
 
 let Article = (props) => {
-  const newsItem = DATA.home.news.find(item => item.slug === props.match.params.title);
+  const newsItem = DATA.home.news.find(item => item.slug === props.match.params.title);  
+  
   if (newsItem) {
+    document.title = `Rising Phoenix | ${newsItem.title}`;
     return (
       <main style={style.article}>
         {newsItem.image && <img src={newsImages[newsItem.image]} alt={newsItem.alt} style={style.article.image}/>}

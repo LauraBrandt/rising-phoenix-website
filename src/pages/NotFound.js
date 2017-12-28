@@ -20,8 +20,9 @@ class Main extends Component {
 }
 Main = Radium(Main);
 
-class About extends Component {
+class About extends Component {  
   render() {
+    document.title = "Rising Phoenix | 404";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

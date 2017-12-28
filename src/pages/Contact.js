@@ -101,6 +101,7 @@ HeaderContent = Radium(HeaderContent);
 
 class Contact extends Component {
   render() {
+    document.title = "Rising Phoenix | Contact";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

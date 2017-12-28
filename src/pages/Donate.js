@@ -61,6 +61,7 @@ HeaderContent = Radium(HeaderContent);
 
 class Donate extends Component {
   render() {
+    document.title = "Rising Phoenix | Donate";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

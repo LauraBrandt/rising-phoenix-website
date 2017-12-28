@@ -31,6 +31,7 @@ HeaderContent = Radium(HeaderContent);
 
 class About extends Component {
   render() {
+    document.title = "Rising Phoenix | What is this all about?";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

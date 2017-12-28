@@ -47,6 +47,7 @@ HeaderContent = Radium(HeaderContent);
 
 class IndividualSponsors extends Component {
   render() {
+    document.title = "Rising Phoenix | Individual Sponsors";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

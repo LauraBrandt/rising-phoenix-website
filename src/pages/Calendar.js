@@ -83,6 +83,7 @@ HeaderContent = Radium(HeaderContent);
 
 class Calendar extends Component {
   render() {
+    document.title = "Rising Phoenix | Calendar";
     return (
       <div>
         <Navbar path={this.props.match.path}/>

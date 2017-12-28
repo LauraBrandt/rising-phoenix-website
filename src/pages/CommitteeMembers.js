@@ -40,6 +40,7 @@ HeaderContent = Radium(HeaderContent);
 
 class CommitteeMembers extends Component {
   render() {
+    document.title = "Rising Phoenix | Committee Members";
     return (
       <div>
         <Navbar path={this.props.match.path}/>
