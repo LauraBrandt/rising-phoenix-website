@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import style from '../styles/homeStyles';
 import phoenixUnfilled from '../img/phoenix_stencil_unfilled.png';
 import phoenixFilled from '../img/phoenix_stencil_filled.png';
+// import phoenixGrey from '../img/phoenix_stencil_grey.png';
 import DATA from '../data.js';
 
 function importAll(r) {

@@ -100,7 +100,8 @@ class DropDown extends React.Component {
     this.toggleShowing = this.toggleShowing.bind(this);
     this.hide = this.hide.bind(this);
   }
-  toggleShowing () {
+  toggleShowing (e) {
+    e.preventDefault();
     const currShowing = this.state.showing;
     this.setState({
       showing: !currShowing,
@@ -122,6 +123,7 @@ class DropDown extends React.Component {
         <button 
           style={[style[this.props.styleType].dropdownToggle,
                   isCurrent && style[this.props.styleType].current]}
+          type="button"
           onClick={this.toggleShowing}
           onBlur={this.hide} 
         >
