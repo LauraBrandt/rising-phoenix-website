@@ -23,7 +23,7 @@ const PageRouter = () => {
       <Route exact path='/donate' component={Donate}/>
       <Route exact path='/contact' component={Contact}/>
       <Route path='/news' component={News}/>
-      <Route path='/' component={NotFound}/>
+      <Route component={NotFound}/>
     </Switch>
   );
 }
