@@ -46,23 +46,16 @@ mongoose.connect(process.env.MONGODB).then(
     // app.use('/', site);
 
     app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
-      res.json('error', {
+      res.status(err.status || 500).json({
         message: err.message,
         error: {}
       });
     });
   },
   err => { 
-    console.log('ERROR connecting to: database. ' + err); 
+    console.log('ERROR connecting to database. ' + err); 
   }
 );
-
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   // we're connected!
-// });
 
 const port = process.env.PORT || 3000;
 app.listen(port, function() {
