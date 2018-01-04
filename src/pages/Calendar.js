@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import style from '../styles/calendarStyles';
 import headerBackground from '../img/astronomy6.png';
 import DATA from '../data.js';
@@ -93,6 +94,7 @@ class Calendar extends Component {
           rightDiv={<HeaderContent/>}
         />
         <Main />
+        <Footer />
       </div>
     );
   }

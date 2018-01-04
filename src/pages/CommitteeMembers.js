@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Radium from 'radium';
 import style from '../styles/committeeStyles';
 import headerBackground from '../img/astronomy2.png';
@@ -50,6 +51,7 @@ class CommitteeMembers extends Component {
           rightDiv={<HeaderContent/>}
         />
         <Main />
+        <Footer />
       </div>
     );
   }

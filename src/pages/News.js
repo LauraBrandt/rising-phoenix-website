@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import style from '../styles/newsStyles';
 import DATA from '../data.js';
 
@@ -72,6 +73,7 @@ class News extends Component {
           <Route exact path='/news' component={NewsList}/>
           <Route path='/news/:title' component={Article}/>
         </Switch>
+        <Footer />
       </div>
     );
   }

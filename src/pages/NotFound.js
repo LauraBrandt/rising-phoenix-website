@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import style from '../styles/notFoundStyles';
 
 let Link = require('react-router-dom').Link;
@@ -27,6 +28,7 @@ class About extends Component {
       <div>
         <Navbar path={this.props.match.path}/>
         <Main />
+        <Footer />
       </div>
     );
   }

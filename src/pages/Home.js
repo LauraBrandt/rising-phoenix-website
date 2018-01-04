@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import style from '../styles/homeStyles';
 import phoenixUnfilled from '../img/phoenix_stencil_unfilled.png';
 import phoenixFilled from '../img/phoenix_stencil_filled.png';
@@ -133,6 +134,7 @@ class Home extends Component {
         <CTAs />
         <News newsItems={homeData.news}/>
         {/* <Sponsors /> */}
+        <Footer />
       </div>
     );
   }
