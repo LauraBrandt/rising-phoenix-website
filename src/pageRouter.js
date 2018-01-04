@@ -1,15 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Home';
-import About from './About';
-import CommitteeMembers from './CommitteeMembers';
-import Calendar from './Calendar';
-import CorporateSponsors from './CorporateSponsors';
-import IndividualSponsors from './IndividualSponsors';
-import Donate from './Donate';
-import Contact from './Contact';
-import News from './News';
-import NotFound from './NotFound';
+import Home from './pages/Home';
+import About from './pages/About';
+import CommitteeMembers from './pages/CommitteeMembers';
+import Calendar from './pages/Calendar';
+import CorporateSponsors from './pages/CorporateSponsors';
+import IndividualSponsors from './pages/IndividualSponsors';
+import Donate from './pages/Donate';
+import Contact from './pages/Contact';
+import News from './pages/News';
+import NotFound from './pages/NotFound';
+import AdminPanel from './admin/AdminPanel';
 
 const PageRouter = () => {
   return (
@@ -23,6 +24,7 @@ const PageRouter = () => {
       <Route exact path='/donate' component={Donate}/>
       <Route exact path='/contact' component={Contact}/>
       <Route path='/news' component={News}/>
+      <Route path='/admin' component={AdminPanel}/>
       <Route component={NotFound}/>
     </Switch>
   );
