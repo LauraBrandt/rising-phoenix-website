@@ -1,6 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const User = require('../models/user');
+
+router.use(passport.initialize());
+router.use(passport.session()); // persistent login sessions
+
+const passportConfig = require('../passport-config')(passport);
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -8,43 +14,30 @@ router.use(function(req, res, next) {
   next();
 });
 
-// router.get('/', (req, res, next) => {
-//   console.log(req);
-//   res.send("api route");
-// });
-
-router.post('/login', (req, res, next) => {
-  if (req.body.username && req.body.password) {
-    User.authenticate(req.body.username, req.body.password, (err, user) => {
-      if (err || !user) {
-        const err = new Error('Wrong user name or password.');
-        err.status = 401;
-        return next(err);
-      } else {
-        req.session.userId = user._id;
-        return res.status(200).json({
-          message: "login ok",
-        });
-      }
-    });
-  } else {
-    var err = new Error('All fields required.');
-    err.status = 400;
-    return next(err);
-  }
+// temporary, delete after development
+router.get('/', (req, res, next) => {
+  console.log(req.user)
+  res.send("api route");
 });
+
+router.post('/login', passport.authenticate('local-signin', {
+  successRedirect: '/admin/dashboard',
+  failureRedirect: '/admin'
+  })
+);
 
 router.get('/logout', function(req, res, next) {
-  if (req.session) {
-    // delete session object
-    req.session.destroy(function(err) {
-      if(err) {
-        return next(err);
-      } else {
-        return res.redirect('/');
-      }
-    });
-  }
+  req.logout();
+  res.redirect('/');
+  req.session.notice = "You have successfully been logged out.";
 });
+
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+      return next();
+  req.session.error = 'Please sign in!';
+  res.redirect('/admin');
+}
 
 module.exports = router;
