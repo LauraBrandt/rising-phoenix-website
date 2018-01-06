@@ -1,43 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
 const User = require('../models/user');
 
-router.use(passport.initialize());
-router.use(passport.session()); // persistent login sessions
-
-const passportConfig = require('../passport-config')(passport);
-
-router.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+const authCheck = jwt({
+  secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/.well-known/jwks.json`
+  }),
+  audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+  issuer: `https://${process.env.REACT_APP_AUTH0_DOMAIN}`,
+  algorithms: ['RS256']
 });
 
 // temporary, delete after development
-router.get('/', (req, res, next) => {
-  console.log(req.user)
+router.get('/', authCheck, (req, res) => {
   res.send("api route");
 });
-
-router.post('/login', passport.authenticate('local-signin', {
-  successRedirect: '/admin/dashboard',
-  failureRedirect: '/admin'
-  })
-);
-
-router.get('/logout', function(req, res, next) {
-  req.logout();
-  res.redirect('/');
-  req.session.notice = "You have successfully been logged out.";
-});
-
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-      return next();
-  req.session.error = 'Please sign in!';
-  res.redirect('/admin');
-}
 
 module.exports = router;

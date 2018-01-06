@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { logout } from '../utils/AuthService';
 
-class Dashboard extends Component {
-  render() {
-    document.title = "Rising Phoenix CMS";
-    return (
-      <div>
-      </div>
-    );
-  }
+const Dashboard = () => {
+  document.title = "Dashboard | Rising Phoenix CMS";
+
+  return (
+    <div>
+      This is the dashboard.
+      <button onClick={() => logout()}>Log out </button>
+    </div>
+  );
 }
   
 export default Dashboard;

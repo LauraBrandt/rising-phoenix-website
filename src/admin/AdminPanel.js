@@ -1,12 +1,28 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Callback from './Callback'
 import Login from './Login';
+import Dashboard from './Dashboard';
+import { isLoggedIn, requireAuth } from '../utils/AuthService';
 
-const AdminPanel = () => (
-  <Switch>
-    <Route exact path='/admin' component={Login}/>
-    <Route path='/admin/login' component={Login}/>
-  </Switch>
-)
+const AdminPanel = () => {
+  return (
+    <div style={{textAlign: 'center', marginTop: '3em'}}>
+      <h1>Rising Phoenix Content Management</h1>
+      <Switch>
+        <Route exact path="/admin/callback" component={Callback} />
+        <Route exact path="/admin/login" render={() => (
+          isLoggedIn() ? (
+            <Redirect to="/admin/dashboard"/>
+          ) : (
+            <Login/>
+          )
+        )}/>
+        <Route exact path="/admin/dashboard" component={Dashboard} onEnter={requireAuth} />
+        <Route path="/admin" component={Dashboard} onEnter={requireAuth} />
+      </Switch>
+    </div>
+  );
+}
   
 export default AdminPanel;

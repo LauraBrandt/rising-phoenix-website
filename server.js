@@ -6,33 +6,26 @@ const bodyParser  = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+const cors = require('cors');
 
-require('dotenv').load();
-
-// routes
-const api = require('./routes/api');
+require('dotenv').config();
 
 // set up app
 const app = express();
 
 app.use(morgan('dev'));
 
-app.use(cookieParser());
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(session({
-  secret: 'thisisitguys',
-  resave: true,
-  saveUninitialized: false
-}));
+app.use(cors());
+
+// routes
+const api = require('./routes/api');
 
 // set up database
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB).then(  
+mongoose.connect(process.env.MONGODB_URL).then(  
   () => { 
     console.log('Connected to database.');
     // Serve static assets
