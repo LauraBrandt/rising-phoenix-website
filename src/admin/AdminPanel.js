@@ -3,7 +3,15 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Callback from './Callback'
 import Login from './Login';
 import Dashboard from './Dashboard';
-import { isLoggedIn, requireAuth } from '../utils/AuthService';
+import { isLoggedIn } from '../utils/AuthService';
+
+const renderIfAuth = (Component) => (
+    isLoggedIn() ? (
+      <Component />
+    ) : (
+      <Redirect to="/admin/login"/>
+    )
+  );
 
 const AdminPanel = () => {
   return (
@@ -18,8 +26,8 @@ const AdminPanel = () => {
             <Login/>
           )
         )}/>
-        <Route exact path="/admin/dashboard" component={Dashboard} onEnter={requireAuth} />
-        <Route path="/admin" component={Dashboard} onEnter={requireAuth} />
+        <Route exact path="/admin/dashboard" render={() => renderIfAuth(Dashboard)} />
+        <Route path="/admin" render={() => renderIfAuth(Dashboard) } />
       </Switch>
     </div>
   );

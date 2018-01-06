@@ -12,28 +12,21 @@ const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
 const auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
-  domain: CLIENT_DOMAIN
+  domain: CLIENT_DOMAIN,
+  responseType: 'token id_token',
+  redirectUri: REDIRECT,
+  audience: AUDIENCE,
+  // scope: SCOPE
 });
 
 export function login() {
-  auth.authorize({
-    responseType: 'token id_token',
-    redirectUri: REDIRECT,
-    audience: AUDIENCE,
-    // scope: SCOPE
-  });
+  auth.authorize();
 }
 
 export function logout() {
   clearIdToken();
   clearAccessToken();
   window.location.href = "/";
-}
-
-export function requireAuth(nextState, replace) {
-  if (!isLoggedIn()) {
-    replace({pathname: '/admin/login'});
-  }
 }
 
 export function getIdToken() {
