@@ -1,8 +1,9 @@
+'use strict'
+
 const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
-const User = require('../models/user');
 
 const authCheck = jwt({
   secret: jwks.expressJwtSecret({
