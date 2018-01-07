@@ -24,13 +24,9 @@ const generalStyles = {
     }
   },
   adminPanel: {
-    textAlign: 'center', 
-    marginTop: '3em',
-    padding: '5%',
+    textAlign: 'center',
+    padding: '3% 5%',
     boxSizing: 'border-box',
-    '@media (max-width: 500px)': {
-      marginTop: 0
-    }
   },
   login: {
     border: '1px solid rgba(0,0,0,0.3)',

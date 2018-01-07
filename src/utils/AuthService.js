@@ -1,5 +1,6 @@
 import decode from 'jwt-decode';
 import auth0 from 'auth0-js';
+import axios from 'axios';
 
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
@@ -7,7 +8,7 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENTID;
 const CLIENT_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 const REDIRECT = "http://localhost:3000/admin/callback";
-const SCOPE = 'openid';
+const SCOPE = 'openid email profile';
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
 const auth = new auth0.WebAuth({
@@ -81,4 +82,25 @@ function getTokenExpirationDate(encodedToken) {
 function isTokenExpired(token) {
   const expirationDate = getTokenExpirationDate(token);
   return expirationDate < new Date();
+}
+
+export function sendResetPasswordRequest(callback) {
+  const email = decode(getIdToken()).email;
+
+  axios({
+    method: 'post',
+    url: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/dbconnections/change_password`,
+    headers: { 'content-type': 'application/json', Authorization: `Bearer ${getAccessToken()}` },
+    data: {
+      client_id: process.env.REACT_APP_AUTH0_CLIENTID,
+      email: email,
+      connection: 'Username-Password-Authentication'
+    }
+  })
+  .then(function (response) {
+    callback(response.data);
+  })
+  .catch(function (error) {
+    callback(error.response.message);
+  });
 }

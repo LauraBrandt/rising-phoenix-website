@@ -1,5 +1,4 @@
 import React from 'react';
-import { logout } from '../utils/AuthService';
 
 const Dashboard = () => {
   document.title = "Dashboard | Rising Phoenix CMS";
@@ -7,7 +6,6 @@ const Dashboard = () => {
   return (
     <div>
       This is the dashboard.
-      <button onClick={() => logout()}>Log out </button>
     </div>
   );
 }
