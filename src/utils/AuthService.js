@@ -7,7 +7,7 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENTID;
 const CLIENT_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 const REDIRECT = "http://localhost:3000/admin/callback";
-// const SCOPE = 'YOUR_SCOPE';
+const SCOPE = 'openid';
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
 const auth = new auth0.WebAuth({
@@ -16,7 +16,7 @@ const auth = new auth0.WebAuth({
   responseType: 'token id_token',
   redirectUri: REDIRECT,
   audience: AUDIENCE,
-  // scope: SCOPE
+  scope: SCOPE
 });
 
 export function login() {
