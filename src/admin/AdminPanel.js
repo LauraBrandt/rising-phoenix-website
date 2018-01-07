@@ -4,6 +4,8 @@ import Callback from './Callback'
 import Login from './Login';
 import Dashboard from './Dashboard';
 import { isLoggedIn } from '../utils/AuthService';
+import generalStyles from '../styles/admin/generalStyles';
+import Radium from 'radium';
 
 const renderIfAuth = (Component) => (
     isLoggedIn() ? (
@@ -13,9 +15,9 @@ const renderIfAuth = (Component) => (
     )
   );
 
-const AdminPanel = () => {
+let AdminPanel = () => {
   return (
-    <div style={{textAlign: 'center', marginTop: '3em'}}>
+    <div style={generalStyles.adminPanel}>
       <h1>Rising Phoenix Content Management</h1>
       <Switch>
         <Route exact path="/admin/callback" component={Callback} />
@@ -32,5 +34,6 @@ const AdminPanel = () => {
     </div>
   );
 }
+AdminPanel = Radium(AdminPanel);
   
 export default AdminPanel;

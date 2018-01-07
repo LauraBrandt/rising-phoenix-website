@@ -14,7 +14,7 @@ const generalStyles = {
     backgroundColor: '#F58C5F',
     color: 'white',
     padding: '0.8em 1.2em',
-    margin: '8px 0',
+    margin: '0.5em 0',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
@@ -23,6 +23,28 @@ const generalStyles = {
         backgroundColor: '#DE5E37',
     }
   },
+  adminPanel: {
+    textAlign: 'center', 
+    marginTop: '3em',
+    padding: '5%',
+    boxSizing: 'border-box',
+    '@media (max-width: 500px)': {
+      marginTop: 0
+    }
+  },
+  login: {
+    border: '1px solid rgba(0,0,0,0.3)',
+    borderRadius: '10px',
+    width: 375,
+    maxWidth: '95%',
+    margin: '5em auto 0 auto',
+    padding: '2em',
+    boxSizing: 'border-box',
+    text: {
+      margin: '1em 0 2em 0',
+      fontSize: '1.1em'
+    }
+  }
 }
 
 export default generalStyles;

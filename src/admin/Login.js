@@ -5,10 +5,9 @@ import { login } from '../utils/AuthService';
 
 let Login = () => {
   document.title = "Login | Rising Phoenix CMS";
-    
   return (
-    <div>
-      <div>You must be authorized to enter.</div>
+    <div style={generalStyles.login}>
+      <div style={generalStyles.login.text}>You must be authorized to enter.</div>
       <button 
         style={generalStyles.submitButton}
         onClick={() => login()}
