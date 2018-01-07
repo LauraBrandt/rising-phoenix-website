@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router-dom';
 import { logout, sendResetPasswordRequest } from '../utils/AuthService';
 import optionsStyles from '../styles/admin/optionsStyles';
 import Radium from 'radium';
@@ -10,7 +11,6 @@ class Options extends Component {
     this.state = {
       menuShowing: false,
       pwResetMessage: "",
-      node: document.getElementById("options")
     }
     this.toggleMenu = this.toggleMenu.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -46,8 +46,11 @@ class Options extends Component {
 
   render() {
     return (
-      <div>
-        <div style={optionsStyles} id="options">
+      <div style={optionsStyles}>
+        <div style={optionsStyles.back}>
+          <Link to="/admin" style={optionsStyles.back.Link}><i class="fa fa-bars" aria-hidden="true"></i></Link>
+        </div>
+        <div style={optionsStyles.menu}>
           <div type='button' style={optionsStyles.button} onClick={this.toggleMenu}>
             <i className="fa fa-cog" aria-hidden="true" style={{marginRight: 5}}></i>
             <i className="fa fa-caret-down" aria-hidden="true"></i>
