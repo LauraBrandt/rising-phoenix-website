@@ -7,7 +7,7 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      pages: ['Home', 'About', 'Committee', 'Calendar', 'Corporate Sponsors', 'Individual Sponsors', 'Donate', 'Links']
+      pages: ['Home', 'About', 'Committee Members', 'Calendar', 'Corporate Sponsors', 'Individual Sponsors', 'Donate', 'Links']
     }
   }
   render() {
