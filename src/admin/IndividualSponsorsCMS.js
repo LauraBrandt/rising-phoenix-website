@@ -47,8 +47,10 @@ class IndividualSponsorsCMS extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const newSponsorList = this.state.sponsorsEntryValue.split("\n");
-    const newSponsors = newSponsorList.map((sponsor, i) => ({index: i, name: sponsor}));
+    const newSponsors = this.state.sponsorsEntryValue
+      .split("\n")
+      .filter(sponsor => !!sponsor) // remove blank lines
+      .map((sponsor, i) => ({index: i, name: sponsor}));
     postData('/api/individual-sponsors', newSponsors)
       .then((response) => {
         this.props.updateMessage(response.message);
