@@ -25,7 +25,7 @@ const api = require('./routes/api');
 
 // set up database
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URL).then(  
+mongoose.connect(process.env.MONGODB_URL_LOCAL).then(  
   () => { 
     console.log('Connected to database.');
     // Serve static assets
