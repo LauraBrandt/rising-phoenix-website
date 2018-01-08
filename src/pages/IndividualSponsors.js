@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import style from '../styles/individualSponsorStyles';
 import headerBackground from '../img/astronomy3.png';
 import { getData } from '../utils/apiCalls';
@@ -64,14 +62,12 @@ class IndividualSponsors extends Component {
     document.title = "Rising Phoenix | Individual Sponsors";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}
           bgAlt="colorful nebula"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

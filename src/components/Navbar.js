@@ -18,7 +18,8 @@ const navElements = [
   {label: "Contact", link: "/contact", isDropdown: false},
 ]
 
-const renderNavElements = (path, styleType) => {
+const renderNavElements = (styleType) => {
+  const path = window.location.pathname;
   return navElements.map((elem) => 
     (<li key={elem.label} style={style[styleType].li}>
       {elem.isDropdown ? 
@@ -44,11 +45,11 @@ const renderNavElements = (path, styleType) => {
   );
 }
 
-let NavbarWide = (props) => {
+let NavbarWide = () => {
   return (
     <nav style={style.wide.navbar}>
       <ul style={style.wide.ul}>
-        {renderNavElements(props.path, 'wide')}
+        {renderNavElements('wide')}
         <li style={style.wide.socialButtons}>
           <a href={DATA.links.facebook} style={style.wide.facebookButton} key="facebook"><i className="fa fa-facebook-square"></i></a>
           <a href={DATA.links.twitter} style={style.wide.twitterButton} key="twitter"><i className="fa fa-twitter-square"></i></a>
@@ -59,8 +60,8 @@ let NavbarWide = (props) => {
 }
 
 class NavbarNarrow extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       showing: false,
     }
@@ -84,7 +85,7 @@ class NavbarNarrow extends React.Component {
           </button>
         </div>
         <ul style={[style.narrow.ul, this.state.showing ? {width: '50%'} : {width: 0}]}>
-          {renderNavElements(this.props.path, 'narrow')}
+          {renderNavElements('narrow')}
         </ul>
       </nav>
     )

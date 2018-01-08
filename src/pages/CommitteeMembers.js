@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Radium from 'radium';
 import style from '../styles/committeeStyles';
 import headerBackground from '../img/astronomy2.png';
@@ -44,14 +42,12 @@ class CommitteeMembers extends Component {
     document.title = "Rising Phoenix | Committee Members";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}  
           bgAlt="swirling pink surface"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

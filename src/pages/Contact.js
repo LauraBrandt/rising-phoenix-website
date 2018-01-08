@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import style from '../styles/contactStyles';
 import headerBackground from '../img/astronomy4.png';
 
@@ -105,14 +103,12 @@ class Contact extends Component {
     document.title = "Rising Phoenix | Contact";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}
           bgAlt="nasa measuring instrument in space"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

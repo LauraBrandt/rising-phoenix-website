@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import style from '../styles/aboutStyles';
 import headerBackground from '../img/astronomy1.png';
 import DATA from '../data.js';
@@ -35,14 +33,12 @@ class About extends Component {
     document.title = "Rising Phoenix | What is this all about?";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}
           bgAlt="blue, purple, and black lines of light"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import style from '../styles/donateStyles';
 import headerBackground from '../img/astronomy7.png';
 import gfmLogo from '../img/GoFundMe-Logo.jpg';
@@ -65,14 +63,12 @@ class Donate extends Component {
     document.title = "Rising Phoenix | Donate";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}
           bgAlt="deep blue-puple starry sky with light from below"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

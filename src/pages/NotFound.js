@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import style from '../styles/notFoundStyles';
 
 let Link = require('react-router-dom').Link;
 Link = Radium(Link);
 
-class Main extends Component {
+class NotFound extends Component {  
   render() {
+    document.title = "Rising Phoenix | 404";
     return (
       <main style={style.main}>
         <h1 style={style.h1}>404</h1>
@@ -19,19 +18,6 @@ class Main extends Component {
     );
   }
 }
-Main = Radium(Main);
+NotFound = Radium(NotFound);
 
-class About extends Component {  
-  render() {
-    document.title = "Rising Phoenix | 404";
-    return (
-      <div>
-        <Navbar path={this.props.match.path}/>
-        <Main />
-        <Footer />
-      </div>
-    );
-  }
-}
-
-export default About;
+export default NotFound;

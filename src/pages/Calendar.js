@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
-import Navbar from '../components/Navbar';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import style from '../styles/calendarStyles';
 import headerBackground from '../img/astronomy6.png';
 import DATA from '../data.js';
@@ -87,14 +85,12 @@ class Calendar extends Component {
     document.title = "Rising Phoenix | Calendar";
     return (
       <div>
-        <Navbar path={this.props.match.path}/>
         <Header 
           bgImage={headerBackground}
           bgAlt="telescope pointing out a glass wall towards a sunset sky"
           rightDiv={<HeaderContent/>}
         />
         <Main />
-        <Footer />
       </div>
     );
   }

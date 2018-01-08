@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Radium from 'radium';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import style from '../styles/newsStyles';
 import DATA from '../data.js';
 
@@ -67,14 +65,10 @@ Article = Radium(Article);
 class News extends Component {
   render() {
     return (
-      <div>        
-        <Navbar path={this.props.match.path}/>
-        <Switch>
-          <Route exact path='/news' component={NewsList}/>
-          <Route path='/news/:title' component={Article}/>
-        </Switch>
-        <Footer />
-      </div>
+      <Switch>
+        <Route exact path='/news' component={NewsList}/>
+        <Route path='/news/:title' component={Article}/>
+      </Switch>
     );
   }
 }
