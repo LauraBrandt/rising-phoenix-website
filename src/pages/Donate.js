@@ -17,7 +17,7 @@ class Main extends Component {
         <div style={style.main.donateContainer}>
           <div style={style.main.gfmContainer}>
             Through our GoFundMe page:<br/><br/>
-            <a href={DATA.links.goFundMe} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
+            <a href={this.props.donateLink} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           <div style={style.main.checkContainer}>
             By mailing a check made payable to <span style={{fontWeight: 600}}>{donateData.check.to}</span> to
@@ -68,7 +68,7 @@ class Donate extends Component {
           bgAlt="deep blue-puple starry sky with light from below"
           rightDiv={<HeaderContent/>}
         />
-        <Main />
+        <Main donateLink={this.props.donateLink}/>
       </div>
     );
   }

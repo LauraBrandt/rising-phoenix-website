@@ -10,6 +10,7 @@ const validator = require('validator');
 
 // models
 const IndividualSponsors = require('../models/individualSponsors');
+const Links = require('../models/links');
 
 /// AUTHENTICATION
 const authCheck = jwt({
@@ -24,7 +25,7 @@ const authCheck = jwt({
   algorithms: ['RS256']
 });
 
-/// ROUTES
+/// ROUTES - GET
 router.get('/individual-sponsors', (req, res) => {
   IndividualSponsors
     .find({})
@@ -40,6 +41,21 @@ router.get('/individual-sponsors', (req, res) => {
     });
 });
 
+router.get('/links', (req, res) => {
+  Links
+    .findOne({})
+    .exec((err, links) => {
+      if (err) {
+        console.log("in api", err)
+        const newError = new Error('An error occurred fetching the links.');
+        res.status(err.status || 404).json({message: newError.message});
+      } else {
+        res.send(links);
+      }
+    });
+});
+
+/// ROUTES - POST
 router.post('/individual-sponsors', authCheck, (req, res) => {
   let sponsors = req.body;
   let sanitizedIndex = "";
@@ -65,6 +81,43 @@ router.post('/individual-sponsors', authCheck, (req, res) => {
       res.send({'message': `Success! ${docs.length} sponsors saved.`})
     });
   });
+});
+
+router.post('/links', authCheck, (req, res) => {
+  let linksSent = req.body;
+  Links
+    .findOne({})
+    .exec((err, currLinks) => {
+      if (err) {
+        console.log(err)
+        const newError = new Error('An error occured fetching the links.');
+        res.status(err.status || 404).json({message: newError.message});
+      } else if (!currLinks) {
+        console.log('No links exist - creating new')
+        const newLinks = new Links(linksSent);
+        newLinks.save(function (err, updatedLinks) {
+          if (err) {
+            console.log(err)
+            const newError = new Error('Links were not saved.');
+            res.status(err.status || 404).json({message: newError.message});
+          }
+          res.send({message: 'Links successfully saved.'});
+         });
+      } else {
+        console.log('Links updating...')
+        currLinks.facebook = linksSent.facebook;
+        currLinks.twitter = linksSent.twitter;
+        currLinks.donate = linksSent.donate;
+        currLinks.save(function (err, updatedLinks) {
+          if (err) {
+            console.log(err)
+            const newError = new Error('Links were not saved.');
+            res.status(err.status || 404).json({message: newError.message});
+          }
+          res.send({message: 'Links successfully saved.'});
+        });
+      }
+    });
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const linksSchema = new Schema({
   facebook: String,
   twitter: String,
-  goFundMe: String,
+  donate: String,
 });
 
 module.exports = mongoose.model('Links', linksSchema);

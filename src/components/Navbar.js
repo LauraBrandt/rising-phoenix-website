@@ -2,7 +2,6 @@ import React from 'react';
 import Radium from 'radium';
 import style from '../styles/navbarStyles';
 import logo from '../img/logo_ajeno.png';
-import DATA from '../data';
 
 let Link = require('react-router-dom').Link;
 Link = Radium(Link);
@@ -45,14 +44,14 @@ const renderNavElements = (styleType) => {
   );
 }
 
-let NavbarWide = () => {
+let NavbarWide = (props) => {
   return (
     <nav style={style.wide.navbar}>
       <ul style={style.wide.ul}>
         {renderNavElements('wide')}
         <li style={style.wide.socialButtons}>
-          <a href={DATA.links.facebook} style={style.wide.facebookButton} key="facebook"><i className="fa fa-facebook-square"></i></a>
-          <a href={DATA.links.twitter} style={style.wide.twitterButton} key="twitter"><i className="fa fa-twitter-square"></i></a>
+          <a href={props.links.facebook} style={style.wide.facebookButton} key="facebook"><i className="fa fa-facebook-square"></i></a>
+          <a href={props.links.twitter} style={style.wide.twitterButton} key="twitter"><i className="fa fa-twitter-square"></i></a>
         </li>
       </ul>
     </nav>
@@ -158,8 +157,8 @@ DropDown = Radium(DropDown);
 const Navbar = (props) => {
   return (
     <div style={style.navbar}>
-      <NavbarWide path={props.path} />
-      <NavbarNarrow path={props.path} />
+      <NavbarWide links={props.links} />
+      <NavbarNarrow />
     </div>
   )
 }
