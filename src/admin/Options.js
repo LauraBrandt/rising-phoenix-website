@@ -10,12 +10,10 @@ class Options extends Component {
     super();
     this.state = {
       menuShowing: false,
-      pwResetMessage: "",
     }
     this.toggleMenu = this.toggleMenu.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handleResetPassword = this.handleResetPassword.bind(this);
-    this.closeMessage = this.closeMessage.bind(this);
   }
 
   toggleMenu() {
@@ -37,18 +35,16 @@ class Options extends Component {
   }
 
   handleResetPassword() {
-    sendResetPasswordRequest((res) => { this.setState({pwResetMessage: res}) } );
-  }
-
-  closeMessage() {
-    this.setState({pwResetMessage: ""})
+    sendResetPasswordRequest((res) => { 
+      this.props.updateMessage(res);
+    } );
   }
 
   render() {
     return (
       <div style={optionsStyles}>
         <div style={optionsStyles.back}>
-          <Link to="/admin" style={optionsStyles.back.Link}><i class="fa fa-bars" aria-hidden="true"></i></Link>
+          <Link to="/admin" style={optionsStyles.back.Link}><i className="fa fa-bars" aria-hidden="true"></i></Link>
         </div>
         <div style={optionsStyles.menu}>
           <div type='button' style={optionsStyles.button} onClick={this.toggleMenu}>
@@ -73,15 +69,6 @@ class Options extends Component {
             </div>
           </div> }
         </div>
-        {this.state.pwResetMessage && <div style={optionsStyles.message}>
-          {this.state.pwResetMessage}
-          <i 
-            className="fa fa-times" 
-            aria-hidden="true" 
-            style={optionsStyles.message.icon}
-            onClick={this.closeMessage}
-          ></i>
-        </div>}
       </div>
     );
   }

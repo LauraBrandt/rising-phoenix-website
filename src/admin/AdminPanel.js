@@ -12,8 +12,7 @@ import CorporateSponsorsCMS from './CorporateSponsorsCMS';
 import IndividualSponsorsCMS from './IndividualSponsorsCMS';
 import DonateCMS from './DonateCMS';
 import LinksCMS from './LinksCMS';
-
-
+import Message from './components/Message';
 import { isLoggedIn } from '../utils/AuthService';
 import generalStyles from '../styles/admin/generalStyles';
 import Radium from 'radium';
@@ -27,11 +26,24 @@ const renderIfAuth = (Component) => (
   );
 
 class AdminPanel extends Component {
+  constructor(){
+    super()
+    this.state = {message: ""};
+    this.updateMessage = this.updateMessage.bind(this);
+    this.closeMessage = this.closeMessage.bind(this);
+  }
+  updateMessage(message){
+    this.setState({message});    
+    setTimeout(() => { this.setState({message: ""}) }, 5000);
+  }
+  closeMessage() {
+    this.setState({message: ""});
+  }
   render() {
     return (
       <div style={generalStyles.adminPanel}>
         <h1>Rising Phoenix Content Management</h1>
-        {isLoggedIn() && <Options />}
+        {isLoggedIn() && <Options updateMessage={this.updateMessage}/>}
         <Switch>
           <Route exact path="/admin/callback" component={Callback} />
           <Route exact path="/admin/login" render={() => (
@@ -52,6 +64,7 @@ class AdminPanel extends Component {
           <Route exact path="/admin/links" render={() => renderIfAuth(LinksCMS)} />
           <Route path="/admin" render={() => renderIfAuth(Dashboard) } />
         </Switch>
+        {this.state.message && <Message message={this.state.message} closeMessage={this.closeMessage}/>}
       </div>
     );
   }

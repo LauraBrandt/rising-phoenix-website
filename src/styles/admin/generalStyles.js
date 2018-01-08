@@ -23,6 +23,21 @@ const generalStyles = {
         backgroundColor: '#DE5E37',
     }
   },
+  message: {
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    margin: '1em', 
+    color: 'white', 
+    padding: '0.8em 1em', 
+    backgroundColor: '#42c2f4',
+    icon: {
+      marginLeft: 5, 
+      float: 'right', 
+      fontSize: '1.3em', 
+      cursor: 'pointer'
+    }
+  },
   adminPanel: {
     textAlign: 'center',
     padding: '3% 5%',

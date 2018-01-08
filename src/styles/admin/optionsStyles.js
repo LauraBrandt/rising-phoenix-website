@@ -52,18 +52,6 @@ const optionsStyles = {
       }
     }
   },
-  message: {
-    margin: '1em 0', 
-    color: 'white', 
-    padding: '0.8em 1em', 
-    backgroundColor: '#42c2f4',
-    icon: {
-      marginLeft: 5, 
-      float: 'right', 
-      fontSize: '1.3em', 
-      cursor: 'pointer'
-    }
-  }
 }
 
 export default optionsStyles;
