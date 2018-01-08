@@ -31,7 +31,9 @@ router.get('/individual-sponsors', (req, res) => {
     .sort({index: 1})
     .exec((err, sponsors) => {
       if (err) {
-        res.send({ 'error': 'An error has occured' });
+        console.log(err)
+        const newError = new Error('An error occurred fetching the sponsors.');
+        res.status(err.status || 404).json({message: newError.message});
       } else {
         res.send(sponsors);
       }
@@ -50,13 +52,15 @@ router.post('/individual-sponsors', authCheck, (req, res) => {
   });
   IndividualSponsors.remove({}, (err, docs) => {
     if (err) {
-      console.log(err);
-      res.send({'message': 'There was a problem with your request.'});
+      console.log(err)
+      const newError = new Error('There was a problem with your request.');
+      res.status(err.status || 404).json({message: newError.message});
     }
     IndividualSponsors.create(sponsors, (err, docs) => {
       if (err) {
-        console.log(err);
-        res.send({'message': 'There was a problem with your request.'});
+        console.log(err)
+        const newError = new Error('There was a problem with your request.');
+        res.status(err.status || 404).json({message: newError.message});
       }
       res.send({'message': `Success! ${docs.length} sponsors saved.`})
     });

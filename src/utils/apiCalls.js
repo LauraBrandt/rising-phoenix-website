@@ -6,7 +6,9 @@ export {getData, postData};
 function getData(endpoint) {
   return axios.get(endpoint)
     .then(response => response.data)
-    .catch(error => error.response);
+    .catch(error => {
+      return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message }
+    });
 }
 
 function postData(endpoint, data) {
@@ -17,5 +19,9 @@ function postData(endpoint, data) {
     data: data
   })
     .then(response => response.data)
-    .catch(error => error.response ? error.response.message : error.response.statusText);
+    .catch(error => 
+      {
+        return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message }
+      }
+    );
 }

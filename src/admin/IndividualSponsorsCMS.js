@@ -19,11 +19,9 @@ class IndividualSponsorsCMS extends Component {
 
   getSponsors() {
     getData('/api/individual-sponsors').then((sponsors) => {
-      if (sponsors.status) {
-        this.setState({
-          error: true
-        });
-        this.props.updateMessage(`${sponsors.status}: ${sponsors.statusText}`);
+      if (sponsors.error) {
+        this.setState({ error: true });
+        this.props.updateMessage(sponsors.error);
       } else {
         const initSponsorsEntryValue = sponsors.map(sponsor => sponsor.name).join('\n');
         this.setState({ 
@@ -53,7 +51,8 @@ class IndividualSponsorsCMS extends Component {
       .map((sponsor, i) => ({index: i, name: sponsor}));
     postData('/api/individual-sponsors', newSponsors)
       .then((response) => {
-        this.props.updateMessage(response.message);
+        const message = response.error || response.message;
+        this.props.updateMessage(message);
       });
   }
 
