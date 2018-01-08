@@ -17,5 +17,5 @@ function postData(endpoint, data) {
     data: data
   })
     .then(response => response.data)
-    .catch(error => error.response);
+    .catch(error => error.response.message || error.response.statusText);
 }

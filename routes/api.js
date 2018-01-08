@@ -1,10 +1,15 @@
 'use strict'
 
+// dependencies
 const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
+// models
+const IndividualSponsors = require('../models/individualSponsors');
+
+/// AUTHENTICATION
 const authCheck = jwt({
   secret: jwks.expressJwtSecret({
       cache: true,
@@ -17,9 +22,32 @@ const authCheck = jwt({
   algorithms: ['RS256']
 });
 
-// temporary, delete after development
-router.get('/', authCheck, (req, res) => {
-  res.send("api route");
+/// ROUTES
+router.get('/individual-sponsors', (req, res) => {
+  IndividualSponsors.find((err, sponsors) => {
+    if (err) {
+      res.send({ 'error': 'An error has occured' });
+    } else {
+      res.send(sponsors);
+    }
+  });
+});
+
+router.post('/individual-sponsors', authCheck, (req, res) => {
+  const sponsors = req.body;
+  IndividualSponsors.remove({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+      res.send({'message': 'There was a problem with your request.'});
+    }
+    IndividualSponsors.create(sponsors, (err, docs) => {
+      if (err) {
+        console.log(err);
+        res.send({'message': 'There was a problem with your request.'});
+      }
+      res.send({'message': `Success! ${docs.length} sponsors saved.`})
+    });
+  });
 });
 
 module.exports = router;
