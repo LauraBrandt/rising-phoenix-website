@@ -5,6 +5,10 @@ const individualSponsorStyles = {
   main: {
     ...sv.mainStyle,
   },
+  link: {
+    ...sv.linkStyle
+    // color: sv.paleOrange,
+  },
   nameContainer: {
     display: 'grid',
     gridRowGap: '1em',
@@ -54,10 +58,6 @@ const individualSponsorStyles = {
         fontSize: '1.3em',
       }
     },
-    link: {
-      ...sv.linkStyle
-      // color: sv.paleOrange,
-    }
   }
 }
 
