@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import style from '../styles/individualSponsorStyles';
 import headerBackground from '../img/astronomy3.png';
-import { getData } from '../utils/api-calls';
+import { getData } from '../utils/apiCalls';
 
 let Link = require('react-router-dom').Link;
 Link = Radium(Link);
