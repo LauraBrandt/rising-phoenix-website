@@ -26,13 +26,16 @@ const authCheck = jwt({
 
 /// ROUTES
 router.get('/individual-sponsors', (req, res) => {
-  IndividualSponsors.find((err, sponsors) => {
-    if (err) {
-      res.send({ 'error': 'An error has occured' });
-    } else {
-      res.send(sponsors);
-    }
-  });
+  IndividualSponsors
+    .find({})
+    .sort({index: 1})
+    .exec((err, sponsors) => {
+      if (err) {
+        res.send({ 'error': 'An error has occured' });
+      } else {
+        res.send(sponsors);
+      }
+    });
 });
 
 router.post('/individual-sponsors', authCheck, (req, res) => {
