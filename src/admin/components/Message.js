@@ -3,7 +3,6 @@ import generalStyles from '../../styles/admin/generalStyles';
 import Radium from 'radium';
 
 let Message = (props) => {
-  console.log('message rendering')
   return (
     <div style={generalStyles.message}>
       {props.message}
