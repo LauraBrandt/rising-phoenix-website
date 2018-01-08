@@ -13,7 +13,7 @@ import IndividualSponsorsCMS from './IndividualSponsorsCMS';
 import DonateCMS from './DonateCMS';
 import LinksCMS from './LinksCMS';
 import Message from './components/Message';
-import { isLoggedIn } from '../utils/AuthService';
+import { isLoggedIn } from '../utils/authService';
 import generalStyles from '../styles/admin/generalStyles';
 import Radium from 'radium';
 
