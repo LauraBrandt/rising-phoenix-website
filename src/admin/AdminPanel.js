@@ -17,9 +17,9 @@ import { isLoggedIn } from '../utils/authService';
 import generalStyles from '../styles/admin/generalStyles';
 import Radium from 'radium';
 
-const renderIfAuth = (Component) => (
+const renderIfAuth = (Component, props) => (
     isLoggedIn() ? (
-      <Component />
+      <Component {...props} />
     ) : (
       <Redirect to="/admin/login"/>
     )
@@ -53,16 +53,16 @@ class AdminPanel extends Component {
               <Login/>
             )
           )}/>
-          <Route exact path="/admin/dashboard" render={() => renderIfAuth(Dashboard)} />
-          <Route exact path="/admin/home" render={() => renderIfAuth(HomeCMS)} />
-          <Route exact path="/admin/about" render={() => renderIfAuth(AboutCMS)} />
-          <Route exact path="/admin/committee" render={() => renderIfAuth(CommitteeCMS)} />
-          <Route exact path="/admin/calendar" render={() => renderIfAuth(CalendarCMS)} />
-          <Route exact path="/admin/corporate-sponsors" render={() => renderIfAuth(CorporateSponsorsCMS)} />
-          <Route exact path="/admin/individual-sponsors" render={() => renderIfAuth(IndividualSponsorsCMS)} />
-          <Route exact path="/admin/donate" render={() => renderIfAuth(DonateCMS)} />
-          <Route exact path="/admin/links" render={() => renderIfAuth(LinksCMS)} />
-          <Route path="/admin" render={() => renderIfAuth(Dashboard) } />
+          <Route exact path="/admin/dashboard" render={() => renderIfAuth(Dashboard, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/home" render={() => renderIfAuth(HomeCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/about" render={() => renderIfAuth(AboutCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/committee" render={() => renderIfAuth(CommitteeCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/calendar" render={() => renderIfAuth(CalendarCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/corporate-sponsors" render={() => renderIfAuth(CorporateSponsorsCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/individual-sponsors" render={() => renderIfAuth(IndividualSponsorsCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/donate" render={() => renderIfAuth(DonateCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/links" render={() => renderIfAuth(LinksCMS, {updateMessage: this.updateMessage})} />
+          <Route path="/admin" render={() => renderIfAuth(Dashboard, {updateMessage: this.updateMessage}) } />
         </Switch>
         {this.state.message && <Message message={this.state.message} closeMessage={this.closeMessage}/>}
       </div>
