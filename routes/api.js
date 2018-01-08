@@ -5,6 +5,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const xssFilters = require('xss-filters');
+const validator = require('validator');
 
 // models
 const IndividualSponsors = require('../models/individualSponsors');
@@ -34,7 +36,15 @@ router.get('/individual-sponsors', (req, res) => {
 });
 
 router.post('/individual-sponsors', authCheck, (req, res) => {
-  const sponsors = req.body;
+  let sponsors = req.body;
+  let sanitizedIndex = "";
+  let sanitizedName = "";
+  sponsors = sponsors.map(sponsor => {
+    sanitizedIndex = validator.isInt(sponsor.index.toString()) ? sponsor.index : -1;
+    sanitizedName = validator.trim(xssFilters.inHTMLData(sponsor.name));
+    sanitizedName = validator.isLength(sanitizedName, {min:0, max: 50}) ? sanitizedName : sanitizedName.substring(0,50);
+    return ({index: sanitizedIndex, name: sanitizedName})
+  });
   IndividualSponsors.remove({}, (err, docs) => {
     if (err) {
       console.log(err);
