@@ -10,6 +10,7 @@ class Options extends Component {
     super();
     this.state = {
       menuShowing: false,
+      passwordButtonDisabled: false
     }
     this.toggleMenu = this.toggleMenu.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
@@ -35,7 +36,9 @@ class Options extends Component {
   }
 
   handleResetPassword() {
-    sendResetPasswordRequest((res) => { 
+    this.setState({passwordButtonDisabled: true})
+    sendResetPasswordRequest((res) => {
+      this.setState({passwordButtonDisabled: false})
       this.props.updateMessage(res);
     } );
   }
@@ -54,8 +57,10 @@ class Options extends Component {
           { this.state.menuShowing && <div style={optionsStyles.dropDown}>
             <div 
               key='pwReset'
-              onClick={this.handleResetPassword}
-              style={optionsStyles.dropDown.menuItem}
+              onClick={this.state.passwordButtonDisabled ? ()=>{} : this.handleResetPassword}
+              style={[optionsStyles.dropDown.menuItem, 
+                      this.state.passwordButtonDisabled && optionsStyles.dropDown.menuItemDisabled
+                    ]}
             >
               Change password
             </div>

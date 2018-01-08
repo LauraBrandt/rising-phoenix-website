@@ -50,7 +50,15 @@ const optionsStyles = {
       ':hover': {
         backgroundColor: '#eee'
       }
-    }
+    },
+    menuItemDisabled: {
+      opacity: 0.8,
+      cursor: 'auto',
+      backgroundColor: '#ddd',
+      ':hover': {
+        backgroundColor: '#ddd'
+      }
+    },    
   },
 }
 
