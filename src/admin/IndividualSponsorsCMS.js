@@ -59,7 +59,7 @@ class IndividualSponsorsCMS extends Component {
 
   render() {
     document.title = "Individual Sponsors | Rising Phoenix CMS";
-    console.log
+    
     return (
       <div>
         <h2>Individual Sponsors</h2>
