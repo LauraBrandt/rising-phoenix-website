@@ -11,7 +11,8 @@ class LinksCMS extends Component {
       error: false,
       facebookValue: "",
       twitterValue: "",
-      donateValue: ""
+      donateValue: "",
+      currentlySaving: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,9 +52,11 @@ class LinksCMS extends Component {
       twitter: this.state.twitterValue,
       donate: this.state.donateValue
     }
+    this.setState({currentlySaving: true});
     postData('/api/links', links)
       .then(response => {
         const message = response.error || response.message;
+        this.setState({currentlySaving: false});
         this.props.updateMessage(message);
       });
   }
@@ -68,7 +71,7 @@ class LinksCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
               <div>
                 <label htmlFor="facebookValue" style={generalStyles.links.link.label}>Link to Facebook page:</label>
                 <input 
@@ -99,7 +102,7 @@ class LinksCMS extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <button style={[generalStyles.submitButton, {width: 180}]}>Save</button>
+              <button style={[generalStyles.submitButton, {width: 180}, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
             </form>
           </div>
         }

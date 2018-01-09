@@ -9,7 +9,7 @@ let Login = () => {
     <div style={generalStyles.login}>
       <div style={generalStyles.login.text}>You must be authorized to enter.</div>
       <button 
-        style={generalStyles.submitButton}
+        style={[generalStyles.submitButton, {width: '100%'}]}
         onClick={() => login()}
       >
         Log In

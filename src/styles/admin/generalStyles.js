@@ -18,10 +18,18 @@ const generalStyles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    width: '100%',
+    width: 180,
     display: 'block',
     ':hover': {
         backgroundColor: '#DE5E37',
+    },
+    disabled: {
+      opacity: 0.8,
+      cursor: 'auto',
+      backgroundColor: '#F58C5F',
+      ':hover': {
+        backgroundColor: '#F58C5F'
+      }
     }
   },
   message: {

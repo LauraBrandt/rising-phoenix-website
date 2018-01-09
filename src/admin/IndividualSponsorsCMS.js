@@ -10,7 +10,8 @@ class IndividualSponsorsCMS extends Component {
     this.state = { 
       sponsors: [],
       error: false,
-      sponsorsEntryValue: ""
+      sponsorsEntryValue: "",
+      currentlySaving: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,6 +46,7 @@ class IndividualSponsorsCMS extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({currentlySaving: true});
     const newSponsors = this.state.sponsorsEntryValue
       .split("\n")
       .filter(sponsor => !!sponsor) // remove blank lines
@@ -52,6 +54,7 @@ class IndividualSponsorsCMS extends Component {
     postData('/api/individual-sponsors', newSponsors)
       .then((response) => {
         const message = response.error || response.message;
+        this.setState({currentlySaving: false});
         this.props.updateMessage(message);
       });
   }
@@ -67,13 +70,13 @@ class IndividualSponsorsCMS extends Component {
           :
           <div>
             <p>Please enter one sponsor name per line.</p>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
               <textarea 
                 onChange={this.handleEntryChange} 
                 value={this.state.sponsorsEntryValue}
                 style={[generalStyles.inputText, {height: 200}]}  
               ></textarea>
-              <button style={[generalStyles.submitButton, {width: 180}]}>Save</button>
+              <button style={[generalStyles.submitButton, {width: 180}, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
             </form>
           </div>
         }
