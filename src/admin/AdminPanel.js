@@ -34,7 +34,7 @@ class AdminPanel extends Component {
   }
   updateMessage(message){
     this.setState({message});    
-    setTimeout(() => { this.setState({message: ""}) }, 5000);
+    setTimeout(() => { this.setState({message: ""}) }, 8000);
   }
   closeMessage() {
     this.setState({message: ""});
