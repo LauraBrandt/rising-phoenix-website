@@ -13,6 +13,7 @@ class LinksCMS extends Component {
       twitterValue: "",
       donateValue: "",
       currentlySaving: false,
+      linkLength: 100
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,8 +41,9 @@ class LinksCMS extends Component {
   }
 
   handleChange(e) {
+    const maxLength = this.state.linkLength
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value.substring(0, maxLength)
     })
   }
 
