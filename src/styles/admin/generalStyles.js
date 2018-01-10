@@ -9,6 +9,13 @@ const generalStyles = {
     width: 500,
     maxWidth: '100%'
   },
+  label: {
+    fontSize: '1.2em',
+    paddingRight: '2em',
+    width: 235,
+    maxWidth: '100%',
+    display: 'inline-block'
+  },
   submitButton: {
     fontSize: '1em',
     backgroundColor: '#F58C5F',
@@ -65,16 +72,6 @@ const generalStyles = {
       fontSize: '1.1em'
     }
   },
-  links: {
-    link: {
-      label: {
-        fontSize: '1.2em',
-        paddingRight: '2em',
-        width: 235,
-        display: 'inline-block'
-      }
-    }
-  }
 }
 
 export default generalStyles;

@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const donateTextSchema = new Schema({
+const donateInfoSchema = new Schema({
   donateTitle: String,
   donateText: String,
   rewardTitle: String,
@@ -15,7 +15,8 @@ const donateTextSchema = new Schema({
       address2: String, 
       city: String, 
       state: String, 
-      zip: String}
+      zip: String
+    }
 });
 
-module.exports = mongoose.model('DonateText', donateTextSchema);
+module.exports = mongoose.model('DonateInfo', donateInfoSchema);

@@ -4,35 +4,70 @@ import Header from '../components/Header';
 import style from '../styles/donateStyles';
 import headerBackground from '../img/astronomy7.png';
 import gfmLogo from '../img/GoFundMe-Logo.jpg';
+import { getData } from '../utils/apiCalls';
 import DATA from '../data.js';
 
 class Main extends Component {
+  constructor() {
+    super()
+    this.state = { 
+      donateInfo: {
+        donateTitle: "",
+        donateText: "",
+        rewardsTitle: "",
+        rewardsText: "",
+        check: {
+          to: "",
+          name: "",
+          address1: "",
+          address2: "",
+          city: "",
+          state: "",
+          zip: "",
+        }
+      } 
+    };
+    this.getDonateInfo = this.getDonateInfo.bind(this)
+  }
+
+  getDonateInfo() {
+    getData('/api/donate-info').then((donateInfo) => {
+      if (!donateInfo.error) {
+        this.setState({ donateInfo });
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.getDonateInfo();
+  }
+
   render() {
-    const donateData = DATA.donate;
+    const rewardsData = DATA.donate.rewardLevels;
     return (
       <main style={style.main}>
-        <h2 style={style.main.h2}>{donateData.donateTitle}</h2>
-        <div style={style.main.donateText}>{donateData.donateText}</div>
+        <h2 style={style.main.h2}>{this.state.donateInfo.donateTitle}</h2>
+        {this.state.donateInfo.donateText && <div style={style.main.donateText}>{this.state.donateInfo.donateText}</div>}
         <div style={style.main.donateHeader}>You can donate in one of the following ways:</div>
         <div style={style.main.donateContainer}>
           <div style={style.main.gfmContainer}>
-            Through our GoFundMe page:<br/><br/>
+            Through our GoFundMe page<br/><br/>
             <a href={this.props.donateLink} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           <div style={style.main.checkContainer}>
-            By mailing a check made payable to <span style={{fontWeight: 600}}>{donateData.check.to}</span> to
+            By mailing a check made payable to <span style={{fontWeight: 600}}>{this.state.donateInfo.check.to}</span> to
             <div style={style.main.checkAddress}>
-              {donateData.check.name && <div>{donateData.check.name}</div>}
-              {donateData.check.address1 && <div>{donateData.check.address1}</div>}
-              {donateData.check.address2 && <div>{donateData.check.address2}</div>}
-              {donateData.check.city}, {donateData.check.state} {donateData.check.zip}<br />
+              {this.state.donateInfo.check.name && <div>{this.state.donateInfo.check.name}</div>}
+              {this.state.donateInfo.check.address1 && <div>{this.state.donateInfo.check.address1}</div>}
+              {this.state.donateInfo.check.address2 && <div>{this.state.donateInfo.check.address2}</div>}
+              {this.state.donateInfo.check.city}, {this.state.donateInfo.check.state} {this.state.donateInfo.check.zip}<br />
             </div>
           </div>
         </div>
-        <h2 style={style.main.h2}>{donateData.rewardTitle}</h2>
-        <div>{donateData.rewardText}</div>
+        <h2 style={style.main.h2}>{this.state.donateInfo.rewardTitle}</h2>
+        {this.state.donateInfo.rewardText && <div style={style.main.rewardText}>{this.state.donateInfo.rewardText}</div>}
         <div style={style.main.rewardsTable}>
-          {donateData.rewardLevels.map( level => 
+          {rewardsData.map( level => 
             <div key={level.name} style={style.main.rewardsTable.row} tabIndex="0">
               {level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>}
               {!level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}

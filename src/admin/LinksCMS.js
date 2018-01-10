@@ -47,12 +47,12 @@ class LinksCMS extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({currentlySaving: true});
     const links = {
       facebook: this.state.facebookValue,
       twitter: this.state.twitterValue,
       donate: this.state.donateValue
     }
-    this.setState({currentlySaving: true});
     postData('/api/links', links)
       .then(response => {
         const message = response.error || response.message;
@@ -73,7 +73,7 @@ class LinksCMS extends Component {
           <div>
             <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
               <div>
-                <label htmlFor="facebookValue" style={generalStyles.links.link.label}>Link to Facebook page:</label>
+                <label htmlFor="facebookValue" style={generalStyles.label}>Link to Facebook page:</label>
                 <input 
                   type="text" 
                   id="facebookValue" 
@@ -83,7 +83,7 @@ class LinksCMS extends Component {
                 />
               </div>
               <div>
-                <label htmlFor="twitterValue" style={generalStyles.links.link.label}>Link to Twitter account:</label>
+                <label htmlFor="twitterValue" style={generalStyles.label}>Link to Twitter account:</label>
                 <input 
                   type="text" 
                   id="twitterValue" 
@@ -93,7 +93,7 @@ class LinksCMS extends Component {
                 />
               </div>
               <div>
-                <label htmlFor="donateValue" style={generalStyles.links.link.label}>Link to Go Fund Me:</label>
+                <label htmlFor="donateValue" style={generalStyles.label}>Link to Go Fund Me:</label>
                 <input 
                   type="text" 
                   id="donateValue" 

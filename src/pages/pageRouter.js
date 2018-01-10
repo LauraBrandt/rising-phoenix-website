@@ -40,7 +40,6 @@ class PageRouter extends Component {
   }
 
   render() {
-    console.log("links to render:", this.state.links.facebook, this.state.links.twitter, this.state.links.donate)
     return (
       <div>
         <Navbar links={this.state.links}/>

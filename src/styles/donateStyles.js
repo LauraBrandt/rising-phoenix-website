@@ -10,6 +10,7 @@ const donateStyles = {
     },
     donateText: {
       margin: '0 0 2em 0',
+      whiteSpace: 'pre-line'
     },
     donateHeader: {
     },
@@ -72,6 +73,9 @@ const donateStyles = {
       '@media (max-width: 550px)': {
         padding: '0.5em 0 0 1em',
       },
+    },
+    rewardText: {
+      whiteSpace: 'pre-line'
     },
     rewardsTable: {
       margin: '2em 0 0.5em 0',
