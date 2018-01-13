@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getAccessToken } from './authService';
 
-export {getData, postData};
+export {getData, postData, deleteData};
 
 function getData(endpoint) {
   return axios.get(endpoint)
@@ -19,9 +19,20 @@ function postData(endpoint, data) {
     data: data
   })
     .then(response => response.data)
-    .catch(error => 
-      {
+    .catch(error => {
         return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message }
-      }
-    );
+    });
+}
+
+function deleteData(endpoint, id) {
+  return axios({ 
+    method: 'DELETE', 
+    url: endpoint, 
+    headers:{ Authorization: `Bearer ${getAccessToken()}` }, 
+    data: {id: id}
+  })
+    .then(response => response.data)
+    .catch(error => {
+        return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message }
+    });
 }

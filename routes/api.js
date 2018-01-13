@@ -12,6 +12,7 @@ const validator = require('validator');
 const IndividualSponsors = require('../models/individualSponsors');
 const DonateInfo = require('../models/donateInfo');
 const Links = require('../models/links');
+const CommitteeMembers = require('../models/committee');
 
 /// AUTHENTICATION
 const authCheck = jwt({
@@ -27,6 +28,21 @@ const authCheck = jwt({
 });
 
 /// ROUTES - GET
+router.get('/committee-members', (req, res) => {
+  CommitteeMembers
+    .find({})
+    .sort({index: 1})
+    .exec((err, committeeMembers) => {
+      if (err) {
+        console.log(err);
+        const newError = new Error('An error occurred fetching the committee members.');
+        res.status(err.status || 404).json({error: newError.message});
+      } else {
+        res.send(committeeMembers);
+      }
+    });
+});
+
 router.get('/individual-sponsors', (req, res) => {
   IndividualSponsors
     .find({})
@@ -71,6 +87,72 @@ router.get('/links', (req, res) => {
 });
 
 /// ROUTES - POST
+router.post('/committee-members', authCheck, (req, res, next) => {  
+  let sentCommitteeMember = req.body;
+  let valid = true;
+
+  sentCommitteeMember.name = validator.trim(xssFilters.inHTMLData(sentCommitteeMember.name));
+  sentCommitteeMember.name = validator.isLength(sentCommitteeMember.name, {min:0, max: 100}) ? sentCommitteeMember.name : sentCommitteeMember.name.substring(0,100);
+  sentCommitteeMember.affiliation = validator.trim(xssFilters.inHTMLData(sentCommitteeMember.affiliation));
+  sentCommitteeMember.affiliation = validator.isLength(sentCommitteeMember.affiliation, {min:0, max: 100}) ? sentCommitteeMember.affiliation : sentCommitteeMember.affiliation.substring(0,100);
+  sentCommitteeMember.link = validator.trim(xssFilters.inDoubleQuotedAttr(sentCommitteeMember.link));
+  if (!validator.isURL(sentCommitteeMember.link) && !validator.isEmpty(sentCommitteeMember.link)) {
+    const newError = new Error('Not a valid URL. Please fix it and try again.');
+    valid = false;
+    next(newError);
+  } else if (!validator.isLength(sentCommitteeMember.link, {min:0, max: 150})) {
+    const newError = new Error('Link exceeds maximum length (150 characters)');
+    valid = false;
+    next(newError);
+  }
+  if (!validator.isInt(sentCommitteeMember.index.toString()) && sentCommitteeMember.index !== '') {
+    const newError = new Error('Index is not a valid number. Please try again.');
+    valid = false;
+    next(newError);
+  }
+  
+  // check about reordering/index stuff????
+
+  if (valid) {
+    if (sentCommitteeMember._id) {
+      // already existing member, need to update
+      const updateObj = {
+        name: sentCommitteeMember.name,
+        affiliation: sentCommitteeMember.affiliation,
+        link: sentCommitteeMember.link,
+      }
+      CommitteeMembers.findByIdAndUpdate(sentCommitteeMember._id, updateObj, {new: true}, function(err, updatedCommitteeMember) {
+        console.log('updating committee member...');
+        if (err) {
+          console.log(err);
+          const newError = new Error('Could not update committee member.');
+          newError.status = err.status;
+          next(newError);
+        }
+        res.send({'message': `Success! ${updatedCommitteeMember.name} saved.`});
+      });
+    } else {
+      // new member, need to create
+      var newCommitteeMember = new CommitteeMembers({
+        name: sentCommitteeMember.name,
+        affiliation: sentCommitteeMember.affiliation,
+        link: sentCommitteeMember.link,
+        index: sentCommitteeMember.index
+      });
+      newCommitteeMember.save(function (err, createdCommitteeMember) {
+        console.log('creating committee member...');
+        if (err) {
+          console.log(err);
+          const newError = new Error('Could not create committee member.');
+          newError.status = err.status;
+          next(newError);
+        }
+        res.send({'message': `Success! ${createdCommitteeMember.name} saved.`});
+      });
+    }
+  }
+});
+
 router.post('/individual-sponsors', authCheck, (req, res) => {
   let sponsors = req.body;
   let sanitizedIndex = "";
@@ -255,5 +337,21 @@ router.post('/links', authCheck, (req, res) => {
       });
     }
 });
+
+
+/// ROUTES - DELETE
+router.delete('/committee-members', (req, res) => {
+  CommitteeMembers.findByIdAndRemove(req.body.id, (err, deletedCommitteeMember) => {  
+    if (err) {
+      console.log(err);
+      const newError = new Error('Could not delete committee member');
+      newError.status = err.status;
+      next(newError);
+    }
+    res.send({'message': `Success! ${deletedCommitteeMember.name} removed.`});
+});
+
+});
+
 
 module.exports = router;

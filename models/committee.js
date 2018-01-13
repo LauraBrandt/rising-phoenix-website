@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const committeeMembersSchema = new Schema({
   index: Number,
   name: {type: String, required: true},
-  organization: String,
+  affiliation: String,
   link: String,
 });
 

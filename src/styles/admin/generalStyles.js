@@ -54,6 +54,119 @@ const generalStyles = {
       cursor: 'pointer'
     }
   },
+  addNewButton: {
+    fontSize: '1.2em',
+    width: 200,
+    maxWidth: '100%',
+    margin: '2em auto',
+    padding: '0.8em',
+    border: '1px solid rgba(0,0,0,0.2)',
+    borderRadius: 5,
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+    backgroundColor: 'white',
+    backgroundImage: 'linear-gradient(to bottom, #fdfdfd, #e9e9e9)',
+    cursor: 'pointer',
+    ':hover': {
+      backgroundColor: '#eee',
+      backgroundImage: 'linear-gradient(to bottom, #fafafa, #e0e0e0)',
+    },
+    ':active': {
+      backgroundImage: 'linear-gradient(to bottom, #efefef, #f5f5f5)',
+    },
+  },
+  modalContainer: {
+    position: 'fixed',
+    zIndex: 1,
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+    overflow: 'auto', //?
+    backgroundColor: 'rgba(0,0,0,0.6)'
+  },
+  modalContent: {
+    boxSizing: 'border-box',
+    margin: '18vh auto',
+    padding: '2em',
+    border: '1px solid #888',
+    borderRadius: 5,
+    boxShadow: '2px 3px 16px rgba(0,0,0,0.3)',
+    backgroundColor: '#fdfdfd',
+    width: '750px',
+    maxWidth: '90%',
+  }, 
+  card: {
+    margin: '1em auto',
+    border: '1px solid rgba(0,0,0,0.1)',
+    borderRadius: 4,
+    boxShadow: '0 3px 12px 0 rgba(0,0,0,0.2)',
+    position: 'relative',
+    minHeight: 80,
+    width: '70%',
+    // transition: '0.3s',
+    // ':hover': {
+    //   backgroundColor: '#f3f3f3'
+    // }
+    '@media (max-width: 666px)': {
+      width: '90%'
+    }
+  },
+  edit: {
+    position: 'absolute', 
+    top: 0,
+    right: 0,
+    width: 40,
+    height: 40,
+    backgroundColor: '#428bca',
+    color: 'white',
+    fontSize: '1em',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 'none',
+    borderRadius: '0 3px 0 0',
+    cursor: 'pointer',
+    opacity: 0.9,
+    ':hover': {
+      backgroundColor: '#529bda'
+    },
+    disabled: {
+      opacity: 0.7,
+      cursor: 'auto',
+      backgroundColor: '#428bca',
+      ':hover': {
+        backgroundColor: '#428bca'
+      }
+    }
+  },
+  delete: {
+    position: 'absolute', 
+    bottom: 0,
+    right: 0,
+    width: 40,
+    height: 40,
+    backgroundColor: '#bb0000',
+    color: 'white',
+    fontSize: '1em',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 'none',
+    borderRadius: '0 0 3px 0',
+    cursor: 'pointer',
+    opacity: 0.9,
+    ':hover': {
+      backgroundColor: '#cb1010'
+    },
+    disabled: {
+      opacity: 0.7,
+      cursor: 'auto',
+      backgroundColor: '#bb0000',
+      ':hover': {
+        backgroundColor: '#bb0000'
+      }
+    }
+  },
   adminPanel: {
     textAlign: 'center',
     padding: '3% 5%',
