@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import { logout, sendResetPasswordRequest } from '../utils/authService';
-import optionsStyles from '../styles/admin/optionsStyles';
+import { logout, sendResetPasswordRequest } from '../../utils/authService';
+import optionsStyles from '../../styles/admin/optionsStyles';
 import Radium from 'radium';
 
 class Options extends Component {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Callback from './Callback'
-import Options from './Options';
+import Callback from './components/Callback'
+import Options from './components/Options';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import HomeCMS from './HomeCMS';
