@@ -49,7 +49,7 @@ router.get('/individual-sponsors', (req, res) => {
     .sort({index: 1})
     .exec((err, sponsors) => {
       if (err) {
-        console.log(err)
+        console.log(err);
         const newError = new Error('An error occurred fetching the sponsors.');
         res.status(err.status || 404).json({error: newError.message});
       } else {
@@ -63,7 +63,7 @@ router.get('/donate-info', (req, res) => {
     .findOne({})
     .exec((err, donateInfo) => {
       if (err) {
-        console.log("in api", err)
+        console.log(err);
         const newError = new Error('An error occurred fetching the donate info.');
         res.status(err.status || 404).json({error: newError.message});
       } else {
@@ -77,7 +77,7 @@ router.get('/links', (req, res) => {
     .findOne({})
     .exec((err, links) => {
       if (err) {
-        console.log("in api", err)
+        console.log(err);
         const newError = new Error('An error occurred fetching the links.');
         res.status(err.status || 404).json({error: newError.message});
       } else {
@@ -165,15 +165,17 @@ router.post('/individual-sponsors', authCheck, (req, res) => {
   });
   IndividualSponsors.remove({}, (err, docs) => {
     if (err) {
-      console.log(err)
+      console.log(err);
       const newError = new Error('There was a problem with your request.');
-      res.status(err.status || 404).json({message: newError.message});
+      newError.status = err.status;
+      next(newError);
     }
     IndividualSponsors.create(sponsors, (err, docs) => {
       if (err) {
-        console.log(err)
+        console.log(err);
         const newError = new Error('There was a problem with your request.');
-        res.status(err.status || 404).json({message: newError.message});
+        newError.status = err.status;
+        next(newError);
       }
       res.send({'message': `Success! ${docs.length} sponsors saved.`})
     });
@@ -247,17 +249,19 @@ router.post('/donate-info', authCheck, (req, res) => {
     .findOne({})
     .exec((err, currDonateInfo) => {
       if (err) {
-        console.log(err)
+        console.log(err);
         const newError = new Error('An error occured fetching the donate info.');
-        res.status(err.status || 404).json({message: newError.message});
+        newError.status = err.status;
+        next(newError);
       } else if (!currDonateInfo) {
-        console.log('No donate info exists - creating new')
+        console.log('No donate info exists - creating new');
         const newDonateInfo = new DonateInfo(sentDonateInfo);
         newDonateInfo.save(function (err, updatedDonateInfo) {
           if (err) {
-            console.log(err)
+            console.log(err);
             const newError = new Error('Donate info was not saved.');
-            res.status(err.status || 404).json({message: newError.message});
+            newError.status = err.status;
+            next(newError);
           }
           res.send({message: 'Donate info saved successfully.'});
         });
@@ -270,9 +274,10 @@ router.post('/donate-info', authCheck, (req, res) => {
 
         currDonateInfo.save(function (err, updatedDonateInfo) {
           if (err) {
-            console.log(err)
+            console.log(err);
             const newError = new Error('Donate info was not saved.');
-            res.status(err.status || 404).json({message: newError.message});
+            newError.status = err.status;
+            next(newError);
           }
           res.send({message: 'Donate info saved successfully.'});
         });
@@ -307,17 +312,19 @@ router.post('/links', authCheck, (req, res) => {
       .findOne({})
       .exec((err, currLinks) => {
         if (err) {
-          console.log(err)
+          console.log(err);
           const newError = new Error('An error occured fetching the links.');
-          res.status(err.status || 404).json({message: newError.message});
+          newError.status = err.status;
+          next(newError);
         } else if (!currLinks) {
-          console.log('No links exist - creating new')
+          console.log('No links exist - creating new');
           const newLinks = new Links(linksSent);
           newLinks.save(function (err, updatedLinks) {
             if (err) {
-              console.log(err)
+              console.log(err);
               const newError = new Error('Links were not saved.');
-              res.status(err.status || 404).json({message: newError.message});
+              newError.status = err.status;
+              next(newError);
             }
             res.send({message: 'Links saved successfully.'});
           });
@@ -327,9 +334,10 @@ router.post('/links', authCheck, (req, res) => {
           currLinks.donate = linksSent.donate;
           currLinks.save(function (err, updatedLinks) {
             if (err) {
-              console.log(err)
+              console.log(err);
               const newError = new Error('Links were not saved.');
-              res.status(err.status || 404).json({message: newError.message});
+              newError.status = err.status;
+              next(newError);
             }
             res.send({message: 'Links saved successfully.'});
           });

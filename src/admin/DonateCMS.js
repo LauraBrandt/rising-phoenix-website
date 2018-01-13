@@ -245,7 +245,7 @@ class DonateCMS extends Component {
                   </div>
                 </div>
               </div>
-              <button style={[generalStyles.submitButton, {width: 180}, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
+              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
             </form>
           </div>
         }

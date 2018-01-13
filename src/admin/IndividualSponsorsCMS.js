@@ -76,7 +76,7 @@ class IndividualSponsorsCMS extends Component {
                 value={this.state.sponsorsEntryValue}
                 style={[generalStyles.inputText, {height: 200}]}  
               ></textarea>
-              <button style={[generalStyles.submitButton, {width: 180}, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
+              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
             </form>
           </div>
         }
