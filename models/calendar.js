@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 const calendarEventsSchema = new Schema({
   index: Number,
-  dateTime: Date,
   name: {type: String, required: true},
+  dateTime: {type: Date, required: true},
   location: String,
   description: String,
   minutesLink: String

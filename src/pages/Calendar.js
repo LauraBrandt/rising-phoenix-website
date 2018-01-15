@@ -3,18 +3,37 @@ import Radium from 'radium';
 import Header from '../components/Header';
 import style from '../styles/calendarStyles';
 import headerBackground from '../img/astronomy6.png';
-import DATA from '../data.js';
+import { getData } from '../utils/apiCalls';
 
 class Main extends Component {
+  constructor() {
+    super()
+    this.state = { events: [] };
+    this.getEvents = this.getEvents.bind(this)
+  }
+
+  getEvents() {
+    getData('/api/calendar').then((events) => {
+      events = events.map(event => {
+        event.dateTime = new Date(event.dateTime);
+        return event;
+      });
+      this.setState({ events });
+    });
+  }
+
+  componentDidMount() {
+    this.getEvents();
+  }
+
   render() {
-    const events = DATA.calendar.events;
     const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return (
       <main style={style.main}>
         <article>
-          {events.length ? 
-            events.map(event => 
+          {this.state.events.length ? 
+            this.state.events.map(event => 
               <div key={event.name} style={style.event}>
                 <div style={style.calendarPage}>
                   <div style={style.calendarPage.month}>{months[event.dateTime.getMonth()].substr(0,3).toUpperCase()}</div>
@@ -33,7 +52,7 @@ class Main extends Component {
                       `${event.dateTime.toTimeString().substr(0,5)} AM`
                     }</div>
                   {event.location && <div style={style.eventInfo.location}>{event.location}</div>}
-                  {event.description && <div style={style.eventInfo.description}>{event.description}</div>}
+                  {event.description && <div style={[style.eventInfo.description, {whiteSpace: 'pre-wrap'}]}>{event.description}</div>}
                 </div>
               </div>
             )

@@ -173,6 +173,13 @@ const generalStyles = {
     fontSize: '1.5em',
     cursor: 'pointer',
   },
+  textareaLabel: {
+    position: 'relative', 
+    bottom:'90px',
+    '@media (max-width: 702px)': {
+      position: 'static',
+    }
+  },
   adminPanel: {
     textAlign: 'center',
     padding: '3% 5%',
