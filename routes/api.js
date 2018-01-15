@@ -438,7 +438,7 @@ router.post('/links', authCheck, (req, res) => {
 
 
 /// ROUTES - DELETE
-router.delete('/committee-members', (req, res) => {
+router.delete('/committee-members', authCheck, (req, res) => {
   CommitteeMembers.findByIdAndRemove(req.body.id, (err, deletedCommitteeMember) => {  
     if (err) {
       console.log(err);
@@ -464,7 +464,7 @@ router.delete('/calendar', authCheck, (req, res) => {
 
 
 /// ROUTES - PUT
-router.put('/committee-members', (req, res) => {
+router.put('/committee-members', authCheck, (req, res) => {
   const committeeMembers = req.body;
   const totalDocs = committeeMembers.length;
   let docsUpdated = 0;
