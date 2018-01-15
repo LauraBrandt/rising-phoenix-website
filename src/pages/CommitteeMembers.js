@@ -3,21 +3,36 @@ import Header from '../components/Header';
 import Radium from 'radium';
 import style from '../styles/committeeStyles';
 import headerBackground from '../img/astronomy2.png';
-import DATA from '../data.js';
+import { getData } from '../utils/apiCalls';
 
 class Main extends Component {
+  constructor() {
+    super()
+    this.state = { members: [] };
+    this.getCommitteeMembers = this.getCommitteeMembers.bind(this)
+  }
+
+  getCommitteeMembers() {
+    getData('/api/committee-members').then((members) => {
+      this.setState({ members });
+    });
+  }
+
+  componentDidMount() {
+    this.getCommitteeMembers();
+  }
+
   render() {
-    const members = DATA.committee.members;
     return (
       <main style={style.main}>
         <ul style={style.ul}>
-          {members.map((person) => 
+          {this.state.members.map((person) => 
             (<li key={person.name} style={style.li}>
               <span style={style.name}>{person.name}</span>
               &nbsp;&nbsp;&nbsp;&mdash;&nbsp;&nbsp;&nbsp;
               {person.link ? 
-                <a href={person.link} style={style.organizationLink} key={person.organization}>{person.organization}</a> :
-                <span>{person.organization}</span>
+                <a href={person.link} style={style.organizationLink} key={person.affiliation}>{person.affiliation}</a> :
+                <span>{person.affiliation}</span>
               }          
             </li>)
           )}
