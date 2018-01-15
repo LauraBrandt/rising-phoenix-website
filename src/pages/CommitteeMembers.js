@@ -26,7 +26,7 @@ class Main extends Component {
     return (
       <main style={style.main}>
         <ul style={style.ul}>
-          {this.state.members.map((person) => 
+          {this.state.members.length && this.state.members.map((person) => 
             (<li key={person.name} style={style.li}>
               <span style={style.name}>{person.name}</span>
               &nbsp;&nbsp;&nbsp;&mdash;&nbsp;&nbsp;&nbsp;
