@@ -47,7 +47,7 @@ class Options extends Component {
     return (
       <div style={optionsStyles}>
         <div style={optionsStyles.back}>
-          <Link to="/admin" style={optionsStyles.back.Link}><i className="fa fa-bars" aria-hidden="true"></i></Link>
+          <Link to="/admin" style={optionsStyles.back.Link} title="Back to Dashboard"><i className="fa fa-bars" aria-hidden="true"></i></Link>
         </div>
         <div style={optionsStyles.menu}>
           <div type='button' style={optionsStyles.button} onClick={this.toggleMenu}>
