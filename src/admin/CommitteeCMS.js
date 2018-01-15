@@ -237,7 +237,6 @@ class CommitteeCMS extends Component {
           link: ""
         });
         this.props.updateMessage(message);
-        window.scrollTo(0, document.body.scrollHeight);
         this.getCommitteeMembers();
       });
   }
