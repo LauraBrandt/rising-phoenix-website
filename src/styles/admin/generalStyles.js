@@ -82,11 +82,13 @@ const generalStyles = {
     width: '100%',
     height: '100%',
     overflow: 'auto', //?
-    backgroundColor: 'rgba(0,0,0,0.6)'
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   modalContent: {
     boxSizing: 'border-box',
-    margin: '18vh auto',
     padding: '2em',
     border: '1px solid #888',
     borderRadius: 5,
@@ -94,76 +96,67 @@ const generalStyles = {
     backgroundColor: '#fdfdfd',
     width: '750px',
     maxWidth: '90%',
+    label: {
+      width: 150,
+      fontSize: '1em',
+      paddingRight: '1em',
+      textAlign: 'right',
+      '@media (max-width: 702px)': {
+        paddingRight: 0,
+        textAlign: 'center',
+        width: 280
+      }
+    },
+    input: {
+      width: 400,
+      fontSize: '0.95em',
+      padding: '0.5em',
+    }, 
+    submit: {
+      padding: '0.6em 0.8em',
+      margin: '2em 2em 0 2em',
+      width: 150,
+      display: 'inline-block',
+      '@media (max-width: 666px)': {
+        margin: '1em 1em 0 1em',
+      }
+    },
+    cancel: {
+      fontSize: '1em',
+      padding: '0.6em 0.8em',
+      margin: '2em 2em 0 2em',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      width: 150, 
+      backgroundColor: 'white',
+      color: '#111',
+      border: '1px solid rgba(0,0,0,0.4)',
+      display: 'inline-block',
+      ':hover': {
+        'backgroundColor': '#ddd',
+      },
+      disabled: {
+        opacity: 0.8,
+        cursor: 'auto',
+        ':hover': {
+          backgroundColor: 'white',         
+        }
+      },
+      '@media (max-width: 666px)': {
+        margin: '1em 1em 0 1em',
+      },
+    },
   }, 
-  // card: {
-  //   margin: '1em auto',
-  //   border: '1px solid rgba(0,0,0,0.1)',
-  //   borderRadius: 4,
-  //   boxShadow: '0 3px 12px 0 rgba(0,0,0,0.2)',
-  //   position: 'relative',
-  //   minHeight: 80,
-  //   backgroundColor: 'white',
-  //   transition: '0.3s',
-  //   ':hover': {
-  //     backgroundColor: '#f3f3f3'
-  //   },
-  // },
-  // edit: {
-  //   position: 'absolute', 
-  //   top: 0,
-  //   right: 0,
-  //   width: 40,
-  //   height: 40,
-  //   backgroundColor: '#428bca',
-  //   color: 'white',
-  //   fontSize: '1em',
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   border: 'none',
-  //   borderRadius: '0 3px 0 0',
-  //   cursor: 'pointer',
-  //   opacity: 0.9,
-  //   ':hover': {
-  //     backgroundColor: '#529bda'
-  //   },
-  //   disabled: {
-  //     opacity: 0.7,
-  //     cursor: 'auto',
-  //     backgroundColor: '#428bca',
-  //     ':hover': {
-  //       backgroundColor: '#428bca'
-  //     }
-  //   }
-  // },
-  // delete: {
-  //   position: 'absolute', 
-  //   bottom: 0,
-  //   right: 0,
-  //   width: 40,
-  //   height: 40,
-  //   backgroundColor: '#bb0000',
-  //   color: 'white',
-  //   fontSize: '1em',
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   border: 'none',
-  //   borderRadius: '0 0 3px 0',
-  //   cursor: 'pointer',
-  //   opacity: 0.9,
-  //   ':hover': {
-  //     backgroundColor: '#cb1010'
-  //   },
-  //   disabled: {
-  //     opacity: 0.7,
-  //     cursor: 'auto',
-  //     backgroundColor: '#bb0000',
-  //     ':hover': {
-  //       backgroundColor: '#bb0000'
-  //     }
-  //   }
-  // },
+  memberListContainer: {
+    width: '70%', 
+    margin: 'auto',
+    '@media (max-width: 1100px)': {
+      width: '90%'
+    },
+    '@media (max-width: 800px)': {
+      width: '100%'
+    }
+  },
   dragHandle: {
     position: 'absolute',
     left: 10,

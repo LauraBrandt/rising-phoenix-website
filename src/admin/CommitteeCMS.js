@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import generalStyles from '../styles/admin/generalStyles';
-import committeeStyles from '../styles/admin/committeeStyles';
 import '../styles/admin/externalComponentStyles.css';
 import Radium from 'radium';
 import { getData, postData, deleteData, putData } from '../utils/apiCalls';
@@ -22,29 +21,27 @@ const DragHandle = SortableHandle(() =>
 
 let SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 
-    // style={{...generalStyles.card, ...committeeStyles.card}} 
     className='card'
     id={member._id} 
     key={`sortable-element-${member._id}`}
   >
     <DragHandle />
-    <div style={committeeStyles.rowContainer}>
-      <div style={committeeStyles.cardLabel}>Name:</div>
-      <div style={committeeStyles.cardContent}>{member.name}</div>
+    <div className='row-container'>
+      <div className='card-label'>Name:</div>
+      <div className='card-content'>{member.name}</div>
     </div>
-    <div style={committeeStyles.rowContainer}>
-      <div style={committeeStyles.cardLabel}>Affiliation:</div>
-      <div style={committeeStyles.cardContent}>{member.affiliation}</div>
+    <div className='row-container'>
+      <div className='card-label'>Affiliation:</div>
+      <div className='card-content'>{member.affiliation}</div>
     </div>
-    {member.link && <div style={committeeStyles.rowContainer}>
-      <div style={committeeStyles.cardLabel}>Link to affiliation:</div>
-      <div style={committeeStyles.cardContent}><a href={member.link}>{member.link}</a></div>
+    {member.link && <div className='row-container'>
+      <div className='card-label'>Link to affiliation:</div>
+      <div className='card-content'><a href={member.link}>{member.link}</a></div>
     </div>}
     <button 
       type='button'
       title="Edit"
       className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
-      // style={currentlyDeleting ? {...generalStyles.edit, ...generalStyles.edit.disabled} : generalStyles.edit}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
       id={member._id}
       key={`edit-${member._id}`}
@@ -55,7 +52,6 @@ let SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handl
       type='button'
       title="Delete" 
       className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
-      // style={currentlyDeleting ? {...generalStyles.delete, ...generalStyles.delete.disabled} : generalStyles.delete}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
       id={member._id}
       key={`delete-${member._id}`}
@@ -264,34 +260,34 @@ class CommitteeCMS extends Component {
                   style={generalStyles.modalContent}
                 >
                   <div>
-                    <label htmlFor="name" style={[generalStyles.label, committeeStyles.label]}>Name:</label>
+                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Name:</label>
                     <input 
                       type="text" 
                       id="name" 
                       value={this.state.name} 
-                      style={[generalStyles.inputText, committeeStyles.input]}
+                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
                       maxLength={100}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div>
-                    <label htmlFor="affiliation" style={[generalStyles.label, committeeStyles.label]}>Affiliation:</label>
+                    <label htmlFor="affiliation" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Affiliation:</label>
                     <input 
                       type="text" 
                       id="affiliation" 
                       value={this.state.affiliation} 
-                      style={[generalStyles.inputText, committeeStyles.input]}
+                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
                       maxLength={100}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div>
-                    <label htmlFor="link" style={[generalStyles.label, committeeStyles.label]}>Link to affiliation website: <span style={{fontSize: '0.9em', fontStyle: 'italic', color: '#666'}}>(optional)</span></label>
+                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: '0.9em', fontStyle: 'italic', color: '#666'}}>(optional)</span></label>
                     <input 
                       type="text" 
                       id="link" 
                       value={this.state.link} 
-                      style={[generalStyles.inputText, committeeStyles.input]}
+                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
                       maxLength={150}
                       onChange={this.handleChange}
                     />
@@ -299,14 +295,14 @@ class CommitteeCMS extends Component {
                   <button 
                     type="submit"
                     key="submit" 
-                    style={[generalStyles.submitButton, committeeStyles.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
+                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
                   >
                     Save
                   </button>
                   <button 
                     type="button"
                     key="cancel" 
-                    style={[committeeStyles.cancel, this.state.currentlySaving && committeeStyles.cancel.disabled]}
+                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
                     onClick={this.handleCancel}
                   >
                     Cancel
@@ -316,7 +312,7 @@ class CommitteeCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={committeeStyles.memberListContainer}>
+            <div style={generalStyles.memberListContainer}>
               <SortableMemberList 
                 memberList={this.state.committeeMembers} 
                 onSortEnd={this.onSortEnd} 

@@ -20,7 +20,45 @@
 
 @media (max-width: 800px) {
   .card {
-    font-size: 0.9em;
+    font-size: 0.95em;
+  }
+}
+
+.row-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.2em;
+  margin-right: 40px;
+  margin-left: 1.5em;
+}
+
+.card-label {
+  flex-basis: 25%;
+  min-width: 25%;
+  text-align: right;
+  font-weight: 600;
+  padding-right: 1em;
+  color: #888;
+}
+
+.card-content {
+  flex-basis: 75%;
+  max-width: 75%;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.pre-wrap {
+  white-space: pre-wrap;
+}
+
+@media (max-width: 600px) {
+  .row-container {
+    flex-direction: column;
+    padding: 0.5em 0 0.5em 1.5em;
+  }
+  .card-label {
+    text-align: left;
   }
 }
 
