@@ -7,28 +7,28 @@ const articleStyles = {
     margin: '2em 0 0 0',
     transition: 'all 0.3s ease',
     '@media (max-width: 850px)': {
-        margin: '3em 0 0 0',
+      margin: '3em 0 0 0',
     },
     image: {
-        display: 'block',
-        maxWidth: '100%',
-        height: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      height: 'auto',
     },
     header: {
-        ...sv.h1Style,
-        color: '#444',
-        margin: '0.8em 0 0 0',
+      ...sv.h1Style,
+      color: '#444',
+      margin: '0.8em 0 0 0',
     },
     date: {
-        color: '#999',
-        fontSize: '0.95em',
-        margin: '0.5em 0.5em 0 0.5em'
+      color: '#999',
+      fontSize: '0.95em',
+      margin: '0.5em 0.5em 0 0.5em'
     },
     hr: {
-        ...sv.hrStyle
+      ...sv.hrStyle
     },
     article: {
-        whiteSpace: 'pre-wrap',
+      whiteSpace: 'pre-wrap',
     }
   },
 
@@ -41,13 +41,13 @@ const articleStyles = {
     backgroundColor: sv.bgLight,
     transition: 'all 0.3s ease',
     '@media (max-width: 850px)': {
-        padding: '5em 0',
+      padding: '5em 0',
     },
     '@media (max-width: 550px)': {
-        padding: '5em 0',
+      padding: '5em 0',
     },
     '@media (max-width: 350px)': {
-        fontSize: '0.95em',
+      fontSize: '0.95em',
     },
     item: {
       boxSizing: 'border-box',

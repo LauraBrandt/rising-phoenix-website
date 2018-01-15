@@ -113,7 +113,7 @@ router.post('/committee-members', authCheck, (req, res, next) => {
   sentCommitteeMember.affiliation = validator.isLength(sentCommitteeMember.affiliation, {min:0, max: 100}) ? sentCommitteeMember.affiliation : sentCommitteeMember.affiliation.substring(0,100);
   sentCommitteeMember.link = validator.trim(xssFilters.inDoubleQuotedAttr(sentCommitteeMember.link));
   if (!validator.isURL(sentCommitteeMember.link) && !validator.isEmpty(sentCommitteeMember.link)) {
-    const newError = new Error('Not a valid URL. Please fix it and try again.');
+    const newError = new Error('Not a valid URL. Please try again.');
     valid = false;
     next(newError);
   } else if (!validator.isLength(sentCommitteeMember.link, {min:0, max: 150})) {
@@ -147,7 +147,7 @@ router.post('/committee-members', authCheck, (req, res, next) => {
       });
     } else {
       // new member, need to create
-      var newCommitteeMember = new CommitteeMembers({
+      let newCommitteeMember = new CommitteeMembers({
         name: sentCommitteeMember.name,
         affiliation: sentCommitteeMember.affiliation,
         link: sentCommitteeMember.link,
@@ -279,58 +279,58 @@ router.post('/donate-info', authCheck, (req, res) => {
 
   sentDonateInfo.donateTitle = xssFilters.inHTMLData(sentDonateInfo.donateTitle);
   if (!validator.isLength(sentDonateInfo.donateTitle, {min:0, max: 100})) {
-    if (valid) {res.json({message: "Subtitle 1 too long - must be no more than 100 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "Subtitle 1 too long - must be no more than 100 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.donateText = xssFilters.inHTMLData(sentDonateInfo.donateText);
   if (!validator.isLength(sentDonateInfo.donateText, {min:0, max: 500})) {
-    if (valid) {res.json({message: "Donate text too long - must be no more than 500 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "Donate text too long - must be no more than 500 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.rewardTitle = xssFilters.inHTMLData(sentDonateInfo.rewardTitle);
   if (!validator.isLength(sentDonateInfo.rewardTitle, {min:0, max: 100})) {
-    if (valid) {res.json({message: "Subtitle 2 too long - must be no more than 100 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "Subtitle 2 too long - must be no more than 100 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.rewardText = xssFilters.inHTMLData(sentDonateInfo.rewardText);
   if (!validator.isLength(sentDonateInfo.rewardText, {min:0, max: 500})) {
-    if (valid) {res.json({message: "Reward text too long - must be no more than 500 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "Reward text too long - must be no more than 500 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.to = xssFilters.inHTMLData(sentDonateInfo.check.to);
   if (!validator.isLength(sentDonateInfo.check.to, {min:0, max: 100})) {
     
-    if (valid) {res.json({message: "'Make checks out to' field too long - must be no more than 100 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "'Make checks out to' field too long - must be no more than 100 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.name = xssFilters.inHTMLData(sentDonateInfo.check.name);
   if (!validator.isLength(sentDonateInfo.check.name, {min:0, max: 100})) {
-    if (valid) {res.json({message: "Name too long - must be no more than 100 characters. Please fix and try again."});}
+    if (valid) {res.json({message: "Name too long - must be no more than 100 characters. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.address1 = xssFilters.inHTMLData(sentDonateInfo.check.address1);
   if (!validator.isLength(sentDonateInfo.check.address1, {min:0, max: 100})) {
-    if (valid) {res.json({message: "Address too long - must be no more than 100 characters each line. Please fix and try again."});}
+    if (valid) {res.json({message: "Address too long - must be no more than 100 characters each line. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.address2 = xssFilters.inHTMLData(sentDonateInfo.check.address2);
   if (!validator.isLength(sentDonateInfo.check.address2, {min:0, max: 100})) {
-    if (valid) {res.json({message: "Address too long - must be no more than 100 characters each line. Please fix and try again."});}
+    if (valid) {res.json({message: "Address too long - must be no more than 100 characters each line. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.city = xssFilters.inHTMLData(sentDonateInfo.check.city);
   if (!validator.isLength(sentDonateInfo.check.city, {min:0, max: 50})) {
-    if (valid) {res.json({message: "City too long - must be no more than 50 characters each line. Please fix and try again."});}
+    if (valid) {res.json({message: "City too long - must be no more than 50 characters each line. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.state = xssFilters.inHTMLData(sentDonateInfo.check.state);
   if (!validator.isIn(sentDonateInfo.check.state, states) && !validator.isEmpty(sentDonateInfo.check.state)) {
-    if (valid) {res.json({message: "Invalid state - must be 2-letter state code. Please fix and try again."});}
+    if (valid) {res.json({message: "Invalid state - must be 2-letter state code. Please try again."});}
     valid = false;
   }
   sentDonateInfo.check.zip = xssFilters.inHTMLData(sentDonateInfo.check.zip);
   if (!validator.isPostalCode(sentDonateInfo.check.zip, 'US')  && !validator.isEmpty(sentDonateInfo.check.state)) {
-    if (valid) {res.json({message: "Invalid zip code - must be valid US postal code. Please fix and try again."});}
+    if (valid) {res.json({message: "Invalid zip code - must be valid US postal code. Please try again."});}
     valid = false;
   }
 
@@ -380,7 +380,7 @@ router.post('/links', authCheck, (req, res) => {
   let linksSent = req.body;
   let linksValid = true;
 
-  for (var linkKey in linksSent) {
+  for (let linkKey in linksSent) {
     if (!linksSent.hasOwnProperty(linkKey)) {
       continue;
     }
@@ -442,7 +442,7 @@ router.delete('/committee-members', (req, res) => {
   CommitteeMembers.findByIdAndRemove(req.body.id, (err, deletedCommitteeMember) => {  
     if (err) {
       console.log(err);
-      const newError = new Error('Could not delete committee member');
+      const newError = new Error('Could not delete committee member.');
       newError.status = err.status;
       next(newError);
     }

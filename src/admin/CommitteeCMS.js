@@ -19,7 +19,7 @@ const DragHandle = SortableHandle(() =>
   </div>
 );
 
-let SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
+const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 
     className='card'
     id={member._id} 
@@ -61,7 +61,7 @@ let SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handl
   </div>
 );
 
-let SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
+const SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {memberList.map((member, index) => (
