@@ -52,6 +52,9 @@ const committeeStyles = {
   memberListContainer: {
     width: '70%', 
     margin: 'auto',
+    '@media (max-width: 1100px)': {
+      width: '85%'
+    },
     '@media (max-width: 800px)': {
       width: '100%'
     }
