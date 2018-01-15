@@ -20,7 +20,7 @@ const DragHandle = SortableHandle(() =>
 );
 
 const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
+  <div
     className='card'
     id={member._id} 
     key={`sortable-element-${member._id}`}
@@ -177,16 +177,20 @@ class CommitteeCMS extends Component {
 
   handleDelete(e) {
     e.preventDefault();
-    this.setState({currentlyDeleting: true});
-    deleteData('/api/committee-members', e.currentTarget.id)
-      .then((response) => {
-        const message = response.error || response.message;
-        this.setState({
-          currentlyDeleting: false,
+    const currMember = this.state.committeeMembers
+      .find((member) => member._id === e.currentTarget.id);
+    if (window.confirm(`Are you sure you want to permanently delete the committee member ${currMember.name}?`)) {
+      this.setState({currentlyDeleting: true});
+      deleteData('/api/committee-members', e.currentTarget.id)
+        .then((response) => {
+          const message = response.error || response.message;
+          this.setState({
+            currentlyDeleting: false,
+          });
+          this.props.updateMessage(message);
+          this.getCommitteeMembers();
         });
-        this.props.updateMessage(message);
-        this.getCommitteeMembers();
-      });
+    }
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
