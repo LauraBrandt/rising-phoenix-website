@@ -110,8 +110,6 @@ router.post('/committee-members', authCheck, (req, res, next) => {
     valid = false;
     next(newError);
   }
-  
-  // check about reordering/index stuff????
 
   if (valid) {
     if (sentCommitteeMember._id) {
@@ -357,9 +355,30 @@ router.delete('/committee-members', (req, res) => {
       next(newError);
     }
     res.send({'message': `Success! ${deletedCommitteeMember.name} removed.`});
+  });
 });
 
-});
 
+/// ROUTES - PUT
+router.put('/committee-members', (req, res) => {
+  const committeeMembers = req.body;
+  const totalDocs = committeeMembers.length;
+  let docsUpdated = 0;
+
+  for (let i=0; i<totalDocs; i++) {
+    CommitteeMembers.findByIdAndUpdate(committeeMembers[i]._id, {index: committeeMembers[i].index}, {new: true}, (err, updatedCommitteeMember) => {
+      if (err) {
+        console.log(err);
+        const newError = new Error('Could not update index.');
+        newError.status = err.status;
+        next(newError);
+      }
+      docsUpdated += 1;
+      if (docsUpdated === totalDocs) {
+        res.send({'message': `Success! Committee members reordered.`});
+      }
+    });
+  }
+});
 
 module.exports = router;

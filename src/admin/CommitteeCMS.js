@@ -1,22 +1,96 @@
 import React, {Component} from 'react';
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import generalStyles from '../styles/admin/generalStyles';
 import committeeStyles from '../styles/admin/committeeStyles';
+import '../styles/admin/externalComponentStyles.css';
 import Radium from 'radium';
-import { getData, postData, deleteData } from '../utils/apiCalls';
+import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+
+
+const DragHandle = SortableHandle(() => 
+  <div style={generalStyles.dragHandle}>
+    <div>
+      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
+      <i className="fa fa-ellipsis-v"></i>
+    </div>
+    <div>
+      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
+      <i className="fa fa-ellipsis-v"></i>
+    </div>
+  </div>
+);
+
+let SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
+  <div 
+    // style={{...generalStyles.card, ...committeeStyles.card}} 
+    className='card'
+    id={member._id} 
+    key={`sortable-element-${member._id}`}
+  >
+    <DragHandle />
+    <div style={committeeStyles.rowContainer}>
+      <div style={committeeStyles.cardLabel}>Name:</div>
+      <div style={committeeStyles.cardContent}>{member.name}</div>
+    </div>
+    <div style={committeeStyles.rowContainer}>
+      <div style={committeeStyles.cardLabel}>Affiliation:</div>
+      <div style={committeeStyles.cardContent}>{member.affiliation}</div>
+    </div>
+    {member.link && <div style={committeeStyles.rowContainer}>
+      <div style={committeeStyles.cardLabel}>Link to affiliation:</div>
+      <div style={committeeStyles.cardContent}><a href={member.link}>{member.link}</a></div>
+    </div>}
+    <button 
+      type='button'
+      title="Edit"
+      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      // style={currentlyDeleting ? {...generalStyles.edit, ...generalStyles.edit.disabled} : generalStyles.edit}
+      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
+      id={member._id}
+      key={`edit-${member._id}`}
+    >
+      <i className="fa fa-pencil"></i>
+    </button>
+    <button 
+      type='button'
+      title="Delete" 
+      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      // style={currentlyDeleting ? {...generalStyles.delete, ...generalStyles.delete.disabled} : generalStyles.delete}
+      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
+      id={member._id}
+      key={`delete-${member._id}`}
+    >
+      <i className="fa fa-trash"></i>
+    </button>
+  </div>
+);
+
+let SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
+  return (
+    <div>
+      {memberList.map((member, index) => (
+        <SortableCommitteeMember 
+          member={member} 
+          key={`member-${member._id}`}
+          index={index}
+          currentlyDeleting={currentlyDeleting}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          disabled={disabled}
+        />
+      ))}
+    </div>
+  );
+});
+
 
 class CommitteeCMS extends Component {
   constructor() {
     super()
 
     this.state = { 
-      // committeeMembers: [],
-      committeeMembers: [
-        { name: 'John Allen',     affiliation: 'PSRC, Early College HS',                          link: '',                                           _id: "111", index: 0 },
-        { name: 'Tim Barry',      affiliation: 'IPS Facilities and Design Committee (Architect)', link: "",                                           _id: "121", index: 1 },
-        { name: 'Ken Brandt',     affiliation: 'Robeson Planetarium',                             link: "",                                           _id: "131", index: 2 },
-        { name: 'Traci Bullard',  affiliation: 'SERMC',                                           link: 'http://www.navsea.navy.mil/Home/RMC/SERMC/', _id: "141", index: 3 }
-      ],
-      currentId: "",
+      committeeMembers: [],
+      id: "",
       name: "",
       affiliation: "",
       link: "",
@@ -34,6 +108,7 @@ class CommitteeCMS extends Component {
     this.getNextIndex = this.getNextIndex.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this)
   }
 
   getCommitteeMembers() {
@@ -77,7 +152,7 @@ class CommitteeCMS extends Component {
     if (window.confirm("Your data will not be saved. Continue?")) {
       const index = this.getNextIndex(this.state.committeeMembers);
       this.setState({
-        currentId: "",
+        id: "",
         name: "",
         affiliation: "",
         link: "",
@@ -95,7 +170,7 @@ class CommitteeCMS extends Component {
       .find((member) => member._id === e.currentTarget.id);
 
     this.setState({
-      currentId: currCommitteeMember._id,
+      id: currCommitteeMember._id,
       name: currCommitteeMember.name,
       affiliation: currCommitteeMember.affiliation,
       link: currCommitteeMember.link,
@@ -118,11 +193,33 @@ class CommitteeCMS extends Component {
       });
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    const NewCommitteeMembers = arrayMove(this.state.committeeMembers, oldIndex, newIndex)
+      .map((member, index) => {
+        member.index = index
+        return member;
+      });
+    this.setState({
+      committeeMembers: NewCommitteeMembers,
+      currentlySaving: true
+    });
+
+    putData('/api/committee-members', NewCommitteeMembers)
+      .then((response) => {
+        // const message = response.error || response.message;
+        this.setState({
+          currentlySaving: false
+        });
+        // this.props.updateMessage(message);
+        this.getCommitteeMembers();
+      });
+  };
+
   handleSubmit(e) {
     e.preventDefault();
     this.setState({currentlySaving: true});
     const committeeMember = {
-      _id: this.state.currentId,
+      _id: this.state.id,
       name: this.state.name,
       affiliation: this.state.affiliation,
       link: this.state.link,
@@ -134,7 +231,7 @@ class CommitteeCMS extends Component {
         this.setState({
           currentlySaving: false,
           addNewOpen: false,
-          currentId: "",
+          id: "",
           name: "",
           affiliation: "",
           link: ""
@@ -147,13 +244,13 @@ class CommitteeCMS extends Component {
 
   render() {
     document.title = "Committee Members | Rising Phoenix CMS";
-    console.log('index: ', this.state.index)
+
     return (
       <div>
         <h2>Committee Members</h2>
-        {/* {this.state.error ?
+        {this.state.error ?
           <p>Sorry, something went wrong. Please try again later.</p>
-          : */}
+          :
           <div>
             {/* button to add new committee member */}
             <div style={generalStyles.addNewButton} onClick={this.handleAdd}>
@@ -219,47 +316,23 @@ class CommitteeCMS extends Component {
               </div>
             }
 
-            {/* list of current committee members (still need to do styles, and add edit/delete buttons - don't forget about drag'n'drop! (and index stuff)) */}
-            <div>
-              {this.state.committeeMembers.map( member => (
-                <div key={member._id} style={[generalStyles.card, committeeStyles.card]} id={member._id}>
-                  <div style={committeeStyles.rowContainer}>
-                    <div style={committeeStyles.cardLabel}>Name:</div>
-                    <div style={committeeStyles.cardContent}>{member.name}</div>
-                  </div>
-                  <div style={committeeStyles.rowContainer}>
-                    <div style={committeeStyles.cardLabel}>Affiliation:</div>
-                    <div style={committeeStyles.cardContent}>{member.affiliation}</div>
-                  </div>
-                  {member.link && <div style={committeeStyles.rowContainer}>
-                    <div style={committeeStyles.cardLabel}>Link to affiliation website:</div>
-                    <div style={committeeStyles.cardContent}><a href={member.link}>{member.link}</a></div>
-                  </div>}                  
-                  <button 
-                    type='button'
-                    title="Edit"
-                    style={[generalStyles.edit, this.state.currentlyDeleting && generalStyles.edit.disabled]}
-                    onClick={this.state.currentlyDeleting ? (e)=> e.preventDefault() : this.handleEdit}
-                    id={member._id}
-                    key={member.name}
-                  >
-                    <i className="fa fa-pencil"></i>
-                  </button>
-                  <button 
-                    type='button'
-                    title="Delete" 
-                    style={[generalStyles.delete, this.state.currentlyDeleting && generalStyles.delete.disabled]}
-                    onClick={this.state.currentlyDeleting ? (e)=> e.preventDefault() : this.handleDelete}
-                    id={member._id}
-                    key={member.index}
-                  >
-                    <i className="fa fa-trash"></i>
-                  </button>
-                </div>
-              ))}
+            {/* list of current committee members */}
+            <div style={committeeStyles.memberListContainer}>
+              <SortableMemberList 
+                memberList={this.state.committeeMembers} 
+                onSortEnd={this.onSortEnd} 
+                currentlyDeleting={this.state.currentlyDeleting}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+                lockAxis='y'
+                distance={10}
+                useDragHandle={true}
+                lockToContainerEdges={true}
+                disabled={this.state.currentlySaving}
+              />
             </div>
           </div>
-        {/* } */}
+        }
       </div>
     );
   }

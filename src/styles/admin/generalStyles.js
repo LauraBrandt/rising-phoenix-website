@@ -95,77 +95,83 @@ const generalStyles = {
     width: '750px',
     maxWidth: '90%',
   }, 
-  card: {
-    margin: '1em auto',
-    border: '1px solid rgba(0,0,0,0.1)',
-    borderRadius: 4,
-    boxShadow: '0 3px 12px 0 rgba(0,0,0,0.2)',
-    position: 'relative',
-    minHeight: 80,
-    width: '70%',
-    // transition: '0.3s',
-    // ':hover': {
-    //   backgroundColor: '#f3f3f3'
-    // }
-    '@media (max-width: 666px)': {
-      width: '90%'
-    }
-  },
-  edit: {
-    position: 'absolute', 
-    top: 0,
-    right: 0,
-    width: 40,
-    height: 40,
-    backgroundColor: '#428bca',
-    color: 'white',
-    fontSize: '1em',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: 'none',
-    borderRadius: '0 3px 0 0',
+  // card: {
+  //   margin: '1em auto',
+  //   border: '1px solid rgba(0,0,0,0.1)',
+  //   borderRadius: 4,
+  //   boxShadow: '0 3px 12px 0 rgba(0,0,0,0.2)',
+  //   position: 'relative',
+  //   minHeight: 80,
+  //   backgroundColor: 'white',
+  //   transition: '0.3s',
+  //   ':hover': {
+  //     backgroundColor: '#f3f3f3'
+  //   },
+  // },
+  // edit: {
+  //   position: 'absolute', 
+  //   top: 0,
+  //   right: 0,
+  //   width: 40,
+  //   height: 40,
+  //   backgroundColor: '#428bca',
+  //   color: 'white',
+  //   fontSize: '1em',
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   border: 'none',
+  //   borderRadius: '0 3px 0 0',
+  //   cursor: 'pointer',
+  //   opacity: 0.9,
+  //   ':hover': {
+  //     backgroundColor: '#529bda'
+  //   },
+  //   disabled: {
+  //     opacity: 0.7,
+  //     cursor: 'auto',
+  //     backgroundColor: '#428bca',
+  //     ':hover': {
+  //       backgroundColor: '#428bca'
+  //     }
+  //   }
+  // },
+  // delete: {
+  //   position: 'absolute', 
+  //   bottom: 0,
+  //   right: 0,
+  //   width: 40,
+  //   height: 40,
+  //   backgroundColor: '#bb0000',
+  //   color: 'white',
+  //   fontSize: '1em',
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   border: 'none',
+  //   borderRadius: '0 0 3px 0',
+  //   cursor: 'pointer',
+  //   opacity: 0.9,
+  //   ':hover': {
+  //     backgroundColor: '#cb1010'
+  //   },
+  //   disabled: {
+  //     opacity: 0.7,
+  //     cursor: 'auto',
+  //     backgroundColor: '#bb0000',
+  //     ':hover': {
+  //       backgroundColor: '#bb0000'
+  //     }
+  //   }
+  // },
+  dragHandle: {
+    position: 'absolute',
+    left: 10,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    color: '#afafaf',
+    fontSize: '1.5em',
     cursor: 'pointer',
-    opacity: 0.9,
-    ':hover': {
-      backgroundColor: '#529bda'
-    },
-    disabled: {
-      opacity: 0.7,
-      cursor: 'auto',
-      backgroundColor: '#428bca',
-      ':hover': {
-        backgroundColor: '#428bca'
-      }
-    }
-  },
-  delete: {
-    position: 'absolute', 
-    bottom: 0,
-    right: 0,
-    width: 40,
-    height: 40,
-    backgroundColor: '#bb0000',
-    color: 'white',
-    fontSize: '1em',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: 'none',
-    borderRadius: '0 0 3px 0',
-    cursor: 'pointer',
-    opacity: 0.9,
-    ':hover': {
-      backgroundColor: '#cb1010'
-    },
-    disabled: {
-      opacity: 0.7,
-      cursor: 'auto',
-      backgroundColor: '#bb0000',
-      ':hover': {
-        backgroundColor: '#bb0000'
-      }
-    }
   },
   adminPanel: {
     textAlign: 'center',

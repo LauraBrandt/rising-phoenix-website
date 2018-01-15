@@ -49,17 +49,23 @@ const committeeStyles = {
       margin: '1em 1em 0 1em',
     },
   },
-  card: {
-    padding: '0.7em',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    fontSize: '1.2em',
-    width: '70%',
-    '@media (max-width: 666px)': {
-      fontSize: '0.9em',
+  memberListContainer: {
+    width: '70%', 
+    margin: 'auto',
+    '@media (max-width: 800px)': {
+      width: '100%'
     }
   },
+  // card: {
+  //   padding: '0.7em',
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-evenly',
+  //   fontSize: '1.2em',
+  //   '@media (max-width: 666px)': {
+  //     fontSize: '0.9em',
+  //   }
+  // },
   rowContainer: {
     display: 'flex',
     justifyContent: 'center',
