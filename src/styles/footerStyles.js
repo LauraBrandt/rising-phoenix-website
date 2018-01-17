@@ -12,7 +12,7 @@ const footerStyles = {
     margin: 'auto',
     width: '200px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     paddingBottom: '0.3em'
   },
   copyright: {
