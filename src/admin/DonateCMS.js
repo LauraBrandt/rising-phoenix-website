@@ -9,9 +9,7 @@ class DonateCMS extends Component {
     super()
 
     this.state = {
-      donateTitle: "",
       donateText: "",
-      rewardTitle: "",
       rewardText: "",
       checkTo: "",
       checkName: "",
@@ -36,9 +34,7 @@ class DonateCMS extends Component {
       } else if (doc) {
         this.setState({ 
           error: false,
-          donateTitle: doc.donateTitle,
           donateText: doc.donateText,
-          rewardTitle: doc.rewardTitle,
           rewardText: doc.rewardText,
           checkTo: doc.check.to,
           checkName: doc.check.name,
@@ -66,9 +62,7 @@ class DonateCMS extends Component {
     e.preventDefault();
     this.setState({currentlySaving: true});
     const donateInfo = {
-      donateTitle: this.state.donateTitle,
       donateText: this.state.donateText,
-      rewardTitle: this.state.rewardTitle,
       rewardText: this.state.rewardText,
       check: {
         to: this.state.checkTo,
@@ -100,19 +94,6 @@ class DonateCMS extends Component {
           <div>
             <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
               <div style={donateStyles.inputContainer}>
-                <label htmlFor="donateTitle" style={[generalStyles.label, donateStyles.label]}>
-                  Subtitle 1 (how to donate section):
-                </label>
-                <input 
-                  type="text" 
-                  id="donateTitle" 
-                  value={this.state.donateTitle} 
-                  style={[generalStyles.inputText, donateStyles.input]}
-                  maxLength={100}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div style={donateStyles.inputContainer}>
                 <label htmlFor="donateText" style={[generalStyles.label, donateStyles.label]}>
                   Text for the section on how to donate:
                 </label>
@@ -121,19 +102,6 @@ class DonateCMS extends Component {
                   value={this.state.donateText} 
                   style={[generalStyles.inputText, donateStyles.textarea]}
                   maxLength={500}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div style={donateStyles.inputContainer}>
-                <label htmlFor="rewardTitle" style={[generalStyles.label, donateStyles.label]}>
-                  Subtitle 2 (rewards description section):
-                </label>
-                <input 
-                  type="text" 
-                  id="rewardTitle" 
-                  value={this.state.rewardTitle} 
-                  style={[generalStyles.inputText, donateStyles.input]}
-                  maxLength={100}
                   onChange={this.handleChange}
                 />
               </div>

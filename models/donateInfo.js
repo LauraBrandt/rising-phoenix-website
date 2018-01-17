@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const donateInfoSchema = new Schema({
-  donateTitle: String,
   donateText: String,
-  rewardTitle: String,
   rewardText: String,
   check: {
       to: String, 

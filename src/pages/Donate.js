@@ -12,9 +12,7 @@ class Main extends Component {
     super()
     this.state = { 
       donateInfo: {
-        donateTitle: "",
         donateText: "",
-        rewardsTitle: "",
         rewardsText: "",
         check: {
           to: "",
@@ -46,7 +44,7 @@ class Main extends Component {
     const rewardsData = DATA.donate.rewardLevels;
     return (
       <main style={style.main}>
-        <h2 style={style.main.h2}>{this.state.donateInfo.donateTitle}</h2>
+        <h2 style={style.main.h2}>Make a Donation</h2>
         {this.state.donateInfo.donateText && <div style={style.main.donateText}>{this.state.donateInfo.donateText}</div>}
         <div style={style.main.donateHeader}>You can donate in one of the following ways:</div>
         <div style={style.main.donateContainer}>
@@ -64,7 +62,7 @@ class Main extends Component {
             </div>
           </div>
         </div>
-        <h2 style={style.main.h2}>{this.state.donateInfo.rewardTitle}</h2>
+        <h2 style={style.main.h2}>Get a Reward</h2>
         {this.state.donateInfo.rewardText && <div style={style.main.rewardText}>{this.state.donateInfo.rewardText}</div>}
         <div style={style.main.rewardsTable}>
           {rewardsData.map( level => 

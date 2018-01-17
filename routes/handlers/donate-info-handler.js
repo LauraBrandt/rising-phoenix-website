@@ -25,19 +25,9 @@ module.exports = {
     let valid = true;
     const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"]
 
-    sentDonateInfo.donateTitle = xssFilters.inHTMLData(sentDonateInfo.donateTitle);
-    if (!validator.isLength(sentDonateInfo.donateTitle, {min:0, max: 100})) {
-      if (valid) {res.json({message: "Subtitle 1 too long - must be no more than 100 characters. Please try again."});}
-      valid = false;
-    }
     sentDonateInfo.donateText = xssFilters.inHTMLData(sentDonateInfo.donateText);
     if (!validator.isLength(sentDonateInfo.donateText, {min:0, max: 500})) {
       if (valid) {res.json({message: "Donate text too long - must be no more than 500 characters. Please try again."});}
-      valid = false;
-    }
-    sentDonateInfo.rewardTitle = xssFilters.inHTMLData(sentDonateInfo.rewardTitle);
-    if (!validator.isLength(sentDonateInfo.rewardTitle, {min:0, max: 100})) {
-      if (valid) {res.json({message: "Subtitle 2 too long - must be no more than 100 characters. Please try again."});}
       valid = false;
     }
     sentDonateInfo.rewardText = xssFilters.inHTMLData(sentDonateInfo.rewardText);
@@ -104,9 +94,7 @@ module.exports = {
             res.send({message: 'Donate info saved successfully.'});
           });
         } else {
-          currDonateInfo.donateTitle = sentDonateInfo.donateTitle;
           currDonateInfo.donateText = sentDonateInfo.donateText;
-          currDonateInfo.rewardTitle = sentDonateInfo.rewardTitle;
           currDonateInfo.rewardText = sentDonateInfo.rewardText;
           currDonateInfo.check = sentDonateInfo.check;
 
