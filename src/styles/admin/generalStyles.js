@@ -147,7 +147,7 @@ const generalStyles = {
       },
     },
   }, 
-  memberListContainer: {
+  listContainer: {
     width: '70%', 
     margin: 'auto',
     '@media (max-width: 1100px)': {

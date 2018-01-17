@@ -117,7 +117,7 @@ class CalendarCMS extends Component {
     this.getNextIndex = this.getNextIndex.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.onSortEnd = this.onSortEnd.bind(this)
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   getEvents() {
@@ -308,6 +308,7 @@ class CalendarCMS extends Component {
                       style={[generalStyles.inputText, generalStyles.modalContent.input]}
                       maxLength={100}
                       onChange={this.handleChange}
+                      required
                     />
                   </div>
                   <div>
@@ -316,7 +317,7 @@ class CalendarCMS extends Component {
                       id="dateTime"
                       value={this.state.dateTime}
                       onChange={this.handleChange}
-                      inputProps={{style: {...generalStyles.inputText, ...generalStyles.modalContent.input}}}
+                      inputProps={{style: {...generalStyles.inputText, ...generalStyles.modalContent.input}, required: true}}
                     />
                   </div>
                   <div>
@@ -371,7 +372,7 @@ class CalendarCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.memberListContainer}>
+            <div style={generalStyles.listContainer}>
               <SortableEventList 
                 eventList={this.state.events} 
                 onSortEnd={this.onSortEnd} 

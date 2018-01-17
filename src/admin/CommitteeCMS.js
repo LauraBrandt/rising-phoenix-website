@@ -272,6 +272,7 @@ class CommitteeCMS extends Component {
                       style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
                       maxLength={100}
                       onChange={this.handleChange}
+                      required
                     />
                   </div>
                   <div>
@@ -316,7 +317,7 @@ class CommitteeCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.memberListContainer}>
+            <div style={generalStyles.listContainer}>
               <SortableMemberList 
                 memberList={this.state.committeeMembers} 
                 onSortEnd={this.onSortEnd} 
