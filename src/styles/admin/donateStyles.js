@@ -54,6 +54,26 @@ const donateStyles = {
       margin: '0.5em', 
       width: 400,
     }
+  },
+  rewardsHeader: {
+    marginTop: '3em',
+  },
+  addNewButton: {
+    padding: '0.7em 0.5em',
+    margin: '1.5em auto',
+  },
+  amountEntryContainer: {
+    width:400, 
+    maxWidth: '100%', 
+    display: 'inline-block',
+    textAlign: 'left',
+    '@media (max-width: 702px)': {
+      textAlign: 'center',
+    }
+  },
+  amountInput: {
+    width: 150, 
+    maxWidth: '41%'
   }
 }
 

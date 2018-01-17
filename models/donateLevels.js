@@ -7,7 +7,7 @@ const donateLevelsSchema = new Schema({
   index: Number,
   amountStart: Number,
   amountEnd: Number,
-  name: String,
+  name: {type: String, required: true},
   reward: String
 });
 

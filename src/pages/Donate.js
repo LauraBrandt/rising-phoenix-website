@@ -5,12 +5,12 @@ import style from '../styles/donateStyles';
 import headerBackground from '../img/astronomy7.png';
 import gfmLogo from '../img/GoFundMe-Logo.jpg';
 import { getData } from '../utils/apiCalls';
-import DATA from '../data.js';
 
 class Main extends Component {
   constructor() {
     super()
     this.state = { 
+      rewardLevels: [],
       donateInfo: {
         donateText: "",
         rewardsText: "",
@@ -23,9 +23,10 @@ class Main extends Component {
           state: "",
           zip: "",
         }
-      } 
+      }
     };
-    this.getDonateInfo = this.getDonateInfo.bind(this)
+    this.getDonateInfo = this.getDonateInfo.bind(this);
+    this.getRewardLevels = this.getRewardLevels.bind(this);
   }
 
   getDonateInfo() {
@@ -36,12 +37,18 @@ class Main extends Component {
     });
   }
 
+  getRewardLevels() {
+    getData('/api/donate-levels').then((rewardLevels) => {
+      this.setState({ rewardLevels });
+    });
+  }
+
   componentDidMount() {
     this.getDonateInfo();
+    this.getRewardLevels();
   }
 
   render() {
-    const rewardsData = DATA.donate.rewardLevels;
     return (
       <main style={style.main}>
         <h2 style={style.main.h2}>Make a Donation</h2>
@@ -65,10 +72,12 @@ class Main extends Component {
         <h2 style={style.main.h2}>Get a Reward</h2>
         {this.state.donateInfo.rewardText && <div style={style.main.rewardText}>{this.state.donateInfo.rewardText}</div>}
         <div style={style.main.rewardsTable}>
-          {rewardsData.map( level => 
+          {this.state.rewardLevels.length && this.state.rewardLevels.map( level => 
             <div key={level.name} style={style.main.rewardsTable.row} tabIndex="0">
-              {level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>}
-              {!level.amountEnd && <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
+              {level.amountEnd ?
+                <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                :
+                <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
               <div style={style.main.rewardsTable.nameCol}>{level.name}</div>
               <div style={style.main.rewardsTable.rewardCol}>{level.reward}</div>
             </div>

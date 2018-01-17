@@ -11,6 +11,7 @@ const committeeMembersHandler = require('./handlers/committee-members-handler.js
 const calendarHandler = require('./handlers/calendar-handler.js');
 const individualSponsorsHandler = require('./handlers/individual-sponsors-handler.js');
 const donateInfoHandler = require('./handlers/donate-info-handler.js');
+const donateLevelsHandler = require('./handlers/donate-levels-handler.js');
 const linksHandler = require('./handlers/links-handler.js');
 
 /// AUTHENTICATION
@@ -25,6 +26,7 @@ const authCheck = jwt({
   issuer: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/`,
   algorithms: ['RS256']
 });
+
 
 /// ROUTES - GET
 router.get('/committee-members', (req, res) => {
@@ -43,9 +45,14 @@ router.get('/donate-info', (req, res) => {
   donateInfoHandler.get(res);
 });
 
+router.get('/donate-levels', (req, res) => {
+  donateLevelsHandler.get(res);
+});
+
 router.get('/links', (req, res) => {
   linksHandler.get(res);
 });
+
 
 /// ROUTES - POST
 router.post('/committee-members', authCheck, (req, res, next) => {  
@@ -64,6 +71,10 @@ router.post('/donate-info', authCheck, (req, res, next) => {
   donateInfoHandler.post(req, res, next);
 });
 
+router.post('/donate-levels', (req, res, next) => {
+  donateLevelsHandler.post(req, res, next);
+});
+
 router.post('/links', authCheck, (req, res, next) => {
   linksHandler.post(req, res, next);
 });
@@ -78,6 +89,10 @@ router.delete('/calendar', authCheck, (req, res, next) => {
   calendarHandler.delete(req, res, next);
 });
 
+router.delete('/donate-levels', (req, res, next) => {
+  donateLevelsHandler.delete(req, res, next);
+});
+
 
 /// ROUTES - PUT
 router.put('/committee-members', authCheck, (req, res, next) => {
@@ -87,5 +102,10 @@ router.put('/committee-members', authCheck, (req, res, next) => {
 router.put('/calendar', authCheck, (req, res, next) => {
   calendarHandler.put(req, res, next);
 });
+
+router.put('/donate-levels', (req, res, next) => {
+  donateLevelsHandler.put(req, res, next);
+});
+
 
 module.exports = router;

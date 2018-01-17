@@ -1,8 +1,87 @@
 import React, {Component} from 'react';
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import generalStyles from '../styles/admin/generalStyles';
 import donateStyles from '../styles/admin/donateStyles';
+import '../styles/admin/externalComponentStyles.css';
 import Radium from 'radium';
-import { getData, postData } from '../utils/apiCalls';
+import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+
+const DragHandle = SortableHandle(() => 
+  <div style={generalStyles.dragHandle}>
+    <div>
+      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
+      <i className="fa fa-ellipsis-v"></i>
+    </div>
+    <div>
+      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
+      <i className="fa fa-ellipsis-v"></i>
+    </div>
+  </div>
+);
+
+const SortableRewardLevel = SortableElement(({level, currentlyDeleting, handleEdit, handleDelete}) =>
+  <div 
+    className='card'
+    id={level._id} 
+    key={`sortable-element-${level._id}`}
+  >
+    <DragHandle />
+    <div className='row-container'>
+      <div className='card-label'>Amount:</div>
+      {level.amountEnd ? 
+        <div className='card-content'>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+        : 
+        <div className='card-content'>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
+    </div>
+    <div className='row-container'>
+      <div className='card-label'>Name:</div>
+      <div className='card-content'>{level.name}</div>
+    </div>
+    <div className='row-container'>
+      <div className='card-label'>Reward:</div>
+      <div className='card-content'>{level.reward}</div>
+    </div>
+    <button 
+      type='button'
+      title="Edit"
+      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
+      id={level._id}
+      key={`edit-${level._id}`}
+    >
+      <i className="fa fa-pencil"></i>
+    </button>
+    <button 
+      type='button'
+      title="Delete" 
+      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
+      id={level._id}
+      key={`delete-${level._id}`}
+    >
+      <i className="fa fa-trash"></i>
+    </button>
+  </div>
+);
+
+const SortableRewardLevelList = SortableContainer(({rewardLevelList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
+  return (
+    <div>
+      {rewardLevelList.map((level, index) => (
+        <SortableRewardLevel 
+          level={level} 
+          key={`level-${level._id}`}
+          index={index}
+          currentlyDeleting={currentlyDeleting}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          disabled={disabled}
+        />
+      ))}
+    </div>
+  );
+});
+
 
 class DonateCMS extends Component {
   constructor() {
@@ -18,12 +97,29 @@ class DonateCMS extends Component {
       checkCity: "",
       checkState: "",
       checkZip: "",
+      rewardLevels: [],
+      rewardId: "",
+      rewardAmountStart: "",
+      rewardAmountEnd: "",
+      rewardName: "",
+      rewardReward: "",
+      rewardIndex: "",
       error: false,
       currentlySaving: false,
+      currentlyDeleting: false,
+      addNewOpen: false,
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitInfo = this.handleSubmitInfo.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.getNextIndex = this.getNextIndex.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
+    this.handleSubmitRewardLevel = this.handleSubmitRewardLevel.bind(this);
   }
 
   getDonateInfo() {
@@ -33,7 +129,6 @@ class DonateCMS extends Component {
         this.props.updateMessage(doc.error);
       } else if (doc) {
         this.setState({ 
-          error: false,
           donateText: doc.donateText,
           rewardText: doc.rewardText,
           checkTo: doc.check.to,
@@ -48,8 +143,35 @@ class DonateCMS extends Component {
     });
   }
 
+  getRewardLevels() {
+    getData('/api/donate-levels').then((levels) => {
+      if (levels.error) {
+        this.setState({ error: true });
+        this.props.updateMessage(levels.error);
+      } else {
+        const newIndex = this.getNextIndex(levels)
+        this.setState({ 
+          rewardLevels: levels,
+          rewardIndex: newIndex
+        });
+      }
+    });
+  }
+
   componentDidMount() {
     this.getDonateInfo();
+    this.getRewardLevels();
+  }
+
+  getNextIndex(levels) {
+    if (levels.length < 1) {
+      return 0;
+    }
+    return Math.max(...levels.map(level => level.index)) + 1;    
+  }
+
+  handleAdd() {
+    this.setState({addNewOpen: true})
   }
 
   handleChange(e) {
@@ -58,7 +180,7 @@ class DonateCMS extends Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmitInfo(e) {
     e.preventDefault();
     this.setState({currentlySaving: true});
     const donateInfo = {
@@ -82,6 +204,127 @@ class DonateCMS extends Component {
       });
   }
 
+  handleCancel(e) {
+    if (window.confirm("Your data will not be saved. Continue?")) {
+      const index = this.getNextIndex(this.state.rewardLevels);
+      this.setState({
+        rewardId: "",
+        rewardAmountStart: "",
+        rewardAmountEnd: "",
+        rewardName: "",
+        rewardReward: "",
+        rewardIndex: index,
+        addNewOpen: false,
+      });
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  handleEdit(e) {
+    e.preventDefault();
+    const currLevel = this.state.rewardLevels
+      .find((level) => level._id === e.currentTarget.id);
+
+    this.setState({
+      rewardId: currLevel._id,
+      rewardAmountStart: currLevel.amountStart,
+      rewardAmountEnd: currLevel.amountEnd,
+      rewardName: currLevel.name,
+      rewardReward: currLevel.reward,
+      rewardIndex: currLevel.index,
+      addNewOpen: true,
+    });
+  }
+
+  handleDelete(e) {
+    e.preventDefault();
+    const currLevel = this.state.rewardLevels
+      .find((level) => level._id === e.currentTarget.id);
+    if (window.confirm(`Are you sure you want to permanently delete the donate level ${currLevel.name}?`)) {
+      this.setState({currentlyDeleting: true});
+      deleteData('/api/donate-levels', e.currentTarget.id)
+        .then((response) => {
+          const message = response.error || response.message;
+          this.setState({
+            currentlyDeleting: false,
+          });
+          this.props.updateMessage(message);
+          this.getRewardLevels();
+        });
+    }
+  }
+
+  onSortEnd = ({oldIndex, newIndex}) => {
+    const newLevels = arrayMove(this.state.rewardLevels, oldIndex, newIndex)
+      .map((level, index) => {
+        level.index = index
+        return level;
+      });
+    this.setState({
+      rewardLevels: newLevels,
+      currentlySaving: true
+    });
+
+    putData('/api/donate-levels', newLevels)
+      .then((response) => {
+        this.setState({
+          currentlySaving: false
+        });
+        this.getRewardLevels();
+      });
+  };
+
+  handleSubmitRewardLevel(e) {
+    e.preventDefault();
+
+    if (!this.state.rewardName) {
+      this.props.updateMessage('Required field must be completed.');
+      return;
+    }
+
+    this.setState({currentlySaving: true});
+
+    const amountStart = typeof this.state.rewardAmountStart === 'string' ? 
+      this.state.rewardAmountStart.replace(/,/g, "") 
+      :
+      this.state.rewardAmountStart;
+    const amountEnd = typeof this.state.rewardAmountEnd === 'string' ?
+      this.state.rewardAmountEnd.replace(/,/g, "")
+      :
+      this.state.rewardAmountEnd;
+
+    if (isNaN(amountStart) || isNaN(amountEnd)) {
+      this.props.updateMessage('Amounts must be numbers.');
+      return;
+    }
+
+    const level = {
+      _id: this.state.rewardId,
+      amountStart: amountStart,
+      amountEnd: amountEnd,
+      name: this.state.rewardName,
+      reward: this.state.rewardReward,
+      index: this.state.rewardIndex
+    }
+
+    postData('/api/donate-levels', level)
+      .then((response) => {
+        const message = response.error || response.message;
+        this.setState({
+          currentlySaving: false,
+          addNewOpen: false,
+          rewardId: "",
+          rewardAmountStart: "",
+          rewardAmountEnd: "",
+          rewardName: "",
+          rewardReward: ""
+        });
+        this.props.updateMessage(message);
+        this.getRewardLevels();
+      });
+  }
+
   render() {
     document.title = "Donate | Rising Phoenix CMS";
 
@@ -92,7 +335,7 @@ class DonateCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
+            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmitInfo}>
               <div style={donateStyles.inputContainer}>
                 <label htmlFor="donateText" style={[generalStyles.label, donateStyles.label]}>
                   Text for the section on how to donate:
@@ -213,8 +456,106 @@ class DonateCMS extends Component {
                   </div>
                 </div>
               </div>
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
+              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save Info</button>
             </form>
+
+
+            <h2 style={donateStyles.rewardsHeader}>Reward Levels</h2>
+            {/* button to add new reward level */}
+            <div key="addNew" style={[generalStyles.addNewButton, donateStyles.addNewButton]} onClick={this.handleAdd}>
+              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
+            </div>
+
+            {/* modal to enter new reward level info */}
+            {this.state.addNewOpen && 
+              <div style={generalStyles.modalContainer}>
+                <form 
+                  onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmitRewardLevel}
+                  style={generalStyles.modalContent}
+                >
+                  <p style={{fontSize: '0.9em', color: '#777', marginTop: 0}}>Fields marked with a * are required.</p>
+                  <div>
+                    <label htmlFor="rewardAmountStart" style={[generalStyles.label, generalStyles.modalContent.label]}>Amount:</label>
+                    <div style={donateStyles.amountEntryContainer}>
+                      $ <input 
+                        type="number" 
+                        id="rewardAmountStart" 
+                        value={this.state.rewardAmountStart} 
+                        style={[generalStyles.inputText, generalStyles.modalContent.input, donateStyles.amountInput]}
+                        maxLength={15}
+                        min="0"
+                        onChange={this.handleChange}
+                      />
+                      &nbsp;&nbsp;&ndash;&nbsp;&nbsp;
+                      <input 
+                        type="number" 
+                        id="rewardAmountEnd" 
+                        value={this.state.rewardAmountEnd} 
+                        style={[generalStyles.inputText, generalStyles.modalContent.input, donateStyles.amountInput]}
+                        maxLength={15}
+                        min="0"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="rewardName" style={[generalStyles.label, generalStyles.modalContent.label]}>Name <span>*</span> :</label>
+                    <input 
+                      type="text" 
+                      id="rewardName" 
+                      value={this.state.rewardName} 
+                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
+                      maxLength={100}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="rewardReward" style={[generalStyles.label, generalStyles.modalContent.label]}>Reward:</label>
+                    <input 
+                      type="text" 
+                      id="rewardReward" 
+                      value={this.state.rewardReward} 
+                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
+                      maxLength={100}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    key="submit" 
+                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
+                  >
+                    Save
+                  </button>
+                  <button 
+                    type="button"
+                    key="cancel" 
+                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
+                    onClick={this.handleCancel}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              </div>
+            }
+
+            {/* list of current reward levels */}
+            <div style={generalStyles.listContainer}>
+              <SortableRewardLevelList 
+                rewardLevelList={this.state.rewardLevels} 
+                onSortEnd={this.onSortEnd} 
+                currentlyDeleting={this.state.currentlyDeleting}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+                lockAxis='y'
+                distance={10}
+                useDragHandle={true}
+                lockToContainerEdges={true}
+                disabled={this.state.currentlySaving}
+              />
+            </div>
+
           </div>
         }
       </div>
