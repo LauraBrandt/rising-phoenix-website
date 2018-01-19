@@ -48,6 +48,10 @@
   overflow-wrap: break-word;
 }
 
+.card-img {
+  max-width: 90%;
+}
+
 .pre-wrap {
   white-space: pre-wrap;
 }

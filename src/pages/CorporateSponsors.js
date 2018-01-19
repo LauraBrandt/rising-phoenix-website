@@ -3,41 +3,47 @@ import Radium from 'radium';
 import Header from '../components/Header';
 import style from '../styles/corporateSponsorStyles';
 import headerBackground from '../img/astronomy5.png';
-import DATA from '../data.js';
+import { getData } from '../utils/apiCalls';
 
 let Link = require('react-router-dom').Link;
 Link = Radium(Link);
 
-// function importAll(r) {
-//   let images = {};
-//   r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
-//   return images;
-// }
-// const sponsorLogos = importAll(require.context('../img/sponsorLogos', false, /\.(png|jpe?g|svg)$/));
-
-const sponsors = DATA.sponsors.corporate;
-
 class Main extends Component {
+  constructor() {
+    super()
+    this.state = { sponsors: [] };
+    this.getCorporateSponsors = this.getCorporateSponsors.bind(this)
+  }
+
+  getCorporateSponsors() {
+    getData('/api/corporate-sponsors').then((sponsors) => {
+      this.setState({ sponsors });
+    });
+  }
+
+  componentDidMount() {
+    this.getCorporateSponsors();
+  }
+
   render() {
-    // const sponsors = DATA.sponsors.corporate;
     return (
       <main style={style.main}>
-        {sponsors.businesses.length ?
+        {this.state.sponsors.length ?
           <article>
             <div style={style.sponsorContainer}>
-              {sponsors.businesses.map( company =>
+              {this.state.sponsors.map( company =>
                 <div key={company.name} style={style.outerCompanyBlock}>
                   {company.link ?
                   <a href={company.link} style={[style.innerCompanyBlock, style.link]} key={company.link}>
                     {company.logo ? 
-                      <img src={`${process.env.PUBLIC_URL}/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
+                      <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
                       :
                       company.name
                     }
                   </a>
                   : 
                   <div href={company.link} style={style.innerCompanyBlock}>
-                    {company.logo && <img src={`${process.env.PUBLIC_URL}/img/sponsorLogos/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
+                    {company.logo && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
                     {!company.logo && company.name}
                   </div>}
                 </div>
@@ -58,7 +64,7 @@ Main = Radium(Main);
 let HeaderContent = () => {
   return (
     <div style={style.header.outer}>
-      <h1 style={style.header.h1}>{sponsors.title}</h1>
+      <h1 style={style.header.h1}>Thanks to all the businesses who have supported us!</h1>
       <div style={style.header.cta}>
         Own a business? <Link to="/contact" style={style.header.link}>Talk to us about becoming a sponsor</Link>.
       </div>

@@ -81,7 +81,7 @@ const generalStyles = {
     top: 0,
     width: '100%',
     height: '100%',
-    overflow: 'auto', //?
+    overflow: 'hidden',
     backgroundColor: 'rgba(0,0,0,0.6)',
     display: 'flex',
     justifyContent: 'center',
@@ -96,6 +96,9 @@ const generalStyles = {
     backgroundColor: '#fdfdfd',
     width: '750px',
     maxWidth: '90%',
+    maxHeight: '90%',
+    overflowY: 'auto',
+    overflowX: 'hidden',
     label: {
       width: 150,
       fontSize: '1em',
@@ -112,6 +115,45 @@ const generalStyles = {
       fontSize: '0.95em',
       padding: '0.5em',
     }, 
+    fileInputContainer: {
+      width: 400, 
+      maxWidth: '100%', 
+      display: 'inline-block', 
+      textAlign: 'left',
+      '@media (max-width: 700px)': {
+        textAlign: 'center'
+      }
+    },
+    fileInput: {
+      padding: '0.5em 1em',
+      margin: '1em auto',
+      border: '1px solid #777',
+      borderRadius: '5px',
+      boxSizing: 'border-box',
+      maxWidth: '99%',
+      backgroundColor: 'white',
+      fontSize: '0.95em',
+      display: 'inline-block',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: '#eee'
+      },
+    },
+    filePreview: {
+      width: '90%',
+      margin: 'auto',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: 5,
+      backgroundColor: '#eee',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      image: {
+        maxWidth: '100%',
+        maxHeight: '100%'
+      }
+    },
     submit: {
       padding: '0.6em 0.8em',
       margin: '2em 2em 0 2em',

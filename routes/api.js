@@ -5,10 +5,15 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const multer  = require('multer');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // route controllers
 const committeeMembersHandler = require('./controllers/committee-members-controller.js');
 const calendarHandler = require('./controllers/calendar-controller.js');
+const corporateSponsorsHandler = require('./controllers/corporate-sponsors-controller.js');
 const individualSponsorsHandler = require('./controllers/individual-sponsors-controller.js');
 const donateInfoHandler = require('./controllers/donate-info-controller.js');
 const donateLevelsHandler = require('./controllers/donate-levels-controller.js');
@@ -37,6 +42,10 @@ router.get('/calendar', (req, res) => {
   calendarHandler.get(res);
 });
 
+router.get('/corporate-sponsors', (req, res) => {
+  corporateSponsorsHandler.get(res);
+});
+
 router.get('/individual-sponsors', (req, res) => {
   individualSponsorsHandler.get(res);
 });
@@ -61,6 +70,10 @@ router.post('/committee-members', authCheck, (req, res, next) => {
 
 router.post('/calendar', authCheck, (req, res, next) => {  
   calendarHandler.post(req, res, next);
+});
+
+router.post('/corporate-sponsors', authCheck, upload.single('logoFile'), (req, res, next) => {
+  corporateSponsorsHandler.post(req, res, next);
 });
 
 router.post('/individual-sponsors', authCheck, (req, res, next) => {
@@ -89,7 +102,10 @@ router.delete('/calendar', authCheck, (req, res, next) => {
   calendarHandler.delete(req, res, next);
 });
 
-router.delete('/donate-levels', (req, res, next) => {
+router.delete('/corporate-sponsors', authCheck, (req, res, next) => {
+  corporateSponsorsHandler.delete(req, res, next);
+});
+
   donateLevelsHandler.delete(req, res, next);
 });
 
@@ -103,7 +119,10 @@ router.put('/calendar', authCheck, (req, res, next) => {
   calendarHandler.put(req, res, next);
 });
 
-router.put('/donate-levels', (req, res, next) => {
+router.put('/corporate-sponsors', authCheck, (req, res, next) => {
+  corporateSponsorsHandler.put(req, res, next);
+});
+
   donateLevelsHandler.put(req, res, next);
 });
 
