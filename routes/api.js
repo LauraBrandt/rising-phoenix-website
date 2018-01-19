@@ -84,7 +84,7 @@ router.post('/donate-info', authCheck, (req, res, next) => {
   donateInfoHandler.post(req, res, next);
 });
 
-router.post('/donate-levels', (req, res, next) => {
+router.post('/donate-levels', authCheck, (req, res, next) => {
   donateLevelsHandler.post(req, res, next);
 });
 
@@ -106,6 +106,7 @@ router.delete('/corporate-sponsors', authCheck, (req, res, next) => {
   corporateSponsorsHandler.delete(req, res, next);
 });
 
+router.delete('/donate-levels', authCheck, (req, res, next) => {
   donateLevelsHandler.delete(req, res, next);
 });
 
@@ -123,6 +124,7 @@ router.put('/corporate-sponsors', authCheck, (req, res, next) => {
   corporateSponsorsHandler.put(req, res, next);
 });
 
+router.put('/donate-levels', authCheck, (req, res, next) => {
   donateLevelsHandler.put(req, res, next);
 });
 
