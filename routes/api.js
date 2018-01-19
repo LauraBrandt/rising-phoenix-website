@@ -6,13 +6,13 @@ const router = express.Router();
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
-// route handlers
-const committeeMembersHandler = require('./handlers/committee-members-handler.js');
-const calendarHandler = require('./handlers/calendar-handler.js');
-const individualSponsorsHandler = require('./handlers/individual-sponsors-handler.js');
-const donateInfoHandler = require('./handlers/donate-info-handler.js');
-const donateLevelsHandler = require('./handlers/donate-levels-handler.js');
-const linksHandler = require('./handlers/links-handler.js');
+// route controllers
+const committeeMembersHandler = require('./controllers/committee-members-controller.js');
+const calendarHandler = require('./controllers/calendar-controller.js');
+const individualSponsorsHandler = require('./controllers/individual-sponsors-controller.js');
+const donateInfoHandler = require('./controllers/donate-info-controller.js');
+const donateLevelsHandler = require('./controllers/donate-levels-controller.js');
+const linksHandler = require('./controllers/links-controller.js');
 
 /// AUTHENTICATION
 const authCheck = jwt({
