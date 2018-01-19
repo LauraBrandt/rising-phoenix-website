@@ -77,7 +77,7 @@ class LinksCMS extends Component {
               <div>
                 <label htmlFor="facebookValue" style={generalStyles.label}>Link to Facebook page:</label>
                 <input 
-                  type="text" 
+                  type="url" 
                   id="facebookValue" 
                   value={this.state.facebookValue} 
                   style={generalStyles.inputText}
@@ -87,7 +87,7 @@ class LinksCMS extends Component {
               <div>
                 <label htmlFor="twitterValue" style={generalStyles.label}>Link to Twitter account:</label>
                 <input 
-                  type="text" 
+                  type="url" 
                   id="twitterValue" 
                   value={this.state.twitterValue} 
                   style={generalStyles.inputText}
@@ -97,7 +97,7 @@ class LinksCMS extends Component {
               <div>
                 <label htmlFor="donateValue" style={generalStyles.label}>Link to Go Fund Me:</label>
                 <input 
-                  type="text" 
+                  type="url" 
                   id="donateValue" 
                   value={this.state.donateValue} 
                   style={generalStyles.inputText}

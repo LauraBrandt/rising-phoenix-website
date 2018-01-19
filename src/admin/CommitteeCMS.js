@@ -289,7 +289,7 @@ class CommitteeCMS extends Component {
                   <div>
                     <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: '0.9em', fontStyle: 'italic', color: '#666'}}>(optional)</span></label>
                     <input 
-                      type="text" 
+                      type="url" 
                       id="link" 
                       value={this.state.link} 
                       style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}

@@ -344,7 +344,7 @@ class CalendarCMS extends Component {
                   <div>
                     <label htmlFor="minutesLink" style={[generalStyles.label, generalStyles.modalContent.label]}>Link to minutes:</label>
                     <input 
-                      type="text" 
+                      type="url" 
                       id="minutesLink" 
                       value={this.state.minutesLink} 
                       style={[generalStyles.inputText, generalStyles.modalContent.input]}
