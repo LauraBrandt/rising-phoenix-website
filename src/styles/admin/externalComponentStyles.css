@@ -122,3 +122,10 @@
 .delete-disabled:hover {
   background-color: #bb0000;
 }
+
+.rte-component {
+  width: 1000px;
+  max-width: 100%;
+  margin: auto;
+  min-height: 400px;
+}

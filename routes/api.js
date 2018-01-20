@@ -11,6 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // route controllers
+const aboutController = require('./controllers/about-controller.js');
 const committeeMembersController = require('./controllers/committee-members-controller.js');
 const calendarController = require('./controllers/calendar-controller.js');
 const corporateSponsorsController = require('./controllers/corporate-sponsors-controller.js');
@@ -34,6 +35,10 @@ const authCheck = jwt({
 
 
 /// ROUTES - GET
+router.get('/about', (req, res) => {
+  aboutController.get(res);
+});
+
 router.get('/committee-members', (req, res) => {
   committeeMembersController.get(res);
 });
@@ -64,6 +69,10 @@ router.get('/links', (req, res) => {
 
 
 /// ROUTES - POST
+router.post('/about', authCheck, (req, res, next) => {
+  aboutController.post(req, res, next);
+});
+
 router.post('/committee-members', authCheck, (req, res, next) => {  
   committeeMembersController.post(req, res, next);
 });

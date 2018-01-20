@@ -3,14 +3,30 @@ import Radium from 'radium';
 import Header from '../components/Header';
 import style from '../styles/aboutStyles';
 import headerBackground from '../img/astronomy1.png';
-import DATA from '../data.js';
+import { getData } from '../utils/apiCalls';
+import RichTextEditor from 'react-rte';
 
 class Main extends Component {
+  constructor() {
+    super();
+    this.state = { aboutContent: "" };
+    this.getAbout = this.getAbout.bind(this)
+  }
+
+  getAbout() {
+    getData('/api/about').then((about) => {
+      this.setState({ aboutContent: about.content });
+    });
+  }
+
+  componentDidMount() {
+    this.getAbout();
+  }
+
   render() {
-    const aboutText = DATA.about.text;
     return (
       <main style={style.main}>
-        <article dangerouslySetInnerHTML={{__html: aboutText}}>
+        <article dangerouslySetInnerHTML={{__html: this.state.aboutContent}}>
         </article>
       </main>
     );
