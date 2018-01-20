@@ -36,7 +36,9 @@ const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit
     </div>}
     {sponsor.logo && <div className='row-container'>
       <div className='card-label'>Logo:</div>
-      <div className='card-content'><img class='card-img' src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`}/></div>
+      <div className='card-content'>
+        <img class='card-img' src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`} alt={`${sponsor.name} logo`}/>
+      </div>
     </div>}
     <button 
       type='button'
