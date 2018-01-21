@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import generalStyles from '../styles/admin/generalStyles';
-import '../styles/admin/externalComponentStyles.css';
-import Radium from 'radium';
-import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+import React, {Component} from "react";
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import generalStyles from "../styles/admin/generalStyles";
+import "../styles/admin/externalComponentStyles.css";
+import Radium from "radium";
+import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
 const DragHandle = SortableHandle(() => 
@@ -21,27 +21,27 @@ const DragHandle = SortableHandle(() =>
 
 const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
   <div
-    className='card'
+    className="card"
     id={member._id} 
     key={`sortable-element-${member._id}`}
   >
     <DragHandle />
-    <div className='row-container'>
-      <div className='card-label'>Name:</div>
-      <div className='card-content'>{member.name}</div>
+    <div className="row-container">
+      <div className="card-label">Name:</div>
+      <div className="card-content">{member.name}</div>
     </div>
-    <div className='row-container'>
-      <div className='card-label'>Affiliation:</div>
-      <div className='card-content'>{member.affiliation}</div>
+    <div className="row-container">
+      <div className="card-label">Affiliation:</div>
+      <div className="card-content">{member.affiliation}</div>
     </div>
-    {member.link && <div className='row-container'>
-      <div className='card-label'>Link to affiliation:</div>
-      <div className='card-content'><a href={member.link}>{member.link}</a></div>
+    {member.link && <div className="row-container">
+      <div className="card-label">Link to affiliation:</div>
+      <div className="card-content"><a href={member.link}>{member.link}</a></div>
     </div>}
     <button 
-      type='button'
+      type="button"
       title="Edit"
-      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
       id={member._id}
       key={`edit-${member._id}`}
@@ -49,9 +49,9 @@ const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, han
       <i className="fa fa-pencil"></i>
     </button>
     <button 
-      type='button'
+      type="button"
       title="Delete" 
-      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
       id={member._id}
       key={`delete-${member._id}`}
@@ -82,7 +82,7 @@ const SortableMemberList = SortableContainer(({memberList, currentlyDeleting, ha
 
 class CommitteeCMS extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = { 
       committeeMembers: [],
@@ -104,16 +104,16 @@ class CommitteeCMS extends Component {
     this.getNextIndex = this.getNextIndex.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.onSortEnd = this.onSortEnd.bind(this)
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   getCommitteeMembers() {
-    getData('/api/committee-members').then((committeeMembers) => {
+    getData("/api/committee-members").then((committeeMembers) => {
       if (committeeMembers.error) {
         this.setState({ error: true });
         this.props.updateMessage(committeeMembers.error);
       } else {
-        const newIndex = this.getNextIndex(committeeMembers)
+        const newIndex = this.getNextIndex(committeeMembers);
         this.setState({ 
           committeeMembers,
           error: false,
@@ -135,13 +135,13 @@ class CommitteeCMS extends Component {
   }
 
   handleAdd() {
-    this.setState({addNewOpen: true})
+    this.setState({addNewOpen: true});
   }
 
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
-    })
+    });
   }
 
   handleCancel(e) {
@@ -181,7 +181,7 @@ class CommitteeCMS extends Component {
       .find((member) => member._id === e.currentTarget.id);
     if (window.confirm(`Are you sure you want to permanently delete the committee member ${currMember.name}?`)) {
       this.setState({currentlyDeleting: true});
-      deleteData('/api/committee-members', e.currentTarget.id)
+      deleteData("/api/committee-members", e.currentTarget.id)
         .then((response) => {
           const message = response.error || response.message;
           this.setState({
@@ -193,10 +193,10 @@ class CommitteeCMS extends Component {
     }
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
+  onSortEnd({oldIndex, newIndex}) {
     const NewCommitteeMembers = arrayMove(this.state.committeeMembers, oldIndex, newIndex)
       .map((member, index) => {
-        member.index = index
+        member.index = index;
         return member;
       });
     this.setState({
@@ -204,16 +204,16 @@ class CommitteeCMS extends Component {
       currentlySaving: true
     });
 
-    putData('/api/committee-members', NewCommitteeMembers)
+    putData("/api/committee-members", NewCommitteeMembers)
       .then((response) => {
-        // const message = response.error || response.message;
+        const message = response.error || response.message;
         this.setState({
           currentlySaving: false
         });
-        // this.props.updateMessage(message);
+        this.props.updateMessage(message);
         this.getCommitteeMembers();
       });
-  };
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -224,8 +224,8 @@ class CommitteeCMS extends Component {
       affiliation: this.state.affiliation,
       link: this.state.link,
       index: this.state.index
-    }
-    postData('/api/committee-members', committeeMember)
+    };
+    postData("/api/committee-members", committeeMember)
       .then((response) => {
         const message = response.error || response.message;
         this.setState({
@@ -287,7 +287,7 @@ class CommitteeCMS extends Component {
                     />
                   </div>
                   <div>
-                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: '0.9em', fontStyle: 'italic', color: '#666'}}>(optional)</span></label>
+                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: "0.9em", fontStyle: "italic", color: "#666"}}>(optional)</span></label>
                     <input 
                       type="url" 
                       id="link" 
@@ -324,7 +324,7 @@ class CommitteeCMS extends Component {
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
                 handleDelete={this.handleDelete}
-                lockAxis='y'
+                lockAxis="y"
                 distance={10}
                 useDragHandle={true}
                 lockToContainerEdges={true}

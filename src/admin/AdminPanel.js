@@ -1,40 +1,40 @@
-import React, {Component} from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Callback from './components/Callback'
-import Options from './components/Options';
-import Login from './Login';
-import Dashboard from './Dashboard';
-import HomeCMS from './HomeCMS';
-import AboutCMS from './AboutCMS';
-import CommitteeCMS from './CommitteeCMS';
-import CalendarCMS from './CalendarCMS';
-import CorporateSponsorsCMS from './CorporateSponsorsCMS';
-import IndividualSponsorsCMS from './IndividualSponsorsCMS';
-import DonateCMS from './DonateCMS';
-import LinksCMS from './LinksCMS';
-import Message from './components/Message';
-import { isLoggedIn } from '../utils/authService';
-import generalStyles from '../styles/admin/generalStyles';
-import Radium from 'radium';
+import React, {Component} from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Callback from "./components/Callback";
+import Options from "./components/Options";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+import HomeCMS from "./HomeCMS";
+import AboutCMS from "./AboutCMS";
+import CommitteeCMS from "./CommitteeCMS";
+import CalendarCMS from "./CalendarCMS";
+import CorporateSponsorsCMS from "./CorporateSponsorsCMS";
+import IndividualSponsorsCMS from "./IndividualSponsorsCMS";
+import DonateCMS from "./DonateCMS";
+import LinksCMS from "./LinksCMS";
+import Message from "./components/Message";
+import { isLoggedIn } from "../utils/authService";
+import generalStyles from "../styles/admin/generalStyles";
+import Radium from "radium";
 
 const renderIfAuth = (Component, props) => (
-    isLoggedIn() ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to="/admin/login"/>
-    )
-  );
+  isLoggedIn() ? (
+    <Component {...props} />
+  ) : (
+    <Redirect to="/admin/login"/>
+  )
+);
 
 class AdminPanel extends Component {
   constructor(){
-    super()
+    super();
     this.state = {message: ""};
     this.updateMessage = this.updateMessage.bind(this);
     this.closeMessage = this.closeMessage.bind(this);
   }
   updateMessage(message){
     this.setState({message});    
-    setTimeout(() => { this.setState({message: ""}) }, 8000);
+    setTimeout(() => { this.setState({message: ""}); }, 8000);
   }
   closeMessage() {
     this.setState({message: ""});

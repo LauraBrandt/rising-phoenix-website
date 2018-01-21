@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-const CorporateSponsors = require('../../models/corporateSponsors');
+const CorporateSponsors = require("../../models/corporateSponsors");
 
-const aws = require('aws-sdk');
-const xssFilters = require('xss-filters');
-const validator = require('validator');
+const aws = require("aws-sdk");
+const xssFilters = require("xss-filters");
+const validator = require("validator");
 
 aws.config.update({
   accessKeyId: process.env.REACT_APP_AWS_ACCESSKEYID,
   secretAccessKey: process.env.REACT_APP_AWS_SECRETACCESSKEY,
-  subregion: 'us-east-2',
+  subregion: "us-east-2",
 });
 const s3 = new aws.S3();
 
@@ -21,7 +21,7 @@ module.exports = {
       .exec((err, corporateSponsors) => {
         if (err) {
           console.log(err);
-          const newError = new Error('An error occurred fetching the sponsors.');
+          const newError = new Error("An error occurred fetching the sponsors.");
           res.status(err.status || 404).json({error: newError.message});
         } else {
           res.send(corporateSponsors);
@@ -35,16 +35,16 @@ module.exports = {
     let docsUpdated = 0;
   
     for (let i=0; i<totalDocs; i++) {
-      CorporateSponsors.findByIdAndUpdate(corporateSponsors[i]._id, {index: corporateSponsors[i].index}, {new: true}, (err, updatedCorporateSponsor) => {
+      CorporateSponsors.findByIdAndUpdate(corporateSponsors[i]._id, {index: corporateSponsors[i].index}, {new: true}, (err, updatedCorporateSponsor) => { // eslint-disable-line no-unused-vars
         if (err) {
           console.log(err);
-          const newError = new Error('Could not update index.');
+          const newError = new Error("Could not update index.");
           newError.status = err.status;
           next(newError);
         }
         docsUpdated += 1;
         if (docsUpdated === totalDocs) {
-          res.send({'message': `Success! Corporate sponsors reordered.`});
+          res.send({"message": "Success! Corporate sponsors reordered."});
         }
       });
     }
@@ -59,11 +59,11 @@ module.exports = {
     let awsParams;
     if (sentFile) {
       awsParams = {
-        Bucket: 'risingphoenix',
+        Bucket: "risingphoenix",
         Key: sentFile.originalname,
         Body: sentFile.buffer,
         Expires: 60,
-        ACL: 'public-read',
+        ACL: "public-read",
         ContentType: sentFile.mimetype,
       };
     }
@@ -72,16 +72,16 @@ module.exports = {
     sentSponsor.name = validator.isLength(sentSponsor.name, {min:0, max: 100}) ? sentSponsor.name : sentSponsor.name.substring(0,100);
     sentSponsor.link = validator.trim(xssFilters.inDoubleQuotedAttr(sentSponsor.link));
     if (!validator.isEmpty(sentSponsor.link) && !validator.isURL(sentSponsor.link)) {
-      const newError = new Error('Not a valid URL. Please try again.');
+      const newError = new Error("Not a valid URL. Please try again.");
       valid = false;
       next(newError);
     } else if (!validator.isLength(sentSponsor.link, {min:0, max: 150})) {
-      const newError = new Error('Link exceeds maximum length (150 characters)');
+      const newError = new Error("Link exceeds maximum length (150 characters)");
       valid = false;
       next(newError);
     }
-    if (sentSponsor.index !== '' && !validator.isInt(sentSponsor.index.toString())) {
-      const newError = new Error('Index is not a valid number. Please try again.');
+    if (sentSponsor.index !== "" && !validator.isInt(sentSponsor.index.toString())) {
+      const newError = new Error("Index is not a valid number. Please try again.");
       valid = false;
       next(newError);
     }
@@ -93,27 +93,27 @@ module.exports = {
           name: sentSponsor.name,
           link: sentSponsor.link,
           logo: logo
-        }
+        };
         CorporateSponsors.findByIdAndUpdate(sentSponsor._id, updateObj, {new: true}, function(err, updatedCorporateSponsor) {
-          console.log('updating sponsor...');
+          console.log("updating sponsor...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not update sponsor.');
+            const newError = new Error("Could not update sponsor.");
             newError.status = err.status;
             next(newError);
           }
           if (sentFile) {
-            s3.putObject(awsParams, (err, data) => { 
+            s3.putObject(awsParams, (err, data) => {  // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
-                const newError = new Error('Could not upload image.');
+                const newError = new Error("Could not upload image.");
                 newError.status = err.status;
                 next(newError);
               }
-              res.send({'message': `Success! ${updatedCorporateSponsor.name} saved.`});
+              res.send({"message": `Success! ${updatedCorporateSponsor.name} saved.`});
             });
           } else {
-            res.send({'message': `Success! ${updatedCorporateSponsor.name} saved.`});
+            res.send({"message": `Success! ${updatedCorporateSponsor.name} saved.`});
           }
         });
       } else {
@@ -125,25 +125,25 @@ module.exports = {
           index: sentSponsor.index
         });
         newCorporateSponsor.save(function (err, createdCorporateSponsor) {
-          console.log('creating sponsor...');
+          console.log("creating sponsor...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not create sponsor.');
+            const newError = new Error("Could not create sponsor.");
             newError.status = err.status;
             next(newError);
           }
           if (sentFile) {
-            s3.putObject(awsParams, (err, data) => { 
+            s3.putObject(awsParams, (err, data) => { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
-                const newError = new Error('Could not upload image.');
+                const newError = new Error("Could not upload image.");
                 newError.status = err.status;
                 next(newError);
               }
-              res.send({'message': `Success! ${createdCorporateSponsor.name} saved.`});
+              res.send({"message": `Success! ${createdCorporateSponsor.name} saved.`});
             });
           } else {
-            res.send({'message': `Success! ${createdCorporateSponsor.name} saved.`});
+            res.send({"message": `Success! ${createdCorporateSponsor.name} saved.`});
           }
         });
       }
@@ -154,11 +154,11 @@ module.exports = {
     CorporateSponsors.findByIdAndRemove(req.body.id, (err, deletedCorporateSponsor) => {  
       if (err) {
         console.log(err);
-        const newError = new Error('Could not delete sponsor.');
+        const newError = new Error("Could not delete sponsor.");
         newError.status = err.status;
         next(newError);
       }
-      res.send({'message': `Success! ${deletedCorporateSponsor.name} removed.`});
+      res.send({"message": `Success! ${deletedCorporateSponsor.name} removed.`});
     });
   }
 };

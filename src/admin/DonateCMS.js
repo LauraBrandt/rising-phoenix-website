@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import generalStyles from '../styles/admin/generalStyles';
-import donateStyles from '../styles/admin/donateStyles';
-import '../styles/admin/externalComponentStyles.css';
-import Radium from 'radium';
-import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+import React, {Component} from "react";
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import generalStyles from "../styles/admin/generalStyles";
+import donateStyles from "../styles/admin/donateStyles";
+import "../styles/admin/externalComponentStyles.css";
+import Radium from "radium";
+import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 const DragHandle = SortableHandle(() => 
   <div style={generalStyles.dragHandle}>
@@ -21,30 +21,30 @@ const DragHandle = SortableHandle(() =>
 
 const SortableRewardLevel = SortableElement(({level, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 
-    className='card'
+    className="card"
     id={level._id} 
     key={`sortable-element-${level._id}`}
   >
     <DragHandle />
-    <div className='row-container'>
-      <div className='card-label'>Amount:</div>
+    <div className="row-container">
+      <div className="card-label">Amount:</div>
       {level.amountEnd ? 
-        <div className='card-content'>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
         : 
-        <div className='card-content'>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
+        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
     </div>
-    <div className='row-container'>
-      <div className='card-label'>Name:</div>
-      <div className='card-content'>{level.name}</div>
+    <div className="row-container">
+      <div className="card-label">Name:</div>
+      <div className="card-content">{level.name}</div>
     </div>
-    <div className='row-container'>
-      <div className='card-label'>Reward:</div>
-      <div className='card-content'>{level.reward}</div>
+    <div className="row-container">
+      <div className="card-label">Reward:</div>
+      <div className="card-content">{level.reward}</div>
     </div>
     <button 
-      type='button'
+      type="button"
       title="Edit"
-      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
       id={level._id}
       key={`edit-${level._id}`}
@@ -52,9 +52,9 @@ const SortableRewardLevel = SortableElement(({level, currentlyDeleting, handleEd
       <i className="fa fa-pencil"></i>
     </button>
     <button 
-      type='button'
+      type="button"
       title="Delete" 
-      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
       id={level._id}
       key={`delete-${level._id}`}
@@ -85,7 +85,7 @@ const SortableRewardLevelList = SortableContainer(({rewardLevelList, currentlyDe
 
 class DonateCMS extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       donateText: "",
@@ -123,7 +123,7 @@ class DonateCMS extends Component {
   }
 
   getDonateInfo() {
-    getData('/api/donate-info').then((doc) => {
+    getData("/api/donate-info").then((doc) => {
       if (doc.error) {
         this.setState({ error: true });
         this.props.updateMessage(doc.error);
@@ -144,12 +144,12 @@ class DonateCMS extends Component {
   }
 
   getRewardLevels() {
-    getData('/api/donate-levels').then((levels) => {
+    getData("/api/donate-levels").then((levels) => {
       if (levels.error) {
         this.setState({ error: true });
         this.props.updateMessage(levels.error);
       } else {
-        const newIndex = this.getNextIndex(levels)
+        const newIndex = this.getNextIndex(levels);
         this.setState({ 
           rewardLevels: levels,
           rewardIndex: newIndex
@@ -171,13 +171,13 @@ class DonateCMS extends Component {
   }
 
   handleAdd() {
-    this.setState({addNewOpen: true})
+    this.setState({addNewOpen: true});
   }
 
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
-    })
+    });
   }
 
   handleSubmitInfo(e) {
@@ -195,8 +195,8 @@ class DonateCMS extends Component {
         state: this.state.checkState,
         zip: this.state.checkZip,
       }
-    }
-    postData('/api/donate-info', donateInfo)
+    };
+    postData("/api/donate-info", donateInfo)
       .then(response => {
         const message = response.error || response.message;
         this.setState({currentlySaving: false});
@@ -243,7 +243,7 @@ class DonateCMS extends Component {
       .find((level) => level._id === e.currentTarget.id);
     if (window.confirm(`Are you sure you want to permanently delete the donate level ${currLevel.name}?`)) {
       this.setState({currentlyDeleting: true});
-      deleteData('/api/donate-levels', e.currentTarget.id)
+      deleteData("/api/donate-levels", e.currentTarget.id)
         .then((response) => {
           const message = response.error || response.message;
           this.setState({
@@ -255,10 +255,10 @@ class DonateCMS extends Component {
     }
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
+  onSortEnd({oldIndex, newIndex}) {
     const newLevels = arrayMove(this.state.rewardLevels, oldIndex, newIndex)
       .map((level, index) => {
-        level.index = index
+        level.index = index;
         return level;
       });
     this.setState({
@@ -266,36 +266,38 @@ class DonateCMS extends Component {
       currentlySaving: true
     });
 
-    putData('/api/donate-levels', newLevels)
+    putData("/api/donate-levels", newLevels)
       .then((response) => {
+        const message = response.error || response.message;
         this.setState({
           currentlySaving: false
         });
+        this.props.updateMessage(message);
         this.getRewardLevels();
       });
-  };
+  }
 
   handleSubmitRewardLevel(e) {
     e.preventDefault();
 
     if (!this.state.rewardName) {
-      this.props.updateMessage('Required field must be completed.');
+      this.props.updateMessage("Required field must be completed.");
       return;
     }
 
     this.setState({currentlySaving: true});
 
-    const amountStart = typeof this.state.rewardAmountStart === 'string' ? 
+    const amountStart = typeof this.state.rewardAmountStart === "string" ? 
       this.state.rewardAmountStart.replace(/,/g, "") 
       :
       this.state.rewardAmountStart;
-    const amountEnd = typeof this.state.rewardAmountEnd === 'string' ?
+    const amountEnd = typeof this.state.rewardAmountEnd === "string" ?
       this.state.rewardAmountEnd.replace(/,/g, "")
       :
       this.state.rewardAmountEnd;
 
     if (isNaN(amountStart) || isNaN(amountEnd)) {
-      this.props.updateMessage('Amounts must be numbers.');
+      this.props.updateMessage("Amounts must be numbers.");
       return;
     }
 
@@ -306,9 +308,9 @@ class DonateCMS extends Component {
       name: this.state.rewardName,
       reward: this.state.rewardReward,
       index: this.state.rewardIndex
-    }
+    };
 
-    postData('/api/donate-levels', level)
+    postData("/api/donate-levels", level)
       .then((response) => {
         const message = response.error || response.message;
         this.setState({
@@ -335,7 +337,7 @@ class DonateCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmitInfo}>
+            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault();} : this.handleSubmitInfo}>
               <div style={donateStyles.inputContainer}>
                 <label htmlFor="donateText" style={[generalStyles.label, donateStyles.label]}>
                   Text for the section on how to donate:
@@ -375,7 +377,7 @@ class DonateCMS extends Component {
               </div>
 
               <div style={donateStyles.address}>
-                <h3 style={{textAlign: 'left'}}>Address to mail checks to:</h3>
+                <h3 style={{textAlign: "left"}}>Address to mail checks to:</h3>
                 <div style={donateStyles.address.container}>
                   <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
                     <label htmlFor="checkName" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
@@ -404,13 +406,13 @@ class DonateCMS extends Component {
                     />
                   </div>
                   <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer, {paddingTop: 0, marginTop: 0}]}>
-                    <label htmlFor="checkAddress2" style={[generalStyles.label, donateStyles.label, {width: 100, '@media (max-width: 700px)': { display: 'none'}}]}>
+                    <label htmlFor="checkAddress2" style={[generalStyles.label, donateStyles.label, {width: 100, "@media (max-width: 700px)": { display: "none"}}]}>
                     </label>
                     <input 
                       type="text" 
                       id="checkAddress2" 
                       value={this.state.checkAddress2} 
-                      style={[generalStyles.inputText, donateStyles.address.input, {margin: '0 0.5em 1em 0.5em'}]}
+                      style={[generalStyles.inputText, donateStyles.address.input, {margin: "0 0.5em 1em 0.5em"}]}
                       maxLength={100}
                       onChange={this.handleChange}
                     />
@@ -473,7 +475,7 @@ class DonateCMS extends Component {
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmitRewardLevel}
                   style={generalStyles.modalContent}
                 >
-                  <p style={{fontSize: '0.9em', color: '#777', marginTop: 0}}>Fields marked with a * are required.</p>
+                  <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
                   <div>
                     <label htmlFor="rewardAmountStart" style={[generalStyles.label, generalStyles.modalContent.label]}>Amount:</label>
                     <div style={donateStyles.amountEntryContainer}>
@@ -548,7 +550,7 @@ class DonateCMS extends Component {
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
                 handleDelete={this.handleDelete}
-                lockAxis='y'
+                lockAxis="y"
                 distance={10}
                 useDragHandle={true}
                 lockToContainerEdges={true}

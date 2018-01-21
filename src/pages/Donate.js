@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/donateStyles';
-import headerBackground from '../img/astronomy7.png';
-import gfmLogo from '../img/GoFundMe-Logo.jpg';
-import { getData } from '../utils/apiCalls';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/donateStyles";
+import headerBackground from "../img/astronomy7.png";
+import gfmLogo from "../img/GoFundMe-Logo.jpg";
+import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
   constructor() {
-    super()
+    super();
     this.state = { 
       rewardLevels: [],
       donateInfo: {
@@ -30,7 +30,7 @@ class Main extends Component {
   }
 
   getDonateInfo() {
-    getData('/api/donate-info').then((donateInfo) => {
+    getData("/api/donate-info").then((donateInfo) => {
       if (!donateInfo.error) {
         this.setState({ donateInfo });
       }
@@ -38,7 +38,7 @@ class Main extends Component {
   }
 
   getRewardLevels() {
-    getData('/api/donate-levels').then((rewardLevels) => {
+    getData("/api/donate-levels").then((rewardLevels) => {
       this.setState({ rewardLevels });
     });
   }
@@ -96,7 +96,7 @@ let HeaderContent = () => {
       <h1 style={style.header.h1}>Donate</h1>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 

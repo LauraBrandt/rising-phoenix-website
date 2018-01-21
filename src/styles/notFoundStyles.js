@@ -1,51 +1,51 @@
-import sv from './styleVariables';
+import sv from "./styleVariables";
 
 const notFoundStyles = {  
   main: {
     ...sv.mainStyle,
-    textAlign: 'center',
-    marginTop: '10vh',
-    '@media (max-width: 450px)': {
-      fontSize: '0.8em'
+    textAlign: "center",
+    marginTop: "10vh",
+    "@media (max-width: 450px)": {
+      fontSize: "0.8em"
     }
   },
   h1: {
-    fontSize: '6em'
+    fontSize: "6em"
   },
   p1: {
-    fontSize: '1.8em'
+    fontSize: "1.8em"
   },
   p2: {
-    fontSize: '1.3em'
+    fontSize: "1.3em"
   },
   button: {
-    textDecoration: 'none',
+    textDecoration: "none",
     // color: sv.orange,
     backgroundColor: sv.orange,
-    color: 'white',
+    color: "white",
     border: `3px solid ${sv.orange}`,
     borderRadius: 5,
     fontWeight: 600,
-    display: 'inline-block',
-    padding: '0.5em 1em',
-    margin: '1em',    
-    transition: 'all 0.4s',
-    ':hover': {
+    display: "inline-block",
+    padding: "0.5em 1em",
+    margin: "1em",    
+    transition: "all 0.4s",
+    ":hover": {
       // backgroundColor: sv.orange,
-      // color: 'white'
+      // color: "white"
       color: sv.orange,
-      backgroundColor: 'white',
+      backgroundColor: "white",
     },
-    ':active': {
+    ":active": {
       color: sv.orange,
-      backgroundColor: 'white',
+      backgroundColor: "white",
     },
-    ':focus': {
+    ":focus": {
       color: sv.orange,
-      backgroundColor: 'white',
-      outline: 'none'
+      backgroundColor: "white",
+      outline: "none"
     }
   }
-}
+};
 
 export default notFoundStyles;

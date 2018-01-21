@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/corporateSponsorStyles';
-import headerBackground from '../img/astronomy5.png';
-import { getData } from '../utils/apiCalls';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/corporateSponsorStyles";
+import headerBackground from "../img/astronomy5.png";
+import { getData } from "../utils/apiCalls";
 
-let Link = require('react-router-dom').Link;
+let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
 class Main extends Component {
   constructor() {
-    super()
+    super();
     this.state = { sponsors: [] };
-    this.getCorporateSponsors = this.getCorporateSponsors.bind(this)
+    this.getCorporateSponsors = this.getCorporateSponsors.bind(this);
   }
 
   getCorporateSponsors() {
-    getData('/api/corporate-sponsors').then((sponsors) => {
+    getData("/api/corporate-sponsors").then((sponsors) => {
       this.setState({ sponsors });
     });
   }
@@ -34,18 +34,19 @@ class Main extends Component {
               {this.state.sponsors.map( company =>
                 <div key={company.name} style={style.outerCompanyBlock}>
                   {company.link ?
-                  <a href={company.link} style={[style.innerCompanyBlock, style.link]} key={company.link}>
-                    {company.logo ? 
-                      <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
-                      :
-                      company.name
-                    }
-                  </a>
-                  : 
-                  <div href={company.link} style={style.innerCompanyBlock}>
-                    {company.logo && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
-                    {!company.logo && company.name}
-                  </div>}
+                    <a href={company.link} style={[style.innerCompanyBlock, style.link]} key={company.link}>
+                      {company.logo ? 
+                        <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />
+                        :
+                        company.name
+                      }
+                    </a>
+                    : 
+                    <div href={company.link} style={style.innerCompanyBlock}>
+                      {company.logo && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${company.logo}`} alt={`${company.name} logo`} style={style.img} />}
+                      {!company.logo && company.name}
+                    </div>
+                  }
                 </div>
               )}
             </div>
@@ -54,7 +55,7 @@ class Main extends Component {
           <div>
             There are no corporate sponsors yet. Own a business? <Link to="/contact">Talk to us about becoming a sponsor</Link>.
           </div>
-      }
+        }
       </main>
     );
   }
@@ -70,7 +71,7 @@ let HeaderContent = () => {
       </div>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 class CorporateSponsors extends Component {

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const calendarEventsSchema = new Schema({
@@ -12,4 +12,4 @@ const calendarEventsSchema = new Schema({
   minutesLink: String
 });
 
-module.exports = mongoose.model('CalendarEvents', calendarEventsSchema);
+module.exports = mongoose.model("CalendarEvents", calendarEventsSchema);

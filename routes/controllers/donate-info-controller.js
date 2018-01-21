@@ -1,29 +1,29 @@
-'use strict';
+"use strict";
 
-const DonateInfo = require('../../models/donateInfo');
+const DonateInfo = require("../../models/donateInfo");
 
-const xssFilters = require('xss-filters');
-const validator = require('validator');
+const xssFilters = require("xss-filters");
+const validator = require("validator");
 
 module.exports = {
   get: (res) => {
     DonateInfo
-    .findOne({})
-    .exec((err, donateInfo) => {
-      if (err) {
-        console.log(err);
-        const newError = new Error('An error occurred fetching the donate info.');
-        res.status(err.status || 404).json({error: newError.message});
-      } else {
-        res.send(donateInfo);
-      }
-    });
+      .findOne({})
+      .exec((err, donateInfo) => {
+        if (err) {
+          console.log(err);
+          const newError = new Error("An error occurred fetching the donate info.");
+          res.status(err.status || 404).json({error: newError.message});
+        } else {
+          res.send(donateInfo);
+        }
+      });
   }, 
 
   post: (req, res, next) => {
     let sentDonateInfo = req.body;
     let valid = true;
-    const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"]
+    const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"];
 
     sentDonateInfo.donateText = xssFilters.inHTMLData(sentDonateInfo.donateText);
     if (!validator.isLength(sentDonateInfo.donateText, {min:0, max: 500})) {
@@ -67,48 +67,48 @@ module.exports = {
       valid = false;
     }
     sentDonateInfo.check.zip = xssFilters.inHTMLData(sentDonateInfo.check.zip);
-    if (!validator.isPostalCode(sentDonateInfo.check.zip, 'US')  && !validator.isEmpty(sentDonateInfo.check.state)) {
+    if (!validator.isPostalCode(sentDonateInfo.check.zip, "US")  && !validator.isEmpty(sentDonateInfo.check.state)) {
       if (valid) {res.json({message: "Invalid zip code - must be valid US postal code. Please try again."});}
       valid = false;
     }
 
     if (valid) {
       DonateInfo
-      .findOne({})
-      .exec((err, currDonateInfo) => {
-        if (err) {
-          console.log(err);
-          const newError = new Error('An error occured fetching the donate info.');
-          newError.status = err.status;
-          next(newError);
-        } else if (!currDonateInfo) {
-          console.log('No donate info exists - creating new');
-          const newDonateInfo = new DonateInfo(sentDonateInfo);
-          newDonateInfo.save(function (err, updatedDonateInfo) {
-            if (err) {
-              console.log(err);
-              const newError = new Error('Donate info was not saved.');
-              newError.status = err.status;
-              next(newError);
-            }
-            res.send({message: 'Donate info saved successfully.'});
-          });
-        } else {
-          currDonateInfo.donateText = sentDonateInfo.donateText;
-          currDonateInfo.rewardText = sentDonateInfo.rewardText;
-          currDonateInfo.check = sentDonateInfo.check;
+        .findOne({})
+        .exec((err, currDonateInfo) => {
+          if (err) {
+            console.log(err);
+            const newError = new Error("An error occured fetching the donate info.");
+            newError.status = err.status;
+            next(newError);
+          } else if (!currDonateInfo) {
+            console.log("No donate info exists - creating new");
+            const newDonateInfo = new DonateInfo(sentDonateInfo);
+            newDonateInfo.save(function (err, updatedDonateInfo) { // eslint-disable-line no-unused-vars
+              if (err) {
+                console.log(err);
+                const newError = new Error("Donate info was not saved.");
+                newError.status = err.status;
+                next(newError);
+              }
+              res.send({message: "Donate info saved successfully."});
+            });
+          } else {
+            currDonateInfo.donateText = sentDonateInfo.donateText;
+            currDonateInfo.rewardText = sentDonateInfo.rewardText;
+            currDonateInfo.check = sentDonateInfo.check;
 
-          currDonateInfo.save(function (err, updatedDonateInfo) {
-            if (err) {
-              console.log(err);
-              const newError = new Error('Donate info was not saved.');
-              newError.status = err.status;
-              next(newError);
-            }
-            res.send({message: 'Donate info saved successfully.'});
-          });
-        }
-      });
+            currDonateInfo.save(function (err, updatedDonateInfo) { // eslint-disable-line no-unused-vars
+              if (err) {
+                console.log(err);
+                const newError = new Error("Donate info was not saved.");
+                newError.status = err.status;
+                next(newError);
+              }
+              res.send({message: "Donate info saved successfully."});
+            });
+          }
+        });
     }
   }
 };

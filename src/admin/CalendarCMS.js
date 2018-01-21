@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import * as Datetime from 'react-datetime';
-import moment from 'moment';
-import generalStyles from '../styles/admin/generalStyles';
-import '../styles/admin/externalComponentStyles.css';
-import '../styles/admin/react-datetime.css';
-import Radium from 'radium';
-import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+import React, {Component} from "react";
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import * as Datetime from "react-datetime";
+import moment from "moment";
+import generalStyles from "../styles/admin/generalStyles";
+import "../styles/admin/externalComponentStyles.css";
+import "../styles/admin/react-datetime.css";
+import Radium from "radium";
+import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
 const DragHandle = SortableHandle(() => 
@@ -24,35 +24,35 @@ const DragHandle = SortableHandle(() =>
 
 const SortableEvent = SortableElement(({event, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 
-    className='card'
+    className="card"
     id={event._id} 
     key={`sortable-element-${event._id}`}
   >
     <DragHandle />
-    <div className='row-container'>
-      <div className='card-label'>Name:</div>
-      <div className='card-content'>{event.name}</div>
+    <div className="row-container">
+      <div className="card-label">Name:</div>
+      <div className="card-content">{event.name}</div>
     </div>
-    <div className='row-container'>
-      <div className='card-label'>Date:</div>
-      <div className='card-content'>{moment(event.dateTime).format("M/D/YY H:mm a")}</div>
+    <div className="row-container">
+      <div className="card-label">Date:</div>
+      <div className="card-content">{moment(event.dateTime).format("M/D/YY H:mm a")}</div>
     </div>
-    {event.location && <div className='row-container'>
-      <div className='card-label'>Location:</div>
-      <div className='card-content'>{event.location}</div>
+    {event.location && <div className="row-container">
+      <div className="card-label">Location:</div>
+      <div className="card-content">{event.location}</div>
     </div>}
-    {event.description && <div className='row-container'>
-      <div className='card-label'>Description:</div>
-      <div className='card-content pre-wrap'>{event.description}</div>
+    {event.description && <div className="row-container">
+      <div className="card-label">Description:</div>
+      <div className="card-content pre-wrap">{event.description}</div>
     </div>}
-    {event.minutesLink && <div className='row-container'>
-      <div className='card-label'>Link to minutes:</div>
-      <div className='card-content'><a href={event.minutesLink}>{event.minutesLink}</a></div>
+    {event.minutesLink && <div className="row-container">
+      <div className="card-label">Link to minutes:</div>
+      <div className="card-content"><a href={event.minutesLink}>{event.minutesLink}</a></div>
     </div>}
     <button 
-      type='button'
+      type="button"
       title="Edit"
-      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
       id={event._id}
       key={`edit-${event._id}`}
@@ -60,9 +60,9 @@ const SortableEvent = SortableElement(({event, currentlyDeleting, handleEdit, ha
       <i className="fa fa-pencil"></i>
     </button>
     <button 
-      type='button'
+      type="button"
       title="Delete" 
-      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
       id={event._id}
       key={`delete-${event._id}`}
@@ -93,7 +93,7 @@ const SortableEventList = SortableContainer(({eventList, currentlyDeleting, hand
 
 class CalendarCMS extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = { 
       events: [],
@@ -121,12 +121,12 @@ class CalendarCMS extends Component {
   }
 
   getEvents() {
-    getData('/api/calendar').then((events) => {
+    getData("/api/calendar").then((events) => {
       if (events.error) {
         this.setState({ error: true });
         this.props.updateMessage(events.error);
       } else {
-        const newIndex = this.getNextIndex(events)
+        const newIndex = this.getNextIndex(events);
         this.setState({ 
           events,
           error: false,
@@ -148,7 +148,7 @@ class CalendarCMS extends Component {
   }
 
   handleAdd() {
-    this.setState({addNewOpen: true})
+    this.setState({addNewOpen: true});
   }
 
   handleChange(e) {
@@ -210,7 +210,7 @@ class CalendarCMS extends Component {
       .find((event) => event._id === e.currentTarget.id);
     if (window.confirm(`Are you sure you want to permanently delete the event ${currEvent.name}?`)) {
       this.setState({currentlyDeleting: true});
-      deleteData('/api/calendar', e.currentTarget.id)
+      deleteData("/api/calendar", e.currentTarget.id)
         .then((response) => {
           const message = response.error || response.message;
           this.setState({
@@ -222,10 +222,10 @@ class CalendarCMS extends Component {
     }
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
+  onSortEnd({oldIndex, newIndex}) {
     const newEvents = arrayMove(this.state.events, oldIndex, newIndex)
       .map((event, index) => {
-        event.index = index
+        event.index = index;
         return event;
       });
     this.setState({
@@ -233,19 +233,21 @@ class CalendarCMS extends Component {
       currentlySaving: true
     });
 
-    putData('/api/calendar', newEvents)
+    putData("/api/calendar", newEvents)
       .then((response) => {
+        const message = response.error || response.message;
         this.setState({
           currentlySaving: false
         });
+        this.props.updateMessage(message);
         this.getEvents();
       });
-  };
+  }
 
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.name || !this.state.dateTime) {
-      this.props.updateMessage('Required fields must be completed.');
+      this.props.updateMessage("Required fields must be completed.");
       return;
     }
     this.setState({currentlySaving: true});
@@ -257,8 +259,8 @@ class CalendarCMS extends Component {
       description: this.state.description,
       minutesLink: this.state.minutesLink,
       index: this.state.index
-    }
-    postData('/api/calendar', event)
+    };
+    postData("/api/calendar", event)
       .then((response) => {
         const message = response.error || response.message;
         this.setState({
@@ -298,7 +300,7 @@ class CalendarCMS extends Component {
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
                   style={generalStyles.modalContent}
                 >
-                  <p style={{fontSize: '0.9em', color: '#777', marginTop: 0}}>Fields marked with a * are required.</p>
+                  <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
                   <div>
                     <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Name of Event <span>*</span> :</label>
                     <input 
@@ -379,7 +381,7 @@ class CalendarCMS extends Component {
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
                 handleDelete={this.handleDelete}
-                lockAxis='y'
+                lockAxis="y"
                 distance={10}
                 useDragHandle={true}
                 lockToContainerEdges={true}

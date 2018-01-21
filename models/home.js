@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const homeSchema = new Schema({
@@ -11,4 +11,4 @@ const homeSchema = new Schema({
   donatedAmount: Number,
 });
 
-module.exports = mongoose.model('Home', homeSchema);
+module.exports = mongoose.model("Home", homeSchema);

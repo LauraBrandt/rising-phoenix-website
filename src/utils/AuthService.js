@@ -1,20 +1,20 @@
-import decode from 'jwt-decode';
-import auth0 from 'auth0-js';
-import axios from 'axios';
+import decode from "jwt-decode";
+import auth0 from "auth0-js";
+import axios from "axios";
 
-const ID_TOKEN_KEY = 'id_token';
-const ACCESS_TOKEN_KEY = 'access_token';
+const ID_TOKEN_KEY = "id_token";
+const ACCESS_TOKEN_KEY = "access_token";
 
 const CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENTID;
 const CLIENT_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 const REDIRECT = "http://localhost:3000/admin/callback";
-const SCOPE = 'openid email profile';
+const SCOPE = "openid email profile";
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
 const auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN,
-  responseType: 'token id_token',
+  responseType: "token id_token",
   redirectUri: REDIRECT,
   audience: AUDIENCE,
   scope: SCOPE
@@ -48,19 +48,19 @@ function clearAccessToken() {
 
 // Helper function that will allow us to extract the access_token and id_token
 function getParameterByName(name) {
-  let match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
-  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  let match = RegExp("[#&]" + name + "=([^&]*)").exec(window.location.hash);
+  return match && decodeURIComponent(match[1].replace(/\+/g, " "));
 }
 
 // Get and store access_token in local storage
 export function setAccessToken() {
-  let accessToken = getParameterByName('access_token');
+  let accessToken = getParameterByName("access_token");
   localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
 }
 
 // Get and store id_token in local storage
 export function setIdToken() {
-  let idToken = getParameterByName('id_token');
+  let idToken = getParameterByName("id_token");
   localStorage.setItem(ID_TOKEN_KEY, idToken);
 }
 
@@ -88,19 +88,19 @@ export function sendResetPasswordRequest(callback) {
   const email = decode(getIdToken()).email;
 
   axios({
-    method: 'post',
+    method: "post",
     url: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/dbconnections/change_password`,
-    headers: { 'content-type': 'application/json', Authorization: `Bearer ${getAccessToken()}` },
+    headers: { "content-type": "application/json", Authorization: `Bearer ${getAccessToken()}` },
     data: {
       client_id: process.env.REACT_APP_AUTH0_CLIENTID,
       email: email,
-      connection: 'Username-Password-Authentication'
+      connection: "Username-Password-Authentication"
     }
   })
-  .then(function (response) {
-    callback(response.data);
-  })
-  .catch(function (error) {
-    callback(error.response.message);
-  });
+    .then(function (response) {
+      callback(response.data);
+    })
+    .catch(function (error) {
+      callback(error.response.message);
+    });
 }

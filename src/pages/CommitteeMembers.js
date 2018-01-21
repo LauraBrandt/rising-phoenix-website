@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import Header from '../components/Header';
-import Radium from 'radium';
-import style from '../styles/committeeStyles';
-import headerBackground from '../img/astronomy2.png';
-import { getData } from '../utils/apiCalls';
+import React, { Component } from "react";
+import Header from "../components/Header";
+import Radium from "radium";
+import style from "../styles/committeeStyles";
+import headerBackground from "../img/astronomy2.png";
+import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
   constructor() {
-    super()
+    super();
     this.state = { members: [] };
-    this.getCommitteeMembers = this.getCommitteeMembers.bind(this)
+    this.getCommitteeMembers = this.getCommitteeMembers.bind(this);
   }
 
   getCommitteeMembers() {
-    getData('/api/committee-members').then((members) => {
+    getData("/api/committee-members").then((members) => {
       this.setState({ members });
     });
   }
@@ -49,7 +49,7 @@ let HeaderContent = () => {
       <h1 style={style.header.h1}>Committee Members</h1>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 class CommitteeMembers extends Component {

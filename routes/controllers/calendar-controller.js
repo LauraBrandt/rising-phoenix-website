@@ -1,24 +1,24 @@
-'use strict';
+"use strict";
 
-const CalendarEvents = require('../../models/calendar');
+const CalendarEvents = require("../../models/calendar");
 
-const xssFilters = require('xss-filters');
-const validator = require('validator');
+const xssFilters = require("xss-filters");
+const validator = require("validator");
 
 module.exports = {
   get: (res) => {
     CalendarEvents
-    .find({})
-    .sort({index: 1})
-    .exec((err, events) => {
-      if (err) {
-        console.log(err);
-        const newError = new Error('An error occurred fetching the calendar events.');
-        res.status(err.status || 404).json({error: newError.message});
-      } else {
-        res.send(events);
-      }
-    });
+      .find({})
+      .sort({index: 1})
+      .exec((err, events) => {
+        if (err) {
+          console.log(err);
+          const newError = new Error("An error occurred fetching the calendar events.");
+          res.status(err.status || 404).json({error: newError.message});
+        } else {
+          res.send(events);
+        }
+      });
   }, 
 
   put: (req, res, next) => {
@@ -27,16 +27,16 @@ module.exports = {
     let docsUpdated = 0;
   
     for (let i=0; i<totalDocs; i++) {
-      CalendarEvents.findByIdAndUpdate(events[i]._id, {index: events[i].index}, {new: true}, (err, updatedEvent) => {
+      CalendarEvents.findByIdAndUpdate(events[i]._id, {index: events[i].index}, {new: true}, (err, updatedEvent) => { // eslint-disable-line no-unused-vars
         if (err) {
           console.log(err);
-          const newError = new Error('Could not update index.');
+          const newError = new Error("Could not update index.");
           newError.status = err.status;
           next(newError);
         }
         docsUpdated += 1;
         if (docsUpdated === totalDocs) {
-          res.send({'message': `Success! Calendar events reordered.`});
+          res.send({"message": "Success! Calendar events reordered."});
         }
       });
     }
@@ -46,24 +46,24 @@ module.exports = {
     let sentEvent = req.body;
     let valid = true;
   
-    if (!validator.isInt(sentEvent.index.toString()) && sentEvent.index !== '') {
-      const newError = new Error('Index is not a valid number. Please try again.');
+    if (!validator.isInt(sentEvent.index.toString()) && sentEvent.index !== "") {
+      const newError = new Error("Index is not a valid number. Please try again.");
       valid = false;
       next(newError);
     }
     sentEvent.minutesLink = validator.trim(xssFilters.inDoubleQuotedAttr(sentEvent.minutesLink));
     if (!validator.isURL(sentEvent.minutesLink) && !validator.isEmpty(sentEvent.minutesLink)) {
-      const newError = new Error('Not a valid URL. Please try again.');
+      const newError = new Error("Not a valid URL. Please try again.");
       valid = false;
       next(newError);
     } else if (!validator.isLength(sentEvent.minutesLink, {min:0, max: 150})) {
-      const newError = new Error('Link exceeds maximum length (150 characters)');
+      const newError = new Error("Link exceeds maximum length (150 characters)");
       valid = false;
       next(newError);
     }
     sentEvent.dateTime = validator.toDate(sentEvent.dateTime);
     if (!sentEvent.dateTime) {
-      const newError = new Error('Not a valid date. Please try again.');
+      const newError = new Error("Not a valid date. Please try again.");
       valid = false;
       next(newError);
     }
@@ -83,16 +83,16 @@ module.exports = {
           location: sentEvent.location,
           description: sentEvent.description,
           minutesLink: sentEvent.minutesLink,
-        }
+        };
         CalendarEvents.findByIdAndUpdate(sentEvent._id, updateObj, {new: true}, function(err, updatedEvent) {
-          console.log('updating event...');
+          console.log("updating event...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not update calendar event.');
+            const newError = new Error("Could not update calendar event.");
             newError.status = err.status;
             next(newError);
           }
-          res.send({'message': `Success! ${updatedEvent.name} saved.`});
+          res.send({"message": `Success! ${updatedEvent.name} saved.`});
         });
       } else {
         // new event, need to create
@@ -105,14 +105,14 @@ module.exports = {
           index: sentEvent.index
         });
         newEvent.save(function (err, createdEvent) {
-          console.log('creating event...');
+          console.log("creating event...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not create calendar event.');
+            const newError = new Error("Could not create calendar event.");
             newError.status = err.status;
             next(newError);
           }
-          res.send({'message': `Success! ${createdEvent.name} saved.`});
+          res.send({"message": `Success! ${createdEvent.name} saved.`});
         });
       }
     }
@@ -122,11 +122,11 @@ module.exports = {
     CalendarEvents.findByIdAndRemove(req.body.id, (err, deletedEvent) => {  
       if (err) {
         console.log(err);
-        const newError = new Error('Could not delete event.');
+        const newError = new Error("Could not delete event.");
         newError.status = err.status;
         next(newError);
       }
-      res.send({'message': `Success! ${deletedEvent.name} removed.`});
+      res.send({"message": `Success! ${deletedEvent.name} removed.`});
     });
   }
 };

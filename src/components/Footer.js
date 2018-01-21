@@ -1,7 +1,7 @@
-import React from 'react';
-import Radium from 'radium';
-import style from '../styles/footerStyles';
-import gfmLogo from '../img/GoFundMe-Logo.jpg';
+import React from "react";
+import Radium from "radium";
+import style from "../styles/footerStyles";
+import gfmLogo from "../img/GoFundMe-Logo.jpg";
 
 let Footer = (props) => {
   return (
@@ -14,7 +14,7 @@ let Footer = (props) => {
       <div style={style.copyright}>&copy; { new Date().getFullYear() } Rising Phoenix</div>
     </footer>
   );
-}
+};
 Footer = Radium(Footer);
 
 export default Footer;

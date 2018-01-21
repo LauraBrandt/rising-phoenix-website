@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const newsSchema = new Schema({
@@ -12,10 +12,10 @@ const newsSchema = new Schema({
   article: String,
 }, {timestamps: true});
 
-newsSchema.pre('save', (next) => {
+newsSchema.pre("save", (next) => {
   const newsItem = this;
-  newsItem.slug = newsItem.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9_\-]/g, '');
+  newsItem.slug = newsItem.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9_-]/g, "");
   next();
 });
 
-module.exports = mongoose.model('News', newsSchema);
+module.exports = mongoose.model("News", newsSchema);

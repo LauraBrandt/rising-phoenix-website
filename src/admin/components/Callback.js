@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { setIdToken, setAccessToken } from '../../utils/authService';
+import React, { Component } from "react";
+import { setIdToken, setAccessToken } from "../../utils/authService";
 
 class Callback extends Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class Callback extends Component {
         <p>Loading...</p>
         {/* <img src={loading} alt="loading"/> */}
       </div>
-    )
+    );
   }
 }
 

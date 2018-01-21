@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import generalStyles from '../styles/admin/generalStyles';
-import Radium from 'radium';
-import { getData, postData } from '../utils/apiCalls';
+import React, {Component} from "react";
+import generalStyles from "../styles/admin/generalStyles";
+import Radium from "radium";
+import { getData, postData } from "../utils/apiCalls";
 
 class IndividualSponsorsCMS extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = { 
       sponsors: [],
@@ -19,12 +19,12 @@ class IndividualSponsorsCMS extends Component {
   }
 
   getSponsors() {
-    getData('/api/individual-sponsors').then((sponsors) => {
+    getData("/api/individual-sponsors").then((sponsors) => {
       if (sponsors.error) {
         this.setState({ error: true });
         this.props.updateMessage(sponsors.error);
       } else {
-        const initSponsorsEntryValue = sponsors.map(sponsor => sponsor.name).join('\n');
+        const initSponsorsEntryValue = sponsors.map(sponsor => sponsor.name).join("\n");
         this.setState({ 
           sponsors,
           sponsorsEntryValue: initSponsorsEntryValue,
@@ -41,7 +41,7 @@ class IndividualSponsorsCMS extends Component {
   handleEntryChange(e) {
     this.setState({
       sponsorsEntryValue: e.target.value
-    })
+    });
   }
 
   handleSubmit(e) {
@@ -51,7 +51,7 @@ class IndividualSponsorsCMS extends Component {
       .split("\n")
       .filter(sponsor => !!sponsor) // remove blank lines
       .map((sponsor, i) => ({index: i, name: sponsor}));
-    postData('/api/individual-sponsors', newSponsors)
+    postData("/api/individual-sponsors", newSponsors)
       .then((response) => {
         const message = response.error || response.message;
         this.setState({currentlySaving: false});
@@ -70,7 +70,7 @@ class IndividualSponsorsCMS extends Component {
           :
           <div>
             <p>Please enter one sponsor name per line.</p>
-            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault()} : this.handleSubmit}>
+            <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault();} : this.handleSubmit}>
               <textarea 
                 onChange={this.handleEntryChange} 
                 value={this.state.sponsorsEntryValue}

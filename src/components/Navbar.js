@@ -1,21 +1,25 @@
-import React from 'react';
-import Radium from 'radium';
-import style from '../styles/navbarStyles';
-import logo from '../img/logo_ajeno.png';
+import React from "react";
+import Radium from "radium";
+import style from "../styles/navbarStyles";
+import logo from "../img/logo_ajeno.png";
 
-let Link = require('react-router-dom').Link;
+let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
 const navElements = [
   {label: "Home", link: "/", isDropdown: false},
-  {label: "About", isDropdown: true, sublinks: [{label: "What is this all about?", link: "/about"}, 
-                                                {label: "Committee Members", link: "/committee-members"}]},
+  {label: "About", isDropdown: true, sublinks: [
+    {label: "What is this all about?", link: "/about"}, 
+    {label: "Committee Members", link: "/committee-members"}
+  ]},
   {label: "Calendar", link: "/calendar", isDropdown: false},
-  {label: "Sponsors", isDropdown: true, sublinks: [{label: "Corporate Sponsors", link: "/corporate-sponsors"}, 
-                                                   {label: "Individual Sponsors", link: "/individual-sponsors"}]},
+  {label: "Sponsors", isDropdown: true, sublinks: [
+    {label: "Corporate Sponsors", link: "/corporate-sponsors"}, 
+    {label: "Individual Sponsors", link: "/individual-sponsors"}
+  ]},
   {label: "Donate", link: "/donate", isDropdown: false},
   {label: "Contact", link: "/contact", isDropdown: false},
-]
+];
 
 const renderNavElements = (styleType) => {
   const path = window.location.pathname;
@@ -31,24 +35,25 @@ const renderNavElements = (styleType) => {
         :
         <Link 
           to={elem.link}
-          style={[style[styleType].Link,
-                  path===elem.link && style[styleType].current,
-                  elem.label==="Donate" && style[styleType].donateLink,
-                  path===elem.link && elem.label==="Donate" && style[styleType].donateLinkCurrent
-                ]}
+          style={[
+            style[styleType].Link,
+            path===elem.link && style[styleType].current,
+            elem.label==="Donate" && style[styleType].donateLink,
+            path===elem.link && elem.label==="Donate" && style[styleType].donateLinkCurrent
+          ]}
         >
           {elem.label}
         </Link>
       }
     </li>)
   );
-}
+};
 
 let NavbarWide = (props) => {
   return (
     <nav style={style.wide.navbar}>
       <ul style={style.wide.ul}>
-        {renderNavElements('wide')}
+        {renderNavElements("wide")}
         <li style={style.wide.socialButtons}>
           {props.links.facebook && <a href={props.links.facebook} style={style.wide.facebookButton} key="facebook"><i className="fa fa-facebook-square"></i></a>}
           {props.links.twitter && <a href={props.links.twitter} style={style.wide.twitterButton} key="twitter"><i className="fa fa-twitter-square"></i></a>}
@@ -56,21 +61,21 @@ let NavbarWide = (props) => {
       </ul>
     </nav>
   );
-}
+};
 
 class NavbarNarrow extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       showing: false,
-    }
+    };
     this.toggleShowing = this.toggleShowing.bind(this);   
   }
   toggleShowing () {
     const currShowing = this.state.showing;
     this.setState({
       showing: !currShowing,
-    })
+    });
   }
   render() {
     return (
@@ -83,11 +88,11 @@ class NavbarNarrow extends React.Component {
             </i>
           </button>
         </div>
-        <ul style={[style.narrow.ul, this.state.showing ? {width: '50%'} : {width: 0}]}>
-          {renderNavElements('narrow')}
+        <ul style={[style.narrow.ul, this.state.showing ? {width: "50%"} : {width: 0}]}>
+          {renderNavElements("narrow")}
         </ul>
       </nav>
-    )
+    );
   }  
 }
 
@@ -96,7 +101,7 @@ class DropDown extends React.Component {
     super(props);
     this.state = {
       showing: false,
-    }
+    };
     this.toggleShowing = this.toggleShowing.bind(this);
     this.hide = this.hide.bind(this);
   }
@@ -105,7 +110,7 @@ class DropDown extends React.Component {
     const currShowing = this.state.showing;
     this.setState({
       showing: !currShowing,
-    })
+    });
   }
   hide(e) {
     if(e && e.relatedTarget){
@@ -113,7 +118,7 @@ class DropDown extends React.Component {
     }
     this.setState({
       showing: false,
-    })
+    });
   }
 
   render () {
@@ -121,8 +126,10 @@ class DropDown extends React.Component {
     return (
       <div>
         <button 
-          style={[style[this.props.styleType].dropdownToggle,
-                  isCurrent && style[this.props.styleType].current]}
+          style={[
+            style[this.props.styleType].dropdownToggle,
+            isCurrent && style[this.props.styleType].current
+          ]}
           type="button"
           onClick={this.toggleShowing}
           onBlur={this.hide} 
@@ -130,23 +137,26 @@ class DropDown extends React.Component {
           {this.props.label}
           <i className="fa fa-caret-down" aria-hidden="true" style={style.carat}></i>
         </button>
-        <ul key={this.props.label} 
-            style={[style[this.props.styleType].dropdownMenu, 
-                    this.state.showing ? 
-                      {maxHeight: '20em', opacity: 1, visibility: 'visible', transition: 'all 0.5s ease, max-height 0.7s, opacity 0.4s, visibility 0s linear 0s',} : 
-                      {maxHeight: 0, opacity: 0, visibility: 'hidden', transition: 'all 0.5s ease, max-height 0.6s ease 0s, opacity 0.5s ease 0.1s, visibility 0s linear 1s'}
-                  ]}>
-            { this.props.sublinks.map((sublink, i) => 
-                <li key={sublink.label} style={style[this.props.styleType].dropdownLi}>
-                  <Link to={sublink.link} style={[style[this.props.styleType].Link, style[this.props.styleType].dropdownLink]}>
-                    {sublink.label}
-                  </Link>
-                </li>
-            ) }
-          </ul>
+        <ul 
+          key={this.props.label} 
+          style={[
+            style[this.props.styleType].dropdownMenu, 
+            this.state.showing ? 
+              {maxHeight: "20em", opacity: 1, visibility: "visible", transition: "all 0.5s ease, max-height 0.7s, opacity 0.4s, visibility 0s linear 0s",} : 
+              {maxHeight: 0, opacity: 0, visibility: "hidden", transition: "all 0.5s ease, max-height 0.6s ease 0s, opacity 0.5s ease 0.1s, visibility 0s linear 1s"}
+          ]}
+        >
+          { this.props.sublinks.map((sublink) => 
+            <li key={sublink.label} style={style[this.props.styleType].dropdownLi}>
+              <Link to={sublink.link} style={[style[this.props.styleType].Link, style[this.props.styleType].dropdownLink]}>
+                {sublink.label}
+              </Link>
+            </li>
+          ) }
+        </ul>
       </div>
     );
-  };
+  }
 }
 
 NavbarWide = Radium(NavbarWide);
@@ -160,8 +170,8 @@ const Navbar = (props) => {
       <NavbarWide links={props.links} />
       <NavbarNarrow />
     </div>
-  )
-}
+  );
+};
 
 export default Radium(Navbar);
 

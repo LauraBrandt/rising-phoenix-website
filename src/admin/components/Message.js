@@ -1,6 +1,6 @@
-import React from 'react';
-import generalStyles from '../../styles/admin/generalStyles';
-import Radium from 'radium';
+import React from "react";
+import generalStyles from "../../styles/admin/generalStyles";
+import Radium from "radium";
 
 let Message = (props) => {
   return (
@@ -14,7 +14,7 @@ let Message = (props) => {
       ></i>
     </div>
   );
-}
+};
 Message = Radium(Message);
   
 export default Message;

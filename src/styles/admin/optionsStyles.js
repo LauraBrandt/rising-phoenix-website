@@ -1,69 +1,69 @@
 const optionsStyles = {
-  width: '100%',
-  position: 'relative',
-  marginBottom: '1em',
+  width: "100%",
+  position: "relative",
+  marginBottom: "1em",
   back: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 0,
-    cursor: 'pointer',
-    border: '1px solid rgba(0,0,0,0.3)', 
-    borderRadius: '5px',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    backgroundColor: 'white',
-    fontSize: '1.5em',
-    color: 'black',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    cursor: "pointer",
+    border: "1px solid rgba(0,0,0,0.3)", 
+    borderRadius: "5px",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    backgroundColor: "white",
+    fontSize: "1.5em",
+    color: "black",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     Link: {
-      padding: '0.2em 0.4em',
-      color: '#111',
-      textDecoration: 'none',
-      display: 'block',
+      padding: "0.2em 0.4em",
+      color: "#111",
+      textDecoration: "none",
+      display: "block",
     }
   },
   menu: {
-    textAlign: 'right',
+    textAlign: "right",
   },
   button: {
-    position: 'relative',
+    position: "relative",
     right: 0,
     top: 0,
-    cursor: 'pointer',
-    fontSize: '1.5em', 
-    display: 'inline-block', 
-    border: '1px solid rgba(0,0,0,0.3)', 
-    borderRadius: '5px',
-    padding: '0.2em 0.4em',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    backgroundColor: 'white'
+    cursor: "pointer",
+    fontSize: "1.5em", 
+    display: "inline-block", 
+    border: "1px solid rgba(0,0,0,0.3)", 
+    borderRadius: "5px",
+    padding: "0.2em 0.4em",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    backgroundColor: "white"
   },
   dropDown: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     zIndex: 1,
-    border: '1px solid rgba(0,0,0,0.4)',
+    border: "1px solid rgba(0,0,0,0.4)",
     marginTop: 1,
-    boxShadow: '3px 3px 16px rgba(0,0,0,0.1)',
-    borderRadius: '3px',
-    backgroundColor: 'white',
+    boxShadow: "3px 3px 16px rgba(0,0,0,0.1)",
+    borderRadius: "3px",
+    backgroundColor: "white",
     menuItem: {
-      padding: '0.7em 1.3em',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: '#eee'
+      padding: "0.7em 1.3em",
+      cursor: "pointer",
+      ":hover": {
+        backgroundColor: "#eee"
       }
     },
     menuItemDisabled: {
       opacity: 0.8,
-      cursor: 'auto',
-      backgroundColor: '#ddd',
-      ':hover': {
-        backgroundColor: '#ddd'
+      cursor: "auto",
+      backgroundColor: "#ddd",
+      ":hover": {
+        backgroundColor: "#ddd"
       }
     },    
   },
-}
+};
 
 export default optionsStyles;

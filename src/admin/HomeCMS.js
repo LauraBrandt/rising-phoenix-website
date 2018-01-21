@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-// import generalStyles from '../styles/admin/generalStyles';
-import Radium from 'radium';
+import React, {Component} from "react";
+// import generalStyles from "../styles/admin/generalStyles";
+import Radium from "radium";
 
 class HomeCMS extends Component {
   render() {

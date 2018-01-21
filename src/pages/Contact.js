@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/contactStyles';
-import headerBackground from '../img/astronomy4.png';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/contactStyles";
+import headerBackground from "../img/astronomy4.png";
 
 class Main extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Main extends Component {
   }
 
   handleSubmit(e) {
-
+    e.preventDefault(); // TODO
   }
 
   render() {
@@ -95,7 +95,7 @@ let HeaderContent = () => {
       <div>Questions? Suggestions? Want to get involved? Let us know!</div>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 class Contact extends Component {

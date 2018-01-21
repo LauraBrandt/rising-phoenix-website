@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
-const Links = require('../../models/links');
+const Links = require("../../models/links");
 
-const xssFilters = require('xss-filters');
-const validator = require('validator');
+const xssFilters = require("xss-filters");
+const validator = require("validator");
 
 module.exports = {
   get: (res) => {
     Links
-    .findOne({})
-    .exec((err, links) => {
-      if (err) {
-        console.log(err);
-        const newError = new Error('An error occurred fetching the links.');
-        res.status(err.status || 404).json({error: newError.message});
-      } else {
-        res.send(links);
-      }
-    });
+      .findOne({})
+      .exec((err, links) => {
+        if (err) {
+          console.log(err);
+          const newError = new Error("An error occurred fetching the links.");
+          res.status(err.status || 404).json({error: newError.message});
+        } else {
+          res.send(links);
+        }
+      });
   },
 
   post: (req, res, next) => {
@@ -31,7 +31,7 @@ module.exports = {
   
       let sanitizedLink = xssFilters.inDoubleQuotedAttr(linksSent[linkKey]);
   
-      if (!validator.isURL(sanitizedLink) && sanitizedLink !== '') {
+      if (!validator.isURL(sanitizedLink) && sanitizedLink !== "") {
         linksValid = false;
         const uppercaseLinkKey = linkKey.charAt(0).toUpperCase() + linkKey.slice(1);
         const message = `${uppercaseLinkKey} URL is not valid. Links not saved, please try again.`;
@@ -47,33 +47,33 @@ module.exports = {
         .exec((err, currLinks) => {
           if (err) {
             console.log(err);
-            const newError = new Error('An error occured fetching the links.');
+            const newError = new Error("An error occured fetching the links.");
             newError.status = err.status;
             next(newError);
           } else if (!currLinks) {
-            console.log('No links exist - creating new');
+            console.log("No links exist - creating new");
             const newLinks = new Links(linksSent);
-            newLinks.save(function (err, updatedLinks) {
+            newLinks.save(function (err, updatedLinks) { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
-                const newError = new Error('Links were not saved.');
+                const newError = new Error("Links were not saved.");
                 newError.status = err.status;
                 next(newError);
               }
-              res.send({message: 'Links saved successfully.'});
+              res.send({message: "Links saved successfully."});
             });
           } else {
             currLinks.facebook = linksSent.facebook;
             currLinks.twitter = linksSent.twitter;
             currLinks.donate = linksSent.donate;
-            currLinks.save(function (err, updatedLinks) {
+            currLinks.save(function (err, updatedLinks) { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
-                const newError = new Error('Links were not saved.');
+                const newError = new Error("Links were not saved.");
                 newError.status = err.status;
                 next(newError);
               }
-              res.send({message: 'Links saved successfully.'});
+              res.send({message: "Links saved successfully."});
             });
           }
         });

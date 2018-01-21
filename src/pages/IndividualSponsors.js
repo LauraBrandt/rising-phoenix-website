@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/individualSponsorStyles';
-import headerBackground from '../img/astronomy3.png';
-import { getData } from '../utils/apiCalls';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/individualSponsorStyles";
+import headerBackground from "../img/astronomy3.png";
+import { getData } from "../utils/apiCalls";
 
-let Link = require('react-router-dom').Link;
+let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
 class Main extends Component {
   constructor() {
-    super()
+    super();
     this.state = { sponsors: [] };
-    this.getSponsors = this.getSponsors.bind(this)
+    this.getSponsors = this.getSponsors.bind(this);
   }
 
   getSponsors() {
-    getData('/api/individual-sponsors').then((sponsors) => {
+    getData("/api/individual-sponsors").then((sponsors) => {
       this.setState({ sponsors });
     });
   }
@@ -31,7 +31,7 @@ class Main extends Component {
         {this.state.sponsors.length ?
           <article>
             <div style={style.nameContainer}>
-            {this.state.sponsors.map( individual => <div key={individual.name} style={style.name}>{individual.name}</div> )}
+              {this.state.sponsors.map( individual => <div key={individual.name} style={style.name}>{individual.name}</div> )}
             </div>
           </article>
           :
@@ -54,7 +54,7 @@ let HeaderContent = () => {
       </div>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 class IndividualSponsors extends Component {

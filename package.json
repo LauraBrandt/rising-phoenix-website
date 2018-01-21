@@ -50,6 +50,8 @@
     "xss-filters": "^1.2.7"
   },
   "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-plugin-react": "^7.5.1",
     "nodemon": "^1.14.7"
   }
 }

@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/aboutStyles';
-import headerBackground from '../img/astronomy1.png';
-import { getData } from '../utils/apiCalls';
-import RichTextEditor from 'react-rte';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/aboutStyles";
+import headerBackground from "../img/astronomy1.png";
+import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
   constructor() {
     super();
     this.state = { aboutContent: "" };
-    this.getAbout = this.getAbout.bind(this)
+    this.getAbout = this.getAbout.bind(this);
   }
 
   getAbout() {
-    getData('/api/about').then((about) => {
+    getData("/api/about").then((about) => {
       this.setState({ aboutContent: about.content });
     });
   }
@@ -40,7 +39,7 @@ let HeaderContent = () => {
       <h1 style={style.header.h1}>What is this all about?</h1>
     </div>
   );
-}
+};
 HeaderContent = Radium(HeaderContent);
 
 

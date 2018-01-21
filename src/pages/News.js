@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import style from '../styles/newsStyles';
-import DATA from '../data.js';
+import React, { Component } from "react";
+import Radium from "radium";
+import { Route, Switch, Redirect } from "react-router-dom";
+import style from "../styles/newsStyles";
+import DATA from "../data.js";
 
-let Link = require('react-router-dom').Link;
+let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
 function importAll(r) {
   let images = {};
-  r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
+  r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
   return images;
 }
-const newsImages = importAll(require.context('../img/news', false, /\.(png|jpe?g|svg)$/));
+const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
 
-let NewsList = (props) => {  
+// TODO: remove props if not used in final version, then remove eslint thing
+let NewsList = (props) => {  // eslint-disable-line no-unused-vars
   document.title = "Rising Phoenix | News";
   
   const newsItems = DATA.home.news;
 
   const getFirstWords = (article) => {
     const numWordsInPreview = 30;
-    return article.split(' ').slice(0,numWordsInPreview).join(' ');
-  }
+    return article.split(" ").slice(0,numWordsInPreview).join(" ");
+  };
 
   return (
     <main style={style.newsList}>
@@ -37,7 +38,7 @@ let NewsList = (props) => {
       )}
     </main>
   );
-}
+};
 NewsList = Radium(NewsList);
 
 let Article = (props) => {
@@ -57,17 +58,17 @@ let Article = (props) => {
     );
   }
   else {
-    return <Redirect to='/notfound'/>;
+    return <Redirect to="/notfound"/>;
   }  
-}
+};
 Article = Radium(Article);
 
 class News extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/news' component={NewsList}/>
-        <Route path='/news/:title' component={Article}/>
+        <Route exact path="/news" component={NewsList}/>
+        <Route path="/news/:title" component={Article}/>
       </Switch>
     );
   }

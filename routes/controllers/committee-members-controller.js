@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const CommitteeMembers = require('../../models/committee');
+const CommitteeMembers = require("../../models/committee");
 
-const xssFilters = require('xss-filters');
-const validator = require('validator');
+const xssFilters = require("xss-filters");
+const validator = require("validator");
 
 module.exports = {
   get: (res) => {
@@ -13,7 +13,7 @@ module.exports = {
       .exec((err, committeeMembers) => {
         if (err) {
           console.log(err);
-          const newError = new Error('An error occurred fetching the committee members.');
+          const newError = new Error("An error occurred fetching the committee members.");
           res.status(err.status || 404).json({error: newError.message});
         } else {
           res.send(committeeMembers);
@@ -27,16 +27,16 @@ module.exports = {
     let docsUpdated = 0;
   
     for (let i=0; i<totalDocs; i++) {
-      CommitteeMembers.findByIdAndUpdate(committeeMembers[i]._id, {index: committeeMembers[i].index}, {new: true}, (err, updatedCommitteeMember) => {
+      CommitteeMembers.findByIdAndUpdate(committeeMembers[i]._id, {index: committeeMembers[i].index}, {new: true}, (err, updatedCommitteeMember) => { // eslint-disable-line no-unused-vars
         if (err) {
           console.log(err);
-          const newError = new Error('Could not update index.');
+          const newError = new Error("Could not update index.");
           newError.status = err.status;
           next(newError);
         }
         docsUpdated += 1;
         if (docsUpdated === totalDocs) {
-          res.send({'message': `Success! Committee members reordered.`});
+          res.send({"message": "Success! Committee members reordered."});
         }
       });
     }
@@ -52,16 +52,16 @@ module.exports = {
     sentCommitteeMember.affiliation = validator.isLength(sentCommitteeMember.affiliation, {min:0, max: 100}) ? sentCommitteeMember.affiliation : sentCommitteeMember.affiliation.substring(0,100);
     sentCommitteeMember.link = validator.trim(xssFilters.inDoubleQuotedAttr(sentCommitteeMember.link));
     if (!validator.isURL(sentCommitteeMember.link) && !validator.isEmpty(sentCommitteeMember.link)) {
-      const newError = new Error('Not a valid URL. Please try again.');
+      const newError = new Error("Not a valid URL. Please try again.");
       valid = false;
       next(newError);
     } else if (!validator.isLength(sentCommitteeMember.link, {min:0, max: 150})) {
-      const newError = new Error('Link exceeds maximum length (150 characters)');
+      const newError = new Error("Link exceeds maximum length (150 characters)");
       valid = false;
       next(newError);
     }
-    if (!validator.isInt(sentCommitteeMember.index.toString()) && sentCommitteeMember.index !== '') {
-      const newError = new Error('Index is not a valid number. Please try again.');
+    if (!validator.isInt(sentCommitteeMember.index.toString()) && sentCommitteeMember.index !== "") {
+      const newError = new Error("Index is not a valid number. Please try again.");
       valid = false;
       next(newError);
     }
@@ -73,16 +73,16 @@ module.exports = {
           name: sentCommitteeMember.name,
           affiliation: sentCommitteeMember.affiliation,
           link: sentCommitteeMember.link,
-        }
+        };
         CommitteeMembers.findByIdAndUpdate(sentCommitteeMember._id, updateObj, {new: true}, function(err, updatedCommitteeMember) {
-          console.log('updating committee member...');
+          console.log("updating committee member...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not update committee member.');
+            const newError = new Error("Could not update committee member.");
             newError.status = err.status;
             next(newError);
           }
-          res.send({'message': `Success! ${updatedCommitteeMember.name} saved.`});
+          res.send({"message": `Success! ${updatedCommitteeMember.name} saved.`});
         });
       } else {
         // new member, need to create
@@ -93,14 +93,14 @@ module.exports = {
           index: sentCommitteeMember.index
         });
         newCommitteeMember.save(function (err, createdCommitteeMember) {
-          console.log('creating committee member...');
+          console.log("creating committee member...");
           if (err) {
             console.log(err);
-            const newError = new Error('Could not create committee member.');
+            const newError = new Error("Could not create committee member.");
             newError.status = err.status;
             next(newError);
           }
-          res.send({'message': `Success! ${createdCommitteeMember.name} saved.`});
+          res.send({"message": `Success! ${createdCommitteeMember.name} saved.`});
         });
       }
     }
@@ -110,11 +110,11 @@ module.exports = {
     CommitteeMembers.findByIdAndRemove(req.body.id, (err, deletedCommitteeMember) => {  
       if (err) {
         console.log(err);
-        const newError = new Error('Could not delete committee member.');
+        const newError = new Error("Could not delete committee member.");
         newError.status = err.status;
         next(newError);
       }
-      res.send({'message': `Success! ${deletedCommitteeMember.name} removed.`});
+      res.send({"message": `Success! ${deletedCommitteeMember.name} removed.`});
     });
   }
 };

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const donateLevelsSchema = new Schema({
@@ -11,4 +11,4 @@ const donateLevelsSchema = new Schema({
   reward: String
 });
 
-module.exports = mongoose.model('DonateLevels', donateLevelsSchema);
+module.exports = mongoose.model("DonateLevels", donateLevelsSchema);

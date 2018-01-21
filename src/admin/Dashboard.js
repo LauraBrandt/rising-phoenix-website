@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import dashboardStyles from '../styles/admin/dashboardStyles';
-import { Link } from 'react-router-dom';
-import Radium from 'radium';
+import React, {Component} from "react";
+import dashboardStyles from "../styles/admin/dashboardStyles";
+import { Link } from "react-router-dom";
+import Radium from "radium";
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      pages: ['Home', 'About', 'Committee Members', 'Calendar', 'Corporate Sponsors', 'Individual Sponsors', 'Donate', 'Links']
-    }
+      pages: ["Home", "About", "Committee Members", "Calendar", "Corporate Sponsors", "Individual Sponsors", "Donate", "Links"]
+    };
   }
   render() {
     document.title = "Dashboard | Rising Phoenix CMS";

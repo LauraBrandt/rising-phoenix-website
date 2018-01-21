@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import style from '../styles/homeStyles';
-import phoenixUnfilled from '../img/phoenix_stencil_unfilled.png';
-import phoenixFilled from '../img/phoenix_stencil_filled.png';
-// import phoenixGrey from '../img/phoenix_stencil_grey.png';
-import DATA from '../data.js';
+import React, { Component } from "react";
+import Radium from "radium";
+import style from "../styles/homeStyles";
+import phoenixUnfilled from "../img/phoenix_stencil_unfilled.png";
+import phoenixFilled from "../img/phoenix_stencil_filled.png";
+// import phoenixGrey from "../img/phoenix_stencil_grey.png";
+import DATA from "../data.js";
 
 function importAll(r) {
   let images = {};
-  r.keys().forEach( item => { images[item.replace('./', '')] = r(item); });
+  r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
   return images;
 }
-const newsImages = importAll(require.context('../img/news', false, /\.(png|jpe?g|svg)$/));
+const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
 
-let Link = require('react-router-dom').Link;
+let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
 let HomeHeader = (props) => {
@@ -23,7 +23,7 @@ let HomeHeader = (props) => {
       <h2 style={style.header.h2}>{props.tagline}</h2>
     </header>
   );
-}
+};
 HomeHeader = Radium(HomeHeader);
 
 let Main = (props) => {
@@ -41,7 +41,7 @@ let Main = (props) => {
           <div style={style.main.progressBox}>
             <div style={style.main.progressBox.label}>Amount Raised:</div>
             <div style={style.main.progressBox.amount}>{`$${props.data.donatedAmount}`}</div>
-            <hr style={{opacity: '0.7'}}/>
+            <hr style={{opacity: "0.7"}}/>
             <div style={style.main.progressBox.label}>Our Goal:</div>
             <div style={style.main.progressBox.amount}>{`$${props.data.goalAmount}`}</div>
           </div>
@@ -49,7 +49,7 @@ let Main = (props) => {
       </div>
     </section>
   );
-}
+};
 Main = Radium(Main);
 
 class CTAs extends Component {
@@ -57,13 +57,13 @@ class CTAs extends Component {
     super();
     this.state = {
       email: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
     this.setState({
       email: e.target.value
-    })
+    });
   }
   render() {
     return (
@@ -93,8 +93,8 @@ CTAs = Radium(CTAs);
 let News = (props) => {
   const getFirstWords = (article) => {
     const numWordsInPreview = 30;
-    return article.split(' ').slice(0,numWordsInPreview).join(' ');
-  }
+    return article.split(" ").slice(0,numWordsInPreview).join(" ");
+  };
 
   return (
     <section style={style.news}>
@@ -109,7 +109,7 @@ let News = (props) => {
       )}
     </section>
   );
-}
+};
 News = Radium(News);
 
 // const Sponsors = () => {

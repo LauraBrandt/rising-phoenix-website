@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const linksSchema = new Schema({
@@ -9,4 +9,4 @@ const linksSchema = new Schema({
   donate: String,
 });
 
-module.exports = mongoose.model('Links', linksSchema);
+module.exports = mongoose.model("Links", linksSchema);

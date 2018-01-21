@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import Radium from 'radium';
-import Header from '../components/Header';
-import style from '../styles/calendarStyles';
-import headerBackground from '../img/astronomy6.png';
-import { getData } from '../utils/apiCalls';
+import React, { Component } from "react";
+import Radium from "radium";
+import Header from "../components/Header";
+import style from "../styles/calendarStyles";
+import headerBackground from "../img/astronomy6.png";
+import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
   constructor() {
-    super()
+    super();
     this.state = { events: [] };
-    this.getEvents = this.getEvents.bind(this)
+    this.getEvents = this.getEvents.bind(this);
   }
 
   getEvents() {
-    getData('/api/calendar').then((events) => {
+    getData("/api/calendar").then((events) => {
       events = events.map(event => {
         event.dateTime = new Date(event.dateTime);
         return event;
@@ -28,7 +28,7 @@ class Main extends Component {
 
   render() {
     const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return (
       <main style={style.main}>
         <article>
@@ -48,16 +48,16 @@ class Main extends Component {
                 <div style={style.eventInfo}>
                   <div style={style.eventInfo.name}>{event.name}{event.minutesLink && <span style={style.eventInfo.minutes}>(<a href={event.minutesLink} style={style.eventInfo.minutesLink}>minutes</a>)</span>}</div>
                   <div style={style.eventInfo.datetime}>{weekdays[event.dateTime.getDay()]}, {months[event.dateTime.getMonth()]} {event.dateTime.getDate()}, {event.dateTime.getFullYear()} at {event.dateTime.getHours() > 12 ?
-                      `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, function(h){ return h-12; })} PM` :
-                      `${event.dateTime.toTimeString().substr(0,5)} AM`
-                    }</div>
+                    `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, function(h){ return h-12; })} PM` :
+                    `${event.dateTime.toTimeString().substr(0,5)} AM`
+                  }</div>
                   {event.location && <div style={style.eventInfo.location}>{event.location}</div>}
-                  {event.description && <div style={[style.eventInfo.description, {whiteSpace: 'pre-wrap'}]}>{event.description}</div>}
+                  {event.description && <div style={[style.eventInfo.description, {whiteSpace: "pre-wrap"}]}>{event.description}</div>}
                 </div>
               </div>
             )
             :
-            <div style={[style.eventInfo, {padding: '1.5em 3em', fontSize: '1.1em'}]}>There are no upcoming events at the moment. Check back soon!</div>
+            <div style={[style.eventInfo, {padding: "1.5em 3em", fontSize: "1.1em"}]}>There are no upcoming events at the moment. Check back soon!</div>
           }          
         </article>
       </main>
@@ -71,13 +71,13 @@ class HeaderContent extends Component {
     super();
     this.state = {
       email: ""
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
     this.setState({
       email: e.target.value
-    })
+    });
   }
   render() {
     return (

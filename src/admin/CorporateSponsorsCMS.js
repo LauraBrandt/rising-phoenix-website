@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import generalStyles from '../styles/admin/generalStyles';
-import '../styles/admin/externalComponentStyles.css';
-import Radium from 'radium';
-import { getData, postData, deleteData, putData } from '../utils/apiCalls';
+import React, {Component} from "react";
+import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import generalStyles from "../styles/admin/generalStyles";
+import "../styles/admin/externalComponentStyles.css";
+import Radium from "radium";
+import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
 const DragHandle = SortableHandle(() => 
@@ -21,29 +21,29 @@ const DragHandle = SortableHandle(() =>
 
 const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 
-    className='card'
+    className="card"
     id={sponsor._id} 
     key={`sortable-element-${sponsor._id}`}
   >
     <DragHandle />
-    <div className='row-container'>
-      <div className='card-label'>Name:</div>
-      <div className='card-content'>{sponsor.name}</div>
+    <div className="row-container">
+      <div className="card-label">Name:</div>
+      <div className="card-content">{sponsor.name}</div>
     </div>
-    {sponsor.link && <div className='row-container'>
-      <div className='card-label'>Website:</div>
-      <div className='card-content'><a href={sponsor.link}>{sponsor.link}</a></div>
+    {sponsor.link && <div className="row-container">
+      <div className="card-label">Website:</div>
+      <div className="card-content"><a href={sponsor.link}>{sponsor.link}</a></div>
     </div>}
-    {sponsor.logo && <div className='row-container'>
-      <div className='card-label'>Logo:</div>
-      <div className='card-content'>
-        <img class='card-img' src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`} alt={`${sponsor.name} logo`}/>
+    {sponsor.logo && <div className="row-container">
+      <div className="card-label">Logo:</div>
+      <div className="card-content">
+        <img class="card-img" src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`} alt={`${sponsor.name} logo`}/>
       </div>
     </div>}
     <button 
-      type='button'
+      type="button"
       title="Edit"
-      className={`edit ${currentlyDeleting ? 'edit-disabled' : ''}`}
+      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
       id={sponsor._id}
       key={`edit-${sponsor._id}`}
@@ -51,9 +51,9 @@ const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit
       <i className="fa fa-pencil"></i>
     </button>
     <button 
-      type='button'
+      type="button"
       title="Delete" 
-      className={`delete ${currentlyDeleting ? 'delete-disabled' : ''}`}
+      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
       onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
       id={sponsor._id}
       key={`delete-${sponsor._id}`}
@@ -83,7 +83,7 @@ const SortableSponsorList = SortableContainer(({sponsorList, currentlyDeleting, 
 
 class CorporateSponsorsCMS extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = { 
       sponsors: [],
@@ -111,12 +111,12 @@ class CorporateSponsorsCMS extends Component {
   }
 
   getSponsors() {
-    getData('/api/corporate-sponsors').then((sponsors) => {
+    getData("/api/corporate-sponsors").then((sponsors) => {
       if (sponsors.error) {
         this.setState({ error: true });
         this.props.updateMessage(sponsors.error);
       } else {
-        const newIndex = this.getNextIndex(sponsors)
+        const newIndex = this.getNextIndex(sponsors);
         this.setState({ 
           sponsors,
           error: false,
@@ -138,7 +138,7 @@ class CorporateSponsorsCMS extends Component {
   }
 
   handleAdd() {
-    this.setState({addNewOpen: true})
+    this.setState({addNewOpen: true});
   }
 
   handleChange(e) {
@@ -194,7 +194,7 @@ class CorporateSponsorsCMS extends Component {
       .find((sponsor) => sponsor._id === e.currentTarget.id);
     if (window.confirm(`Are you sure you want to permanently delete the sponsor ${currSponsor.name}?`)) {
       this.setState({currentlyDeleting: true});
-      deleteData('/api/corporate-sponsors', e.currentTarget.id)
+      deleteData("/api/corporate-sponsors", e.currentTarget.id)
         .then((response) => {
           const message = response.error || response.message;
           this.setState({
@@ -206,10 +206,10 @@ class CorporateSponsorsCMS extends Component {
     }
   }
 
-  onSortEnd = ({oldIndex, newIndex}) => {
+  onSortEnd({oldIndex, newIndex}) {
     const newSponsors = arrayMove(this.state.sponsors, oldIndex, newIndex)
       .map((sponsor, index) => {
-        sponsor.index = index
+        sponsor.index = index;
         return sponsor;
       });
     this.setState({
@@ -217,14 +217,16 @@ class CorporateSponsorsCMS extends Component {
       currentlySaving: true
     });
 
-    putData('/api/corporate-sponsors', newSponsors)
+    putData("/api/corporate-sponsors", newSponsors)
       .then((response) => {
+        const message = response.error || response.message;
         this.setState({
           currentlySaving: false
         });
+        this.props.updateMessage(message);
         this.getSponsors();
       });
-  };
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -232,14 +234,14 @@ class CorporateSponsorsCMS extends Component {
     this.setState({currentlySaving: true});
 
     let sponsor = new FormData();
-    sponsor.append('_id', this.state.id);
-    sponsor.append('name', this.state.name);
-    sponsor.append('link', this.state.link);
-    sponsor.append('logo', this.state.logo);
-    sponsor.append('logoFile', this.state.logoFile);
-    sponsor.append('index', this.state.index);
+    sponsor.append("_id", this.state.id);
+    sponsor.append("name", this.state.name);
+    sponsor.append("link", this.state.link);
+    sponsor.append("logo", this.state.logo);
+    sponsor.append("logoFile", this.state.logoFile);
+    sponsor.append("index", this.state.index);
 
-    postData('/api/corporate-sponsors', sponsor)
+    postData("/api/corporate-sponsors", sponsor)
       .then((response) => {
         const message = response.error || response.message;
         this.setState({
@@ -280,7 +282,7 @@ class CorporateSponsorsCMS extends Component {
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
                   style={generalStyles.modalContent}
                 >
-                  <p style={{fontSize: '0.9em', color: '#777', marginTop: 0}}>Fields marked with a * are required.</p>
+                  <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
                   <div>
                     <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Name <span>*</span> :</label>
                     <input 
@@ -310,14 +312,14 @@ class CorporateSponsorsCMS extends Component {
                       <label 
                         htmlFor="logo" 
                         style={generalStyles.modalContent.fileInput}
-                        key='fileInput'
+                        key="fileInput"
                       >
                         Choose a File
                       </label>
                       <input 
                         type="file" 
-                        accept='image/*' 
-                        id='logo'
+                        accept="image/*" 
+                        id="logo"
                         style={{opacity: 0, width: 0, height: 0}}
                         value={this.state.logoPath}
                         onChange={this.handleChange}
@@ -326,26 +328,26 @@ class CorporateSponsorsCMS extends Component {
                     <div className="preview" style={generalStyles.modalContent.filePreview}>
                       {
                         this.state.logo ? 
-                        <div>
-                          <img 
-                            src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.logo}`}
-                            alt={`${this.state.name} logo`} 
-                            style={generalStyles.modalContent.filePreview.image}
-                          />
-                          <p style={{marginBottom: 0}}>{this.state.logo}</p>
-                        </div>
-                        :
-                        this.state.logoPath ? 
-                        <div>
-                          <img 
-                            src={window.URL.createObjectURL(this.state.logoFile)}
-                            alt={`${this.state.name} logo`} 
-                            style={generalStyles.modalContent.filePreview.image}
-                          />
-                          <p style={{marginBottom: 0}}>{this.state.logoFile.name}</p>
-                        </div>
-                        :
-                        <p>No file currently selected.</p>
+                          <div>
+                            <img 
+                              src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.logo}`}
+                              alt={`${this.state.name} logo`} 
+                              style={generalStyles.modalContent.filePreview.image}
+                            />
+                            <p style={{marginBottom: 0}}>{this.state.logo}</p>
+                          </div>
+                          :
+                          this.state.logoPath ? 
+                            <div>
+                              <img 
+                                src={window.URL.createObjectURL(this.state.logoFile)}
+                                alt={`${this.state.name} logo`} 
+                                style={generalStyles.modalContent.filePreview.image}
+                              />
+                              <p style={{marginBottom: 0}}>{this.state.logoFile.name}</p>
+                            </div>
+                            :
+                            <p>No file currently selected.</p>
                       }
                     </div>
                   </div>
@@ -376,7 +378,7 @@ class CorporateSponsorsCMS extends Component {
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
                 handleDelete={this.handleDelete}
-                lockAxis='y'
+                lockAxis="y"
                 distance={10}
                 useDragHandle={true}
                 lockToContainerEdges={true}

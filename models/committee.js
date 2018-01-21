@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const committeeMembersSchema = new Schema({
@@ -10,4 +10,4 @@ const committeeMembersSchema = new Schema({
   link: String,
 });
 
-module.exports = mongoose.model('CommitteeMembers', committeeMembersSchema);
+module.exports = mongoose.model("CommitteeMembers", committeeMembersSchema);
