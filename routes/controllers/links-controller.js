@@ -53,7 +53,7 @@ module.exports = {
           } else if (!currLinks) {
             console.log("No links exist - creating new");
             const newLinks = new Links(linksSent);
-            newLinks.save(function (err, updatedLinks) { // eslint-disable-line no-unused-vars
+            newLinks.save((err, updatedLinks) => { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
                 const newError = new Error("Links were not saved.");
@@ -66,7 +66,7 @@ module.exports = {
             currLinks.facebook = linksSent.facebook;
             currLinks.twitter = linksSent.twitter;
             currLinks.donate = linksSent.donate;
-            currLinks.save(function (err, updatedLinks) { // eslint-disable-line no-unused-vars
+            currLinks.save((err, updatedLinks) => { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
                 const newError = new Error("Links were not saved.");

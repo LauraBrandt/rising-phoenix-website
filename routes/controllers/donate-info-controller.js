@@ -84,7 +84,7 @@ module.exports = {
           } else if (!currDonateInfo) {
             console.log("No donate info exists - creating new");
             const newDonateInfo = new DonateInfo(sentDonateInfo);
-            newDonateInfo.save(function (err, updatedDonateInfo) { // eslint-disable-line no-unused-vars
+            newDonateInfo.save((err, updatedDonateInfo) => { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
                 const newError = new Error("Donate info was not saved.");
@@ -98,7 +98,7 @@ module.exports = {
             currDonateInfo.rewardText = sentDonateInfo.rewardText;
             currDonateInfo.check = sentDonateInfo.check;
 
-            currDonateInfo.save(function (err, updatedDonateInfo) { // eslint-disable-line no-unused-vars
+            currDonateInfo.save((err, updatedDonateInfo) => { // eslint-disable-line no-unused-vars
               if (err) {
                 console.log(err);
                 const newError = new Error("Donate info was not saved.");

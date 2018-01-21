@@ -77,7 +77,7 @@ module.exports = {
           name: sentDonateLevel.name,
           reward: sentDonateLevel.reward,
         };
-        DonateLevels.findByIdAndUpdate(sentDonateLevel._id, updateObj, {new: true}, function(err, updatedLevel) {
+        DonateLevels.findByIdAndUpdate(sentDonateLevel._id, updateObj, {new: true}, (err, updatedLevel) => {
           console.log("updating donate level...");
           if (err) {
             console.log(err);
@@ -96,7 +96,7 @@ module.exports = {
           reward: sentDonateLevel.reward,
           index: sentDonateLevel.index
         });
-        newDonateLevel.save(function (err, createdLevel) {
+        newDonateLevel.save((err, createdLevel) => {
           console.log("creating donate level...");
           if (err) {
             console.log(err);

@@ -3,15 +3,15 @@ import { getAccessToken } from "./authService";
 
 export {getData, postData, deleteData, putData};
 
-function getData(endpoint) {
+const getData = (endpoint) => {
   return axios.get(endpoint)
     .then(response => response.data)
     .catch(error => {
       return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message };
     });
-}
+};
 
-function postData(endpoint, data) {
+const postData = (endpoint, data) => {
   return axios({ 
     method: "POST", 
     url: endpoint, 
@@ -22,9 +22,9 @@ function postData(endpoint, data) {
     .catch(error => {
       return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message };
     });
-}
+};
 
-function deleteData(endpoint, id) {
+const deleteData = (endpoint, id) => {
   return axios({ 
     method: "DELETE", 
     url: endpoint, 
@@ -35,9 +35,9 @@ function deleteData(endpoint, id) {
     .catch(error => {
       return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message };
     });
-}
+};
 
-function putData(endpoint, data) {
+const putData = (endpoint, data) => {
   return axios({ 
     method: "PUT",
     url: endpoint, 
@@ -48,4 +48,4 @@ function putData(endpoint, data) {
     .catch(error => {
       return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message };
     });
-}
+};

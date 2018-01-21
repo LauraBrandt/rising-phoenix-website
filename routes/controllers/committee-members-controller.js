@@ -74,7 +74,7 @@ module.exports = {
           affiliation: sentCommitteeMember.affiliation,
           link: sentCommitteeMember.link,
         };
-        CommitteeMembers.findByIdAndUpdate(sentCommitteeMember._id, updateObj, {new: true}, function(err, updatedCommitteeMember) {
+        CommitteeMembers.findByIdAndUpdate(sentCommitteeMember._id, updateObj, {new: true}, (err, updatedCommitteeMember) => {
           console.log("updating committee member...");
           if (err) {
             console.log(err);
@@ -92,7 +92,7 @@ module.exports = {
           link: sentCommitteeMember.link,
           index: sentCommitteeMember.index
         });
-        newCommitteeMember.save(function (err, createdCommitteeMember) {
+        newCommitteeMember.save((err, createdCommitteeMember) => {
           console.log("creating committee member...");
           if (err) {
             console.log(err);

@@ -31,7 +31,7 @@ module.exports = {
         } else if (!oldAbout) {
           console.log("No about content exists - creating new");
           const newAbout = new AboutContent(sentAbout);
-          newAbout.save(function (err, updatedAbout) { // eslint-disable-line no-unused-vars
+          newAbout.save((err, updatedAbout) => { // eslint-disable-line no-unused-vars
             if (err) {
               console.log(err);
               const newError = new Error("About content was not saved.");
@@ -43,7 +43,7 @@ module.exports = {
         } else {
           console.log("Updating about content...");
           oldAbout.content = sentAbout.content;
-          oldAbout.save(function (err, updatedAbout) { // eslint-disable-line no-unused-vars
+          oldAbout.save((err, updatedAbout) => { // eslint-disable-line no-unused-vars
             if (err) {
               console.log(err);
               const newError = new Error("About content was not saved.");

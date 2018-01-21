@@ -94,7 +94,7 @@ module.exports = {
           link: sentSponsor.link,
           logo: logo
         };
-        CorporateSponsors.findByIdAndUpdate(sentSponsor._id, updateObj, {new: true}, function(err, updatedCorporateSponsor) {
+        CorporateSponsors.findByIdAndUpdate(sentSponsor._id, updateObj, {new: true}, (err, updatedCorporateSponsor) => {
           console.log("updating sponsor...");
           if (err) {
             console.log(err);
@@ -124,7 +124,7 @@ module.exports = {
           logo: logo,
           index: sentSponsor.index
         });
-        newCorporateSponsor.save(function (err, createdCorporateSponsor) {
+        newCorporateSponsor.save((err, createdCorporateSponsor) => {
           console.log("creating sponsor...");
           if (err) {
             console.log(err);

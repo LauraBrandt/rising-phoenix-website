@@ -7,11 +7,11 @@ import DATA from "../data.js";
 let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
-function importAll(r) {
+const importAll = (r) => {
   let images = {};
   r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
   return images;
-}
+};
 const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
 
 // TODO: remove props if not used in final version, then remove eslint thing

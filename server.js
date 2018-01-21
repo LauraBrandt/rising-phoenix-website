@@ -33,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URL_LOCAL).then(
 
     app.use("/api", api);
 
-    app.use(function(err, req, res) {
+    app.use((err, req, res) => {
       res.status(err.status || 500).json({
         message: err.message,
         error: err
@@ -46,6 +46,6 @@ mongoose.connect(process.env.MONGODB_URL_LOCAL).then(
 );
 
 const port = process.env.PORT || 3000;
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`Running on port ${port}`);
 });

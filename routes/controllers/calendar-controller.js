@@ -84,7 +84,7 @@ module.exports = {
           description: sentEvent.description,
           minutesLink: sentEvent.minutesLink,
         };
-        CalendarEvents.findByIdAndUpdate(sentEvent._id, updateObj, {new: true}, function(err, updatedEvent) {
+        CalendarEvents.findByIdAndUpdate(sentEvent._id, updateObj, {new: true}, (err, updatedEvent) => {
           console.log("updating event...");
           if (err) {
             console.log(err);
@@ -104,7 +104,7 @@ module.exports = {
           minutesLink: sentEvent.minutesLink,
           index: sentEvent.index
         });
-        newEvent.save(function (err, createdEvent) {
+        newEvent.save((err, createdEvent) => {
           console.log("creating event...");
           if (err) {
             console.log(err);

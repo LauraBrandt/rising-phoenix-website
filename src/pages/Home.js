@@ -6,11 +6,11 @@ import phoenixFilled from "../img/phoenix_stencil_filled.png";
 // import phoenixGrey from "../img/phoenix_stencil_grey.png";
 import DATA from "../data.js";
 
-function importAll(r) {
+const importAll = (r) => {
   let images = {};
   r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
   return images;
-}
+};
 const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
 
 let Link = require("react-router-dom").Link;

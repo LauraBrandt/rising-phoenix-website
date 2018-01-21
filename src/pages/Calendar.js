@@ -40,7 +40,7 @@ class Main extends Component {
                   <div style={style.calendarPage.date}>{event.dateTime.getDate()}</div>
                   <div style={style.calendarPage.time}>
                     {event.dateTime.getHours() > 12 ?
-                      `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, function(h){ return h-12; })} PM` :
+                      `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, (h) => { return h-12; })} PM` :
                       `${event.dateTime.toTimeString().substr(0,5)} AM`
                     }
                   </div>  
@@ -48,7 +48,7 @@ class Main extends Component {
                 <div style={style.eventInfo}>
                   <div style={style.eventInfo.name}>{event.name}{event.minutesLink && <span style={style.eventInfo.minutes}>(<a href={event.minutesLink} style={style.eventInfo.minutesLink}>minutes</a>)</span>}</div>
                   <div style={style.eventInfo.datetime}>{weekdays[event.dateTime.getDay()]}, {months[event.dateTime.getMonth()]} {event.dateTime.getDate()}, {event.dateTime.getFullYear()} at {event.dateTime.getHours() > 12 ?
-                    `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, function(h){ return h-12; })} PM` :
+                    `${event.dateTime.toTimeString().substr(0,5).replace(/\d{2}/, (h) => { return h-12; })} PM` :
                     `${event.dateTime.toTimeString().substr(0,5)} AM`
                   }</div>
                   {event.location && <div style={style.eventInfo.location}>{event.location}</div>}
