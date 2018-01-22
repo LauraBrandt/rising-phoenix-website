@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getAccessToken } from "./authService";
 
-export {getData, postData, deleteData, putData};
-
 const getData = (endpoint) => {
   return axios.get(endpoint)
     .then(response => response.data)
@@ -49,3 +47,5 @@ const putData = (endpoint, data) => {
       return error.response ? error.response.data.message ? { error: error.response.data.message } : { error: error.message } : { error: error.message };
     });
 };
+
+export {getData, postData, deleteData, putData};

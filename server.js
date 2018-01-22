@@ -33,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URL_LOCAL).then(
 
     app.use("/api", api);
 
-    app.use((err, req, res) => {
+    app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
       res.status(err.status || 500).json({
         message: err.message,
         error: err
