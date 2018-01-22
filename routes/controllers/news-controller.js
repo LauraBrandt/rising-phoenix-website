@@ -29,6 +29,23 @@ module.exports = {
       });
   },
 
+  getArticle: (slug, res) => {
+    News
+      .findOne({ slug })
+      .exec((err, article) => {
+        if (err) {
+          console.log(err);
+          const newError = new Error("An error occurred fetching the article.");
+          res.status(err.status || 500).json({error: newError.message});
+        } else if (!article) {
+          const newError = new Error("Could not find the article.");
+          res.status(404).json({error: newError.message});
+        } else {
+          res.send(article);
+        }
+      });
+  },
+
   put: (req, res, next) => {
     const sentNews = req.body;
     const totalDocs = sentNews.length;

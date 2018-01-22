@@ -45,6 +45,10 @@ router.get("/news", (req, res) => {
   newsController.get(res);
 });
 
+router.get("/news/:slug", (req, res) => {
+  newsController.getArticle(req.params.slug, res);
+});
+
 router.get("/about", (req, res) => {
   aboutController.get(res);
 });

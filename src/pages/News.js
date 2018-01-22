@@ -2,65 +2,100 @@ import React, { Component } from "react";
 import Radium from "radium";
 import { Route, Switch, Redirect } from "react-router-dom";
 import style from "../styles/newsStyles";
-import DATA from "../data.js";
+import { getData } from "../utils/apiCalls";
 
 let Link = require("react-router-dom").Link;
 Link = Radium(Link);
 
-const importAll = (r) => {
-  let images = {};
-  r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
-  return images;
-};
-const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
+class NewsList extends Component {
+  constructor() {
+    super();
+    this.state = { news: [] };
+    this.getNews = this.getNews.bind(this);
+  }
 
-// TODO: remove props if not used in final version, then remove eslint thing
-let NewsList = (props) => {  // eslint-disable-line no-unused-vars
-  document.title = "Rising Phoenix | News";
+  getNews() {
+    getData("/api/news").then((news) => {
+      this.setState({ news });
+    });
+  }
+
+  componentDidMount() {
+    this.getNews();
+  }
+
+  render() {
+    document.title = "Rising Phoenix | News";
   
-  const newsItems = DATA.home.news;
+    const getFirstWords = (article) => {
+      var articleWithoutHtml = article.replace(/(<([^>]+)>)/ig,"");
+      const numWordsInPreview = 50;
+      return articleWithoutHtml.split(/\s+/).slice(0,numWordsInPreview).join(" ");
+    };
 
-  const getFirstWords = (article) => {
-    const numWordsInPreview = 30;
-    return article.split(" ").slice(0,numWordsInPreview).join(" ");
-  };
-
-  return (
-    <main style={style.newsList}>
-      {newsItems.map(news => 
-        <div key={news.title} style={style.newsList.item}>
-          {news.image && <img src={newsImages[news.image]} alt={news.alt} style={style.newsList.image}/>}
-          <Link to={`/news/${news.slug}`} style={style.newsList.header} >{news.title}</Link>
-          <div style={style.newsList.date}>{news.date.toDateString()}</div>
-          <div style={style.newsList.preview}>{getFirstWords(news.article)}...</div>
-          <Link to={`/news/${news.slug}`} style={style.newsList.readMore}>Read more</Link>
-        </div>  
-      )}
-    </main>
-  );
-};
-NewsList = Radium(NewsList);
-
-let Article = (props) => {
-  const newsItem = DATA.home.news.find(item => item.slug === props.match.params.title);  
-  
-  if (newsItem) {
-    document.title = `Rising Phoenix | ${newsItem.title}`;
     return (
-      <main style={style.article}>
-        {newsItem.image && <img src={newsImages[newsItem.image]} alt={newsItem.alt} style={style.article.image}/>}
-        <h1 style={style.article.header}>{newsItem.title}</h1>
-        <div style={style.article.date}>{newsItem.date.toDateString()}</div>
-        <hr style={style.article.hr} />
-        <article style={style.article.article} dangerouslySetInnerHTML={{__html: newsItem.article}}>
-        </article>
+      <main style={style.newsList}>
+        {this.state.news.length && this.state.news.map(newsItem => 
+          <div key={newsItem.title} style={style.newsList.item}>
+            {newsItem.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${newsItem.image}`} alt={newsItem.alt} style={style.newsList.image}/>}
+            <Link to={`/news/${newsItem.slug}`} style={style.newsList.header} >{newsItem.title}</Link>
+            {newsItem.updatedAt && <div style={style.newsList.date}>{new Date(newsItem.updatedAt).toDateString()}</div>}
+            <div style={style.newsList.preview}>{getFirstWords(newsItem.article)}...</div>
+            <Link to={`/news/${newsItem.slug}`} style={style.newsList.readMore}>Read more</Link>
+          </div>  
+        )}
       </main>
     );
   }
-  else {
-    return <Redirect to="/notfound"/>;
-  }  
-};
+}
+NewsList = Radium(NewsList);
+
+
+class Article extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { article: {}, notFound: false };
+    this.getArticle = this.getArticle.bind(this);
+  }
+
+  getArticle() {
+    getData(`/api/news/${this.props.match.params.title}`).then((article) => {
+      if (article.error) {
+        this.setState({
+          notFound: true
+        });
+      } else {
+        this.setState({ 
+          article,
+          notFound: false
+        });
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.getArticle();
+  }
+
+  render() {
+    document.title = `Rising Phoenix | ${this.state.article.title}`;
+
+    if (this.state.notFound) {
+      return <Redirect to="/notfound"/>;
+    } else {
+      return (
+        <main style={style.article}>
+          {this.state.article.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.article.image}`} alt={this.state.article.alt} style={style.article.image}/>}
+          <h1 style={style.article.header}>{this.state.article.title}</h1>
+          {this.state.article.updatedAt && <div style={style.article.date}>{new Date(this.state.article.updatedAt).toDateString()}</div>}
+          <hr style={style.article.hr} />
+          <article style={style.article.article} dangerouslySetInnerHTML={{__html: this.state.article.article}}>
+          </article>
+        </main>
+      );
+    }
+  }
+}
 Article = Radium(Article);
 
 class News extends Component {
