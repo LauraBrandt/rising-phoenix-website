@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import generalStyles from "../styles/admin/generalStyles";
+import "../styles/admin/externalComponentStyles.css";
 import Radium from "radium";
 import { getData, postData } from "../utils/apiCalls";
 import RichTextEditor from "react-rte";
@@ -77,6 +78,7 @@ class AboutCMS extends Component {
         {label: "Heading Small", style: "header-three"}
       ]
     };
+    
     return (
       <div>
         <h2>About</h2>
