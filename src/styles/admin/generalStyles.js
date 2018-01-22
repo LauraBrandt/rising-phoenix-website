@@ -125,7 +125,7 @@ const generalStyles = {
       }
     },
     fileInput: {
-      padding: "0.5em 1em",
+      padding: "0.6em 1.5em",
       margin: "1em auto",
       border: "1px solid #777",
       borderRadius: "5px",

@@ -56,16 +56,6 @@
   white-space: pre-wrap;
 }
 
-@media (max-width: 600px) {
-  .row-container {
-    flex-direction: column;
-    padding: 0.5em 0 0.5em 1.5em;
-  }
-  .card-label {
-    text-align: left;
-  }
-}
-
 .edit {
   color: white;
   position: absolute;
@@ -128,4 +118,30 @@
   max-width: 100%;
   margin: auto;
   min-height: 400px;
+}
+
+.rte-card {
+  z-index: 0;
+  margin: 20px 50px;
+}
+
+.title {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .row-container {
+    flex-direction: column;
+    padding: 0.5em 0 0.5em 1.5em;
+  }
+  .card-label {
+    text-align: left;
+  }
+  .card-content {
+    max-width: 100%;
+  }
+  .rte-card {
+    margin: 20px 40px;
+  }
 }

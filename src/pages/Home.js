@@ -4,14 +4,7 @@ import style from "../styles/homeStyles";
 import phoenixUnfilled from "../img/phoenix_stencil_unfilled.png";
 import phoenixFilled from "../img/phoenix_stencil_filled.png";
 // import phoenixGrey from "../img/phoenix_stencil_grey.png";
-import DATA from "../data.js";
-
-const importAll = (r) => {
-  let images = {};
-  r.keys().forEach( item => { images[item.replace("./", "")] = r(item); });
-  return images;
-};
-const newsImages = importAll(require.context("../img/news", false, /\.(png|jpe?g|svg)$/));
+import { getData } from "../utils/apiCalls";
 
 let Link = require("react-router-dom").Link;
 Link = Radium(Link);
@@ -32,18 +25,18 @@ let Main = (props) => {
       <div style={style.main.giveContainer}><Link to="/donate" style={style.main.giveLink}>Give</Link></div>
       <div style={style.main.main}>
         <div style={style.main.blurb}>
-          <h2>{props.data.blurbTitle}</h2>
-          <div>{props.data.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
+          <h2>{props.homeInfo.blurbTitle}</h2>
+          <div style={{whiteSpace: "pre-wrap"}}>{props.homeInfo.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
         </div>
         <div style={style.main.progress}>
           <img src={phoenixUnfilled} alt="outline of a phoenix" style={style.main.phoenix}/>
           <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={style.main.phoenixFilled}/>
           <div style={style.main.progressBox}>
             <div style={style.main.progressBox.label}>Amount Raised:</div>
-            <div style={style.main.progressBox.amount}>{`$${props.data.donatedAmount}`}</div>
+            <div style={style.main.progressBox.amount}>{`$${props.homeInfo.donatedAmount}`}</div>
             <hr style={{opacity: "0.7"}}/>
             <div style={style.main.progressBox.label}>Our Goal:</div>
-            <div style={style.main.progressBox.amount}>{`$${props.data.goalAmount}`}</div>
+            <div style={style.main.progressBox.amount}>{`$${props.homeInfo.goalAmount}`}</div>
           </div>
         </div>        
       </div>
@@ -92,19 +85,20 @@ CTAs = Radium(CTAs);
 
 let News = (props) => {
   const getFirstWords = (article) => {
+    var articleWithoutHtml = article.replace(/(<([^>]+)>)/ig,"");
     const numWordsInPreview = 30;
-    return article.split(" ").slice(0,numWordsInPreview).join(" ");
+    return articleWithoutHtml.split(/\s+/).slice(0,numWordsInPreview).join(" ");
   };
 
   return (
     <section style={style.news}>
-      {props.newsItems.map( news => 
-        <div key={news.title} style={style.news.newsItem}>
-          {news.image && <img src={newsImages[news.image]} alt={news.alt} style={style.news.newsImage}/>}
-          <Link to={`/news/${news.slug}`} style={style.news.header} >{news.title}</Link>
-          <div style={style.news.date}>{news.date.toDateString()}</div>
-          <div style={style.news.preview}>{getFirstWords(news.article)}...</div>
-          <Link to={`/news/${news.slug}`} style={style.news.readMore}>Read more</Link>
+      {props.newsStories.length && props.newsStories.map( story => 
+        <div key={story.title} style={style.news.newsItem}>
+          {story.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt} style={style.news.newsImage}/>}
+          <Link to={`/news/${story.slug}`} style={style.news.header}>{story.title}</Link>
+          <div style={style.news.date}>{new Date(story.updatedAt).toDateString()}</div>
+          <div style={style.news.preview}>{getFirstWords(story.article)}...</div>
+          <Link to={`/news/${story.slug}`} style={style.news.readMore}>Read more</Link>
         </div>
       )}
     </section>
@@ -121,15 +115,49 @@ News = Radium(News);
 // }
 
 class Home extends Component {
-  render() {
-    const homeData = DATA.home;    
+  constructor() {
+    super();
+    this.state = { 
+      news: [],
+      homeInfo: {
+        tagline: "",
+        blurbTitle: "",
+        blurb: "",
+        goalAmount: "",
+        donatedAmount: ""
+      }
+    };
+    this.getHomeInfo = this.getHomeInfo.bind(this);
+    this.getNews = this.getNews.bind(this);
+  }
+
+  getHomeInfo() {
+    getData("/api/home").then((homeInfo) => {
+      if (!homeInfo.error) {
+        this.setState({ homeInfo });
+      }
+    });
+  }
+
+  getNews() {
+    getData("/api/news").then((news) => {
+      this.setState({ news });
+    });
+  }
+
+  componentDidMount() {
+    this.getHomeInfo();
+    this.getNews();
+  }
+
+  render() {   
     document.title = "Rising Phoenix";
     return (
       <div>
-        <HomeHeader tagline={homeData.tagline} />
-        <Main data={homeData} />
+        <HomeHeader tagline={this.state.homeInfo.tagline} />
+        <Main homeInfo={this.state.homeInfo} />
         <CTAs />
-        <News newsItems={homeData.news}/>
+        <News newsStories={this.state.news}/>
         {/* <Sponsors /> */}
       </div>
     );

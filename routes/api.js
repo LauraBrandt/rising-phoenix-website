@@ -11,6 +11,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // route controllers
+const homeController = require("./controllers/home-controller.js");
+const newsController = require("./controllers/news-controller.js");
 const aboutController = require("./controllers/about-controller.js");
 const committeeMembersController = require("./controllers/committee-members-controller.js");
 const calendarController = require("./controllers/calendar-controller.js");
@@ -35,6 +37,14 @@ const authCheck = jwt({
 
 
 /// ROUTES - GET
+router.get("/home", (req, res) => {
+  homeController.get(res);
+});
+
+router.get("/news", (req, res) => {
+  newsController.get(res);
+});
+
 router.get("/about", (req, res) => {
   aboutController.get(res);
 });
@@ -69,6 +79,14 @@ router.get("/links", (req, res) => {
 
 
 /// ROUTES - POST
+router.post("/home", authCheck, (req, res, next) => {
+  homeController.post(req, res, next);
+});
+
+router.post("/news", authCheck, upload.single("imageFile"), (req, res, next) => {
+  newsController.post(req, res, next);
+});
+
 router.post("/about", authCheck, (req, res, next) => {
   aboutController.post(req, res, next);
 });
@@ -103,6 +121,10 @@ router.post("/links", authCheck, (req, res, next) => {
 
 
 /// ROUTES - DELETE
+router.delete("/news", authCheck, (req, res, next) => {
+  newsController.delete(req, res, next);
+});
+
 router.delete("/committee-members", authCheck, (req, res, next) => {
   committeeMembersController.delete(req, res, next);
 });
@@ -121,6 +143,10 @@ router.delete("/donate-levels", authCheck, (req, res, next) => {
 
 
 /// ROUTES - PUT
+router.put("/news", authCheck, (req, res, next) => {
+  newsController.put(req, res, next);
+});
+
 router.put("/committee-members", authCheck, (req, res, next) => {
   committeeMembersController.put(req, res, next);
 });
