@@ -108,6 +108,7 @@ class CorporateSponsorsCMS extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+    this.removeImage = this.removeImage.bind(this);
   }
 
   getSponsors() {
@@ -204,6 +205,14 @@ class CorporateSponsorsCMS extends Component {
           this.getSponsors();
         });
     }
+  }
+
+  removeImage() {
+    this.setState({
+      logo: "",
+      logoFile: "",
+      logoPath: ""
+    });
   }
 
   onSortEnd({oldIndex, newIndex}) {
@@ -329,6 +338,12 @@ class CorporateSponsorsCMS extends Component {
                       {
                         this.state.logo ? 
                           <div>
+                            <i 
+                              className="fa fa-times" 
+                              title="remove image"
+                              onClick={this.removeImage}
+                              style={generalStyles.modalContent.removeImage}
+                            ></i>
                             <img 
                               src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.logo}`}
                               alt={`${this.state.name} logo`} 
@@ -339,6 +354,12 @@ class CorporateSponsorsCMS extends Component {
                           :
                           this.state.logoPath ? 
                             <div>
+                              <i 
+                                className="fa fa-times" 
+                                title="remove image"
+                                onClick={this.removeImage}
+                                style={generalStyles.modalContent.removeImage}
+                              ></i>
                               <img 
                                 src={window.URL.createObjectURL(this.state.logoFile)}
                                 alt={`${this.state.name} logo`} 

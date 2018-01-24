@@ -122,6 +122,7 @@ class HomeCMS extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
+    this.removeImage = this.removeImage.bind(this);
     this.handleSubmitNewsStory = this.handleSubmitNewsStory.bind(this);
   }
 
@@ -292,6 +293,14 @@ class HomeCMS extends Component {
         this.props.updateMessage(message);
         this.getNews();
       });
+  }
+
+  removeImage() {
+    this.setState({
+      newsImage: "",
+      newsImagePath: "",
+      newsImageFile: "",
+    });
   }
 
   handleSubmitNewsStory(e) {
@@ -474,6 +483,12 @@ class HomeCMS extends Component {
                       {
                         this.state.newsImage ? 
                           <div>
+                            <i 
+                              className="fa fa-times" 
+                              title="remove image"
+                              onClick={this.removeImage}
+                              style={generalStyles.modalContent.removeImage}
+                            ></i>
                             <img 
                               src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.newsImage}`}
                               alt={this.state.alt} 
@@ -484,6 +499,12 @@ class HomeCMS extends Component {
                           :
                           this.state.newsImagePath ? 
                             <div>
+                              <i 
+                                className="fa fa-times" 
+                                title="remove image"
+                                onClick={this.removeImage}
+                                style={generalStyles.modalContent.removeImage}
+                              ></i>
                               <img 
                                 src={window.URL.createObjectURL(this.state.newsImageFile)}
                                 alt={this.state.alt}

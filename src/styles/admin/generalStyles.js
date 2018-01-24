@@ -149,10 +149,26 @@ const generalStyles = {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      position: "relative",
       image: {
         maxWidth: "100%",
         maxHeight: "100%"
       }
+    },
+    removeImage: {
+      position: "absolute",
+      right: 0,
+      top: 0,
+      width: 25,
+      height: 25,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center", 
+      color: "white",
+      backgroundColor: "#BE352D",
+      fontSize: "1.2em",
+      borderRadius: "0 5px 0 2px",
+      cursor: "pointer"
     },
     submit: {
       padding: "0.6em 0.8em",
