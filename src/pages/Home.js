@@ -20,6 +20,39 @@ let HomeHeader = (props) => {
 HomeHeader = Radium(HomeHeader);
 
 let Main = (props) => {
+  const imageHeight = 400;
+  const fakePercentConstant = 0.08;
+
+  const percentGoal = props.homeInfo.donatedAmount / props.homeInfo.goalAmount;
+  const fakePercent = percentGoal / (percentGoal + fakePercentConstant);
+  const clipAmount = imageHeight - (imageHeight * fakePercent);
+
+  const imageHeightStyle = {
+    height: imageHeight,
+    "@media (max-width: 750px)": {
+      height: imageHeight*0.8,
+    },
+    "@media (max-width: 650px)": {
+      height: imageHeight*0.65,
+    },
+  };
+
+  const imageClipStyle = {
+    clip: `rect(${clipAmount}px,400px,400px,0px)`,
+    "@media (max-width: 750px)": {
+      clip: `rect(${clipAmount*0.8}px,400px,400px,0px)`,
+    },
+    "@media (max-width: 650px)": {
+      clip: `rect(${clipAmount*0.65}px,400px,400px,0px)`,
+    },
+  };
+
+  const progressBoxMarginSmallStyle = {
+    "@media (max-width: 650px)": {
+      margin: `2em auto ${(imageHeight*0.65) + 50}px auto`
+    },
+  }
+
   return (
     <section style={style.main}>
       <div style={style.main.giveContainer}><Link to="/donate" style={style.main.giveLink}>Give</Link></div>
@@ -29,9 +62,9 @@ let Main = (props) => {
           <div style={{whiteSpace: "pre-wrap"}}>{props.homeInfo.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
         </div>
         <div style={style.main.progress}>
-          <img src={phoenixUnfilled} alt="outline of a phoenix" style={style.main.phoenix}/>
-          <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={style.main.phoenixFilled}/>
-          <div style={style.main.progressBox}>
+          <img src={phoenixUnfilled} alt="outline of a phoenix" style={[style.main.phoenix, imageHeightStyle]}/>
+          <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/>
+          <div style={[style.main.progressBox, progressBoxMarginSmallStyle]}>
             <div style={style.main.progressBox.label}>Amount Raised:</div>
             <div style={style.main.progressBox.amount}>{`$${props.homeInfo.donatedAmount}`}</div>
             <hr style={{opacity: "0.7"}}/>

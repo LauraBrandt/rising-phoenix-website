@@ -1,13 +1,6 @@
 import sv from "./styleVariables";
 import color from "color";
 import fire from "../img/fire.png";
-import DATA from "../data.js";
-
-const phoenixHeight = 400;
-
-const percentGoal = DATA.home.donatedAmount / DATA.home.goalAmount;
-const fakePercent = percentGoal / (percentGoal + .08);
-const clipAmount = phoenixHeight - (phoenixHeight * fakePercent);
 
 const homeStyles = {
   header: {
@@ -197,19 +190,14 @@ const homeStyles = {
       },
     },
     phoenix: {
-      height: phoenixHeight,
       position: "absolute",
       right: 0,
       transition: "all 0.3s ease",
-      "@media (max-width: 750px)": {
-        height: phoenixHeight*0.8,
-      },
       "@media (max-width: 650px)": {
         bottom: "30px",
         marginLeft: "auto",
         marginRight: "auto",
         left: 0,
-        height: phoenixHeight*0.65,
       },
       "@media (min-width: 2000px)": {
         right: "3em",
@@ -217,22 +205,14 @@ const homeStyles = {
       },
     },
     phoenixFilled: {
-      height: phoenixHeight,
       position: "absolute",
       right: 0,
-      clip: `rect(${clipAmount}px,400px,400px,0px)`,
       transition: "all 0.3s ease",
-      "@media (max-width: 750px)": {
-        height: phoenixHeight*0.8,
-        clip: `rect(${clipAmount*0.8}px,400px,400px,0px)`,
-      },
       "@media (max-width: 650px)": {
         bottom: "30px",
         marginLeft: "auto",
         marginRight: "auto",
         left: 0,
-        height: phoenixHeight*0.65,
-        clip: `rect(${clipAmount*0.65}px,400px,400px,0px)`,
       },
       "@media (min-width: 2000px)": {
         right: "3em",
@@ -262,7 +242,6 @@ const homeStyles = {
       "@media (max-width: 650px)": {
         float: "none",
         width: "70%",
-        margin: `2em auto ${(phoenixHeight*0.65) + 50}px auto`
       },
       "@media (min-width: 2000px)": {
         margin: "2em 3em",
