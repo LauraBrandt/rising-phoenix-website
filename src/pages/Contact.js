@@ -3,6 +3,7 @@ import Radium from "radium";
 import Header from "../components/Header";
 import style from "../styles/contactStyles";
 import headerBackground from "../img/astronomy4.png";
+import { postData } from "../utils/apiCalls";
 
 class Main extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Main extends Component {
       email: "",
       subject: "",
       message: "",
+      statusMessage: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,13 +26,30 @@ class Main extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault(); // TODO
+    e.preventDefault();
+
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      subject: this.state.subject,
+      message: this.state.message
+    };
+
+    postData("/api/contact", data)
+      .then(response => {
+        const message = response.error || response.message;
+        this.setState({
+          statusMessage: message
+        });
+        window.scrollTo(0, 0);
+      });
   }
 
   render() {
     return (
-      <main style={style.main}>        
-        <form style={style.form}>
+      <main style={style.main}>  
+        {this.state.statusMessage && <div style={style.statusMessage}>{this.state.statusMessage}</div>}      
+        <form style={style.form} id="contact-form" method="post" action="/api/contact" onSubmit={this.handleSubmit}>
           <label htmlFor="name" style={[style.label, style.nameLabel]}>
             Your Name: 
           </label>
@@ -41,6 +60,7 @@ class Main extends Component {
             value={this.state.name}
             style={[style.text, style.name]}
             onChange={this.handleChange}
+            maxLength={70}
           />
 
           <label htmlFor="email" style={[style.label, style.emailLabel]}>
@@ -53,6 +73,7 @@ class Main extends Component {
             value={this.state.email}
             style={[style.text, style.email]}
             onChange={this.handleChange}
+            maxLength={254}
             required
           />
 
@@ -66,6 +87,7 @@ class Main extends Component {
             value={this.state.subject} 
             style={[style.text, style.subject]}
             onChange={this.handleChange}
+            maxLength={130}
           />
 
           <label htmlFor="message" style={[style.label, style.messageLabel]}>
@@ -80,7 +102,7 @@ class Main extends Component {
             required
           />
 
-          <input type="button" value="Send Message" onClick={this.handleSubmit} style={style.submit}/>
+          <input type="submit" value="Send Message" style={style.submit}/>
         </form>
       </main>
     );

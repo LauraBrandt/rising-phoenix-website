@@ -10,6 +10,12 @@ const contactStyles = {
       padding: "2% 10%",
     },
   },
+  statusMessage: {
+    textAlign: "center",
+    margin: '1em 0',
+    color: sv.orange,
+    fontSize: '1.2em'
+  },
   form: {
     backgroundColor: "white",
     boxShadow: "0 1px 8px rgba(0,0,0,0.25)",

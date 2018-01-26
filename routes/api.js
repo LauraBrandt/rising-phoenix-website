@@ -21,6 +21,7 @@ const individualSponsorsController = require("./controllers/individual-sponsors-
 const donateInfoController = require("./controllers/donate-info-controller.js");
 const donateLevelsController = require("./controllers/donate-levels-controller.js");
 const linksController = require("./controllers/links-controller.js");
+const contactController = require("./controllers/contact-controller.js");
 
 /// AUTHENTICATION
 const authCheck = jwt({
@@ -121,6 +122,10 @@ router.post("/donate-levels", authCheck, (req, res, next) => {
 
 router.post("/links", authCheck, (req, res, next) => {
   linksController.post(req, res, next);
+});
+
+router.post("/contact", (req, res, next) => {
+  contactController.post(req, res, next);
 });
 
 
