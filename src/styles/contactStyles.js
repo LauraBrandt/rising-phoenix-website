@@ -12,9 +12,9 @@ const contactStyles = {
   },
   statusMessage: {
     textAlign: "center",
-    margin: '1em 0',
+    margin: "1em 0",
     color: sv.orange,
-    fontSize: '1.2em'
+    fontSize: "1.2em"
   },
   form: {
     backgroundColor: "white",

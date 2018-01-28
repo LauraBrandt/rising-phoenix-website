@@ -54,7 +54,7 @@ let Main = (props) => {
     // "@media (max-width: 650px)": {
     //   margin: `2em auto ${(imageHeight*0.65) + 50}px auto`
     // },
-  }
+  };
 
   return (
     <section style={style.main}>
