@@ -238,7 +238,7 @@ const navbarStyles = {
     title: {
       fontFamily: sv.fontTitle,
       color: color(sv.light).lighten(0.3),
-      margin: 0,
+      margin: "5.5% 0 5% 5%", // with logo: 0,
       fontSize: "1.3em"
     },
     barsButton: {

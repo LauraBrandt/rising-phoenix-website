@@ -1,7 +1,7 @@
 import React from "react";
 import Radium from "radium";
 import style from "../styles/navbarStyles";
-import logo from "../img/logo_ajeno.png";
+// import logo from "../img/logo_ajeno.png";
 
 let Link = require("react-router-dom").Link;
 Link = Radium(Link);
@@ -81,7 +81,7 @@ class NavbarNarrow extends React.Component {
     return (
       <nav style={style.narrow.navbar}>
         <div style={style.narrow.topBar}>
-          <img src={logo} alt="a phoenix with wings held out" style={style.narrow.logo} />
+          {/* <img src={logo} alt="a phoenix with wings held out" style={style.narrow.logo} /> */}
           <h1 style={style.narrow.title}>Rising Phoenix</h1>
           <button onClick={this.toggleShowing} style={style.narrow.barsButton}>
             <i className="fa fa-bars">

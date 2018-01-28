@@ -12,7 +12,7 @@ const aboutStyles = {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-evenly",
-      paddingLeft: "1.5em",
+      paddingLeft: "3.5em", //with logo: "1.5em",
       fontSize: "1.8em",
       transition: "all 0.3s ease",
       "@media (max-width: 1024px)": {

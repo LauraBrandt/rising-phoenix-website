@@ -144,6 +144,7 @@ const contactStyles = {
       fontSize: "1.8em",
       padding: "0 3em 0 0",
       transition: "all 0.3s ease",
+      textAlign: "center", // remove with logo
       "@media (max-width: 1024px)": {
         fontSize: "1.5em",
       },
@@ -157,14 +158,14 @@ const contactStyles = {
       }
     },
     h1: {
-      margin: "0 0 0 27%",
+      margin: 0, // with logo: "0 0 0 27%",
       transition: "all 0.3s ease",
-      "@media (min-width: 2000px)": {
-        margin: "0 0 0 22%",
-      },
-      "@media (max-width: 745px)": {
-        margin: "0"
-      },
+      // "@media (min-width: 2000px)": {
+      //   margin: "0 0 0 22%",
+      // },
+      // "@media (max-width: 745px)": {
+      //   margin: "0"
+      // },
     },    
   }
 };

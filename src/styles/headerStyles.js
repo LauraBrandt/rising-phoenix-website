@@ -29,7 +29,7 @@ const headerStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "25%",
+    width: "15%", // with logo: width: "25%",
     zIndex: 2,
     "@media (max-width: 745px)": {
       display: "none"
