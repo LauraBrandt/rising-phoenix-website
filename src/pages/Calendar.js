@@ -14,11 +14,13 @@ class Main extends Component {
 
   getEvents() {
     getData("/api/calendar").then((events) => {
-      events = events.map(event => {
-        event.dateTime = new Date(event.dateTime);
-        return event;
-      });
-      this.setState({ events });
+      if (events.length) {
+        events = events.map(event => {
+          event.dateTime = new Date(event.dateTime);
+          return event;
+        });
+        this.setState({ events });
+      }
     });
   }
 
