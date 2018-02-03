@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
-// var helmet = require('helmet');
+var helmet = require('helmet');
 
 require("dotenv").config();
 
@@ -16,7 +16,7 @@ const app = express();
 
 app.use(morgan("common"));
 
-// app.use(helmet());
+app.use(helmet());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: "5mb"}));
