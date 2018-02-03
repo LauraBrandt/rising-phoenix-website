@@ -24,8 +24,9 @@ app.use(cors());
 const api = require("./routes/api");
 
 // set up database
+const dbpw = encodeURIComponent(process.env.MONGODB_COSMODB_PW)
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URL_LOCAL).then(  
+mongoose.connect(`mongodb://${process.env.MONGODB_COSMODB_NAME}:${dbpw}@${process.env.MONGODB_COSMODB_NAME}.documents.azure.com:10250/mean?ssl=true&sslverifycertificate=false`).then(  
   () => { 
     console.log("Connected to database.");
     // Serve static assets
