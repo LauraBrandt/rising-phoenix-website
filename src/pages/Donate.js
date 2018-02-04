@@ -60,7 +60,7 @@ class Main extends Component {
             <a href={this.props.donateLink} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           <div style={style.main.checkContainer}>
-            By mailing a check made payable to <span style={{fontWeight: 600}}>{this.state.donateInfo.check.to}</span> to
+            {this.state.donateInfo.check.to && <div>By mailing a check made payable to <span style={{fontWeight: 600}}>{this.state.donateInfo.check.to}</span> to</div>}
             <div style={style.main.checkAddress}>
               {this.state.donateInfo.check.name && <div>{this.state.donateInfo.check.name}</div>}
               {this.state.donateInfo.check.address1 && <div>{this.state.donateInfo.check.address1}</div>}
