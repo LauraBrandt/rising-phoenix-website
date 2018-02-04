@@ -7,8 +7,8 @@ const xssFilters = require("xss-filters");
 const validator = require("validator");
 
 aws.config.update({
-  accessKeyId: process.env.REACT_APP_AWS_ACCESSKEYID,
-  secretAccessKey: process.env.REACT_APP_AWS_SECRETACCESSKEY,
+  accessKeyId: process.env.AWS_ACCESSKEYID,
+  secretAccessKey: process.env.AWS_SECRETACCESSKEY,
   subregion: "us-east-2",
 });
 const s3 = new aws.S3();

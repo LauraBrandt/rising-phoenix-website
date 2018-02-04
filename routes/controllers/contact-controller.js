@@ -14,15 +14,15 @@ module.exports = {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.REACT_APP_CONTACT_EMAIL,
-        pass: process.env.REACT_APP_CONTACT_PASSWORD
+        user: process.env.CONTACT_EMAIL,
+        pass: process.env.CONTACT_PASSWORD
       }
     });
 
     const from = req.body.name ? `"${req.body.name}" <${req.body.email}>` : req.body.email;
     const mailOptions = {
       from: from,
-      to: process.env.REACT_APP_CONTACT_EMAIL,
+      to: process.env.CONTACT_EMAIL,
       subject: req.body.subject,
       text: req.body.message
     };
