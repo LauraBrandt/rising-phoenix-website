@@ -49,7 +49,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log('check:', this.state.check)
     return (
       <main style={style.main}>
         <h2 style={style.main.h2}>Make a Donation</h2>
@@ -60,15 +59,17 @@ class Main extends Component {
             Through our GoFundMe page<br/><br/>
             <a href={this.props.donateLink} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
-          <div style={style.main.checkContainer}>
-            {this.state.donateInfo.check.to && <div>By mailing a check made payable to <span style={{fontWeight: 600}}>{this.state.donateInfo.check.to}</span> to</div>}
-            <div style={style.main.checkAddress}>
-              {this.state.donateInfo.check.name && <div>{this.state.donateInfo.check.name}</div>}
-              {this.state.donateInfo.check.address1 && <div>{this.state.donateInfo.check.address1}</div>}
-              {this.state.donateInfo.check.address2 && <div>{this.state.donateInfo.check.address2}</div>}
-              {this.state.donateInfo.check.city}, {this.state.donateInfo.check.state} {this.state.donateInfo.check.zip}<br />
+          {this.state.donateInfo.check &&
+            <div style={style.main.checkContainer}>
+              {this.state.donateInfo.check.to && <div>By mailing a check made payable to <span style={{fontWeight: 600}}>{this.state.donateInfo.check.to}</span> to</div>}
+              <div style={style.main.checkAddress}>
+                {this.state.donateInfo.check.name && <div>{this.state.donateInfo.check.name}</div>}
+                {this.state.donateInfo.check.address1 && <div>{this.state.donateInfo.check.address1}</div>}
+                {this.state.donateInfo.check.address2 && <div>{this.state.donateInfo.check.address2}</div>}
+                {this.state.donateInfo.check.city}, {this.state.donateInfo.check.state} {this.state.donateInfo.check.zip}<br />
+              </div>
             </div>
-          </div>
+          }
         </div>
         <h2 style={style.main.h2}>Get a Reward</h2>
         {this.state.donateInfo.rewardText && <div style={style.main.rewardText}>{this.state.donateInfo.rewardText}</div>}
