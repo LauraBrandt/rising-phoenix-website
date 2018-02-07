@@ -49,6 +49,7 @@ class Main extends Component {
   }
 
   render() {
+    console.log('check:', this.state.check)
     return (
       <main style={style.main}>
         <h2 style={style.main.h2}>Make a Donation</h2>
