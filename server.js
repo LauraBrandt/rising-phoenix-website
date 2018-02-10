@@ -25,7 +25,7 @@ app.use(cors());
 
 // routes
 const api = require("./routes/api");
-const site = require("./routes/site");
+// const site = require("./routes/site");
 
 // set up database
 mongoose.Promise = global.Promise;
@@ -38,7 +38,9 @@ mongoose.connect(process.env.MONGODB_URL_MLAB).then(
     app.use(express.static(path.resolve(__dirname, "build")));
 
     app.use("/api", api);
-    app.use("*", site);
+    app.get('*', function (req, res) {
+      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
 
     app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
       res.status(err.status || 500).json({
