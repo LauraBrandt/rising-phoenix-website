@@ -1,12 +1,11 @@
 import sv from "./styleVariables";
 import color from "color";
-import fire from "../img/fire.png";
 
 const homeStyles = {
   header: {
     margin: "3em 0 0 0",
     height: "58vh",
-    background: `#222 url("${fire}") center top/cover no-repeat fixed`,
+    background: `#222 url("https://s3.us-east-2.amazonaws.com/risingphoenix/static/fire.png") center top/cover no-repeat fixed`,
     textAlign: "center",
     textShadow: "0 3px 3px rgba(0,0,0,0.9)", 
     paddingTop: "15vh",

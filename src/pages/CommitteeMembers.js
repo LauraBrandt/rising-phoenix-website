@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Header from "../components/Header";
 import Radium from "radium";
 import style from "../styles/committeeStyles";
-import headerBackground from "../img/astronomy2.png";
 import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
@@ -58,7 +57,7 @@ class CommitteeMembers extends Component {
     return (
       <div>
         <Header 
-          bgImage={headerBackground}  
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy2.png" 
           bgAlt="swirling pink surface"
           rightDiv={<HeaderContent/>}
         />

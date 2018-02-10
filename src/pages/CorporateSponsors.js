@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Radium from "radium";
 import Header from "../components/Header";
 import style from "../styles/corporateSponsorStyles";
-import headerBackground from "../img/astronomy5.png";
 import { getData } from "../utils/apiCalls";
 
 let Link = require("react-router-dom").Link;
@@ -80,7 +79,7 @@ class CorporateSponsors extends Component {
     return (
       <div>
         <Header 
-          bgImage={headerBackground} 
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy5.png"
           bgAlt="Aurora borealis"
           rightDiv={<HeaderContent/>}
         />
