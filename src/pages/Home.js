@@ -122,15 +122,19 @@ let News = (props) => {
 
   return (
     <section style={style.news}>
-      {props.newsStories.length && props.newsStories.map( story => 
-        <div key={story.title} style={style.news.newsItem}>
-          {story.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt} style={style.news.newsImage}/>}
-          <Link to={`/news/${story.slug}`} style={style.news.header}>{story.title}</Link>
-          {story.updatedAt && <div style={style.news.date}>{new Date(story.updatedAt).toDateString()}</div>}
-          <div style={style.news.preview}>{getFirstWords(story.article)}...</div>
-          <Link to={`/news/${story.slug}`} style={style.news.readMore}>Read more</Link>
-        </div>
-      )}
+      {props.newsStories.length ?
+        props.newsStories.map( story => 
+          <div key={story.title} style={style.news.newsItem}>
+            {story.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt} style={style.news.newsImage}/>}
+            <Link to={`/news/${story.slug}`} style={style.news.header}>{story.title}</Link>
+            {story.updatedAt && <div style={style.news.date}>{new Date(story.updatedAt).toDateString()}</div>}
+            <div style={style.news.preview}>{getFirstWords(story.article)}...</div>
+            <Link to={`/news/${story.slug}`} style={style.news.readMore}>Read more</Link>
+          </div>
+        )
+        :
+        <div></div>
+      }
     </section>
   );
 };

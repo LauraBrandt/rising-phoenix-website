@@ -72,16 +72,20 @@ class Main extends Component {
         <h2 style={style.main.h2}>Get a Reward</h2>
         {this.state.donateInfo.rewardText && <div style={style.main.rewardText}>{this.state.donateInfo.rewardText}</div>}
         <div style={style.main.rewardsTable}>
-          {this.state.rewardLevels.length && this.state.rewardLevels.map( level => 
-            <div key={level.name} style={style.main.rewardsTable.row} tabIndex="0">
-              {level.amountEnd ?
-                <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
-                :
-                <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
-              <div style={style.main.rewardsTable.nameCol}>{level.name}</div>
-              <div style={style.main.rewardsTable.rewardCol}>{level.reward}</div>
-            </div>
-          )}
+          {this.state.rewardLevels.length ? 
+            this.state.rewardLevels.map( level => 
+              <div key={level.name} style={style.main.rewardsTable.row} tabIndex="0">
+                {level.amountEnd ?
+                  <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                  :
+                  <div style={style.main.rewardsTable.amtCol}>$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
+                <div style={style.main.rewardsTable.nameCol}>{level.name}</div>
+                <div style={style.main.rewardsTable.rewardCol}>{level.reward}</div>
+              </div>
+            )
+            :
+            <div></div>
+          }
         </div>
         <div style={style.main.footnote}>*pending approval of the school board</div>
       </main>

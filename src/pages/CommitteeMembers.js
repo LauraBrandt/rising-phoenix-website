@@ -25,16 +25,20 @@ class Main extends Component {
     return (
       <main style={style.main}>
         <ul style={style.ul}>
-          {this.state.members.length && this.state.members.map((person) => 
-            (<li key={person.name} style={style.li}>
-              <span style={style.name}>{person.name}</span>
-              &nbsp;&nbsp;&nbsp;&mdash;&nbsp;&nbsp;&nbsp;
-              {person.link ? 
-                <a href={person.link} style={style.organizationLink} key={person.affiliation}>{person.affiliation}</a> :
-                <span>{person.affiliation}</span>
-              }          
-            </li>)
-          )}
+          {this.state.members.length ?
+            this.state.members.map((person) => 
+              (<li key={person.name} style={style.li}>
+                <span style={style.name}>{person.name}</span>
+                &nbsp;&nbsp;&nbsp;&mdash;&nbsp;&nbsp;&nbsp;
+                {person.link ? 
+                  <a href={person.link} style={style.organizationLink} key={person.affiliation}>{person.affiliation}</a> :
+                  <span>{person.affiliation}</span>
+                }          
+              </li>)
+            )          
+            :
+            <div></div>
+          }
         </ul>
       </main>
     );

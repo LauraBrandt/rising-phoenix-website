@@ -35,15 +35,19 @@ class NewsList extends Component {
 
     return (
       <main style={style.newsList}>
-        {this.state.news.length && this.state.news.map(newsItem => 
-          <div key={newsItem.title} style={style.newsList.item}>
-            {newsItem.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${newsItem.image}`} alt={newsItem.alt} style={style.newsList.image}/>}
-            <Link to={`/news/${newsItem.slug}`} style={style.newsList.header} >{newsItem.title}</Link>
-            {newsItem.updatedAt && <div style={style.newsList.date}>{new Date(newsItem.updatedAt).toDateString()}</div>}
-            <div style={style.newsList.preview}>{getFirstWords(newsItem.article)}...</div>
-            <Link to={`/news/${newsItem.slug}`} style={style.newsList.readMore}>Read more</Link>
-          </div>  
-        )}
+        {this.state.news.length ?
+          this.state.news.map(newsItem => 
+            <div key={newsItem.title} style={style.newsList.item}>
+              {newsItem.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${newsItem.image}`} alt={newsItem.alt} style={style.newsList.image}/>}
+              <Link to={`/news/${newsItem.slug}`} style={style.newsList.header} >{newsItem.title}</Link>
+              {newsItem.updatedAt && <div style={style.newsList.date}>{new Date(newsItem.updatedAt).toDateString()}</div>}
+              <div style={style.newsList.preview}>{getFirstWords(newsItem.article)}...</div>
+              <Link to={`/news/${newsItem.slug}`} style={style.newsList.readMore}>Read more</Link>
+            </div>  
+          )
+          :
+          <div></div>
+        }
       </main>
     );
   }
