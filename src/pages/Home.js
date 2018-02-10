@@ -59,8 +59,6 @@ let Main = (props) => {
           <div style={{whiteSpace: "pre-wrap"}}>{props.homeInfo.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
         </div>
         <div style={style.main.progress}>
-          {/* <img src={phoenixUnfilled} alt="outline of a phoenix" style={[style.main.phoenix, imageHeightStyle]}/>
-          <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/> */}
           <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_grey_filled.png" alt="outline of a thermometer" style={[style.main.phoenix, imageHeightStyle]}/>
           <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_red_filled.png" alt="thermometer filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/>
           <div style={[style.main.progressBox, progressBoxMarginSmallStyle]}>
