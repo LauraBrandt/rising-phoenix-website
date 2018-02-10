@@ -7,7 +7,7 @@ const ACCESS_TOKEN_KEY = "access_token";
 
 const CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENTID;
 const CLIENT_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
-const REDIRECT = "http://localhost:3000/admin/callback";
+const REDIRECT = "https://rising-phoenix.herokuapp.com/admin/callback";
 const SCOPE = "openid email profile";
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
