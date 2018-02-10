@@ -222,7 +222,7 @@ const generalStyles = {
     transform: "translateY(-50%)",
     color: "#afafaf",
     fontSize: "1.5em",
-    cursor: "pointer",
+    cursor: "move",
   },
   textareaLabel: {
     position: "relative", 
