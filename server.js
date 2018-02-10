@@ -38,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URL_MLAB).then(
     app.use(express.static(path.resolve(__dirname, "build")));
 
     app.use("/api", api);
-    app.use("*", site);
+    app.use("/", site);
 
     app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
       res.status(err.status || 500).json({
