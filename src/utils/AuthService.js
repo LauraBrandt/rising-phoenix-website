@@ -11,7 +11,6 @@ const REDIRECT = `${process.env.REACT_APP_BASE_URL}/admin/callback`;
 const SCOPE = "openid email profile";
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
-console.log("redirect:", REDIRECT)
 const auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN,
