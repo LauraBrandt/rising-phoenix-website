@@ -45,7 +45,8 @@ module.exports = {
           newError.status = err.status;
           next(newError);
         }
-        res.send({"message": `Success! ${docs.length} sponsors saved.`});
+        if (!docs) {res.send({"message": `Success! 0 sponsors saved.`});}
+        else {res.send({"message": `Success! ${docs.length} sponsors saved.`});} 
       });
     });
   }
