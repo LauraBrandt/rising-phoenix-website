@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import Radium from "radium";
 import style from "../styles/homeStyles";
-// import phoenixUnfilled from "../img/phoenix_stencil_unfilled.png";
-// import phoenixFilled from "../img/phoenix_stencil_filled.png";
-// import phoenixGrey from "../img/phoenix_stencil_grey.png";
-// import thermometerUnfilled from "../img/thermometer_unfilled.png";
-import thermometerRed from "../img/thermometer_red_filled.png";
-import thermometerGrey from "../img/thermometer_grey_filled.png";
 import { getData } from "../utils/apiCalls";
 
 let Link = require("react-router-dom").Link;
@@ -67,8 +61,8 @@ let Main = (props) => {
         <div style={style.main.progress}>
           {/* <img src={phoenixUnfilled} alt="outline of a phoenix" style={[style.main.phoenix, imageHeightStyle]}/>
           <img src={phoenixFilled} alt="outline of a phoenix filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/> */}
-          <img src={thermometerGrey} alt="outline of a thermometer" style={[style.main.phoenix, imageHeightStyle]}/>
-          <img src={thermometerRed} alt="thermometer filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/>
+          <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_grey_filled.png" alt="outline of a thermometer" style={[style.main.phoenix, imageHeightStyle]}/>
+          <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_red_filled.png" alt="thermometer filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/>
           <div style={[style.main.progressBox, progressBoxMarginSmallStyle]}>
             <div style={style.main.progressBox.label}>Amount Raised:</div>
             <div style={style.main.progressBox.amount}>{`$${props.homeInfo.donatedAmount}`}</div>

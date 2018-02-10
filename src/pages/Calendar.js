@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Radium from "radium";
 import Header from "../components/Header";
 import style from "../styles/calendarStyles";
-import headerBackground from "../img/astronomy6.png";
 import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
@@ -107,7 +106,7 @@ class Calendar extends Component {
     return (
       <div>
         <Header 
-          bgImage={headerBackground}
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy6.png"
           bgAlt="telescope pointing out a glass wall towards a sunset sky"
           rightDiv={<HeaderContent/>}
         />

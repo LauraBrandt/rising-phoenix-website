@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Radium from "radium";
 import Header from "../components/Header";
 import style from "../styles/donateStyles";
-import headerBackground from "../img/astronomy7.png";
-import gfmLogo from "../img/GoFundMe-Logo.jpg";
 import { getData } from "../utils/apiCalls";
 
 class Main extends Component {
@@ -57,7 +55,7 @@ class Main extends Component {
         <div style={style.main.donateContainer}>
           <div style={style.main.gfmContainer}>
             Through our GoFundMe page<br/><br/>
-            <a href={this.props.donateLink} style={style.main.gfmLink}><img src={gfmLogo} alt="gofundme logo" style={style.main.gfmLogo}/></a>
+            <a href={this.props.donateLink} style={style.main.gfmLink}><img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/GoFundMe-Logo.jpg" alt="gofundme logo" style={style.main.gfmLogo}/></a>
           </div>
           {this.state.donateInfo.check &&
             <div style={style.main.checkContainer}>
@@ -108,7 +106,7 @@ class Donate extends Component {
     return (
       <div>
         <Header 
-          bgImage={headerBackground}
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy7.png"
           bgAlt="deep blue-puple starry sky with light from below"
           rightDiv={<HeaderContent/>}
         />
