@@ -7,7 +7,7 @@ const ACCESS_TOKEN_KEY = "access_token";
 
 const CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENTID;
 const CLIENT_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
-const REDIRECT = `${process.env.REACT_APP_BASE_URL}/admin/callback`;
+const REDIRECT = `${window.location.origin}/admin/callback`;
 const SCOPE = "openid email profile";
 const AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
