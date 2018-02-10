@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 var helmet = require('helmet');
 
-require("dotenv").config();
+// require("dotenv").config();
 
 // set up app
 const app = express();
