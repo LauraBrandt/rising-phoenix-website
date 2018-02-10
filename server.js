@@ -25,7 +25,6 @@ app.use(cors());
 
 // routes
 const api = require("./routes/api");
-// const site = require("./routes/site");
 
 // set up database
 mongoose.Promise = global.Promise;
