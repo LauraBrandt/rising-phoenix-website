@@ -25,8 +25,7 @@ class Main extends Component {
   render() {
     return (
       <main style={style.main}>
-        <article dangerouslySetInnerHTML={{__html: this.state.aboutContent}}>
-        </article>
+        <article dangerouslySetInnerHTML={{__html: this.state.aboutContent}} />
       </main>
     );
   }

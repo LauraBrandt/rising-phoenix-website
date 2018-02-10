@@ -89,8 +89,7 @@ class Article extends Component {
           <h1 style={style.article.header}>{this.state.article.title}</h1>
           {this.state.article.updatedAt && <div style={style.article.date}>{new Date(this.state.article.updatedAt).toDateString()}</div>}
           <hr style={style.article.hr} />
-          <article style={style.article.article} dangerouslySetInnerHTML={{__html: this.state.article.article}}>
-          </article>
+          <article style={style.article.article} dangerouslySetInnerHTML={{__html: this.state.article.article}} />
         </main>
       );
     }
