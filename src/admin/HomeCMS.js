@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { arrayMove, SortableContainer } from "react-sortable-hoc";
 import SortableNewsStory from "./components/SortableItem";
+import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import RichTextEditor from "react-rte";
 import generalStyles from "../styles/admin/generalStyles";
@@ -419,43 +420,13 @@ class HomeCMS extends Component {
                         onChange={this.handleChange}
                       />
                     </div>
-                    <div className="preview" style={[generalStyles.modalContent.filePreview, homeStyles.modalContent.filePreview]}>
-                      {
-                        this.state.newsImage ? 
-                          <div>
-                            <i 
-                              className="fa fa-times" 
-                              title="remove image"
-                              onClick={this.removeImage}
-                              style={generalStyles.modalContent.removeImage}
-                            ></i>
-                            <img 
-                              src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.newsImage}`}
-                              alt={this.state.alt} 
-                              style={generalStyles.modalContent.filePreview.image}
-                            />
-                            <p style={{marginBottom: 0}}>{this.state.newsImage}</p>
-                          </div>
-                          :
-                          this.state.newsImagePath ? 
-                            <div>
-                              <i 
-                                className="fa fa-times" 
-                                title="remove image"
-                                onClick={this.removeImage}
-                                style={generalStyles.modalContent.removeImage}
-                              ></i>
-                              <img 
-                                src={window.URL.createObjectURL(this.state.newsImageFile)}
-                                alt={this.state.alt}
-                                style={generalStyles.modalContent.filePreview.image}
-                              />
-                              <p style={{marginBottom: 0}}>{this.state.newsImageFile.name}</p>
-                            </div>
-                            :
-                            <p>No file currently selected.</p>
-                      }
-                    </div>
+                    <ImagePreview  
+                      image={this.state.newsImage} 
+                      path={this.state.newsImagePath} 
+                      file={this.state.newsImageFile} 
+                      alt={this.state.alt} 
+                      removeImage={this.removeImage} 
+                    />
                   </div>
                   <div>
                     <label htmlFor="newsImageAlt" style={[generalStyles.label, generalStyles.modalContent.label, homeStyles.modalContent.label]}>Brief description of image:</label>

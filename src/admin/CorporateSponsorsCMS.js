@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { arrayMove, SortableContainer } from "react-sortable-hoc";
 import SortableSponsor from "./components/SortableItem";
+import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
@@ -285,43 +286,13 @@ class CorporateSponsorsCMS extends Component {
                         onChange={this.handleChange}
                       />
                     </div>
-                    <div className="preview" style={generalStyles.modalContent.filePreview}>
-                      {
-                        this.state.logo ? 
-                          <div>
-                            <i 
-                              className="fa fa-times" 
-                              title="remove image"
-                              onClick={this.removeImage}
-                              style={generalStyles.modalContent.removeImage}
-                            ></i>
-                            <img 
-                              src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.logo}`}
-                              alt={`${this.state.name} logo`} 
-                              style={generalStyles.modalContent.filePreview.image}
-                            />
-                            <p style={{marginBottom: 0}}>{this.state.logo}</p>
-                          </div>
-                          :
-                          this.state.logoPath ? 
-                            <div>
-                              <i 
-                                className="fa fa-times" 
-                                title="remove image"
-                                onClick={this.removeImage}
-                                style={generalStyles.modalContent.removeImage}
-                              ></i>
-                              <img 
-                                src={window.URL.createObjectURL(this.state.logoFile)}
-                                alt={`${this.state.name} logo`} 
-                                style={generalStyles.modalContent.filePreview.image}
-                              />
-                              <p style={{marginBottom: 0}}>{this.state.logoFile.name}</p>
-                            </div>
-                            :
-                            <p>No file currently selected.</p>
-                      }
-                    </div>
+                    <ImagePreview  
+                      image={this.state.logo} 
+                      path={this.state.logoPath} 
+                      file={this.state.logoFile} 
+                      alt={`${this.state.name} logo`} 
+                      removeImage={this.removeImage} 
+                    />
                   </div>
 
                   <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
