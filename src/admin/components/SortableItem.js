@@ -13,13 +13,11 @@ const SortableItem = SortableElement(({item, currentlyDeleting, handleEdit, hand
     {fieldList.map(field => 
       field.rte ? 
       field.value &&
-        <div>
-          <RichTextEditor 
-            value={field.value}
-            readOnly={true}
-            className='rte-card'
-          />
-        </div>
+        <RichTextEditor 
+          value={field.value}
+          readOnly={true}
+          className='rte-card'
+        />
       :
       field.content &&
         <div className="row-container" key={field.label}>
