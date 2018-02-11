@@ -3,8 +3,6 @@ import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "r
 import * as Datetime from "react-datetime";
 import moment from "moment";
 import generalStyles from "../styles/admin/generalStyles";
-import "../styles/admin/externalComponentStyles.css";
-import "../styles/admin/react-datetime.css";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
