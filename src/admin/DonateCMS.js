@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
 import generalStyles from "../styles/admin/generalStyles";
 import donateStyles from "../styles/admin/donateStyles";
-import "../styles/admin/externalComponentStyles.css";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 

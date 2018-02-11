@@ -3,7 +3,6 @@ import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "r
 import RichTextEditor from "react-rte";
 import generalStyles from "../styles/admin/generalStyles";
 import homeStyles from "../styles/admin/homeStyles";
-import "../styles/admin/externalComponentStyles.css";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
