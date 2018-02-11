@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
-import DragHandle from "./components/DragHandle";
+import { arrayMove, SortableContainer } from "react-sortable-hoc";
+import SortableEvent from "./components/SortableItem";
 import * as Datetime from "react-datetime";
 import moment from "moment";
 import generalStyles from "../styles/admin/generalStyles";
@@ -8,68 +8,25 @@ import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
-const SortableEvent = SortableElement(({event, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={event._id} 
-    key={`sortable-element-${event._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{event.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Date:</div>
-      <div className="card-content">{moment(event.dateTime).format("M/D/YY H:mm a")}</div>
-    </div>
-    {event.location && <div className="row-container">
-      <div className="card-label">Location:</div>
-      <div className="card-content">{event.location}</div>
-    </div>}
-    {event.description && <div className="row-container">
-      <div className="card-label">Description:</div>
-      <div className="card-content pre-wrap">{event.description}</div>
-    </div>}
-    {event.minutesLink && <div className="row-container">
-      <div className="card-label">Link to minutes:</div>
-      <div className="card-content"><a href={event.minutesLink}>{event.minutesLink}</a></div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={event._id}
-      key={`edit-${event._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={event._id}
-      key={`delete-${event._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
 const SortableEventList = SortableContainer(({eventList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {eventList.map((event, index) => (
         <SortableEvent 
-          event={event} 
+          item={event} 
           key={`event-${event._id}`}
           index={index}
           currentlyDeleting={currentlyDeleting}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           disabled={disabled}
+          fieldList={[
+            {label: "Name:", content: event.name},
+            {label: "Date:", content: event.dateTime ? moment(event.dateTime).format("M/D/YY H:mm a") : ""},
+            {label: "Location:", content: event.location},
+            {label: "Description:", content: event.description},
+            {label: "Link to minutes:", content: event.minutesLink ? `<a href=${event.minutesLink}>${event.minutesLink}</a>` : ""}
+          ]}
         />
       ))}
     </div>

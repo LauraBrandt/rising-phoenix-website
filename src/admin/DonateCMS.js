@@ -1,69 +1,29 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
-import DragHandle from "./components/DragHandle";
+import { arrayMove, SortableContainer } from "react-sortable-hoc";
+import SortableRewardLevel from "./components/SortableItem";
 import generalStyles from "../styles/admin/generalStyles";
 import donateStyles from "../styles/admin/donateStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
-const SortableRewardLevel = SortableElement(({level, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={level._id} 
-    key={`sortable-element-${level._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Amount:</div>
-      {level.amountEnd ? 
-        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
-        : 
-        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
-    </div>
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{level.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Reward:</div>
-      <div className="card-content">{level.reward}</div>
-    </div>
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={level._id}
-      key={`edit-${level._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={level._id}
-      key={`delete-${level._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
 const SortableRewardLevelList = SortableContainer(({rewardLevelList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {rewardLevelList.map((level, index) => (
         <SortableRewardLevel 
-          level={level} 
+          item={level} 
           key={`level-${level._id}`}
           index={index}
           currentlyDeleting={currentlyDeleting}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           disabled={disabled}
+          fieldList={[
+            {label: "Amount:", content: level.amountEnd ? `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +`},
+            {label: "Name:", content: level.name},
+            {label: "Reward:", content: level.reward}
+          ]}
         />
       ))}
     </div>

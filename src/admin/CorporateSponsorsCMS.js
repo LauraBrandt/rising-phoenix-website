@@ -1,67 +1,28 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
-import DragHandle from "./components/DragHandle";
+import { arrayMove, SortableContainer } from "react-sortable-hoc";
+import SortableSponsor from "./components/SortableItem";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
-const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={sponsor._id} 
-    key={`sortable-element-${sponsor._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{sponsor.name}</div>
-    </div>
-    {sponsor.link && <div className="row-container">
-      <div className="card-label">Website:</div>
-      <div className="card-content"><a href={sponsor.link}>{sponsor.link}</a></div>
-    </div>}
-    {sponsor.logo && <div className="row-container">
-      <div className="card-label">Logo:</div>
-      <div className="card-content">
-        <img class="card-img" src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`} alt={`${sponsor.name} logo`}/>
-      </div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={sponsor._id}
-      key={`edit-${sponsor._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={sponsor._id}
-      key={`delete-${sponsor._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
 const SortableSponsorList = SortableContainer(({sponsorList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {sponsorList.map((sponsor, index) => (
-        <SortableSponsor 
-          sponsor={sponsor} 
+        <SortableSponsor
+          item={sponsor} 
           key={`sponsor-${sponsor._id}`}
           index={index}
           currentlyDeleting={currentlyDeleting}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           disabled={disabled}
+          fieldList={[
+            {label: "Name:", content: sponsor.name},
+            {label: "Website:", content: sponsor.link ? `<a href=${sponsor.link}>${sponsor.link}</a>` : ""},
+            {label: "Logo:", content: sponsor.logo ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}" alt="${sponsor.name} logo"/>` : ""}
+          ]}
         />
       ))}
     </div>
@@ -73,6 +34,11 @@ class CorporateSponsorsCMS extends Component {
     super();
 
     this.state = { 
+      // sponsors: [
+      //   {name: "Mariani's Venue", logo: "marianisvenue-logo.png", link: "https://www.marianivenue.com/", _id: 1}, 
+      //   {name: "Mobile Meat Market", logo: "mobile_meat_market.jpg", _id: 2},
+      //   {name: "All Occasions & Bridal", link: "https://www.facebook.com/ALLOCCASIONSANDBRIDAL/", _id: 3}, 
+      // ],
       sponsors: [],
       id: "",
       name: "",

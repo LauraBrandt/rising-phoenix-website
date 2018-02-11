@@ -1,65 +1,28 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
-import DragHandle from "./components/DragHandle";
+import { arrayMove, SortableContainer } from "react-sortable-hoc";
+import SortableCommitteeMember from "./components/SortableItem";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
-
-const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div
-    className="card"
-    id={member._id} 
-    key={`sortable-element-${member._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{member.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Affiliation:</div>
-      <div className="card-content">{member.affiliation}</div>
-    </div>
-    {member.link && <div className="row-container">
-      <div className="card-label">Link to affiliation:</div>
-      <div className="card-content"><a href={member.link}>{member.link}</a></div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={member._id}
-      key={`edit-${member._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={member._id}
-      key={`delete-${member._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
 
 const SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {memberList.map((member, index) => (
         <SortableCommitteeMember 
-          member={member} 
+          item={member} 
           key={`member-${member._id}`}
           index={index}
           currentlyDeleting={currentlyDeleting}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           disabled={disabled}
+          fieldList={[
+            {label: "Name:", content: member.name},
+            {label: "Affiliation:", content: member.affiliation},
+            {label: "Link to affiliation:", content: member.link ? `<a href=${member.link}>${member.link}</a>` : ""}
+          ]}
         />
       ))}
     </div>
@@ -72,6 +35,7 @@ class CommitteeCMS extends Component {
     super();
 
     this.state = { 
+      // committeeMembers: [{name: "John Allen", affiliation: "PSRC, Early College HS", _id: 123}, {name: "Traci Bullard", affiliation: "SERMC", link: "http://www.navsea.navy.mil/Home/RMC/SERMC/", id: 456}],
       committeeMembers: [],
       id: "",
       name: "",

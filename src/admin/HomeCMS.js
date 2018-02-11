@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
-import DragHandle from "./components/DragHandle";
+import { arrayMove, SortableContainer } from "react-sortable-hoc";
+import SortableNewsStory from "./components/SortableItem";
 import RichTextEditor from "react-rte";
 import generalStyles from "../styles/admin/generalStyles";
 import homeStyles from "../styles/admin/homeStyles";
@@ -8,67 +8,24 @@ import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
 
-const SortableNewsStory = SortableElement(({story, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={story._id} 
-    key={`sortable-element-${story._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Title:</div>
-      <div className="card-content title">{story.title}</div>
-    </div>
-    {story.image && <div className="row-container">
-      <div className="card-label">Image:</div>
-      <div className="card-content">
-        <img class="card-img" src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt}/>
-      </div>
-    </div>}
-    {story.alt && <div className="row-container">
-      <div className="card-label">Image Alt Text:</div>
-      <div className="card-content">{story.alt}</div>
-    </div>}
-    <RichTextEditor
-      value={RichTextEditor.createValueFromString(story.article, "html")}
-      readOnly={true}
-      className='rte-card'
-    />
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={story._id}
-      key={`edit-${story._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={story._id}
-      key={`delete-${story._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
 const SortableNewsList = SortableContainer(({newsList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
   return (
     <div>
       {newsList.map((story, index) => (
         <SortableNewsStory 
-          story={story} 
+          item={story} 
           key={`news-${story._id}`}
           index={index}
           currentlyDeleting={currentlyDeleting}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
           disabled={disabled}
+          fieldList={[
+            {label: "Title:", content: story.title},
+            {label: "Image:", content: story.image ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}" alt=${story.alt}/>` : ""},
+            {label: "Image Alt Text:", content: story.alt},
+            {rte: true, value: RichTextEditor.createValueFromString(story.article, 'html')}
+          ]}
         />
       ))}
     </div>
