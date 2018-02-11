@@ -14,8 +14,13 @@ import DonateCMS from "./DonateCMS";
 import LinksCMS from "./LinksCMS";
 import Message from "./components/Message";
 import { isLoggedIn } from "../utils/authService";
-import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
+
+const style = {
+  textAlign: "center",
+  padding: "3% 5%",
+  boxSizing: "border-box",
+}
 
 const renderIfAuth = (Component, props) => (
   isLoggedIn() ? (
@@ -41,7 +46,7 @@ class AdminPanel extends Component {
   }
   render() {
     return (
-      <div style={generalStyles.adminPanel}>
+      <div style={style}>
         <h1>Rising Phoenix Content Management</h1>
         {isLoggedIn() && <Options updateMessage={this.updateMessage}/>}
         <Switch>

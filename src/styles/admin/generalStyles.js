@@ -112,7 +112,7 @@ const generalStyles = {
       borderRadius: "0 5px 0 2px",
       cursor: "pointer"
     },
-      },
+  }, 
   listContainer: {
     width: "70%", 
     margin: "auto",
@@ -129,25 +129,7 @@ const generalStyles = {
     "@media (max-width: 702px)": {
       position: "static",
     }
-  },
-  adminPanel: {
-    textAlign: "center",
-    padding: "3% 5%",
-    boxSizing: "border-box",
-  },
-  login: {
-    border: "1px solid rgba(0,0,0,0.3)",
-    borderRadius: "10px",
-    width: 375,
-    maxWidth: "95%",
-    margin: "5em auto 0 auto",
-    padding: "1.5em 2.5em",
-    boxSizing: "border-box",
-    text: {
-      margin: "1em 0 3em 0",
-      fontSize: "1.1em"
-    }
-  },
+  }, 
 };
 
 export default generalStyles;
