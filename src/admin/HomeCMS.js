@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { arrayMove, SortableContainer } from "react-sortable-hoc";
 import SortableNewsStory from "./components/SortableItem";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import RichTextEditor from "react-rte";
 import generalStyles from "../styles/admin/generalStyles";
 import homeStyles from "../styles/admin/homeStyles";
@@ -371,19 +372,13 @@ class HomeCMS extends Component {
                   />
                 </div>
               </div>
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save Info</button>
+              <SaveButton currentlySaving={this.state.currentlySaving} info={true} />
             </form>
 
 
             <h2 style={homeStyles.newsHeader}>News Stories</h2>
-            {/* button to add new news story */}
-            <div 
-              key="addNew" 
-              style={[generalStyles.addNewButton, homeStyles.addNewButton]} 
-              onClick={this.handleAdd}
-            >
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            
+            <AddNewButton handleAdd={this.handleAdd} style={homeStyles.addNewButton} />
 
             {/* modal to enter new news story */}
             {this.state.addNewOpen && 
@@ -484,21 +479,10 @@ class HomeCMS extends Component {
                       editorClassName="rte-editor"
                     />
                   </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }

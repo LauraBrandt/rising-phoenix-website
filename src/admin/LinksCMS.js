@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { SaveButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData } from "../utils/apiCalls";
@@ -104,7 +105,7 @@ class LinksCMS extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
+              <SaveButton currentlySaving={this.state.currentlySaving} />
             </form>
           </div>
         }

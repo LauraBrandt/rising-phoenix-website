@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { arrayMove, SortableContainer } from "react-sortable-hoc";
 import SortableRewardLevel from "./components/SortableItem";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import donateStyles from "../styles/admin/donateStyles";
 import Radium from "radium";
@@ -406,15 +407,13 @@ class DonateCMS extends Component {
                   </div>
                 </div>
               </div>
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save Info</button>
+              <SaveButton currentlySaving={this.state.currentlySaving} info={true} />
             </form>
 
 
             <h2 style={donateStyles.rewardsHeader}>Reward Levels</h2>
-            {/* button to add new reward level */}
-            <div key="addNew" style={[generalStyles.addNewButton, donateStyles.addNewButton]} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            
+            <AddNewButton handleAdd={this.handleAdd} style={donateStyles.addNewButton} />
 
             {/* modal to enter new reward level info */}
             {this.state.addNewOpen && 
@@ -471,21 +470,10 @@ class DonateCMS extends Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }

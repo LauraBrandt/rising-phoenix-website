@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import generalStyles from "../styles/admin/generalStyles";
+import { SaveButton } from "./components/buttons";
 import Radium from "radium";
 import { getData, postData } from "../utils/apiCalls";
 import RichTextEditor from "react-rte";
@@ -93,7 +93,7 @@ class AboutCMS extends Component {
                 className="rte-component"
                 autoFocus={true}
               />
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save</button>
+              <SaveButton currentlySaving={this.state.currentlySaving} />
             </form>
           </div>
         }

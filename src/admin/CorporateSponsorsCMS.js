@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { arrayMove, SortableContainer } from "react-sortable-hoc";
 import SortableSponsor from "./components/SortableItem";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
@@ -232,10 +233,7 @@ class CorporateSponsorsCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            {/* button to add new sponsor */}
-            <div style={generalStyles.addNewButton} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            <AddNewButton handleAdd={this.handleAdd} />
 
             {/* modal to enter new sponsor info */}
             {this.state.addNewOpen && 
@@ -325,21 +323,10 @@ class CorporateSponsorsCMS extends Component {
                       }
                     </div>
                   </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }
