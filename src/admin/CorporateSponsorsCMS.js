@@ -1,22 +1,10 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import { arrayMove, SortableContainer, SortableElement } from "react-sortable-hoc";
+import DragHandle from "./components/DragHandle";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
-
-const DragHandle = SortableHandle(() => 
-  <div style={generalStyles.dragHandle}>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-  </div>
-);
 
 const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit, handleDelete}) =>
   <div 

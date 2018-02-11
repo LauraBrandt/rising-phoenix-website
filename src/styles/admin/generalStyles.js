@@ -215,15 +215,6 @@ const generalStyles = {
       width: "100%"
     }
   },
-  dragHandle: {
-    position: "absolute",
-    left: 10,
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "#afafaf",
-    fontSize: "1.5em",
-    cursor: "move",
-  },
   textareaLabel: {
     position: "relative", 
     bottom:"90px",
