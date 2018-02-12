@@ -1,90 +1,24 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
-import generalStyles from "../styles/admin/generalStyles";
+import { arrayMove } from "react-sortable-hoc";
+import SortableSponsorList from "./components/SortableItemList";
+import ImagePreview from "./components/ImagePreview";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput, ImageInput } from "./components/inputs";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
-
-const DragHandle = SortableHandle(() => 
-  <div style={generalStyles.dragHandle}>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-  </div>
-);
-
-const SortableSponsor = SortableElement(({sponsor, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={sponsor._id} 
-    key={`sortable-element-${sponsor._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{sponsor.name}</div>
-    </div>
-    {sponsor.link && <div className="row-container">
-      <div className="card-label">Website:</div>
-      <div className="card-content"><a href={sponsor.link}>{sponsor.link}</a></div>
-    </div>}
-    {sponsor.logo && <div className="row-container">
-      <div className="card-label">Logo:</div>
-      <div className="card-content">
-        <img class="card-img" src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}`} alt={`${sponsor.name} logo`}/>
-      </div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={sponsor._id}
-      key={`edit-${sponsor._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={sponsor._id}
-      key={`delete-${sponsor._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
-const SortableSponsorList = SortableContainer(({sponsorList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {sponsorList.map((sponsor, index) => (
-        <SortableSponsor 
-          sponsor={sponsor} 
-          key={`sponsor-${sponsor._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-        />
-      ))}
-    </div>
-  );
-});
 
 class CorporateSponsorsCMS extends Component {
   constructor() {
     super();
 
     this.state = { 
+      // sponsors: [
+      //   {name: "Mariani's Venue", logo: "marianisvenue-logo.png", link: "https://www.marianivenue.com/", _id: 1}, 
+      //   {name: "Mobile Meat Market", logo: "mobile_meat_market.jpg", _id: 2},
+      //   {name: "All Occasions & Bridal", link: "https://www.facebook.com/ALLOCCASIONSANDBRIDAL/", _id: 3}, 
+      // ],
       sponsors: [],
       id: "",
       name: "",
@@ -278,122 +212,61 @@ class CorporateSponsorsCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            {/* button to add new sponsor */}
-            <div style={generalStyles.addNewButton} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            <AddNewButton handleAdd={this.handleAdd} />
 
             {/* modal to enter new sponsor info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
-                  <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Name <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Website:</label>
-                    <input 
-                      type="url" 
-                      id="link" 
-                      value={this.state.link} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <div style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Logo:</div>
-                    <div style={generalStyles.modalContent.fileInputContainer}>
-                      <label 
-                        htmlFor="logo" 
-                        style={generalStyles.modalContent.fileInput}
-                        key="fileInput"
-                      >
-                        Choose a File
-                      </label>
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        id="logo"
-                        style={{opacity: 0, width: 0, height: 0}}
-                        value={this.state.logoPath}
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <div className="preview" style={generalStyles.modalContent.filePreview}>
-                      {
-                        this.state.logo ? 
-                          <div>
-                            <i 
-                              className="fa fa-times" 
-                              title="remove image"
-                              onClick={this.removeImage}
-                              style={generalStyles.modalContent.removeImage}
-                            ></i>
-                            <img 
-                              src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${this.state.logo}`}
-                              alt={`${this.state.name} logo`} 
-                              style={generalStyles.modalContent.filePreview.image}
-                            />
-                            <p style={{marginBottom: 0}}>{this.state.logo}</p>
-                          </div>
-                          :
-                          this.state.logoPath ? 
-                            <div>
-                              <i 
-                                className="fa fa-times" 
-                                title="remove image"
-                                onClick={this.removeImage}
-                                style={generalStyles.modalContent.removeImage}
-                              ></i>
-                              <img 
-                                src={window.URL.createObjectURL(this.state.logoFile)}
-                                alt={`${this.state.name} logo`} 
-                                style={generalStyles.modalContent.filePreview.image}
-                              />
-                              <p style={{marginBottom: 0}}>{this.state.logoFile.name}</p>
-                            </div>
-                            :
-                            <p>No file currently selected.</p>
-                      }
-                    </div>
-                  </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  <TextInput 
+                    id="name"
+                    label="Sponsor Name:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                  />
+                  <TextInput 
+                    id="link"
+                    label="Sponsor Website:"
+                    type="url"
+                    value={this.state.link}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                  />
+                  <ImageInput 
+                    id="logo" 
+                    label="Sponsor Logo:"
+                    modal={true}
+                    value={this.state.logoPath}
+                    handleChange={this.handleChange}
+                  />
+                  <ImagePreview  
+                    image={this.state.logo} 
+                    path={this.state.logoPath} 
+                    file={this.state.logoFile} 
+                    alt={`${this.state.name} logo`} 
+                    removeImage={this.removeImage} 
+                  />
+
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableSponsorList 
-                sponsorList={this.state.sponsors} 
+                itemList={this.state.sponsors} 
+                itemType="sponsor"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -403,6 +276,13 @@ class CorporateSponsorsCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(sponsor) => 
+                  [
+                    {label: "Name:", content: sponsor.name},
+                    {label: "Website:", content: sponsor.link ? `<a href=${sponsor.link}>${sponsor.link}</a>` : ""},
+                    {label: "Logo:", content: sponsor.logo ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}" alt="${sponsor.name} logo"/>` : ""}
+                  ]
+                }
               />
             </div>
           </div>

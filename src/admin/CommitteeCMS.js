@@ -1,82 +1,11 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
-import generalStyles from "../styles/admin/generalStyles";
+import { arrayMove } from "react-sortable-hoc";
+import SortableMemberList from "./components/SortableItemList";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput } from "./components/inputs";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const DragHandle = SortableHandle(() => 
-  <div style={generalStyles.dragHandle}>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-  </div>
-);
-
-const SortableCommitteeMember = SortableElement(({member, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div
-    className="card"
-    id={member._id} 
-    key={`sortable-element-${member._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{member.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Affiliation:</div>
-      <div className="card-content">{member.affiliation}</div>
-    </div>
-    {member.link && <div className="row-container">
-      <div className="card-label">Link to affiliation:</div>
-      <div className="card-content"><a href={member.link}>{member.link}</a></div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={member._id}
-      key={`edit-${member._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={member._id}
-      key={`delete-${member._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
-const SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {memberList.map((member, index) => (
-        <SortableCommitteeMember 
-          member={member} 
-          key={`member-${member._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class CommitteeCMS extends Component {
@@ -84,6 +13,7 @@ class CommitteeCMS extends Component {
     super();
 
     this.state = { 
+      // committeeMembers: [{name: "John Allen", affiliation: "PSRC, Early College HS", _id: 123}, {name: "Traci Bullard", affiliation: "SERMC", link: "http://www.navsea.navy.mil/Home/RMC/SERMC/", id: 456}],
       committeeMembers: [],
       id: "",
       name: "",
@@ -250,75 +180,61 @@ class CommitteeCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            {/* button to add new committee member */}
-            <div style={generalStyles.addNewButton} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            <AddNewButton handleAdd={this.handleAdd} />            
 
             {/* modal to enter new committee member info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
-                  <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Name:</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="affiliation" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Affiliation:</label>
-                    <input 
-                      type="text" 
-                      id="affiliation" 
-                      value={this.state.affiliation} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: "0.9em", fontStyle: "italic", color: "#666"}}>(optional)</span></label>
-                    <input 
-                      type="url" 
-                      id="link" 
-                      value={this.state.link} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
+                  <TextInput 
+                    id="name"
+                    label="Name:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
+                  <TextInput 
+                    id="affiliation"
+                    label="Affiliation:"
+                    value={this.state.affiliation}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
+                  <TextInput 
+                    id="link"
+                    label="Link to affiliation website:"
+                    type="url" 
+                    value={this.state.link}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
+
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+                  
                 </form>
               </div>
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableMemberList 
-                memberList={this.state.committeeMembers} 
+                itemList={this.state.committeeMembers}
+                itemType="member" 
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -328,6 +244,13 @@ class CommitteeCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(member) => 
+                  [
+                    {label: "Name:", content: member.name},
+                    {label: "Affiliation:", content: member.affiliation},
+                    {label: "Link to affiliation:", content: member.link ? `<a href=${member.link}>${member.link}</a>` : ""}
+                  ]
+                }
               />
             </div>
           </div>

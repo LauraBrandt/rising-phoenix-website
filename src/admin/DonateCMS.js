@@ -1,85 +1,13 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
-import generalStyles from "../styles/admin/generalStyles";
+import { arrayMove } from "react-sortable-hoc";
+import SortableRewardLevelList from "./components/SortableItemList";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput, TextAreaInput } from "./components/inputs";
+import inputStyles from "../styles/admin/inputStyles";
+import containerStyles from "../styles/admin/containerStyles";
 import donateStyles from "../styles/admin/donateStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-const DragHandle = SortableHandle(() => 
-  <div style={generalStyles.dragHandle}>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-  </div>
-);
-
-const SortableRewardLevel = SortableElement(({level, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={level._id} 
-    key={`sortable-element-${level._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Amount:</div>
-      {level.amountEnd ? 
-        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - {level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
-        : 
-        <div className="card-content">$ {level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +</div>}
-    </div>
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{level.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Reward:</div>
-      <div className="card-content">{level.reward}</div>
-    </div>
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={level._id}
-      key={`edit-${level._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={level._id}
-      key={`delete-${level._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
-const SortableRewardLevelList = SortableContainer(({rewardLevelList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {rewardLevelList.map((level, index) => (
-        <SortableRewardLevel 
-          level={level} 
-          key={`level-${level._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class DonateCMS extends Component {
@@ -337,152 +265,124 @@ class DonateCMS extends Component {
           :
           <div>
             <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault();} : this.handleSubmitInfo}>
-              <div style={donateStyles.inputContainer}>
-                <label htmlFor="donateText" style={[generalStyles.label, donateStyles.label]}>
-                  Text for the section on how to donate:
-                </label>
-                <textarea
-                  id="donateText" 
-                  value={this.state.donateText} 
-                  style={[generalStyles.inputText, donateStyles.textarea]}
-                  maxLength={500}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div style={donateStyles.inputContainer}>
-                <label htmlFor="rewardText" style={[generalStyles.label, donateStyles.label]}>
-                  Text for the section describing rewards:
-                </label>
-                <textarea 
-                  id="rewardText" 
-                  value={this.state.rewardText} 
-                  style={[generalStyles.inputText, donateStyles.textarea]}
-                  maxLength={500}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div style={donateStyles.inputContainer}>
-                <label htmlFor="checkTo" style={[generalStyles.label, donateStyles.label]}>
-                  Make checks out to:
-                </label>
-                <input 
-                  type="text" 
-                  id="checkTo" 
-                  value={this.state.checkTo} 
-                  style={[generalStyles.inputText, donateStyles.input]}
-                  maxLength={100}
-                  onChange={this.handleChange}
-                />
-              </div>
-
+              <TextAreaInput 
+                id="donateText"
+                label="Text for the section on how to donate:"
+                value={this.state.donateText}
+                handleChange={this.handleChange}
+                maxLength={500}
+                containerStyle={donateStyles.inputContainer}
+                inputStyle={donateStyles.textarea}
+                labelStyle={donateStyles.label}
+              />
+              <TextAreaInput 
+                id="rewardText"
+                label="Text for the section describing rewards:"
+                value={this.state.rewardText}
+                handleChange={this.handleChange}
+                maxLength={500}
+                containerStyle={donateStyles.inputContainer}
+                inputStyle={donateStyles.textarea}
+                labelStyle={donateStyles.label}
+              />
+              <TextInput 
+                id="checkTo"
+                label="Make checks out to:"
+                value={this.state.checkTo}
+                handleChange={this.handleChange}
+                maxLength={100}
+                containerStyle={donateStyles.inputContainer}
+                labelStyle={donateStyles.label}
+                inputStyle={donateStyles.input}
+              />
               <div style={donateStyles.address}>
                 <h3 style={{textAlign: "left"}}>Address to mail checks to:</h3>
                 <div style={donateStyles.address.container}>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
-                    <label htmlFor="checkName" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
-                      Name:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkName" 
-                      value={this.state.checkName} 
-                      style={[generalStyles.inputText, donateStyles.address.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
-                    <label htmlFor="checkAddress1" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
-                      Address:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkAddress1" 
-                      value={this.state.checkAddress1} 
-                      style={[generalStyles.inputText, donateStyles.address.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer, {paddingTop: 0, marginTop: 0}]}>
-                    <label htmlFor="checkAddress2" style={[generalStyles.label, donateStyles.label, {width: 100, "@media (max-width: 700px)": { display: "none"}}]}>
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkAddress2" 
-                      value={this.state.checkAddress2} 
-                      style={[generalStyles.inputText, donateStyles.address.input, {margin: "0 0.5em 1em 0.5em"}]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
-                    <label htmlFor="checkCity" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
-                      City:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkCity" 
-                      value={this.state.checkCity} 
-                      style={[generalStyles.inputText, donateStyles.address.input]}
-                      maxLength={50}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
-                    <label htmlFor="checkState" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
-                      State:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkState" 
-                      value={this.state.checkState} 
-                      style={[generalStyles.inputText, donateStyles.address.input]}
-                      maxLength={2}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div style={[donateStyles.inputContainer, donateStyles.address.inputContainer]}>
-                    <label htmlFor="checkZip" style={[generalStyles.label, donateStyles.label, {width: 100}]}>
-                      Zip:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="checkZip" 
-                      value={this.state.checkZip} 
-                      style={[generalStyles.inputText, donateStyles.address.input]}
-                      maxLength={10}
-                      onChange={this.handleChange}
-                    />
-                  </div>
+                  <TextInput 
+                    id="checkName"
+                    label="Name:"
+                    value={this.state.checkName}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer}}
+                    labelStyle={{...donateStyles.label, width: 100}}
+                    inputStyle={donateStyles.address.input}
+                  />
+                  <TextInput 
+                    id="checkAddress1"
+                    label="Address:"
+                    value={this.state.checkAddress1}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer}}
+                    labelStyle={{...donateStyles.label, width: 100}}
+                    inputStyle={donateStyles.address.input}
+                  />
+                  <TextInput 
+                    id="checkAddress2"
+                    value={this.state.checkAddress2}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer, paddingTop: 0, marginTop: 0}}
+                    labelStyle={{...donateStyles.label, width: 100, "@media (max-width: 700px)": { display: "none"}}}
+                    inputStyle={{...donateStyles.address.input, margin: "0 0.5em 1em 0.5em"}}
+                  />
+                  <TextInput 
+                    id="checkCity"
+                    label="City:"
+                    value={this.state.checkCity}
+                    handleChange={this.handleChange}
+                    maxLength={50}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer}}
+                    labelStyle={{...donateStyles.label, width: 100}}
+                    inputStyle={donateStyles.address.input}
+                  />
+                  <TextInput 
+                    id="checkState"
+                    label="State:"
+                    value={this.state.checkState}
+                    handleChange={this.handleChange}
+                    maxLength={2}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer}}
+                    labelStyle={{...donateStyles.label, width: 100}}
+                    inputStyle={donateStyles.address.input}
+                  />
+                  <TextInput 
+                    id="checkZip"
+                    label="Zip:"
+                    value={this.state.checkZip}
+                    handleChange={this.handleChange}
+                    maxLength={10}
+                    containerStyle={{...donateStyles.inputContainer, ...donateStyles.address.inputContainer}}
+                    labelStyle={{...donateStyles.label, width: 100}}
+                    inputStyle={donateStyles.address.input}
+                  />
                 </div>
               </div>
-              <button style={[generalStyles.submitButton, this.state.currentlySaving && generalStyles.submitButton.disabled]}>Save Info</button>
+              <SaveButton currentlySaving={this.state.currentlySaving} info={true} />
             </form>
 
 
             <h2 style={donateStyles.rewardsHeader}>Reward Levels</h2>
-            {/* button to add new reward level */}
-            <div key="addNew" style={[generalStyles.addNewButton, donateStyles.addNewButton]} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            
+            <AddNewButton handleAdd={this.handleAdd} style={donateStyles.addNewButton} />
 
             {/* modal to enter new reward level info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmitRewardLevel}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
                   <div>
-                    <label htmlFor="rewardAmountStart" style={[generalStyles.label, generalStyles.modalContent.label]}>Amount:</label>
+                    <label htmlFor="rewardAmountStart" style={[inputStyles.label, inputStyles.modal.label]}>Amount:</label>
                     <div style={donateStyles.amountEntryContainer}>
                       $ <input 
                         type="number" 
                         id="rewardAmountStart" 
                         value={this.state.rewardAmountStart} 
-                        style={[generalStyles.inputText, generalStyles.modalContent.input, donateStyles.amountInput]}
+                        style={[inputStyles.inputText, inputStyles.modal.input, donateStyles.amountInput]}
                         maxLength={15}
                         min="0"
                         onChange={this.handleChange}
@@ -492,59 +392,43 @@ class DonateCMS extends Component {
                         type="number" 
                         id="rewardAmountEnd" 
                         value={this.state.rewardAmountEnd} 
-                        style={[generalStyles.inputText, generalStyles.modalContent.input, donateStyles.amountInput]}
+                        style={[inputStyles.inputText, inputStyles.modal.input, donateStyles.amountInput]}
                         maxLength={15}
                         min="0"
                         onChange={this.handleChange}
                       />
                     </div>
                   </div>
-                  <div>
-                    <label htmlFor="rewardName" style={[generalStyles.label, generalStyles.modalContent.label]}>Name <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="rewardName" 
-                      value={this.state.rewardName} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="rewardReward" style={[generalStyles.label, generalStyles.modalContent.label]}>Reward:</label>
-                    <input 
-                      type="text" 
-                      id="rewardReward" 
-                      value={this.state.rewardReward} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  <TextInput 
+                    id="rewardName"
+                    label="Name:"
+                    value={this.state.rewardName}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                  />
+                  <TextInput 
+                    id="rewardReward"
+                    label="Reward:"
+                    value={this.state.rewardReward}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                  />
+                  
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }
 
             {/* list of current reward levels */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableRewardLevelList 
-                rewardLevelList={this.state.rewardLevels} 
+                itemList={this.state.rewardLevels} 
+                itemType="level"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -554,6 +438,13 @@ class DonateCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(level) => 
+                  [
+                    {label: "Amount:", content: level.amountEnd ? `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +`},
+                    {label: "Name:", content: level.name},
+                    {label: "Reward:", content: level.reward}
+                  ]
+                }
               />
             </div>
 

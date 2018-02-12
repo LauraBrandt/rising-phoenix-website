@@ -1,92 +1,14 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import { arrayMove } from "react-sortable-hoc";
+import SortableEventList from "./components/SortableItemList";
+import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput, TextAreaInput } from "./components/inputs";
 import * as Datetime from "react-datetime";
 import moment from "moment";
-import generalStyles from "../styles/admin/generalStyles";
+import inputStyles from "../styles/admin/inputStyles";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const DragHandle = SortableHandle(() => 
-  <div style={generalStyles.dragHandle}>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-    <div>
-      <i className="fa fa-ellipsis-v" style={{marginRight: 3}}></i>
-      <i className="fa fa-ellipsis-v"></i>
-    </div>
-  </div>
-);
-
-const SortableEvent = SortableElement(({event, currentlyDeleting, handleEdit, handleDelete}) =>
-  <div 
-    className="card"
-    id={event._id} 
-    key={`sortable-element-${event._id}`}
-  >
-    <DragHandle />
-    <div className="row-container">
-      <div className="card-label">Name:</div>
-      <div className="card-content">{event.name}</div>
-    </div>
-    <div className="row-container">
-      <div className="card-label">Date:</div>
-      <div className="card-content">{moment(event.dateTime).format("M/D/YY H:mm a")}</div>
-    </div>
-    {event.location && <div className="row-container">
-      <div className="card-label">Location:</div>
-      <div className="card-content">{event.location}</div>
-    </div>}
-    {event.description && <div className="row-container">
-      <div className="card-label">Description:</div>
-      <div className="card-content pre-wrap">{event.description}</div>
-    </div>}
-    {event.minutesLink && <div className="row-container">
-      <div className="card-label">Link to minutes:</div>
-      <div className="card-content"><a href={event.minutesLink}>{event.minutesLink}</a></div>
-    </div>}
-    <button 
-      type="button"
-      title="Edit"
-      className={`edit ${currentlyDeleting ? "edit-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleEdit}
-      id={event._id}
-      key={`edit-${event._id}`}
-    >
-      <i className="fa fa-pencil"></i>
-    </button>
-    <button 
-      type="button"
-      title="Delete" 
-      className={`delete ${currentlyDeleting ? "delete-disabled" : ""}`}
-      onClick={currentlyDeleting ? (e)=> e.preventDefault() : handleDelete}
-      id={event._id}
-      key={`delete-${event._id}`}
-    >
-      <i className="fa fa-trash"></i>
-    </button>
-  </div>
-);
-
-const SortableEventList = SortableContainer(({eventList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {eventList.map((event, index) => (
-        <SortableEvent 
-          event={event} 
-          key={`event-${event._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class CalendarCMS extends Component {
@@ -286,95 +208,73 @@ class CalendarCMS extends Component {
           <p>Sorry, something went wrong. Please try again later.</p>
           :
           <div>
-            {/* button to add new event */}
-            <div style={generalStyles.addNewButton} onClick={this.handleAdd}>
-              <i className="fa fa-plus" aria-hidden="true" style={{marginRight: 20}}></i> Add new
-            </div>
+            <AddNewButton handleAdd={this.handleAdd} />
 
             {/* modal to enter new event info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
+                  <TextInput 
+                    id="name"
+                    label="Name of Event:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                  />
                   <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Name of Event <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="dateTime" style={[generalStyles.label, generalStyles.modalContent.label]}>Date and Time <span>*</span> :</label>
+                    <label htmlFor="dateTime" style={[inputStyles.label, inputStyles.modal.label]}>Date and Time: <span>*</span></label>
                     <Datetime 
                       id="dateTime"
                       value={this.state.dateTime}
                       onChange={this.handleChange}
-                      inputProps={{style: {...generalStyles.inputText, ...generalStyles.modalContent.input}, required: true}}
+                      inputProps={{style: {...inputStyles.inputText, ...inputStyles.modal.input}, required: true}}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="location" style={[generalStyles.label, generalStyles.modalContent.label]}>Location:</label>
-                    <input 
-                      type="text" 
-                      id="location" 
-                      value={this.state.location} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="description" style={[generalStyles.label, generalStyles.modalContent.label, generalStyles.textareaLabel]}>Description:</label>
-                    <textarea 
-                      id="description" 
-                      value={this.state.description} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {height: 100}]}
-                      maxLength={500}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="minutesLink" style={[generalStyles.label, generalStyles.modalContent.label]}>Link to minutes:</label>
-                    <input 
-                      type="url" 
-                      id="minutesLink" 
-                      value={this.state.minutesLink} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <button 
-                    type="submit"
-                    key="submit" 
-                    style={[generalStyles.submitButton, generalStyles.modalContent.submit, this.state.currentlySaving && generalStyles.submitButton.disabled]}
-                  >
-                    Save
-                  </button>
-                  <button 
-                    type="button"
-                    key="cancel" 
-                    style={[generalStyles.modalContent.cancel, this.state.currentlySaving && generalStyles.modalContent.cancel.disabled]}
-                    onClick={this.handleCancel}
-                  >
-                    Cancel
-                  </button>
+                  <TextInput 
+                    id="location"
+                    label="Location:"
+                    value={this.state.location}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                  />
+                  <TextAreaInput 
+                    id="description"
+                    label="Description:"
+                    value={this.state.description}
+                    handleChange={this.handleChange}
+                    maxLength={500}
+                    modal={true}
+                    inputStyle={{height: 100}}
+                  />
+                  <TextInput 
+                    id="minutesLink"
+                    label="Link to minutes:"
+                    type="url" 
+                    value={this.state.minutesLink}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                  />
+
+                  <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
+                  <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
+
                 </form>
               </div>
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableEventList 
-                eventList={this.state.events} 
+                itemList={this.state.events} 
+                itemType="event"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -384,6 +284,15 @@ class CalendarCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(event) => 
+                  [
+                    {label: "Name:", content: event.name},
+                    {label: "Date:", content: event.dateTime ? moment(event.dateTime).format("M/D/YY H:mm a") : ""},
+                    {label: "Location:", content: event.location},
+                    {label: "Description:", content: event.description},
+                    {label: "Link to minutes:", content: event.minutesLink ? `<a href=${event.minutesLink}>${event.minutesLink}</a>` : ""}
+                  ]
+                }
               />
             </div>
           </div>

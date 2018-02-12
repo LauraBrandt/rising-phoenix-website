@@ -1,15 +1,15 @@
 import React from "react";
 import Radium from "radium";
-import generalStyles from "../styles/admin/generalStyles";
+import loginStyles from "../styles/admin/loginStyles";
 import { login } from "../utils/authService";
 
 let Login = () => {
   document.title = "Login | Rising Phoenix CMS";
   return (
-    <div style={generalStyles.login}>
-      <div style={generalStyles.login.text}>You must be authorized to enter.</div>
+    <div style={loginStyles}>
+      <div style={loginStyles.text}>You must be authorized to enter.</div>
       <button 
-        style={[generalStyles.submitButton, {width: "100%"}]}
+        style={loginStyles.submit}
         onClick={() => login()}
       >
         Log In
