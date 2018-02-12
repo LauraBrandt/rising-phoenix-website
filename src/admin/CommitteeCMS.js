@@ -1,34 +1,10 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer } from "react-sortable-hoc";
-import SortableCommitteeMember from "./components/SortableItem";
+import { arrayMove } from "react-sortable-hoc";
+import SortableMemberList from "./components/SortableItemList";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const SortableMemberList = SortableContainer(({memberList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {memberList.map((member, index) => (
-        <SortableCommitteeMember 
-          item={member} 
-          key={`member-${member._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-          fieldList={[
-            {label: "Name:", content: member.name},
-            {label: "Affiliation:", content: member.affiliation},
-            {label: "Link to affiliation:", content: member.link ? `<a href=${member.link}>${member.link}</a>` : ""}
-          ]}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class CommitteeCMS extends Component {
@@ -257,7 +233,8 @@ class CommitteeCMS extends Component {
             {/* list of current committee members */}
             <div style={generalStyles.listContainer}>
               <SortableMemberList 
-                memberList={this.state.committeeMembers} 
+                itemList={this.state.committeeMembers}
+                itemType="member" 
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -267,6 +244,13 @@ class CommitteeCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(member) => 
+                  [
+                    {label: "Name:", content: member.name},
+                    {label: "Affiliation:", content: member.affiliation},
+                    {label: "Link to affiliation:", content: member.link ? `<a href=${member.link}>${member.link}</a>` : ""}
+                  ]
+                }
               />
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer } from "react-sortable-hoc";
-import SortableNewsStory from "./components/SortableItem";
+import { arrayMove } from "react-sortable-hoc";
+import SortableNewsList from "./components/SortableItemList";
 import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import RichTextEditor from "react-rte";
@@ -8,31 +8,6 @@ import generalStyles from "../styles/admin/generalStyles";
 import homeStyles from "../styles/admin/homeStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const SortableNewsList = SortableContainer(({newsList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {newsList.map((story, index) => (
-        <SortableNewsStory 
-          item={story} 
-          key={`news-${story._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-          fieldList={[
-            {label: "Title:", content: story.title},
-            {label: "Image:", content: story.image ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}" alt=${story.alt}/>` : ""},
-            {label: "Image Alt Text:", content: story.alt},
-            {rte: true, value: RichTextEditor.createValueFromString(story.article, 'html')}
-          ]}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class HomeCMS extends Component {
@@ -461,7 +436,8 @@ class HomeCMS extends Component {
             {/* list of current news stories */}
             <div style={generalStyles.listContainer}>
               <SortableNewsList 
-                newsList={this.state.news} 
+                itemList={this.state.news}
+                itemType="news" 
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -471,6 +447,14 @@ class HomeCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(story) => 
+                  [
+                    {label: "Title:", content: story.title},
+                    {label: "Image:", content: story.image ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}" alt=${story.alt}/>` : ""},
+                    {label: "Image Alt Text:", content: story.alt},
+                    {rte: true, value: RichTextEditor.createValueFromString(story.article, 'html')}
+                  ]
+                }
               />
             </div>
 

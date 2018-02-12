@@ -1,35 +1,12 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer } from "react-sortable-hoc";
-import SortableSponsor from "./components/SortableItem";
+import { arrayMove } from "react-sortable-hoc";
+import SortableSponsorList from "./components/SortableItemList";
 import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
-
-const SortableSponsorList = SortableContainer(({sponsorList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {sponsorList.map((sponsor, index) => (
-        <SortableSponsor
-          item={sponsor} 
-          key={`sponsor-${sponsor._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-          fieldList={[
-            {label: "Name:", content: sponsor.name},
-            {label: "Website:", content: sponsor.link ? `<a href=${sponsor.link}>${sponsor.link}</a>` : ""},
-            {label: "Logo:", content: sponsor.logo ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}" alt="${sponsor.name} logo"/>` : ""}
-          ]}
-        />
-      ))}
-    </div>
-  );
-});
 
 class CorporateSponsorsCMS extends Component {
   constructor() {
@@ -305,7 +282,8 @@ class CorporateSponsorsCMS extends Component {
             {/* list of current committee members */}
             <div style={generalStyles.listContainer}>
               <SortableSponsorList 
-                sponsorList={this.state.sponsors} 
+                itemList={this.state.sponsors} 
+                itemType="sponsor"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -315,6 +293,13 @@ class CorporateSponsorsCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(sponsor) => 
+                  [
+                    {label: "Name:", content: sponsor.name},
+                    {label: "Website:", content: sponsor.link ? `<a href=${sponsor.link}>${sponsor.link}</a>` : ""},
+                    {label: "Logo:", content: sponsor.logo ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${sponsor.logo}" alt="${sponsor.name} logo"/>` : ""}
+                  ]
+                }
               />
             </div>
           </div>

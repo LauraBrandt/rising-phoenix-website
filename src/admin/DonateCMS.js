@@ -1,35 +1,11 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer } from "react-sortable-hoc";
-import SortableRewardLevel from "./components/SortableItem";
+import { arrayMove } from "react-sortable-hoc";
+import SortableRewardLevelList from "./components/SortableItemList";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import generalStyles from "../styles/admin/generalStyles";
 import donateStyles from "../styles/admin/donateStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const SortableRewardLevelList = SortableContainer(({rewardLevelList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {rewardLevelList.map((level, index) => (
-        <SortableRewardLevel 
-          item={level} 
-          key={`level-${level._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-          fieldList={[
-            {label: "Amount:", content: level.amountEnd ? `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +`},
-            {label: "Name:", content: level.name},
-            {label: "Reward:", content: level.reward}
-          ]}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class DonateCMS extends Component {
@@ -481,7 +457,8 @@ class DonateCMS extends Component {
             {/* list of current reward levels */}
             <div style={generalStyles.listContainer}>
               <SortableRewardLevelList 
-                rewardLevelList={this.state.rewardLevels} 
+                itemList={this.state.rewardLevels} 
+                itemType="level"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -491,6 +468,13 @@ class DonateCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(level) => 
+                  [
+                    {label: "Amount:", content: level.amountEnd ? `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${level.amountEnd.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : `$ ${level.amountStart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} +`},
+                    {label: "Name:", content: level.name},
+                    {label: "Reward:", content: level.reward}
+                  ]
+                }
               />
             </div>
 

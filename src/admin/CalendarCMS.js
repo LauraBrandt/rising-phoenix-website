@@ -1,38 +1,12 @@
 import React, {Component} from "react";
-import { arrayMove, SortableContainer } from "react-sortable-hoc";
-import SortableEvent from "./components/SortableItem";
+import { arrayMove } from "react-sortable-hoc";
+import SortableEventList from "./components/SortableItemList";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
 import * as Datetime from "react-datetime";
 import moment from "moment";
 import generalStyles from "../styles/admin/generalStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
-
-
-const SortableEventList = SortableContainer(({eventList, currentlyDeleting, handleEdit, handleDelete, disabled}) => {
-  return (
-    <div>
-      {eventList.map((event, index) => (
-        <SortableEvent 
-          item={event} 
-          key={`event-${event._id}`}
-          index={index}
-          currentlyDeleting={currentlyDeleting}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-          disabled={disabled}
-          fieldList={[
-            {label: "Name:", content: event.name},
-            {label: "Date:", content: event.dateTime ? moment(event.dateTime).format("M/D/YY H:mm a") : ""},
-            {label: "Location:", content: event.location},
-            {label: "Description:", content: event.description},
-            {label: "Link to minutes:", content: event.minutesLink ? `<a href=${event.minutesLink}>${event.minutesLink}</a>` : ""}
-          ]}
-        />
-      ))}
-    </div>
-  );
-});
 
 
 class CalendarCMS extends Component {
@@ -306,7 +280,8 @@ class CalendarCMS extends Component {
             {/* list of current committee members */}
             <div style={generalStyles.listContainer}>
               <SortableEventList 
-                eventList={this.state.events} 
+                itemList={this.state.events} 
+                itemType="event"
                 onSortEnd={this.onSortEnd} 
                 currentlyDeleting={this.state.currentlyDeleting}
                 handleEdit={this.handleEdit}
@@ -316,6 +291,15 @@ class CalendarCMS extends Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 disabled={this.state.currentlySaving}
+                fieldList={(event) => 
+                  [
+                    {label: "Name:", content: event.name},
+                    {label: "Date:", content: event.dateTime ? moment(event.dateTime).format("M/D/YY H:mm a") : ""},
+                    {label: "Location:", content: event.location},
+                    {label: "Description:", content: event.description},
+                    {label: "Link to minutes:", content: event.minutesLink ? `<a href=${event.minutesLink}>${event.minutesLink}</a>` : ""}
+                  ]
+                }
               />
             </div>
           </div>
