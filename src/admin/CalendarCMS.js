@@ -2,9 +2,11 @@ import React, {Component} from "react";
 import { arrayMove } from "react-sortable-hoc";
 import SortableEventList from "./components/SortableItemList";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput, TextAreaInput } from "./components/inputs";
 import * as Datetime from "react-datetime";
 import moment from "moment";
-import generalStyles from "../styles/admin/generalStyles";
+import inputStyles from "../styles/admin/inputStyles";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
@@ -210,65 +212,56 @@ class CalendarCMS extends Component {
 
             {/* modal to enter new event info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
+                  <TextInput 
+                    id="name"
+                    label="Name of Event:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                  />
                   <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Name of Event <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="dateTime" style={[generalStyles.label, generalStyles.modalContent.label]}>Date and Time <span>*</span> :</label>
+                    <label htmlFor="dateTime" style={[inputStyles.label, inputStyles.modal.label]}>Date and Time: <span>*</span></label>
                     <Datetime 
                       id="dateTime"
                       value={this.state.dateTime}
                       onChange={this.handleChange}
-                      inputProps={{style: {...generalStyles.inputText, ...generalStyles.modalContent.input}, required: true}}
+                      inputProps={{style: {...inputStyles.inputText, ...inputStyles.modal.input}, required: true}}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="location" style={[generalStyles.label, generalStyles.modalContent.label]}>Location:</label>
-                    <input 
-                      type="text" 
-                      id="location" 
-                      value={this.state.location} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="description" style={[generalStyles.label, generalStyles.modalContent.label, generalStyles.textareaLabel]}>Description:</label>
-                    <textarea 
-                      id="description" 
-                      value={this.state.description} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {height: 100}]}
-                      maxLength={500}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="minutesLink" style={[generalStyles.label, generalStyles.modalContent.label]}>Link to minutes:</label>
-                    <input 
-                      type="url" 
-                      id="minutesLink" 
-                      value={this.state.minutesLink} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
+                  <TextInput 
+                    id="location"
+                    label="Location:"
+                    value={this.state.location}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                  />
+                  <TextAreaInput 
+                    id="description"
+                    label="Description:"
+                    value={this.state.description}
+                    handleChange={this.handleChange}
+                    maxLength={500}
+                    modal={true}
+                    inputStyle={{height: 100}}
+                  />
+                  <TextInput 
+                    id="minutesLink"
+                    label="Link to minutes:"
+                    type="url" 
+                    value={this.state.minutesLink}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                  />
 
                   <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
                   <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
@@ -278,7 +271,7 @@ class CalendarCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableEventList 
                 itemList={this.state.events} 
                 itemType="event"

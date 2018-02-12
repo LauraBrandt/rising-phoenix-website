@@ -11,6 +11,7 @@ const donateStyles = {
     width: 390, 
     margin: "1em 0", 
     textAlign: "right",
+    bottom:0,
     "@media (max-width: 900px)": {
       margin: "1em 1em 0 1em",
       padding: 0,

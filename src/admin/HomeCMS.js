@@ -3,8 +3,10 @@ import { arrayMove } from "react-sortable-hoc";
 import SortableNewsList from "./components/SortableItemList";
 import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
+import { TextInput, TextAreaInput, ImageInput } from "./components/inputs";
 import RichTextEditor from "react-rte";
-import generalStyles from "../styles/admin/generalStyles";
+import inputStyles from "../styles/admin/inputStyles";
+import containerStyles from "../styles/admin/containerStyles";
 import homeStyles from "../styles/admin/homeStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
@@ -290,59 +292,50 @@ class HomeCMS extends Component {
           :
           <div>
             <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault();} : this.handleSubmitInfo}>
+              <TextInput 
+                id="tagline"
+                label="Tagline:"
+                value={this.state.tagline}
+                handleChange={this.handleChange}
+                maxLength={100}
+              />
+              <TextAreaInput 
+                id="blurb"
+                label="Short blurb about Rising Phoenix:"
+                value={this.state.blurb}
+                handleChange={this.handleChange}
+                maxLength={750}
+                inputStyle={{height: 150}}
+                labelStyle={homeStyles.modalContent.textareaLabel}
+              />
+              <TextInput 
+                id="blurbTitle"
+                label="Title of blurb:"
+                value={this.state.blurbTitle}
+                handleChange={this.handleChange}
+                maxLength={100}
+              />
               <div>
-                <label htmlFor="tagline" style={generalStyles.label}>Tagline:</label>
-                <input 
-                  type="text" 
-                  id="tagline" 
-                  value={this.state.tagline} 
-                  style={generalStyles.inputText}
-                  maxLength={100}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="blurb" style={[generalStyles.label, generalStyles.textareaLabel, homeStyles.modalContent.textareaLabel]}>Short blurb about Rising Phoenix:</label>
-                <textarea
-                  id="blurb" 
-                  value={this.state.blurb} 
-                  style={[generalStyles.inputText, {height: 150}]}
-                  maxLength={750}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="blurbTitle" style={generalStyles.label}>Title of blurb:</label>
-                <input 
-                  type="text" 
-                  id="blurbTitle" 
-                  value={this.state.blurbTitle} 
-                  style={generalStyles.inputText}
-                  maxLength={100}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="goalAmount" style={generalStyles.label}>Goal Amount:</label>
+                <label htmlFor="goalAmount" style={inputStyles.label}>Goal Amount:</label>
                 <div style={{display: "inline-block", maxWidth: "90%", whiteSpace: "nowrap"}}>
                   $ <input 
                     type="number" 
                     id="goalAmount" 
                     value={this.state.goalAmount} 
-                    style={generalStyles.inputText}
+                    style={inputStyles.inputText}
                     maxLength={20}
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="donatedAmount" style={generalStyles.label}>Amount Donated:</label>
+                <label htmlFor="donatedAmount" style={inputStyles.label}>Amount Donated:</label>
                 <div style={{display: "inline-block", maxWidth: "90%", whiteSpace: "nowrap"}}>
                   $ <input 
                     type="number" 
                     id="donatedAmount" 
                     value={this.state.donatedAmount} 
-                    style={generalStyles.inputText}
+                    style={inputStyles.inputText}
                     maxLength={20}
                     onChange={this.handleChange}
                   />
@@ -358,64 +351,51 @@ class HomeCMS extends Component {
 
             {/* modal to enter new news story */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmitNewsStory}
-                  style={[generalStyles.modalContent, homeStyles.modalContent]}
+                  style={[containerStyles.modalContent, homeStyles.modalContent]}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
+                  <TextInput 
+                    id="newsTitle"
+                    label="Title:"
+                    value={this.state.newsTitle}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    required={true}
+                    modal={true}
+                    labelStyle={homeStyles.modalContent.label}
+                    inputStyle={homeStyles.modalContent.input}
+                  />
+                  <ImageInput 
+                    id="newsImage" 
+                    label="Image:"
+                    modal={true}
+                    value={this.state.newsImagePath}
+                    handleChange={this.handleChange}
+                    labelStyle={homeStyles.modalContent.label}
+                    containerStyle={homeStyles.modalContent.fileInputContainer}
+                  />
+                  <ImagePreview  
+                    image={this.state.newsImage} 
+                    path={this.state.newsImagePath} 
+                    file={this.state.newsImageFile} 
+                    alt={this.state.alt} 
+                    removeImage={this.removeImage} 
+                  />
+                  <TextInput 
+                    id="newsImageAlt"
+                    label="Brief description of image:"
+                    value={this.state.newsImageAlt}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    labelStyle={homeStyles.modalContent.label}
+                    inputStyle={homeStyles.modalContent.input}
+                  />
                   <div>
-                    <label htmlFor="newsTitle" style={[generalStyles.label, generalStyles.modalContent.label, homeStyles.modalContent.label]}>Title <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="newsTitle" 
-                      value={this.state.newsTitle} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, homeStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <div style={[generalStyles.label, generalStyles.modalContent.label, homeStyles.modalContent.label]}>Image:</div>
-                    <div style={[generalStyles.modalContent.fileInputContainer, homeStyles.modalContent.fileInputContainer]}>
-                      <label 
-                        htmlFor="newsImage" 
-                        style={generalStyles.modalContent.fileInput}
-                        key="fileInput"
-                      >
-                        Choose a File
-                      </label>
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        id="newsImage"
-                        style={{opacity: 0, width: 0, height: 0}}
-                        value={this.state.newsImagePath}
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <ImagePreview  
-                      image={this.state.newsImage} 
-                      path={this.state.newsImagePath} 
-                      file={this.state.newsImageFile} 
-                      alt={this.state.alt} 
-                      removeImage={this.removeImage} 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="newsImageAlt" style={[generalStyles.label, generalStyles.modalContent.label, homeStyles.modalContent.label]}>Brief description of image:</label>
-                    <input 
-                      type="text" 
-                      id="newsImageAlt" 
-                      value={this.state.newsImageAlt} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, homeStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="newsArticle" style={[generalStyles.label, generalStyles.modalContent.label, homeStyles.modalContent.articleLabel]}>Article:</label>
+                    <label htmlFor="newsArticle" style={[inputStyles.label, inputStyles.modal.label, homeStyles.modalContent.articleLabel]}>Article:</label>
                     <RichTextEditor
                       id="newsArticle"
                       toolbarConfig={toolbarConfig}
@@ -434,7 +414,7 @@ class HomeCMS extends Component {
             }
 
             {/* list of current news stories */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableNewsList 
                 itemList={this.state.news}
                 itemType="news" 

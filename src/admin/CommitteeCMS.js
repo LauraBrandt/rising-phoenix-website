@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import { arrayMove } from "react-sortable-hoc";
 import SortableMemberList from "./components/SortableItemList";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
-import generalStyles from "../styles/admin/generalStyles";
+import { TextInput } from "./components/inputs";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
@@ -183,45 +184,44 @@ class CommitteeCMS extends Component {
 
             {/* modal to enter new committee member info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
-                  <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Name:</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="affiliation" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Affiliation:</label>
-                    <input 
-                      type="text" 
-                      id="affiliation" 
-                      value={this.state.affiliation} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label, {width: 220 }]}>Link to affiliation website: <span style={{fontSize: "0.9em", fontStyle: "italic", color: "#666"}}>(optional)</span></label>
-                    <input 
-                      type="url" 
-                      id="link" 
-                      value={this.state.link} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input, {width: 330 }]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
+                  <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
+                  <TextInput 
+                    id="name"
+                    label="Name:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
+                  <TextInput 
+                    id="affiliation"
+                    label="Affiliation:"
+                    value={this.state.affiliation}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
+                  <TextInput 
+                    id="link"
+                    label="Link to affiliation website:"
+                    type="url" 
+                    value={this.state.link}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                    labelStyle={{width: 220}}
+                    inputStyle={{width: 330}}
+                  />
 
                   <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
                   <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
@@ -231,7 +231,7 @@ class CommitteeCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableMemberList 
                 itemList={this.state.committeeMembers}
                 itemType="member" 

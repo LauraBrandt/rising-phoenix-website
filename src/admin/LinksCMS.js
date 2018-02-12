@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { SaveButton } from "./components/buttons";
-import generalStyles from "../styles/admin/generalStyles";
-import Radium from "radium";
+import { TextInput } from "./components/inputs";
 import { getData, postData } from "../utils/apiCalls";
 
 class LinksCMS extends Component {
@@ -75,36 +74,27 @@ class LinksCMS extends Component {
           :
           <div>
             <form onSubmit={this.state.currentlySaving ? (e)=>{e.preventDevault();} : this.handleSubmit}>
-              <div>
-                <label htmlFor="facebookValue" style={generalStyles.label}>Link to Facebook page:</label>
-                <input 
-                  type="url" 
-                  id="facebookValue" 
-                  value={this.state.facebookValue} 
-                  style={generalStyles.inputText}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="twitterValue" style={generalStyles.label}>Link to Twitter account:</label>
-                <input 
-                  type="url" 
-                  id="twitterValue" 
-                  value={this.state.twitterValue} 
-                  style={generalStyles.inputText}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="donateValue" style={generalStyles.label}>Link to Go Fund Me:</label>
-                <input 
-                  type="url" 
-                  id="donateValue" 
-                  value={this.state.donateValue} 
-                  style={generalStyles.inputText}
-                  onChange={this.handleChange}
-                />
-              </div>
+              <TextInput 
+                id="facebookValue"
+                label="Link to Facebook page:"
+                type="url"
+                value={this.state.facebookValue}
+                handleChange={this.handleChange}
+              />
+              <TextInput 
+                id="twitterValue"
+                label="Link to Twitter account:"
+                type="url"
+                value={this.state.twitterValue}
+                handleChange={this.handleChange}
+              />
+              <TextInput 
+                id="donateValue"
+                label="Link to Go Fund Me:"
+                type="url"
+                value={this.state.donateValue}
+                handleChange={this.handleChange}
+              />
               <SaveButton currentlySaving={this.state.currentlySaving} />
             </form>
           </div>
@@ -113,6 +103,5 @@ class LinksCMS extends Component {
     );
   }
 }
-LinksCMS = Radium(LinksCMS);
   
 export default LinksCMS;

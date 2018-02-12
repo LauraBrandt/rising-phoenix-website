@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { SaveButton } from "./components/buttons";
-import generalStyles from "../styles/admin/generalStyles";
+import inputStyles from "../styles/admin/inputStyles";
 import Radium from "radium";
 import { getData, postData } from "../utils/apiCalls";
 
@@ -75,7 +75,7 @@ class IndividualSponsorsCMS extends Component {
               <textarea 
                 onChange={this.handleEntryChange} 
                 value={this.state.sponsorsEntryValue}
-                style={[generalStyles.inputText, {height: 200}]}  
+                style={[inputStyles.inputText, {height: 200}]}  
               ></textarea>
               <SaveButton currentlySaving={this.state.currentlySaving} />
             </form>

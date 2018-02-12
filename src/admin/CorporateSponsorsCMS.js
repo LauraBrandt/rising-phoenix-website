@@ -3,7 +3,8 @@ import { arrayMove } from "react-sortable-hoc";
 import SortableSponsorList from "./components/SortableItemList";
 import ImagePreview from "./components/ImagePreview";
 import { AddNewButton, SaveButton, CancelButton } from "./components/buttons";
-import generalStyles from "../styles/admin/generalStyles";
+import { TextInput, ImageInput } from "./components/inputs";
+import containerStyles from "../styles/admin/containerStyles";
 import Radium from "radium";
 import { getData, postData, deleteData, putData } from "../utils/apiCalls";
 
@@ -215,62 +216,44 @@ class CorporateSponsorsCMS extends Component {
 
             {/* modal to enter new sponsor info */}
             {this.state.addNewOpen && 
-              <div style={generalStyles.modalContainer}>
+              <div style={containerStyles.modalContainer}>
                 <form 
                   onSubmit={this.state.currentlySaving ? (e) => e.preventDefault() : this.handleSubmit}
-                  style={generalStyles.modalContent}
+                  style={containerStyles.modalContent}
                 >
                   <p style={{fontSize: "0.9em", color: "#777", marginTop: 0}}>Fields marked with a * are required.</p>
-                  <div>
-                    <label htmlFor="name" style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Name <span>*</span> :</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      value={this.state.name} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={100}
-                      onChange={this.handleChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="link" style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Website:</label>
-                    <input 
-                      type="url" 
-                      id="link" 
-                      value={this.state.link} 
-                      style={[generalStyles.inputText, generalStyles.modalContent.input]}
-                      maxLength={150}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div>
-                    <div style={[generalStyles.label, generalStyles.modalContent.label]}>Sponsor Logo:</div>
-                    <div style={generalStyles.modalContent.fileInputContainer}>
-                      <label 
-                        htmlFor="logo" 
-                        style={generalStyles.modalContent.fileInput}
-                        key="fileInput"
-                      >
-                        Choose a File
-                      </label>
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        id="logo"
-                        style={{opacity: 0, width: 0, height: 0}}
-                        value={this.state.logoPath}
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <ImagePreview  
-                      image={this.state.logo} 
-                      path={this.state.logoPath} 
-                      file={this.state.logoFile} 
-                      alt={`${this.state.name} logo`} 
-                      removeImage={this.removeImage} 
-                    />
-                  </div>
+                  <TextInput 
+                    id="name"
+                    label="Sponsor Name:"
+                    value={this.state.name}
+                    handleChange={this.handleChange}
+                    maxLength={100}
+                    modal={true}
+                    required={true}
+                  />
+                  <TextInput 
+                    id="link"
+                    label="Sponsor Website:"
+                    type="url"
+                    value={this.state.link}
+                    handleChange={this.handleChange}
+                    maxLength={150}
+                    modal={true}
+                  />
+                  <ImageInput 
+                    id="logo" 
+                    label="Sponsor Logo:"
+                    modal={true}
+                    value={this.state.logoPath}
+                    handleChange={this.handleChange}
+                  />
+                  <ImagePreview  
+                    image={this.state.logo} 
+                    path={this.state.logoPath} 
+                    file={this.state.logoFile} 
+                    alt={`${this.state.name} logo`} 
+                    removeImage={this.removeImage} 
+                  />
 
                   <SaveButton currentlySaving={this.state.currentlySaving} modal={true} />
                   <CancelButton currentlySaving={this.state.currentlySaving} handleCancel={this.handleCancel} />
@@ -280,7 +263,7 @@ class CorporateSponsorsCMS extends Component {
             }
 
             {/* list of current committee members */}
-            <div style={generalStyles.listContainer}>
+            <div style={containerStyles.listContainer}>
               <SortableSponsorList 
                 itemList={this.state.sponsors} 
                 itemType="sponsor"
