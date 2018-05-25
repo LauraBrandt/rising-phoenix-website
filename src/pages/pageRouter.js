@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Home from "./Home";
 import About from "./About";
 import CommitteeMembers from "./CommitteeMembers";
+import Bylaws from "./Bylaws";
 import Calendar from "./Calendar";
 import CorporateSponsors from "./CorporateSponsors";
 import IndividualSponsors from "./IndividualSponsors";
@@ -47,6 +48,7 @@ class PageRouter extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/committee-members" component={CommitteeMembers}/>
+          <Route exact path="/bylaws" component={Bylaws}/>
           <Route exact path="/calendar" component={Calendar}/>
           <Route exact path="/corporate-sponsors" component={CorporateSponsors}/>
           <Route exact path="/individual-sponsors" component={IndividualSponsors}/>

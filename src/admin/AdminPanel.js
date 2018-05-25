@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard";
 import HomeCMS from "./HomeCMS";
 import AboutCMS from "./AboutCMS";
 import CommitteeCMS from "./CommitteeCMS";
+import BylawsCMS from "./BylawsCMS";
 import CalendarCMS from "./CalendarCMS";
 import CorporateSponsorsCMS from "./CorporateSponsorsCMS";
 import IndividualSponsorsCMS from "./IndividualSponsorsCMS";

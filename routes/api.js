@@ -15,6 +15,7 @@ const homeController = require("./controllers/home-controller.js");
 const newsController = require("./controllers/news-controller.js");
 const aboutController = require("./controllers/about-controller.js");
 const committeeMembersController = require("./controllers/committee-members-controller.js");
+const bylawsController = require("./controllers/bylaws-controller.js");
 const calendarController = require("./controllers/calendar-controller.js");
 const corporateSponsorsController = require("./controllers/corporate-sponsors-controller.js");
 const individualSponsorsController = require("./controllers/individual-sponsors-controller.js");
@@ -58,6 +59,10 @@ router.get("/committee-members", (req, res) => {
   committeeMembersController.get(res);
 });
 
+router.get("/bylaws", (req, res) => {
+  bylawsController.get(res);
+});
+
 router.get("/calendar", (req, res) => {
   calendarController.get(res);
 });
@@ -98,6 +103,10 @@ router.post("/about", authCheck, (req, res, next) => {
 
 router.post("/committee-members", authCheck, (req, res, next) => {  
   committeeMembersController.post(req, res, next);
+});
+
+router.post("/bylaws", authCheck, (req, res, next) => {
+  bylawsController.post(req, res, next);
 });
 
 router.post("/calendar", authCheck, (req, res, next) => {  

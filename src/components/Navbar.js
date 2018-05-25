@@ -10,7 +10,8 @@ const navElements = [
   {label: "Home", link: "/", isDropdown: false},
   {label: "About", isDropdown: true, sublinks: [
     {label: "What is this all about?", link: "/about"}, 
-    {label: "Committee Members", link: "/committee-members"}
+    {label: "Committee Members", link: "/committee-members"},
+    {label: "By-Laws", link: "/bylaws"}
   ]},
   {label: "Calendar", link: "/calendar", isDropdown: false},
   {label: "Sponsors", isDropdown: true, sublinks: [

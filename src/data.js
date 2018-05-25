@@ -247,6 +247,135 @@ Ut mollis auctor nisi id scelerisque. Sed turpis lorem, lacinia non mollis eget,
       }
     ]
   },
+  bylaws: {
+    contentHTML: `<article>
+    <h1>Robeson Planetarium Rising Phoenix Board</h1>
+    <p><br></p>
+    <h1>Constitution</h1>
+    <p><br></p>
+    <h2>Article I: &nbsp;Name &amp; Purpose</h2>
+    <h3>Section A: &nbsp;Name:</h3>
+    <p>The name of this organization shall be the Robeson Planetarium Rising Phoenix Board and shall be referred to as the “Board” in this document.</p>
+    <h3>Section B: &nbsp;Purpose</h3>
+    <p>The purpose of this organization shall be: &nbsp;</p>
+    <ol>
+      <li>To raise funds for the re-building and long-term support of the Robeson Planetarium and STEAM Center (known henceforth as the “Planetarium”) through fundraising events and long-term patronage. &nbsp;</li>
+      <li>Adhere to the guidelines set forth by the Public Schools of Robeson County</li>
+    </ol>
+    <p><br></p>
+    <h2>Article II: &nbsp;Board Membership&nbsp;</h2>
+    <h3>Section A: &nbsp;Eligibility: &nbsp;</h3>
+    <p>Membership shall be open to any individual, group, association, organization, business or corporation representative who are brought before and approved by the members of the current board.</p>
+    <p><br></p>
+    <h2>Article III: &nbsp;Officers</h2>
+    <h3>Section A: &nbsp;The Executive Committee:</h3>
+    <p>The Executive Committee shall consist of the President, Past President, Vice-President, Secretary, Treasurer, Treasurer-Elect, and Liaison to the School Board. &nbsp;</p>
+    <h3>Section B: &nbsp;Rotation:</h3>
+    <p>Officers shall be elected each year with the President moving into the Past President’s position and the Treasurer-elect moving into the Treasurer’s position.</p>
+    <p><br></p>
+    <h2>Article IV: &nbsp;Meetings</h2>
+    <p>There will be a minimum of four (4) meetings per year, one of which is the annual meeting. &nbsp;More meetings may be called by the President as needed.&nbsp;</p>
+    <p><br></p>
+    <h2>Article V: &nbsp;Quorum</h2>
+    <p>In order for any business to be conducted, a quorum of at least two-thirds (2/3) of the executive committee is necessary. &nbsp;</p>
+    <p><br></p>
+    <h2>Article VI: &nbsp;Ratification and Amendments&nbsp;</h2>
+    <h3>Section A: &nbsp;Ratification: &nbsp;</h3>
+    <p>Ratification of this constitution and bylaws may be accomplished by a two-thirds (2/3) affirmative vote of members present and voting during the business session of the general membership meeting.&nbsp;</p>
+    <h3>Section B: &nbsp;Bylaws:</h3>
+    <p>Bylaws may not be in conflict with the constitution.</p>
+    <h3>Section C: &nbsp;Notice: &nbsp;</h3>
+    <p>The constitution and bylaws may be amended by a two-thirds (2/3) affirmative vote of the members present and voting at the business meeting provided that the proposed change is sent, in writing, to the membership at least five days before the meeting. &nbsp;</p>
+    <p><br></p>
+    <p><br></p>
+    <h1>By-Laws&nbsp;</h1>
+    <h2>I. General: &nbsp;</h2>
+    <p>The rules contained in Robert’s Rules of Order, latest edition, shall govern the business meetings of this board. &nbsp;</p>
+    <p><br></p>
+    <h2>II. Nomination of Officers: &nbsp;</h2>
+    <ol>
+      <li>Nominations of candidates for the Board will take place from the floor at the annual meeting. &nbsp;All nomationations will be finalized during this process.</li>
+      <li>The campaigning will be restricted to statements made at this meeting prior to ballots being cast.</li>
+      <li>The officers shall be elected by ballot from nominated Board members during the annual meeting. &nbsp;A two-thirds (2/3) vote of the total membership present is required for election.</li>
+      <li>The term of office will be for one year with the exception of the President, who will succeed the Past President, who will then serve in an advisory (non-voting) capacity, and the Treasurer-elect, who will succeed the Treasurer.</li>
+      <li>Vacancy: &nbsp;If a vacancy occurs in the office of President, the Vice-President shall assume the office for the remainder of the term. &nbsp;Vacancies in any other office shall be filled by a special election. &nbsp;</li>
+    </ol>
+    <p><br></p>
+    <h2>III. &nbsp;Duties of Officers&nbsp;</h2>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;A: &nbsp;President: &nbsp;</h3>
+    <p>It shall be the duty of the President to:&nbsp;</p>
+    <ul>
+      <li>Preside at meetings;&nbsp;</li>
+      <li>Vote only in the case of a tie;&nbsp;</li>
+      <li>Represent the Board at public events;&nbsp;</li>
+      <li>Appoint committee chairpersons subject to the approval of the Executive Committee;&nbsp;</li>
+      <li>Serve as an ex-officio member of all committees except the nominating committee. &nbsp;</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;B: Past President&nbsp;</h3>
+    <p>It shall be the duty of the Past President to:&nbsp;</p>
+    <ul>
+      <li>Serve in an advisory capacity to the President and Executive Committee.</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;C: &nbsp;Vice-President: &nbsp;</h3>
+    <p>It shall be the duty of the Vice-President to:&nbsp;</p>
+    <ul>
+      <li>Preside in the absence of the President;&nbsp;</li>
+      <li>Serve as chairperson of the Fundraising Committee;&nbsp;</li>
+      <li>Serve as the Public Information Officer. &nbsp;&nbsp;</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;D: &nbsp;Secretary: &nbsp;</h3>
+    <p>It shall be the duty of the Secretary to:&nbsp;</p>
+    <ul>
+      <li>Record the minutes of all meetings;&nbsp;</li>
+      <li>Keep a file of the Board’s records and publish them in a timely manner;&nbsp;</li>
+      <li>Maintain a current roster of membership;&nbsp;</li>
+      <li>Issue notices of meetings and conduct the general correspondence of the Board.&nbsp;</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;E: &nbsp;Treasurer: &nbsp;</h3>
+    <p>It shall be the duty of the Treasurer to:&nbsp;</p>
+    <ul>
+      <li>Serve on the Fundraising Committee;&nbsp;</li>
+      <li>Receive all funds and process Request for Payment, Deposit Slip, and Officer Signature forms; &nbsp;</li>
+      <li>Keep an itemized account of all receipts and expenditures and make reports as directed;&nbsp;</li>
+      <li>File the annual tax return for the Board. &nbsp;</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;F: &nbsp;Treasurer-Elect: &nbsp;</h3>
+    <p>It shall be the duty of the Treasurer-Elect to:&nbsp;</p>
+    <ul>
+      <li>Serve as a back-up to the Treasurer in all duties. &nbsp;</li>
+    </ul>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;G: &nbsp;Liaison to the School Board: &nbsp;</h3>
+    <p>It shall be the duty of the Liaison to the School Board to:&nbsp;</p>
+    <ul>
+      <li>Chair the public relations committee;</li>
+      <li>Communicate with the Robeson Planetarium Rising Phoenix Board and the School Board of Robeson County in a positive manner;</li>
+      <li>Attend school board meetings as necessary. &nbsp;</li>
+    </ul>
+    <p><br></p>
+    <h2>IV. &nbsp;Duties of Advisor&nbsp;</h2>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;A: &nbsp;Selection: &nbsp;</h3>
+    <p>The Director of the Robeson County Planetarium and STEAM Center shall serve as an advisor to the Board.&nbsp;</p>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;B: &nbsp;Duties: &nbsp;</h3>
+    <p>The responsibilities of the Advisor shall be to:&nbsp;</p>
+    <ul>
+      <li>Attend regular meetings and executive board meetings as often as possible;&nbsp;</li>
+      <li>Assist in the orientation of new officers;&nbsp;</li>
+      <li>Communicate the needs and activities of the Planetarium and STEAM Center to the Board&nbsp;</li>
+    </ul>
+    <p><br></p>
+    <h2>V. &nbsp;Committees&nbsp;</h2>
+    <h3>A: &nbsp;Executive Committee: &nbsp;</h3>
+    <p>The Executive Committee shall consist of all officers of the Board &nbsp;&nbsp;</p>
+    <h3>B: &nbsp;Public Relations Committee: &nbsp;</h3>
+    <p>A public relations committee shall be composed of the Liaison to the School Board, the Advisor, and at least three (3) other Board members to keep the Planetarium in the spotlight. &nbsp;</p>
+    <h3>C: &nbsp;Fund-Raising Committee: &nbsp;</h3>
+    <p>A fundraising committee shall be composed of the Vice-President, the Treasurer, and at least three (3) other Board members. &nbsp;Their initial purpose shall be to raise money to rebuild the Planetarium. &nbsp;Once the doors have reopened, the purpose shall be to raise money to fund any necessary supplies not covered by the Public Schools of Robeson County. &nbsp;</p>
+    <h3>D: &nbsp;Other committees:&nbsp;</h3>
+    <p>Other committees shall be appointed by the President, with the approval of the Executive Committee, as needed. &nbsp;These committees may serve in perpetuity or may be for a specific, short-term purpose. &nbsp;</p>
+    <p><br></p>
+    <h2>VI. &nbsp;Attendance: &nbsp;</h2>
+    <p>Attendance may be in person (which is preferable) or virtual (if necessary).&nbsp;</p></article>`
+  }
 };
 
 export default data;
