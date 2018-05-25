@@ -1,7 +1,7 @@
 import React from "react";
 import Radium from "radium";
 import loginStyles from "../styles/admin/loginStyles";
-import { login } from "../utils/authService";
+import { login } from "../utils/AuthService";
 
 let Login = () => {
   document.title = "Login | Rising Phoenix CMS";

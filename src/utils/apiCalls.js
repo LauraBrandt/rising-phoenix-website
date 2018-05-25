@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAccessToken } from "./authService";
+import { getAccessToken } from "./AuthService";
 
 const getData = (endpoint) => {
   return axios.get(endpoint)

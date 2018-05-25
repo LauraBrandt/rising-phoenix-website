@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
-import { logout, sendResetPasswordRequest } from "../../utils/authService";
+import { logout, sendResetPasswordRequest } from "../../utils/AuthService";
 import optionsStyles from "../../styles/admin/optionsStyles";
 import Radium from "radium";
 

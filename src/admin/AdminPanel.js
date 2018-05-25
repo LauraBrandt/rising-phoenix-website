@@ -14,7 +14,7 @@ import IndividualSponsorsCMS from "./IndividualSponsorsCMS";
 import DonateCMS from "./DonateCMS";
 import LinksCMS from "./LinksCMS";
 import Message from "./components/Message";
-import { isLoggedIn } from "../utils/authService";
+import { isLoggedIn } from "../utils/AuthService";
 import Radium from "radium";
 
 const style = {
@@ -63,6 +63,7 @@ class AdminPanel extends Component {
           <Route exact path="/admin/home" render={() => renderIfAuth(HomeCMS, {updateMessage: this.updateMessage})} />
           <Route exact path="/admin/about" render={() => renderIfAuth(AboutCMS, {updateMessage: this.updateMessage})} />
           <Route exact path="/admin/committee-members" render={() => renderIfAuth(CommitteeCMS, {updateMessage: this.updateMessage})} />
+          <Route exact path="/admin/bylaws" render={() => renderIfAuth(BylawsCMS, {updateMessage: this.updateMessage})} />
           <Route exact path="/admin/calendar" render={() => renderIfAuth(CalendarCMS, {updateMessage: this.updateMessage})} />
           <Route exact path="/admin/corporate-sponsors" render={() => renderIfAuth(CorporateSponsorsCMS, {updateMessage: this.updateMessage})} />
           <Route exact path="/admin/individual-sponsors" render={() => renderIfAuth(IndividualSponsorsCMS, {updateMessage: this.updateMessage})} />
