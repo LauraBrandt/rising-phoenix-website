@@ -48,7 +48,7 @@ class ByLaws extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy8.png"
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy8.min.jpg"
           bgAlt="Earth as seen from space"
           rightDiv={<HeaderContent/>}
         />

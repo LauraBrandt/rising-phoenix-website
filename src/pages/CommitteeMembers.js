@@ -61,7 +61,7 @@ class CommitteeMembers extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy2.png" 
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy2.min.jpg" 
           bgAlt="swirling pink surface"
           rightDiv={<HeaderContent/>}
         />

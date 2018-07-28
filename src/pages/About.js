@@ -47,7 +47,7 @@ class About extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy1.png"
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy1.min.jpg"
           bgAlt="blue, purple, and black lines of light"
           rightDiv={<HeaderContent/>}
         />

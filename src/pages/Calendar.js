@@ -106,7 +106,7 @@ class Calendar extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy6.png"
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy6.min.jpg"
           bgAlt="telescope pointing out a glass wall towards a sunset sky"
           rightDiv={<HeaderContent/>}
         />

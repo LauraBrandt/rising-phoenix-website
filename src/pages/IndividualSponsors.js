@@ -62,7 +62,7 @@ class IndividualSponsors extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy3.png"
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy3.min.jpg"
           bgAlt="colorful nebula"
           rightDiv={<HeaderContent/>}
         />

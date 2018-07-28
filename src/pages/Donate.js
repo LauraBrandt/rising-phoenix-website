@@ -110,7 +110,7 @@ class Donate extends Component {
     return (
       <div>
         <Header 
-          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy7.png"
+          bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy7.min.jpg"
           bgAlt="deep blue-puple starry sky with light from below"
           rightDiv={<HeaderContent/>}
         />
