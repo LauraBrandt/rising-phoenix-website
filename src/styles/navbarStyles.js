@@ -80,7 +80,7 @@ const navbarStyles = {
       padding: ".1em 0 0 0",
       justifyContent: "space-around",
       alignItems: "flex-end",
-      width: "75%",
+      width: "80%",
       transition: "all 0.4s ease",
       "@media (max-width: 1025px)": {
         width: "90%",
@@ -175,6 +175,7 @@ const navbarStyles = {
     socialButtons: {
       fontSize: "1.5em",
       paddingBottom: "0.35em",
+      display: "flex"
     },
     facebookButton: {
       color: sv.facebookBlue,
@@ -192,6 +193,9 @@ const navbarStyles = {
       },
       "@media (max-width: 1025px)": {
         marginRight: ".6em",
+      },
+      "@media (max-width: 770px)": {
+        marginRight: ".4em",
       }
     },
     twitterButton: {
@@ -210,6 +214,42 @@ const navbarStyles = {
       },
       "@media (max-width: 1025px)": {
         marginRight: ".6em",
+      },
+      "@media (max-width: 770px)": {
+        marginRight: ".4em",
+      }
+    },
+    instagramButton: {
+      marginRight: ".8em",
+      transition: "all 0.4s ease",
+
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "linear-gradient(#4c68d7, #8a3ab9, #bc2a8d, #cd486b, #e95950, #fbad50, #fccc63)",
+      color: sv.dark,
+      height: "1.3rem",
+      width: "1.3rem",
+      fontSize: "1.2rem",
+      marginTop: "0.22rem",
+      marginBottom: "0.2rem",
+      borderRadius: "5px",
+      textDecoration: "none",
+      ":hover": {
+        background: `linear-gradient(${color("#4c68d7").lighten(0.15)}, ${color("#8a3ab9").lighten(0.15)}, ${color("#bc2a8d").lighten(0.15)}, ${color("#cd486b").lighten(0.15)}, ${color("#e95950").lighten(0.15)}, ${color("#fbad50").lighten(0.15)}, ${color("#fccc63").lighten(0.15)})`,
+      },
+      ":active": {
+        background: `linear-gradient(${color("#4c68d7").lighten(0.15)}, ${color("#8a3ab9").lighten(0.15)}, ${color("#bc2a8d").lighten(0.15)}, ${color("#cd486b").lighten(0.15)}, ${color("#e95950").lighten(0.15)}, ${color("#fbad50").lighten(0.15)}, ${color("#fccc63").lighten(0.15)})`,
+      },
+      ":focus": {
+        background: `linear-gradient(${color("#4c68d7").lighten(0.15)}, ${color("#8a3ab9").lighten(0.15)}, ${color("#bc2a8d").lighten(0.15)}, ${color("#cd486b").lighten(0.15)}, ${color("#e95950").lighten(0.15)}, ${color("#fbad50").lighten(0.15)}, ${color("#fccc63").lighten(0.15)})`,
+        outline: "none"
+      },
+      "@media (max-width: 1025px)": {
+        marginRight: ".6em",
+      },
+      "@media (max-width: 770px)": {
+        marginRight: ".4em",
       }
     },
   }, 

@@ -65,6 +65,7 @@ module.exports = {
           } else {
             currLinks.facebook = linksSent.facebook;
             currLinks.twitter = linksSent.twitter;
+            currLinks.instagram = linksSent.instagram;
             currLinks.donate = linksSent.donate;
             currLinks.save((err, updatedLinks) => { // eslint-disable-line no-unused-vars
               if (err) {

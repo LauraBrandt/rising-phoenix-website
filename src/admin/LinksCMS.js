@@ -11,6 +11,7 @@ class LinksCMS extends Component {
       error: false,
       facebookValue: "",
       twitterValue: "",
+      instagramValue: "",
       donateValue: "",
       currentlySaving: false,
       linkLength: 100
@@ -30,6 +31,7 @@ class LinksCMS extends Component {
           error: false,
           facebookValue: links.facebook,
           twitterValue: links.twitter,
+          instagramValue: links.instagram,
           donateValue: links.donate
         });
       }
@@ -53,6 +55,7 @@ class LinksCMS extends Component {
     const links = {
       facebook: this.state.facebookValue,
       twitter: this.state.twitterValue,
+      instagram: this.state.instagramValue,
       donate: this.state.donateValue
     };
     postData("/api/links", links)
@@ -86,6 +89,13 @@ class LinksCMS extends Component {
                 label="Link to Twitter account:"
                 type="url"
                 value={this.state.twitterValue}
+                handleChange={this.handleChange}
+              />
+              <TextInput 
+                id="instagramValue"
+                label="Link to Instagram account:"
+                type="url"
+                value={this.state.instagramValue}
                 handleChange={this.handleChange}
               />
               <TextInput 

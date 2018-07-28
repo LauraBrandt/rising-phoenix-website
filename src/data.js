@@ -2,6 +2,7 @@ const data = {
   links: {
     facebook: "#",
     twitter: "#",
+    instagram: "#",
     goFundMe: "#"
   },
   home: {

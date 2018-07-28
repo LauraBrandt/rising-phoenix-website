@@ -22,6 +22,7 @@ class PageRouter extends Component {
       links: {
         facebook: "",
         twitter: "",
+        instagram: "",
         donate: ""
       } 
     };

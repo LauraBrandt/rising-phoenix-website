@@ -58,6 +58,7 @@ let NavbarWide = (props) => {
         <li style={style.wide.socialButtons}>
           {props.links.facebook && <a href={props.links.facebook} style={style.wide.facebookButton} key="facebook"><i className="fa fa-facebook-square"></i></a>}
           {props.links.twitter && <a href={props.links.twitter} style={style.wide.twitterButton} key="twitter"><i className="fa fa-twitter-square"></i></a>}
+          {props.links.instagram && <a href={props.links.instagram} style={style.wide.instagramButton} key="instagram"><i className="fa fa-instagram"></i></a>}
         </li>
       </ul>
     </nav>

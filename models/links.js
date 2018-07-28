@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const linksSchema = new Schema({
   facebook: String,
   twitter: String,
+  instagram: String,
   donate: String,
 });
 
