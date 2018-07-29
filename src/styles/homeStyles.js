@@ -311,8 +311,8 @@ const homeStyles = {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
-    padding: "2.5em 0",
-    fontSize: "1.5em",
+    padding: "2em 0",
+    fontSize: "1.3em",
     textAlign: "center",
     color: "white",
     transition: "all 0.3s ease",
@@ -336,7 +336,7 @@ const homeStyles = {
     },
     getInTouch: {
       display: "inline-block",
-      border: "3px solid white",
+      border: "2px solid white",
       color: "white",
       textDecoration: "none",
       fontSize: "0.8em",
@@ -362,23 +362,34 @@ const homeStyles = {
       }
     },
     subscribeText: {
-      margin: "0.7em 1em 0.3em 1em",
-      fontSize: "0.95em",
+      margin: "0 0 1em 0"
     },
     emailInput: {
+      height: "2rem",
+      width: "60%",
       padding: "0.5em",
+      boxSizing: "border-box",
       transition: "all 0.3s ease",
-      "@media (max-width: 768px)": {
-        padding: "0.35em",
+      borderRadius: 0,
+      fontSize: "0.9rem",
+      border: "none",
+      outline: "none",
+      "@media (max-width: 745px)": {
+        fontSize: "0.rem",
       },
     },
     emailSubmit: {
-      height: "2.3em",
+      height: "2rem",
       border: "none",
       padding: "0 1em",
       cursor: "pointer",
       backgroundColor: "#eee",
       transition: "background-color 0.4s ease",
+      borderRadius: 0,
+      fontFamily: sv.fontDefault,
+      fontSize: "0.9rem",
+      outline: "none",
+      boxSizing: "border-box",
       ":hover": {
         color: "black",
         backgroundColor: "#ddd",
@@ -394,8 +405,8 @@ const homeStyles = {
         backgroundColor: "#d7d7d7",
         outline: "1px solid rgba(0,0,0,0.1)"
       },
-      "@media (max-width: 768px)": {
-        height: "2em",
+      "@media (max-width: 745px)": {
+        fontSize: "0.rem",
       },
     }
   },

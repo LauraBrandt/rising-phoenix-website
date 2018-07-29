@@ -131,19 +131,30 @@ const calendarStyles = {
       }
     },
     input: {
-      height: "15px",
+      height: "27px",
+      boxSizing: "border-box",
+      width: "200px",
       padding: "0.3em 0.5em",
       border: "inset 1px solid rgba(0,0,0,0.3)",
-      margin: 0,
+      margin: "3px 0 0 0",
+      borderRadius: 0,
+      fontSize: "0.8rem",
+      "@media (max-width: 745px)": {
+        fontSize: "0.75rem",
+      }
     },
     submit: {   
       backgroundColor: "#f5f5f5",
       border: "1px solid rgba(0,0,0,0.3)",
+      borderRadius: 0,
+      fontFamily: sv.fontDefault,
       height: "27px",      
       padding: "0.3em 1em",
       cursor: "pointer",
-      margin: "0 0 0 -1px",
+      margin: "5px 0 0 -1px",
       transition: "all 0.4s ease",
+      fontSize: "0.8rem",
+      boxSizing: "border-box",
       ":hover": {
         backgroundColor: "#e2e2e2",
       },
@@ -153,6 +164,9 @@ const calendarStyles = {
       ":focus": {
         backgroundColor: "#ddd",
         outline: "none",
+      },
+      "@media (max-width: 745px)": {
+        fontSize: "0.75rem",
       }
     }
   }

@@ -85,14 +85,14 @@ class HeaderContent extends Component {
       <div style={style.header.outer}>
         <h1 style={style.header.h1}>Upcoming Events</h1>
         <div>
-          <div style={style.header.cta}>Make sure you don't miss anything. Subscribe to our newsletter:</div>
+          <div style={style.header.cta}>Make sure you don't miss anything.</div>
           <input 
             type="email" 
             value={this.state.email} 
             placeholder="Email"
             onChange={this.handleChange} 
             style={style.header.input}/>
-          <button type="button" style={style.header.submit}>Join</button>
+          <button type="button" style={style.header.submit}>Subscribe</button>
         </div>
       </div>
     );

@@ -96,8 +96,7 @@ class CTAs extends Component {
           <Link to="/contact" style={style.ctas.getInTouch}>Get in touch</Link>
         </div>
         <div style={style.ctas.subscribe}>
-          <div>Stay up-to-date with the campaign.</div>
-          <div style={style.ctas.subscribeText}>Subscribe to our newsletter:</div>
+          <div style={style.ctas.subscribeText}>Stay up-to-date with the campaign.</div>
           <input 
             type="email" 
             value={this.state.email} 
@@ -105,7 +104,7 @@ class CTAs extends Component {
             onChange={this.handleChange} 
             style={style.ctas.emailInput}
           />
-          <button type="button" style={style.ctas.emailSubmit}>Join</button>
+          <button type="button" style={style.ctas.emailSubmit}>Subscribe</button>
         </div>
       </section>
     );
