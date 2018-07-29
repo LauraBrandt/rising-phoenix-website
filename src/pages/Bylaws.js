@@ -3,7 +3,7 @@ import Radium from "radium";
 import Header from "../components/Header";
 import style from "../styles/bylawsStyles";
 import { getData } from "../utils/apiCalls";
-import "../styles/bylaws.css"
+import "../styles/bylaws.css";
 
 class Main extends Component {
   constructor() {
@@ -50,7 +50,7 @@ class ByLaws extends Component {
         <Header 
           bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy8.min.jpg"
           bgAlt="Earth as seen from space"
-          rightDiv={<HeaderContent/>}
+          contentDiv={<HeaderContent/>}
         />
         <Main />
       </div>

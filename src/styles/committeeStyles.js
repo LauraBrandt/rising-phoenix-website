@@ -32,12 +32,12 @@ const committeeStyles = {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-evenly",
-      paddingLeft: "2.5em",
-      fontSize: "1.8em",
+      paddingLeft: "6em",
+      fontSize: "1.7em",
       transition: "all 0.3s ease",
-      "@media (max-width: 1024px)": {
+      "@media (max-width: 1000px)": {
         fontSize: "1.5em",
-        paddingLeft: "0.7em",
+        paddingLeft: "4em",
       },
       "@media (max-width: 745px)": {
         fontSize: "1.2em",

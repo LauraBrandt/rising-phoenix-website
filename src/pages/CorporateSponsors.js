@@ -81,7 +81,7 @@ class CorporateSponsors extends Component {
         <Header 
           bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy5.min.jpg"
           bgAlt="Aurora borealis"
-          rightDiv={<HeaderContent/>}
+          contentDiv={<HeaderContent/>}
         />
         <Main />
       </div>

@@ -27,11 +27,12 @@ const individualSponsorStyles = {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-evenly",
-      padding: "0 5% 0 0",
+      padding: "0 8% 0 12%",
       transition: "all 0.3s ease",
       "@media (max-width: 745px)": {
         textAlign: "center",
         padding: "5%",
+        justifyContent: "space-around",
       },
     },
     h1: {

@@ -142,11 +142,11 @@ const contactStyles = {
       flexDirection: "column",
       justifyContent: "space-evenly",
       fontSize: "1.8em",
-      padding: "0 3em 0 0",
+      padding: "0 10% 0 30%",
       transition: "all 0.3s ease",
-      textAlign: "center", // remove with logo
       "@media (max-width: 1024px)": {
         fontSize: "1.5em",
+        padding: "0 5% 0 15%"
       },
       "@media (max-width: 745px)": {
         fontSize: "1.2em",

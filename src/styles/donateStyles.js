@@ -174,7 +174,7 @@ const donateStyles = {
       boxSizing: "border-box",
       display: "flex",
       alignItems: "center",
-      paddingLeft: "2em",
+      padding: "0 5% 0 28%",
       fontSize: "2.2em",
       transition: "all 0.3s ease",
       "@media (max-width: 1024px)": {

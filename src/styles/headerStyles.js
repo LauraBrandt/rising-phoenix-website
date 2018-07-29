@@ -25,23 +25,23 @@ const headerStyles = {
     height: "auto",
     opacity: 0.5,
   },
-  leftDiv: {
+  logoDiv: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "15%", // with logo: width: "25%",
+    width: "20%",
     zIndex: 2,
     "@media (max-width: 745px)": {
       display: "none"
     }
   },
   logo: {
-    width: "100px",
+    width: "150px",
+    background: "radial-gradient(rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 70%)"
   },
-  rightDiv: {
-    width: "75%",
+  contentDiv: {
+    width: "80%",
     zIndex: 2,
-    boxSizing: "border-box",
     transition: "all 0.3s ease",
     "@media (max-width: 745px)": {
       width: "100%",

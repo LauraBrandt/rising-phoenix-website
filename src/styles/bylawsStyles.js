@@ -12,14 +12,17 @@ const bylawsStyles = {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-evenly",
-      paddingLeft: "30%",
-      fontSize: "1.9em",
+      paddingLeft: "50%",
+      fontSize: "1.7em",
       transition: "all 0.3s ease",
       "@media (max-width: 1024px)": {
         fontSize: "1.6em",
+        paddingLeft: "40%",
       },
       "@media (max-width: 745px)": {
         fontSize: "1.3em",
+        padding: "0 2em 0 2em",
+        alignItems: "center"
       },
       "@media (min-width: 2000px)": {
         fontSize: "2.8em",

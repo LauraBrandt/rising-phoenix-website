@@ -92,10 +92,13 @@ const calendarStyles = {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-evenly",
-      padding: "0 2em 0 1em",
+      paddingLeft: "19%",
       transition: "all 0.3s ease",
+      "@media (max-width: 850px)": {
+        padding: "0 2em 0 5em",
+      },
       "@media (max-width: 450px)": {
-        padding: "0.5em 2em",
+        padding: "0.5em 1.5em",
       },
     },
     h1: {

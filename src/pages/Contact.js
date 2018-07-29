@@ -127,7 +127,7 @@ class Contact extends Component {
         <Header 
           bgImage="https://s3.us-east-2.amazonaws.com/risingphoenix/static/astronomy4.min.jpg"
           bgAlt="nasa measuring instrument in space"
-          rightDiv={<HeaderContent/>}
+          contentDiv={<HeaderContent/>}
         />
         <Main />
       </div>
