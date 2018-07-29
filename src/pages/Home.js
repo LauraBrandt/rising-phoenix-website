@@ -17,7 +17,7 @@ let HomeHeader = (props) => {
 HomeHeader = Radium(HomeHeader);
 
 let Main = (props) => {
-  const imageHeight = 400;
+  /*const imageHeight = 400;
   const fakePercentConstant = 0.1;
 
   const percentGoal = props.homeInfo.donatedAmount / props.homeInfo.goalAmount;
@@ -48,17 +48,20 @@ let Main = (props) => {
     // "@media (max-width: 650px)": {
     //   margin: `2em auto ${(imageHeight*0.65) + 50}px auto`
     // },
-  };
+  };*/
 
   return (
     <section style={style.main}>
       <div style={style.main.giveContainer}><Link to="/donate" style={style.main.giveLink}>Give</Link></div>
       <div style={style.main.main}>
+        <div style={style.main.logoContainer}>
+          <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/rising_phoenix_logo_sm.min.png" alt="Rising Phoenix logo" style={style.main.logo} />
+        </div>
         <div style={style.main.blurb}>
           <h2>{props.homeInfo.blurbTitle}</h2>
           <div style={{whiteSpace: "pre-wrap"}}>{props.homeInfo.blurb} <Link to="/about" style={style.main.learnMoreLink}>Learn more...</Link></div>
         </div>
-        <div style={style.main.progress}>
+        {/* <div style={style.main.progress}>
           <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_grey_filled.png" alt="outline of a thermometer" style={[style.main.phoenix, imageHeightStyle]}/>
           <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/thermometer_red_filled.png" alt="thermometer filled with red" style={[style.main.phoenixFilled, imageHeightStyle, imageClipStyle]}/>
           <div style={[style.main.progressBox, progressBoxMarginSmallStyle]}>
@@ -68,7 +71,7 @@ let Main = (props) => {
             <div style={style.main.progressBox.label}>Our Goal:</div>
             <div style={style.main.progressBox.amount}>{`$${props.homeInfo.goalAmount}`}</div>
           </div>
-        </div>        
+        </div> */}
       </div>
     </section>
   );
