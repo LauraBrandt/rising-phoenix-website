@@ -159,11 +159,11 @@ const homeStyles = {
       },
     },
     logoContainer: {
-        flexBasis: "30%",
+      flexBasis: "30%",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      },
+    },
     logo: {
       maxWidth: "90%",
       "@media (min-width: 2000px)": {
@@ -171,11 +171,11 @@ const homeStyles = {
       },
       "@media (max-width: 745px)": {
         maxWidth: "80%",
-    },
       },
+    },
     learnMoreLink: {
       ...sv.linkStyle
-      },
+    },
     // progress: {
     //   flexBasis: "45%", //"60%",
     //   position: "relative",
@@ -215,7 +215,7 @@ const homeStyles = {
     //     flexBasis: "30%",
     //     margin: "1em 3em 0 5em",
     //   },
-      // },
+    // },
     // progressBox: {
     //   float: "left",
     //   borderRadius: "10px",
@@ -261,7 +261,7 @@ const homeStyles = {
     //     padding: "0 0 0.8em 0",
     //     color: sv.dark,
     //   },
-      // },
+    // },    
   },
 
   ctas: {
@@ -369,6 +369,53 @@ const homeStyles = {
     }
   },
 
+  stats: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    padding: "4em",
+    boxSizing: "border-box",
+    position: "relative",
+    // color: "white",
+    backgroundImage: "url('https://s3.us-east-2.amazonaws.com/risingphoenix/static/joanna-kosinska-453787-unsplash.jpg')",
+    // backgroundImage: "url('https://s3.us-east-2.amazonaws.com/risingphoenix/static/jason-leung-479251-unsplash.jpg')",
+    backgroundSize: "cover",
+    "@media (max-width: 745px)": {
+      padding: "1em",
+      flexDirection: "column"
+    },
+    overlay: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(255,255,255,0.3)",
+    },
+    section: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "2em 0",
+      amount: {
+        fontSize: "4rem",
+        marginBottom: "1rem",
+        zIndex: 2,
+        // textShadow: "0 0 8px rgba(0,0,0,0.9)"
+      },
+      text: {
+        fontSize: "1.5rem",
+        zIndex: 2,
+        // textShadow: "0 0 5px rgba(0,0,0,0.9)"
+      }
+    },
+    borderDiv: {
+      border: "1px solid black",
+      alignSelf: "stretch"
+    },
+  },
+
   news: {
     display: "flex",
     flexWrap: "wrap",
@@ -407,7 +454,6 @@ const homeStyles = {
       margin: "0 0 0.2em 0",
       fontSize: "1.7em",
       fontWeight: 600,
-      // color: sv.lightBrown
       ...sv.linkStyle
     },
     date: {

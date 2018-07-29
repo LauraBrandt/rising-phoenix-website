@@ -115,6 +115,24 @@ class CTAs extends Component {
 }
 CTAs = Radium(CTAs);
 
+// let Stats = ({ donatedAmount }) => {
+//   return (
+//     <div style={style.stats}>
+//       <div style={style.stats.overlay}></div>
+//       <div style={style.stats.section}>
+//         <div style={style.stats.section.amount}>${donatedAmount}</div>
+//         <div style={style.stats.section.text}>raised so far</div>
+//       </div>
+//       <div style={style.stats.borderDiv}></div>
+//       <div style={style.stats.section}>
+//         <div style={style.stats.section.amount}>0</div>
+//         <div style={style.stats.section.text}>donors</div>
+//       </div>
+//     </div>
+//   );
+// };
+// Stats = Radium(Stats);
+
 let News = (props) => {
   const getFirstWords = (article) => {
     var articleWithoutHtml = article.replace(/(<([^>]+)>)/ig,"");
@@ -160,7 +178,8 @@ class Home extends Component {
         blurbTitle: "",
         blurb: "",
         goalAmount: "",
-        donatedAmount: "",
+        donatedAmount: 0,
+        donors: 0
       }
     };
     this.getHomeInfo = this.getHomeInfo.bind(this);
@@ -193,6 +212,7 @@ class Home extends Component {
         <HomeHeader tagline={this.state.homeInfo.tagline} />
         <Main homeInfo={this.state.homeInfo} />
         <CTAs />
+        {/* <Stats donatedAmount={this.state.homeInfo.donatedAmount} /> */}
         <News newsStories={this.state.news}/>
         {/* <Sponsors /> */}
       </div>
