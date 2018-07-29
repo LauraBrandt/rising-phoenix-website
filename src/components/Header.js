@@ -10,7 +10,7 @@ let Header =  (props) => {
         {props.contentDiv}
       </div>
       <div style={style.logoDiv}>
-        <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/rising_phoenix_logo_sm.min.png" alt="a phoenix with wings held out" style={style.logo} />
+        <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/rising_phoenix_logo_sm.min.png" alt="Rising Phoenix logo" style={style.logo} />
       </div>
     </header>
   );
