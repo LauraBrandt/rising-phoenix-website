@@ -271,14 +271,13 @@ const navbarStyles = {
     },
     logo: {
       height: 50,
-      width: 50,
       display: "block",
       margin: "2% 0 2% 3%",
     },
     title: {
       fontFamily: sv.fontTitle,
       color: color(sv.light).lighten(0.3),
-      margin: "5.5% 0 5% 5%", // with logo: 0,
+      margin: 0,
       fontSize: "1.3em"
     },
     barsButton: {
