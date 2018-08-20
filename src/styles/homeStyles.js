@@ -69,7 +69,7 @@ const homeStyles = {
     },
   },
 
-  main: {
+  info: {
     textAlign: "center",
     zIndex: 1,
     giveContainer: {
@@ -123,12 +123,15 @@ const homeStyles = {
     main: {
       display: "flex",
       marginTop: "-7em",
-      padding: "4em 2em 3em 2em",
+      padding: "4em 4em 3em 4em",
       backgroundColor: sv.bgLight,
       transition: "all 0.3s ease",
+      "@media (max-width: 1000px)": {
+        padding: "4em 2em 3em 2em",
+      },
       "@media (max-width: 745px)": {
         flexDirection: "column-reverse",
-        padding: "3em 2em",
+        padding: "3em 3em",
       },
       "@media (max-width: 450px)": {
         padding: "3em 1em 1em 1em",
@@ -163,105 +166,33 @@ const homeStyles = {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      marginLeft: "5%",
+      "@media (max-width: 1000px)": {
+        marginLeft: 0,
+        marginTop: "3em",
+        alignItems: "flex-start",
+    },
+      "@media (max-width: 745px)": {
+        marginTop: "1em",
+      },
     },
     logo: {
       maxWidth: "90%",
       "@media (min-width: 2000px)": {
         maxWidth: "500px",
       },
+      "@media (max-width: 1000px)": {
+        maxWidth: "100%",
+      },
       "@media (max-width: 745px)": {
-        maxWidth: "80%",
+        maxWidth: "300px",
       },
     },
     learnMoreLink: {
       ...sv.linkStyle
     },
-    // progress: {
-    //   flexBasis: "45%", //"60%",
-    //   position: "relative",
-    //   margin: "1em 0 0 2em",
-    //   border: "1px solid rgba(0,0,0,0.15)",
-    //   borderRadius: "10px",
-    //   backgroundColor: "white",
-    //   transition: "all 0.3s ease",
-    //   padding: "3em 2em", //
-    //   boxSizing: "border-box", //
-    //   // "@media (max-width: 1270px)": {
-    //   //   flexBasis: "70%",
-    //   // },
-    //   "@media (max-width: 1120px)": { // 
-    //     padding: "3em 1em"
-    //   },
-    //   "@media (max-width: 1000px)": { // 1160
-    //     width: "70%", // 80%
-    //     margin: "1em auto",
-    //     padding: "3em 4em"
-    //   },
-    //   // "@media (max-width: 960px)": {
-    //   //   width: "100%",
-    //   // },
-    //   "@media (max-width: 780px)": { // 650
-    //     margin: "0 auto 1em auto",
-    //     width: "85%", //
-    //   },
-    //   "@media (max-width: 660px)": { //
-    //     width: "100%", //
-    //     padding: "3em 2em"
-    //   },
-    //   "@media (max-width: 450px)": { //
-    //     padding: "4em 2%"
-    //   },
-    //   "@media (min-width: 2000px)": {
-    //     flexBasis: "30%",
-    //     margin: "1em 3em 0 5em",
-    //   },
-    // },
-    // progressBox: {
-    //   float: "left",
-    //   borderRadius: "10px",
-    //   margin: "1em", //"2em 1em",
-    //   padding: "0.5em",
-    //   fontSize: "1.4em",
-    //   backgroundColor: color(sv.lightBrown).lighten(1.0),
-    //   border: "1px solid rgba(0,0,0,0.05)",
-    //   // boxShadow: "inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.2)",
-    //   boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-    //   transition: "all 0.3s ease",
-    //   // "@media (max-width: 1270px)": {
-    //   //   margin: "2em",
-    //   // },
-    //   "@media (max-width: 1024px)": { //
-    //     fontSize: "1.2em",
-    //   },
-    //   "@media (max-width: 960px)": {
-    //     margin: "2em 1em",
-    //   },
-    //   "@media (max-width: 350px)": { //
-    //     fontSize: "1em",
-    //   },
-    //   // "@media (max-width: 750px)": {
-    //   //   fontSize: "1.2em",
-    //   // },
-    //   // "@media (max-width: 650px)": {
-    //   //   float: "none",
-    //   //   width: "70%",
-    //   // },
-    //   "@media (min-width: 2000px)": {
-    //     margin: "1em 3em", //"2em 3em",
-    //     padding: "1em",
-    //     fontSize: "1.5em"
-    //   },
-    //   label: {
-    //     color: sv.lightBrown,
-    //     padding: "0.8em",
-    //     // opacity: 0.9
-    //   },
-    //   amount: {
-    //     fontSize: "1.8em",
-    //     padding: "0 0 0.8em 0",
-    //     color: sv.dark,
-    //   },
-    // },    
+  },
+
   },
 
   ctas: {

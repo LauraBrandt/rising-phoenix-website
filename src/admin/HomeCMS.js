@@ -299,23 +299,23 @@ class HomeCMS extends Component {
                 handleChange={this.handleChange}
                 maxLength={100}
               />
+              <TextInput 
+                id="blurbTitle"
+                label="Title of Rising Phoenix info:"
+                value={this.state.blurbTitle}
+                handleChange={this.handleChange}
+                maxLength={100}
+              />
               <TextAreaInput 
                 id="blurb"
-                label="Short blurb about Rising Phoenix:"
+                label="Brief information about Rising Phoenix/Robeson Planetarium:"
                 value={this.state.blurb}
                 handleChange={this.handleChange}
                 maxLength={750}
                 inputStyle={{height: 150}}
                 labelStyle={homeStyles.modalContent.textareaLabel}
               />
-              <TextInput 
-                id="blurbTitle"
-                label="Title of blurb:"
-                value={this.state.blurbTitle}
-                handleChange={this.handleChange}
-                maxLength={100}
-              />
-              <div>
+              {/* <div>
                 <label htmlFor="goalAmount" style={inputStyles.label}>Goal Amount:</label>
                 <div style={{display: "inline-block", maxWidth: "90%", whiteSpace: "nowrap"}}>
                   $ <input 
@@ -432,7 +432,7 @@ class HomeCMS extends Component {
                     {label: "Title:", content: story.title},
                     {label: "Image:", content: story.image ? `<img class="card-img" src="https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}" alt=${story.alt}/>` : ""},
                     {label: "Image Alt Text:", content: story.alt},
-                    {rte: true, value: RichTextEditor.createValueFromString(story.article, 'html')}
+                    {rte: true, value: RichTextEditor.createValueFromString(story.article, "html")}
                   ]
                 }
               />

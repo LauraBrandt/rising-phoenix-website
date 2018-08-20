@@ -16,9 +16,23 @@ let HomeHeader = (props) => {
 };
 HomeHeader = Radium(HomeHeader);
 
-let Main = (props) => {
-  /*const imageHeight = 400;
-  const fakePercentConstant = 0.1;
+let Info = (props) => {
+  return (
+    <section style={style.info}>
+      <div style={style.info.giveContainer}><Link to="/donate" style={style.info.giveLink}>Give</Link></div>
+      <div style={style.info.main}>
+        <div style={style.info.logoContainer}>
+          <img src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/rising_phoenix_logo_sm.min.png" alt="Rising Phoenix logo" style={style.info.logo} />
+        </div>
+        <div style={style.info.blurb}>
+          <h2>{props.homeInfo.blurbTitle}</h2>
+          <div style={{whiteSpace: "pre-wrap"}}>{props.homeInfo.blurb} <Link to="/about" style={style.info.learnMoreLink}>Learn more...</Link></div>
+        </div>
+      </div>
+    </section>
+  );
+};
+Info = Radium(Info);
 
   const percentGoal = props.homeInfo.donatedAmount / props.homeInfo.goalAmount;
   const fakePercent = percentGoal / (percentGoal + fakePercentConstant);
@@ -210,7 +224,7 @@ class Home extends Component {
     return (
       <div>
         <HomeHeader tagline={this.state.homeInfo.tagline} />
-        <Main homeInfo={this.state.homeInfo} />
+        <Info homeInfo={this.state.homeInfo} />
         <CTAs />
         {/* <Stats donatedAmount={this.state.homeInfo.donatedAmount} /> */}
         <News newsStories={this.state.news}/>
