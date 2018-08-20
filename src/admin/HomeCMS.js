@@ -20,7 +20,7 @@ class HomeCMS extends Component {
       tagline: "",
       blurbTitle: "",
       blurb: "",
-      goalAmount: "",
+      // goalAmount: "",
       donatedAmount: "",
       news: [],
       newsId: "",
@@ -60,7 +60,7 @@ class HomeCMS extends Component {
           tagline: doc.tagline,
           blurbTitle: doc.blurbTitle,
           blurb: doc.blurb,
-          goalAmount: doc.goalAmount,
+          // goalAmount: doc.goalAmount,
           donatedAmount: doc.donatedAmount,
         });
       }
@@ -120,10 +120,10 @@ class HomeCMS extends Component {
     e.preventDefault();
     this.setState({currentlySaving: true});
 
-    const goalAmount = typeof this.state.goalAmount === "string" ? 
-      this.state.goalAmount.replace(/,/g, "") 
-      :
-      this.state.goalAmount;
+    // const goalAmount = typeof this.state.goalAmount === "string" ? 
+    //   this.state.goalAmount.replace(/,/g, "") 
+    //   :
+    //   this.state.goalAmount;
     const donatedAmount = typeof this.state.donatedAmount === "string" ?
       this.state.donatedAmount.replace(/,/g, "")
       :
@@ -133,7 +133,7 @@ class HomeCMS extends Component {
       tagline: this.state.tagline,
       blurbTitle: this.state.blurbTitle,
       blurb: this.state.blurb,
-      goalAmount: goalAmount,
+      // goalAmount: goalAmount,
       donatedAmount: donatedAmount,
     };
     postData("/api/home", homeInfo)
@@ -327,7 +327,7 @@ class HomeCMS extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-              </div>
+              </div> */}
               <div>
                 <label htmlFor="donatedAmount" style={inputStyles.label}>Amount Donated:</label>
                 <div style={{display: "inline-block", maxWidth: "90%", whiteSpace: "nowrap"}}>

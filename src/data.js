@@ -13,7 +13,7 @@ const data = {
 In a time when an understanding of science is so important, this is a blow for the community, which doesn"t have the resources to rebuild this community institution.
 So we've decided to take matters into our own hands and rebuild the Robeson Planetarium and Science Center even better than before, once again giving a diverse range of students an opportunity to become the next generation of young scientists. 
 But we need your help! Please click the link above to donate what you can, any amount is appreciated. `,
-    goalAmount: 250000,
+    // goalAmount: 250000,
     donatedAmount: 5800,
     news: [
       {

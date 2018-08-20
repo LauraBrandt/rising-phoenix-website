@@ -123,7 +123,7 @@ const homeStyles = {
     main: {
       display: "flex",
       marginTop: "-7em",
-      padding: "4em 4em 3em 4em",
+      padding: "4.5em 4em 3.5em 4em",
       backgroundColor: sv.bgLight,
       transition: "all 0.3s ease",
       "@media (max-width: 1000px)": {
@@ -171,7 +171,7 @@ const homeStyles = {
         marginLeft: 0,
         marginTop: "3em",
         alignItems: "flex-start",
-    },
+      },
       "@media (max-width: 745px)": {
         marginTop: "1em",
       },
@@ -193,6 +193,59 @@ const homeStyles = {
     },
   },
 
+  stats: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    padding: "3rem 1rem",
+    boxSizing: "border-box",
+    position: "relative",
+    backgroundColor: color("#78e8f9").lighten(0.1),
+    textAlign: "center",
+    "@media (max-width: 745px)": {
+      flexDirection: "column",
+      padding: "3rem 2rem",
+    },
+    section: {
+      display: "flex",
+      width: "50%",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "1em 7em",
+      "@media (max-width: 1000px)": {
+        flexDirection: "column"
+      },
+      "@media (max-width: 745px)": {
+        padding: "0.25em 0",
+        flexDirection: "column",
+        width: "100%",
+      },
+      amount: {
+        fontSize: "5rem",
+        color: "#333",
+        marginBottom: "1.3rem",
+        "@media (max-width: 745px)": {
+          fontSize: "4.3rem",
+        },
+      },
+      text: {
+        fontSize: "2rem",
+        color: "#4a4a4a",
+        width: "100%",
+        "@media (max-width: 745px)": {
+          fontSize: "1.8rem",
+        },
+      },
+    },
+    borderDiv: {
+      border: "2px solid rgba(0,0,0,0.4)",
+      alignSelf: "stretch",
+      borderRadius: "40%",
+      "@media (max-width: 745px)": {
+        margin: "4rem 0 3rem 0",
+      },
+    },
   },
 
   ctas: {
@@ -298,53 +351,6 @@ const homeStyles = {
         fontSize: "0.rem",
       },
     }
-  },
-
-  stats: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    padding: "4em",
-    boxSizing: "border-box",
-    position: "relative",
-    // color: "white",
-    backgroundImage: "url('https://s3.us-east-2.amazonaws.com/risingphoenix/static/joanna-kosinska-453787-unsplash.jpg')",
-    // backgroundImage: "url('https://s3.us-east-2.amazonaws.com/risingphoenix/static/jason-leung-479251-unsplash.jpg')",
-    backgroundSize: "cover",
-    "@media (max-width: 745px)": {
-      padding: "1em",
-      flexDirection: "column"
-    },
-    overlay: {
-      position: "absolute",
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: "rgba(255,255,255,0.3)",
-    },
-    section: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "2em 0",
-      amount: {
-        fontSize: "4rem",
-        marginBottom: "1rem",
-        zIndex: 2,
-        // textShadow: "0 0 8px rgba(0,0,0,0.9)"
-      },
-      text: {
-        fontSize: "1.5rem",
-        zIndex: 2,
-        // textShadow: "0 0 5px rgba(0,0,0,0.9)"
-      }
-    },
-    borderDiv: {
-      border: "1px solid black",
-      alignSelf: "stretch"
-    },
   },
 
   news: {

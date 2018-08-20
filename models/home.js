@@ -7,7 +7,7 @@ const homeSchema = new Schema({
   tagline: String,
   blurbTitle: String,
   blurb: String,
-  goalAmount: Number,
+  // goalAmount: Number,
   donatedAmount: Number,
 });
 

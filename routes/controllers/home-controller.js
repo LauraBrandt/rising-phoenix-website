@@ -24,12 +24,12 @@ module.exports = {
     let sentHomeInfo = req.body;
     let valid = true;
 
-    sentHomeInfo.goalAmount = xssFilters.inHTMLData(sentHomeInfo.goalAmount);
-    if (sentHomeInfo.goalAmount !== "" && !validator.isFloat(sentHomeInfo.goalAmount.toString())) {
-      const newError = new Error("Goal amount must be a valid number. Please try again.");
-      valid = false;
-      next(newError);
-    }
+    // sentHomeInfo.goalAmount = xssFilters.inHTMLData(sentHomeInfo.goalAmount);
+    // if (sentHomeInfo.goalAmount !== "" && !validator.isFloat(sentHomeInfo.goalAmount.toString())) {
+    //   const newError = new Error("Goal amount must be a valid number. Please try again.");
+    //   valid = false;
+    //   next(newError);
+    // }
     sentHomeInfo.donatedAmount = xssFilters.inHTMLData(sentHomeInfo.donatedAmount);
     if (sentHomeInfo.donatedAmount !== "" && !validator.isFloat(sentHomeInfo.donatedAmount.toString())) {
       const newError = new Error("Donated amount must be a valid number. Please try again.");
@@ -69,7 +69,7 @@ module.exports = {
             currHomeInfo.tagline = sentHomeInfo.tagline;
             currHomeInfo.blurbTitle = sentHomeInfo.blurbTitle;
             currHomeInfo.blurb = sentHomeInfo.blurb;
-            currHomeInfo.goalAmount = sentHomeInfo.goalAmount;
+            // currHomeInfo.goalAmount = sentHomeInfo.goalAmount;
             currHomeInfo.donatedAmount = sentHomeInfo.donatedAmount;
 
             currHomeInfo.save((err, updatedHomeInfo) => { // eslint-disable-line no-unused-vars
