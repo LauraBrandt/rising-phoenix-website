@@ -316,6 +316,7 @@ const homeStyles = {
       fontSize: "0.9rem",
       border: "none",
       outline: "none",
+      verticalAlign: "top",
       "@media (max-width: 745px)": {
         fontSize: "0.rem",
       },
@@ -332,6 +333,7 @@ const homeStyles = {
       fontSize: "0.9rem",
       outline: "none",
       boxSizing: "border-box",
+      verticalAlign: "top",
       ":hover": {
         color: "black",
         backgroundColor: "#ddd",
