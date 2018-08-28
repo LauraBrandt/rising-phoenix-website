@@ -249,56 +249,83 @@ const homeStyles = {
   },
 
   news: {
-    display: "flex",
-    flexWrap: "wrap",
-    padding: "2em",
-    justifyContent: "space-evenly",
+    padding: "70px 40px 60px 40px",
     backgroundColor: sv.bgLight,
     transition: "all 0.3s ease",
+    "@media (max-width: 900px)": {
+      padding: "60px 30px",
+    },
+    headerTop: {
+      fontSize: "2.8rem",
+      color: "#333",
+      textAlign: "center",
+      margin: "0 0 30px 0",
+      "@media (max-width: 900px)": {
+        margin: "0 0 25px 0",
+      },
     "@media (max-width: 450px)": {
-      padding: "1em",
+        fontSize: "2.35rem",
+    },
+    },
+    articles: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-evenly",
     },
     newsItem: {
-      flexBasis: "550px",
+      width: "380px",
       boxSizing: "border-box",
       border: "1px solid rgba(0,0,0,0.1)",
-      boxShadow: "0 10px 30px -7px rgba(0,0,0,0.25)",
+      boxShadow: "0 3px 10px -2px rgba(0,0,0,0.2)",
       borderRadius: 5,
-      margin: "1em",
-      padding: "2em",
+      margin: "1em 8px",
       backgroundColor: "white",
       transition: "all 0.3s ease",
-      "@media (max-width: 1230px)": {
-        flexBasis: "440px",
+      "@media (max-width: 900px)": {
+        width: "335px",
       },
       "@media (max-width: 450px)": {
-        margin: "1em 0.5em",
-        padding: "1em",
+        // margin: "1em 0.5em",
+        // padding: "1em",
+      },
+    },
+    newsImageContainer: {
+      height: 230,
+      overflow: "hidden",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-start",
+      "@media (max-width: 900px)": {
+        height: 200,
       },
     },
     newsImage: {
       display: "block",
       maxWidth: "100%",
-      height: "auto",
-      margin: "0 auto 1.3em auto"
+      height: "auto"
+    },
+    text: {
+      padding: "1.5rem 2rem",
+      "@media (max-width: 900px)": {
+        padding: "1.5rem",
+      },
     },
     header: {
-      margin: "0 0 0.2em 0",
-      fontSize: "1.7em",
+      margin: "0 0 1rem 0",
+      fontSize: "1.5em",
       fontWeight: 600,
       ...sv.linkStyle
     },
     date: {
       fontStyle: "italic",
-      fontSize: "0.95em",
+      fontSize: "0.95rem",
+      color: "#999",
     },
     preview: {
-      margin: "1rem 0 0 0",
+      margin: "0.5rem 0 0.5rem 0",
     },
     readMore: {
       ...sv.linkStyle,
-      display: "block",
-      margin: "1em 0 0 0"
     }
   }, 
 

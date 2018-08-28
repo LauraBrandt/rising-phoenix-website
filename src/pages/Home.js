@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Radium from "radium";
+import he from "he";
 import style from "../styles/homeStyles";
 import { getData } from "../utils/apiCalls";
+
+// import data from "../data";
 
 let Link = require("react-router-dom").Link;
 Link = Radium(Link);
@@ -57,27 +60,31 @@ let Stats = ({ donatedAmount, numDonors }) => {
 Stats = Radium(Stats);
 
 let News = (props) => {
-  const getFirstWords = (article) => {
-    var articleWithoutHtml = article.replace(/(<([^>]+)>)/ig,"");
-    const numWordsInPreview = 50;
-    return articleWithoutHtml.split(/\s+/).slice(0,numWordsInPreview).join(" ");
+  const getFirstWords = (article, short = true) => {
+    var articleWithoutHtml = he.decode(article.replace(/(<([^>]+)>)/ig,""));
+    const numWordsInPreview = short ? 20 : 50;
+    const words = articleWithoutHtml.split(/\s+/);
+    
+    return `${words.slice(0,numWordsInPreview).join(" ")}${words.length > numWordsInPreview ? " ..." : ""}`;
   };
 
   return (
     <section style={style.news}>
-      {props.newsStories.length ?
-        props.newsStories.map( story => 
-          <div key={story.title} style={style.news.newsItem}>
-            {story.image && <img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt} style={style.news.newsImage}/>}
-            <Link to={`/news/${story.slug}`} style={style.news.header}>{story.title}</Link>
-            {story.updatedAt && <div style={style.news.date}>{new Date(story.updatedAt).toDateString()}</div>}
-            <div style={style.news.preview}>{getFirstWords(story.article)}...</div>
-            <Link to={`/news/${story.slug}`} style={style.news.readMore}>Read more</Link>
-          </div>
-        )
-        :
-        <div></div>
-      }
+      <h2 style={style.news.headerTop}>Check out what's going on</h2>
+      <div style={style.news.articles}>
+        {/* { data.home.news.length && data.home.news.map(story => */}
+        { props.newsStories.length && props.newsStories.map( story => 
+          <article key={story.title} style={style.news.newsItem}>
+            {story.image && <div style={style.news.newsImageContainer}><img src={`https://s3.us-east-2.amazonaws.com/risingphoenix/${story.image}`} alt={story.alt} style={style.news.newsImage}/></div>}
+            <div style={[style.news.text, !story.image && {padding: "2rem"}]}>
+              <Link to={`/news/${story.slug}`} style={style.news.header}>{story.title}</Link>
+              {story.updatedAt && <div style={style.news.date}>{new Date(story.updatedAt).toDateString()}</div>}
+              <div style={style.news.preview}>{getFirstWords(story.article, !!story.image)}</div>
+              <Link to={`/news/${story.slug}`} style={style.news.readMore}>Read more &raquo;</Link>
+            </div>
+          </article>
+        ) }
+      </div>
     </section>
   );
 };

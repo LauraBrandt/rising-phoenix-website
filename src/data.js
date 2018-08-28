@@ -19,7 +19,7 @@ But we need your help! Please click the link above to donate what you can, any a
       {
         title: "The campaign begins",
         slug: "the-campaign-begins", // title 1. non-whitespace, non-number, non-digit removed, 2. whitespace replaced with "-", 3. all lowercase
-        date: new Date("2018-1-8"),
+        updatedAt: new Date("2018-1-8"),
         image: "",
         alt: "",
         article: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus nibh quis maximus convallis. Maecenas sit amet metus risus. Integer molestie sem eu urna vulputate varius. Fusce tempor erat et lacus tempor congue. Aliquam maximus, massa nec auctor efficitur, velit mauris luctus neque, nec feugiat sapien justo quis ex. In nec dapibus turpis, ut lacinia sem. Mauris at pulvinar risus. Aenean non diam orci. Fusce malesuada non augue sed molestie. Praesent diam urna, varius vitae augue nec, gravida aliquet ligula. Quisque gravida erat diam, ac semper massa semper nec. Duis sagittis tortor at sollicitudin posuere. Pellentesque non augue tempor, venenatis libero quis, placerat libero.
@@ -29,7 +29,7 @@ Proin ullamcorper posuere massa at iaculis. Donec diam dolor, laoreet sagittis p
       {
         title: "Next committee meeting",
         slug: "next-committee-meeting",
-        date: new Date("2018-1-2"),
+        updatedAt: new Date("2018-1-2"),
         image: "nextmeeting.jpg",
         alt: "box with text 'Put this on your calendar'",
         article: `Pellentesque tincidunt justo massa, bibendum fermentum erat faucibus tempus. Aliquam pretium, mauris vulputate ultrices gravida, nibh ipsum finibus urna, vehicula ultricies metus ligula ornare purus. Nunc lorem neque, hendrerit vel lectus eget, maximus ornare sem. Fusce dictum metus nunc, cursus commodo nunc ultrices vitae. Nullam sodales sapien eget iaculis accumsan. Aliquam urna sapien, laoreet eu pellentesque pharetra, interdum nec justo. Integer commodo, justo in varius tincidunt, mi eros pretium odio, quis mattis lacus dui ut est. Integer fermentum efficitur sem id mollis. Mauris at faucibus turpis. Cras ac ante ut velit pharetra euismod. Suspendisse vulputate non magna et lobortis. Nunc ac dolor malesuada, tincidunt massa tempor, lobortis risus.
@@ -38,8 +38,8 @@ Ut mollis auctor nisi id scelerisque. Sed turpis lorem, lacinia non mollis eget,
       {
         title: "Third article",
         slug: "third-article",
-        date: new Date("2018-1-2"),
-        image: "stock-image.jpg",
+        updatedAt: new Date("2018-1-2"),
+        image: "img7.jpg",
         alt: "profile of golden retriever dog yawning",
         article: `Pellentesque tincidunt justo massa, bibendum fermentum erat faucibus tempus. Aliquam pretium, mauris vulputate ultrices gravida, nibh ipsum finibus urna, vehicula ultricies metus ligula ornare purus. Nunc lorem neque, hendrerit vel lectus eget, maximus ornare sem. Fusce dictum metus nunc, cursus commodo nunc ultrices vitae. Nullam sodales sapien eget iaculis accumsan. Aliquam urna sapien, laoreet eu pellentesque pharetra, interdum nec justo. Integer commodo, justo in varius tincidunt, mi eros pretium odio, quis mattis lacus dui ut est. Integer fermentum efficitur sem id mollis. Mauris at faucibus turpis. Cras ac ante ut velit pharetra euismod. Suspendisse vulputate non magna et lobortis. Nunc ac dolor malesuada, tincidunt massa tempor, lobortis risus.
 Ut mollis auctor nisi id scelerisque. Sed turpis lorem, lacinia non mollis eget, aliquam non felis. Integer ante erat, mollis id lorem ac, consequat viverra dui. Sed ipsum elit, varius vel ligula eu, commodo gravida odio. Sed vitae magna ac odio condimentum semper id sit amet arcu. Nam et vestibulum ligula. Vivamus arcu neque, fringilla et augue at, ultrices tincidunt est. Phasellus a pretium nulla. Ut nunc lectus, sagittis sed tellus sed, vulputate cursus nunc. Fusce vulputate augue sed eros auctor lobortis. Nam erat enim, maximus sed justo porttitor, eleifend finibus lectus. Pellentesque tempus porttitor eros, a eleifend sapien molestie vel. Nunc ut turpis elementum, dapibus sapien vitae, luctus sapien. Mauris tempus ac neque nec efficitur.`,
