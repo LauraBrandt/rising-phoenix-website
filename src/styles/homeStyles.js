@@ -248,6 +248,60 @@ const homeStyles = {
     },
   },
 
+  news: {
+    display: "flex",
+    flexWrap: "wrap",
+    padding: "2em",
+    justifyContent: "space-evenly",
+    backgroundColor: sv.bgLight,
+    transition: "all 0.3s ease",
+    "@media (max-width: 450px)": {
+      padding: "1em",
+    },
+    newsItem: {
+      flexBasis: "550px",
+      boxSizing: "border-box",
+      border: "1px solid rgba(0,0,0,0.1)",
+      boxShadow: "0 10px 30px -7px rgba(0,0,0,0.25)",
+      borderRadius: 5,
+      margin: "1em",
+      padding: "2em",
+      backgroundColor: "white",
+      transition: "all 0.3s ease",
+      "@media (max-width: 1230px)": {
+        flexBasis: "440px",
+      },
+      "@media (max-width: 450px)": {
+        margin: "1em 0.5em",
+        padding: "1em",
+      },
+    },
+    newsImage: {
+      display: "block",
+      maxWidth: "100%",
+      height: "auto",
+      margin: "0 auto 1.3em auto"
+    },
+    header: {
+      margin: "0 0 0.2em 0",
+      fontSize: "1.7em",
+      fontWeight: 600,
+      ...sv.linkStyle
+    },
+    date: {
+      fontStyle: "italic",
+      fontSize: "0.95em",
+    },
+    preview: {
+      margin: "1rem 0 0 0",
+    },
+    readMore: {
+      ...sv.linkStyle,
+      display: "block",
+      margin: "1em 0 0 0"
+    }
+  }, 
+
   ctas: {
     backgroundColor: sv.orange,
     display: "flex",
@@ -355,59 +409,28 @@ const homeStyles = {
     }
   },
 
-  news: {
+  scores: {
     display: "flex",
-    flexWrap: "wrap",
-    padding: "2em",
-    justifyContent: "space-evenly",
-    backgroundColor: sv.bgLight,
-    transition: "all 0.3s ease",
-    "@media (max-width: 450px)": {
-      padding: "1em",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: 50,
+    margin: "auto",
+    maxWidth: 1000,
+    boxSizing: "border-box",
+    "@media (max-width: 740px)": {
+      fontSize: "0.95em",
+      padding: 30,
     },
-    newsItem: {
-      flexBasis: "550px",
-      boxSizing: "border-box",
-      border: "1px solid rgba(0,0,0,0.1)",
-      boxShadow: "0 10px 30px -7px rgba(0,0,0,0.25)",
-      borderRadius: 5,
-      margin: "1em",
-      padding: "2em",
-      backgroundColor: "white",
-      transition: "all 0.3s ease",
-      "@media (max-width: 1230px)": {
-        flexBasis: "440px",
-      },
-      "@media (max-width: 450px)": {
-        margin: "1em 0.5em",
-        padding: "1em",
-      },
-    },
-    newsImage: {
-      display: "block",
+    graph: {
+      marginTop: "2rem",
+      marginBottom: "1rem",
       maxWidth: "100%",
       height: "auto",
-      margin: "0 auto 1.3em auto"
+      "@media (max-width: 740px)": {
+        marginTop: "1.5rem",
+      },
     },
-    header: {
-      margin: "0 0 0.2em 0",
-      fontSize: "1.7em",
-      fontWeight: 600,
-      ...sv.linkStyle
-    },
-    date: {
-      fontStyle: "italic",
-      fontSize: "0.95em",
-    },
-    preview: {
-      margin: "1rem 0 0 0",
-    },
-    readMore: {
-      ...sv.linkStyle,
-      display: "block",
-      margin: "1em 0 0 0"
-    }
-  }, 
+  },
 
   sponsors: {
     backgroundColor: sv.lightBrown,

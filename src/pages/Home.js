@@ -120,6 +120,16 @@ class CTAs extends Component {
 }
 CTAs = Radium(CTAs);
 
+let Scores = () => {
+  return (
+    <div style={style.scores}>
+      <div>Before Hurricane Matthew, Robeson County scored better in science relative to ELA (English language arts) and math than average in North Carolina. We think having access to the Robeson Planetarium and Science Center might have had something to do with it!</div>
+      <img style={style.scores.graph} src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/scores-blue.png" alt="Graph of percent difference between science and ELA+math in Robeson County vs NC"/>
+    </div>
+  );
+};
+Scores = Radium(Scores);
+
 // const Sponsors = () => {
 //   return (
 //     <section style={style.sponsors}>
@@ -196,6 +206,7 @@ class Home extends Component {
         <Stats donatedAmount={this.state.homeInfo.donatedAmount} numDonors={this.state.donors} />
         <News newsStories={this.state.news}/>
         <CTAs />
+        <Scores />
         {/* <Sponsors /> */}
       </div>
     );
