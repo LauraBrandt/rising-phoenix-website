@@ -200,7 +200,10 @@ const homeStyles = {
     padding: "3rem 1rem",
     boxSizing: "border-box",
     position: "relative",
-    backgroundColor: color("#78e8f9").lighten(0.1),
+    // backgroundColor: color(sv.blue).lighten(0.1),
+    backgroundImage: "url('https://s3.us-east-2.amazonaws.com/risingphoenix/static/jason-leung-479251-unsplash.jpg')",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     textAlign: "center",
     "@media (max-width: 745px)": {
       flexDirection: "column",
@@ -209,6 +212,7 @@ const homeStyles = {
     section: {
       display: "flex",
       width: "50%",
+      boxSizing: "border-box",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
@@ -222,16 +226,18 @@ const homeStyles = {
         width: "100%",
       },
       amount: {
+        zIndex: 2,
         fontSize: "5rem",
-        color: "#333",
+        // color: "#333",
         marginBottom: "1.3rem",
         "@media (max-width: 745px)": {
           fontSize: "4.3rem",
         },
       },
       text: {
+        zIndex: 2,
         fontSize: "2rem",
-        color: "#4a4a4a",
+        // color: "#4a4a4a",
         width: "100%",
         "@media (max-width: 745px)": {
           fontSize: "1.8rem",
@@ -239,13 +245,23 @@ const homeStyles = {
       },
     },
     borderDiv: {
-      border: "2px solid rgba(0,0,0,0.4)",
+      zIndex: 2,
+      // border: "2px solid rgba(0,0,0,0.5)",
+      border: "2px solid #555",
       alignSelf: "stretch",
-      borderRadius: "40%",
+      borderRadius: "35%",
       "@media (max-width: 745px)": {
         margin: "4rem 0 3rem 0",
       },
     },
+    overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      backgroundColor: color(sv.blue).fade(0.5),
+    }
   },
 
   news: {
@@ -263,9 +279,9 @@ const homeStyles = {
       "@media (max-width: 900px)": {
         margin: "0 0 25px 0",
       },
-    "@media (max-width: 450px)": {
+      "@media (max-width: 450px)": {
         fontSize: "2.35rem",
-    },
+      },
     },
     articles: {
       display: "flex",
@@ -438,20 +454,24 @@ const homeStyles = {
 
   scores: {
     display: "flex",
-    flexDirection: "column",
+    // flexDirection: "column",
     alignItems: "center",
-    padding: 50,
+    padding: "120px",
     margin: "auto",
-    maxWidth: 1000,
     boxSizing: "border-box",
     "@media (max-width: 740px)": {
       fontSize: "0.95em",
       padding: 30,
     },
+    text: {
+      fontSize: "1.25rem",
+      color: "#444",
+      marginRight: 70
+    },
     graph: {
       marginTop: "2rem",
       marginBottom: "1rem",
-      maxWidth: "100%",
+      width: 600,
       height: "auto",
       "@media (max-width: 740px)": {
         marginTop: "1.5rem",

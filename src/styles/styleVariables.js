@@ -9,9 +9,13 @@ const styleVariables = {
   paleOrange: "#F58C5F",
   lightBrown: "#9C5F4D",
   darkGreen: "#283927",
+
+  turquoise: "#40ADA1",
+  blue: "#78E8F9",
+
   facebookBlue: "#3B5998",
   twitterBlue: "#55ACEE",
-  bgLight: "#f5f5f5",
+  bgLight: "#f7f7f7",
   fontDefault: "Montserrat, Helvetica, sans-serif",
   fontHeader: "Poiret One, Helvetica, sans-serif",
   fontTitle: "Cinzel Decorative, Helvetica, sans-serif",

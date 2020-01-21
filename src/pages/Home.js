@@ -44,7 +44,6 @@ const formatNumberCommas = num => {
 let Stats = ({ donatedAmount, numDonors }) => {
   return (
     <div style={style.stats}>
-      {/* <div style={style.stats.overlay}></div> */}
       <div style={style.stats.section}>
         <div style={style.stats.section.amount}>${formatNumberCommas(donatedAmount)}</div>
         <div style={style.stats.section.text}>raised so far</div>
@@ -54,6 +53,7 @@ let Stats = ({ donatedAmount, numDonors }) => {
         <div style={style.stats.section.amount}>{formatNumberCommas(numDonors)}</div>
         <div style={style.stats.section.text}>donors</div>
       </div>
+      <div style={style.stats.overlay}></div>
     </div>
   );
 };
@@ -130,7 +130,7 @@ CTAs = Radium(CTAs);
 let Scores = () => {
   return (
     <div style={style.scores}>
-      <div>Before Hurricane Matthew, Robeson County scored better in science relative to ELA (English language arts) and math than average in North Carolina. We think having access to the Robeson Planetarium and Science Center might have had something to do with it!</div>
+      <div style={style.scores.text}>Before Hurricane Matthew, Robeson County scored better in science relative to ELA (English language arts) and math than average in North Carolina. We think having access to the Robeson Planetarium and Science Center might have had something to do with it!</div>
       <img style={style.scores.graph} src="https://s3.us-east-2.amazonaws.com/risingphoenix/static/scores-blue.png" alt="Graph of percent difference between science and ELA+math in Robeson County vs NC"/>
     </div>
   );
@@ -211,7 +211,7 @@ class Home extends Component {
         <HomeHeader tagline={this.state.homeInfo.tagline} />
         <Info homeInfo={this.state.homeInfo} />
         <Stats donatedAmount={this.state.homeInfo.donatedAmount} numDonors={this.state.donors} />
-        <News newsStories={this.state.news}/>
+        {this.state.news.length > 0 && <News newsStories={this.state.news}/>}
         <CTAs />
         <Scores />
         {/* <Sponsors /> */}
