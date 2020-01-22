@@ -1,0 +1,1 @@
+{"version":3,"sources":["bylaws.css"],"names":[],"mappings":"AAAA,QACE,iBAAkB,CAClB,cAAe,CACf,gBAAkB,CAClB,SACF,CAEA,oBACE,gBAAiB,CACjB,gBACF","file":"main.8b8da862.chunk.css","sourcesContent":["main h1 {\n  text-align: center;\n  font-size: 2rem;\n  margin: 0.7em auto;\n  padding: 0;\n}\n\nmain h1:first-child {\n  font-size: 2.3rem;\n  line-height: 100%;\n}"]}

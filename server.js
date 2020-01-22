@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
-var helmet = require('helmet');
+var helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -43,8 +43,8 @@ mongoose.connect(process.env.MONGODB_URL_MLAB, {
 
     app.use("/api", api);
 
-    app.get('*', function (req, res) {
-      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    app.get("*", function (req, res) {
+      res.sendFile(path.join(__dirname, "build", "index.html"));
     });
 
     app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
