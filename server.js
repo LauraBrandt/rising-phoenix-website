@@ -29,7 +29,12 @@ const api = require("./routes/api");
 // set up database
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URL_MLAB).then(  
+mongoose.connect(process.env.MONGODB_URL_MLAB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+}).then(  
   () => { 
     console.log("Connected to database.");
 
